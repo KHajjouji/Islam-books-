@@ -29,12 +29,12 @@ export default function Layout() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-stone-50 text-stone-900 font-sans">
+    <div className="min-h-screen flex flex-col bg-noor-cream text-noor-dark font-sans">
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 items-center">
             <div className="flex items-center">
-              <Link to="/" className="flex items-center gap-2 text-2xl font-serif font-bold text-emerald-800">
+              <Link to="/" className="flex items-center gap-2 text-2xl font-serif font-bold text-noor-green">
                 <BookOpen className="h-8 w-8" />
                 <span>NoorKids</span>
               </Link>
@@ -46,29 +46,29 @@ export default function Layout() {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`text-sm font-medium transition-colors hover:text-emerald-600 ${
-                    location.pathname === link.path ? 'text-emerald-700 border-b-2 border-emerald-600' : 'text-stone-600'
+                  className={`text-sm font-medium transition-colors hover:text-noor-green ${
+                    location.pathname === link.path ? 'text-noor-green border-b-2 border-noor-green' : 'text-noor-dark/70'
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              <div className="flex items-center gap-2 ml-4 pl-4 border-l border-stone-200">
+              <div className="flex items-center gap-2 ml-4 pl-4 border-l border-noor-light-green/50">
                 <button 
                   onClick={toggleLanguage}
-                  className="p-2 rounded-full hover:bg-stone-100 transition-colors text-stone-600"
+                  className="p-2 rounded-full hover:bg-noor-light-green transition-colors text-noor-dark/70"
                   aria-label="Toggle Language"
                 >
                   <Globe className="h-5 w-5" />
                 </button>
                 <Link 
                   to="/cart"
-                  className="p-2 rounded-full hover:bg-stone-100 transition-colors text-stone-600 relative"
+                  className="p-2 rounded-full hover:bg-noor-light-green transition-colors text-noor-dark/70 relative"
                   aria-label="View Cart"
                 >
                   <ShoppingCart className="h-5 w-5" />
                   {itemCount > 0 && (
-                    <span className="absolute top-0 right-0 bg-emerald-600 text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1">
+                    <span className="absolute top-0 right-0 bg-noor-orange text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1">
                       {itemCount}
                     </span>
                   )}
@@ -80,25 +80,25 @@ export default function Layout() {
             <div className="md:hidden flex items-center gap-2">
               <Link 
                 to="/cart"
-                className="p-2 rounded-full hover:bg-stone-100 transition-colors text-stone-600 relative"
+                className="p-2 rounded-full hover:bg-noor-light-green transition-colors text-noor-dark/70 relative"
                 aria-label="View Cart"
               >
                 <ShoppingCart className="h-5 w-5" />
                 {itemCount > 0 && (
-                  <span className="absolute top-0 right-0 bg-emerald-600 text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1">
+                  <span className="absolute top-0 right-0 bg-noor-orange text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1">
                     {itemCount}
                   </span>
                 )}
               </Link>
               <button 
                 onClick={toggleLanguage}
-                className="p-2 rounded-full hover:bg-stone-100 transition-colors text-stone-600"
+                className="p-2 rounded-full hover:bg-noor-light-green transition-colors text-noor-dark/70"
               >
                 <Globe className="h-5 w-5" />
               </button>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-stone-600 hover:text-stone-900 focus:outline-none p-2"
+                className="text-noor-dark/70 hover:text-noor-dark focus:outline-none p-2"
               >
                 {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
@@ -108,7 +108,7 @@ export default function Layout() {
 
         {/* Mobile Nav */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-stone-100">
+          <div className="md:hidden bg-white border-t border-noor-light-green">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navLinks.map((link) => (
                 <Link
@@ -117,8 +117,8 @@ export default function Layout() {
                   onClick={() => setIsMenuOpen(false)}
                   className={`block px-3 py-2 rounded-md text-base font-medium ${
                     location.pathname === link.path
-                      ? 'bg-emerald-50 text-emerald-800'
-                      : 'text-stone-600 hover:bg-stone-50 hover:text-stone-900'
+                      ? 'bg-noor-light-green text-noor-green'
+                      : 'text-noor-dark/70 hover:bg-noor-light-green hover:text-noor-dark'
                   }`}
                 >
                   {link.label}
@@ -133,7 +133,7 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      <footer className="bg-stone-900 text-stone-300 py-12 mt-auto">
+      <footer className="bg-noor-dark text-white/80 py-12 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-2">
@@ -164,7 +164,7 @@ export default function Layout() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-stone-800 mt-12 pt-8 text-sm text-center">
+          <div className="border-t border-noor-dark/90 mt-12 pt-8 text-sm text-center">
             <p>&copy; {new Date().getFullYear()} NoorKids. All rights reserved.</p>
           </div>
         </div>

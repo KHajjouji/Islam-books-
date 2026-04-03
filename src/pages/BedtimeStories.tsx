@@ -15,7 +15,7 @@ export default function BedtimeStories() {
         <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <Moon className="h-12 w-12 text-blue-300 mx-auto mb-6" />
-          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-gradient">
             Islamic Bedtime Stories for Peaceful, Meaningful Family Reading
           </h1>
           <p className="text-lg md:text-xl text-slate-300 leading-relaxed">
@@ -32,10 +32,10 @@ export default function BedtimeStories() {
               <img src="https://picsum.photos/seed/bedtime/800/600" alt="Parent reading bedtime story" className="rounded-2xl shadow-xl w-full object-cover" referrerPolicy="no-referrer" />
             </div>
             <div className="order-1 lg:order-2">
-              <h2 className="text-3xl font-serif font-bold text-stone-900 mb-6">
+              <h2 className="text-3xl font-serif font-bold text-noor-dark mb-6">
                 A Gentle Way to End the Day with Faith and Family
               </h2>
-              <div className="space-y-4 text-lg text-stone-600 leading-relaxed">
+              <div className="space-y-4 text-lg text-noor-dark/70 leading-relaxed">
                 <p>
                   Bedtime is one of the most powerful moments for connection. It is when children are calm, close, and ready to listen. That makes it the perfect time for stories that nurture trust, gratitude, kindness, and remembrance of Allah.
                 </p>
@@ -52,10 +52,10 @@ export default function BedtimeStories() {
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-serif font-bold text-stone-900 mb-6">
+            <h2 className="text-3xl font-serif font-bold text-noor-dark mb-6">
               Short Islamic Stories Children Can Understand and Love
             </h2>
-            <p className="text-lg text-stone-600">
+            <p className="text-lg text-noor-dark/70">
               Bedtime stories can include:
             </p>
           </div>
@@ -71,7 +71,7 @@ export default function BedtimeStories() {
             ].map((item, i) => (
               <div key={i} className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
                 <Star className="h-8 w-8 text-blue-400 mb-4" />
-                <span className="font-medium text-stone-800">{item}</span>
+                <span className="font-medium text-noor-dark/90">{item}</span>
               </div>
             ))}
           </div>
@@ -81,10 +81,10 @@ export default function BedtimeStories() {
       {/* For Modern Family Life */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-serif font-bold text-stone-900 mb-6">
+          <h2 className="text-3xl font-serif font-bold text-noor-dark mb-6">
             Meaningful Bedtime Reading for Busy Muslim Families
           </h2>
-          <p className="text-lg text-stone-600 leading-relaxed">
+          <p className="text-lg text-noor-dark/70 leading-relaxed">
             Not every family has time for long lessons. Bedtime stories give parents a simple and realistic way to make Islamic learning part of the day without pressure. A short story each night can build vocabulary, values, memory, and emotional connection over time.
           </p>
         </div>

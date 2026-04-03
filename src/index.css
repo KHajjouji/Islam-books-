@@ -1,7 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-serif: "Nunito", ui-sans-serif, system-ui, sans-serif;
+
+  --color-noor-green: #1e5631;
+  --color-noor-light-green: #e8f3e8;
+  --color-noor-yellow: #fcd34d;
+  --color-noor-orange: #f97316;
+  --color-noor-cream: #faf9f6;
+  --color-noor-dark: #1f2937;
+}
+
+@layer base {
+  body {
+    @apply bg-noor-cream text-noor-dark font-sans;
+  }
+}
+
+@layer utilities {
+  .card-hover {
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px #0000001f;
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, #1e5631, #2d7a47);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .glass {
+    background: #fffc;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
 }

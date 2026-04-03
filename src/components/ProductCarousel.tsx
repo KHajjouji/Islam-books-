@@ -25,18 +25,18 @@ export default function ProductCarousel({ products, title }: ProductCarouselProp
     <div className="relative">
       {title && (
         <div className="flex justify-between items-end mb-6">
-          <h2 className="text-2xl md:text-3xl font-serif font-bold text-stone-900">{title}</h2>
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-noor-dark">{title}</h2>
           <div className="hidden sm:flex gap-2">
             <button 
               onClick={() => scroll('left')}
-              className="p-2 rounded-full border border-stone-200 hover:bg-stone-50 text-stone-600 transition-colors"
+              className="p-2 rounded-full border border-noor-light-green/50 hover:bg-noor-cream text-noor-dark/70 transition-colors"
               aria-label="Scroll left"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button 
               onClick={() => scroll('right')}
-              className="p-2 rounded-full border border-stone-200 hover:bg-stone-50 text-stone-600 transition-colors"
+              className="p-2 rounded-full border border-noor-light-green/50 hover:bg-noor-cream text-noor-dark/70 transition-colors"
               aria-label="Scroll right"
             >
               <ChevronRight className="h-5 w-5" />
