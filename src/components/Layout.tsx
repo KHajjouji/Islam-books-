@@ -21,6 +21,7 @@ export default function Layout() {
 
   const navLinks = [
     { path: '/islamic-childrens-books', label: t('nav.books') },
+    { path: '/shop', label: t('nav.shop') },
     { path: '/quran-stories-for-kids', label: t('nav.quran') },
     { path: '/stories-of-the-prophets-for-kids', label: t('nav.prophets') },
     { path: '/ramadan-books-for-kids', label: t('nav.ramadan') },

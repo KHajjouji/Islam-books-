@@ -4,10 +4,14 @@ export interface Product {
   author?: string;
   price: number;
   image: string;
+  images?: string[];
   category: 'book' | 'academy';
   theme: 'quran' | 'prophets' | 'ramadan' | 'bedtime' | 'general' | 'bilingual';
   description: string;
+  longDescription?: string;
   ageRange?: string;
+  features?: string[];
+  interactiveUrl?: string;
 }
 
 export const products: Product[] = [
@@ -17,10 +21,22 @@ export const products: Product[] = [
     author: 'NoorKids Editorial',
     price: 14.99,
     image: 'https://picsum.photos/seed/nuhbook/400/500',
+    images: [
+      'https://picsum.photos/seed/nuhbook/400/500',
+      'https://picsum.photos/seed/nuhbook2/400/500',
+      'https://picsum.photos/seed/nuhbook3/400/500'
+    ],
     category: 'book',
     theme: 'prophets',
     description: 'A beautifully illustrated book telling the story of Prophet Nuh (AS) and his incredible patience and trust in Allah. Perfect for bedtime reading.',
-    ageRange: '4-8 years'
+    longDescription: 'This book brings to life the inspiring story of Prophet Nuh (AS) in a way that resonates with young hearts. Through vibrant illustrations and engaging prose, children will learn about the importance of faith, the power of prayer, and the rewards of steadfastness. It includes a special section with reflection questions for parents and children to discuss together.',
+    ageRange: '4-8 years',
+    features: [
+      'Hardcover with premium finish',
+      '32 full-color illustrated pages',
+      'Includes reflection questions',
+      'Durable paper for young readers'
+    ]
   },
   {
     id: '2',
@@ -28,10 +44,21 @@ export const products: Product[] = [
     author: 'NoorKids Editorial',
     price: 18.99,
     image: 'https://picsum.photos/seed/quranbook1/400/500',
+    images: [
+      'https://picsum.photos/seed/quranbook1/400/500',
+      'https://picsum.photos/seed/quranbook1-2/400/500'
+    ],
     category: 'book',
     theme: 'quran',
     description: 'Introduce your little ones to the beautiful stories of the Quran with simple language and captivating illustrations.',
-    ageRange: '3-6 years'
+    longDescription: 'A collection of the most beloved stories from the Quran, simplified for early learners. From the creation of the world to the stories of the Prophets, this book provides a foundational understanding of Islamic history and values.',
+    ageRange: '3-6 years',
+    features: [
+      'Simple, easy-to-understand language',
+      'Captivating full-page illustrations',
+      'Great for early literacy development',
+      'Reinforces core Islamic values'
+    ]
   },
   {
     id: '3',
@@ -85,7 +112,8 @@ export const products: Product[] = [
     category: 'academy',
     theme: 'general',
     description: 'Get access to our interactive learning platform, featuring audio stories, printable activities, and guided learning paths.',
-    ageRange: '4-10 years'
+    ageRange: '4-10 years',
+    interactiveUrl: 'https://academy.noorkids.com/dashboard'
   },
   {
     id: '8',
@@ -95,6 +123,7 @@ export const products: Product[] = [
     category: 'academy',
     theme: 'ramadan',
     description: 'A comprehensive activity pack to keep kids engaged during Ramadan. Includes daily crafts, dua cards, and a fasting tracker.',
-    ageRange: '5-12 years'
+    ageRange: '5-12 years',
+    interactiveUrl: 'https://academy.noorkids.com/ramadan-pack'
   }
 ];

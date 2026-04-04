@@ -30,8 +30,8 @@ export default function Home() {
               From Quran stories for kids and stories of the Prophets for kids to Ramadan books, Islamic bedtime stories, and interactive learning journeys, we create resources for Muslim families raising children in the West.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/islamic-childrens-books" className="inline-flex justify-center items-center px-8 py-4 bg-noor-yellow text-noor-dark font-bold rounded-full hover:bg-noor-yellow/80 transition-colors text-lg">
-                Shop the Books
+              <Link to="/shop" className="inline-flex justify-center items-center px-8 py-4 bg-noor-yellow text-noor-dark font-bold rounded-full hover:bg-noor-yellow/80 transition-colors text-lg">
+                Shop All Products
               </Link>
               <Link to="/academy" className="inline-flex justify-center items-center px-8 py-4 bg-noor-green text-white font-bold rounded-full hover:bg-noor-green border border-noor-green transition-colors text-lg">
                 Explore the Academy
@@ -134,8 +134,8 @@ export default function Home() {
             <ProductCarousel products={featuredBooks} title="Featured Islamic Books for Kids" />
           )}
           <div className="mt-12 text-center">
-            <Link to="/islamic-childrens-books" className="text-noor-green font-bold hover:text-noor-green flex items-center justify-center">
-              View all books <ArrowRight className="ml-2 h-5 w-5" />
+            <Link to="/shop" className="text-noor-green font-bold hover:text-noor-green flex items-center justify-center">
+              View all products <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </div>
         </div>
@@ -249,8 +249,8 @@ export default function Home() {
             Explore Islamic children's books, Quran stories for kids, stories of the Prophets for kids, and interactive learning resources designed to support Muslim families with beauty, clarity, and purpose.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/islamic-childrens-books" className="inline-flex justify-center items-center px-8 py-4 bg-noor-green text-white font-bold rounded-full hover:bg-noor-green transition-colors text-lg">
-              Shop Books
+            <Link to="/shop" className="inline-flex justify-center items-center px-8 py-4 bg-noor-green text-white font-bold rounded-full hover:bg-noor-green transition-colors text-lg">
+              Shop All Products
             </Link>
             <Link to="/academy" className="inline-flex justify-center items-center px-8 py-4 bg-noor-light-green text-noor-dark font-bold rounded-full hover:bg-noor-light-green/50 transition-colors text-lg">
               Join the Academy

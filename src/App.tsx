@@ -18,6 +18,7 @@ import Academy from './pages/Academy';
 import BilingualBooks from './pages/BilingualBooks';
 import Blog from './pages/Blog';
 import ProductDetail from './pages/ProductDetail';
+import Shop from './pages/Shop';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import AdminLayout from './pages/admin/AdminLayout';
@@ -46,6 +47,7 @@ export default function App() {
                 <Route path="bilingual-islamic-books-for-kids" element={<BilingualBooks />} />
                 <Route path="blog" element={<Blog />} />
                 <Route path="product/:id" element={<ProductDetail />} />
+                <Route path="shop" element={<Shop />} />
                 <Route path="cart" element={<Cart />} />
                 <Route path="checkout" element={<Checkout />} />
               </Route>

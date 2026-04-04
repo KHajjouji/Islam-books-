@@ -14,6 +14,7 @@ const resources = {
       "nav.bedtime": "Bedtime",
       "nav.academy": "Academy",
       "nav.bilingual": "Bilingual",
+      "nav.shop": "Shop All",
       "nav.blog": "Blog",
     }
   },
@@ -27,6 +28,7 @@ const resources = {
       "nav.bedtime": "وقت النوم",
       "nav.academy": "الأكاديمية",
       "nav.bilingual": "ثنائي اللغة",
+      "nav.shop": "تسوق الكل",
       "nav.blog": "المدونة",
     }
   }
