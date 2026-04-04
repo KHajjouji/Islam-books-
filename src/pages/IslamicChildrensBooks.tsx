@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
-import { BookOpen, Star, Heart, Sparkles, ArrowRight, HelpCircle } from 'lucide-react';
+import { BookOpen, Star, Heart, Sparkles, ArrowRight, HelpCircle, Loader2 } from 'lucide-react';
 import SEO from '../components/SEO';
 import ProductCarousel from '../components/ProductCarousel';
-import { products } from '../data/products';
+import { useProducts } from '../hooks/useProducts';
 
 export default function IslamicChildrensBooks() {
+  const { products, loading } = useProducts();
   const allBooks = products.filter(p => p.category === 'book');
 
   return (
@@ -50,7 +51,13 @@ export default function IslamicChildrensBooks() {
       {/* All Books Carousel */}
       <section className="py-12 bg-noor-cream overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProductCarousel products={allBooks} title="Shop All Books" />
+          {loading ? (
+            <div className="flex justify-center items-center py-12">
+              <Loader2 className="h-8 w-8 animate-spin text-noor-green" />
+            </div>
+          ) : (
+            <ProductCarousel products={allBooks} title="Shop All Books" />
+          )}
         </div>
       </section>
 

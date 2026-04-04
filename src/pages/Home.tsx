@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
-import { BookOpen, Star, Heart, Sparkles, ArrowRight } from 'lucide-react';
+import { BookOpen, Star, Heart, Sparkles, ArrowRight, Loader2 } from 'lucide-react';
 import SEO from '../components/SEO';
 import ProductCarousel from '../components/ProductCarousel';
-import { products } from '../data/products';
+import { useProducts } from '../hooks/useProducts';
 
 export default function Home() {
+  const { products, loading } = useProducts();
   const featuredBooks = products.filter(p => p.category === 'book').slice(0, 5);
 
   return (
@@ -125,7 +126,13 @@ export default function Home() {
       {/* Featured Books Carousel */}
       <section className="py-20 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProductCarousel products={featuredBooks} title="Featured Islamic Books for Kids" />
+          {loading ? (
+            <div className="flex justify-center items-center py-12">
+              <Loader2 className="h-8 w-8 animate-spin text-noor-green" />
+            </div>
+          ) : (
+            <ProductCarousel products={featuredBooks} title="Featured Islamic Books for Kids" />
+          )}
           <div className="mt-12 text-center">
             <Link to="/islamic-childrens-books" className="text-noor-green font-bold hover:text-noor-green flex items-center justify-center">
               View all books <ArrowRight className="ml-2 h-5 w-5" />

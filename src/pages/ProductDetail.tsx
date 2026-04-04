@@ -1,7 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { ShoppingCart, ArrowLeft, CheckCircle } from 'lucide-react';
-import { products } from '../data/products';
+import { ShoppingCart, ArrowLeft, CheckCircle, Loader2 } from 'lucide-react';
+import { useProducts } from '../hooks/useProducts';
 import { useCart } from '../context/CartContext';
 import SEO from '../components/SEO';
 
@@ -9,8 +9,17 @@ export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const { products, loading } = useProducts();
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
+
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center bg-noor-cream">
+        <Loader2 className="h-8 w-8 animate-spin text-noor-green" />
+      </div>
+    );
+  }
 
   const product = products.find(p => p.id === id);
 

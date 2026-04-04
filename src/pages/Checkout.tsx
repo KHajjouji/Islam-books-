@@ -1,30 +1,64 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { CheckCircle, Lock } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '../firebase';
 import SEO from '../components/SEO';
 
 export default function Checkout() {
   const { items, total, clearCart } = useCart();
+  const { user, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) return;
+    
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const form = e.target as HTMLFormElement;
+      const shippingAddress = {
+        firstName: (form.elements.namedItem('firstName') as HTMLInputElement).value,
+        lastName: (form.elements.namedItem('lastName') as HTMLInputElement).value,
+        address: (form.elements.namedItem('address') as HTMLInputElement).value,
+        city: (form.elements.namedItem('city') as HTMLInputElement).value,
+        zip: (form.elements.namedItem('zip') as HTMLInputElement).value,
+      };
+
+      const orderData = {
+        userId: user.uid,
+        items: items.map(item => ({
+          productId: item.id,
+          title: item.title,
+          price: item.price,
+          quantity: item.quantity,
+          image: item.image
+        })),
+        total,
+        status: 'pending',
+        shippingAddress,
+        createdAt: serverTimestamp()
+      };
+
+      await addDoc(collection(db, 'orders'), orderData);
+      
       setIsSuccess(true);
       clearCart();
       
-      // Redirect after success
       setTimeout(() => {
         navigate('/');
       }, 3000);
-    }, 1500);
+    } catch (error) {
+      console.error("Error creating order:", error);
+      alert("There was an error processing your order. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSuccess) {
@@ -43,6 +77,29 @@ export default function Checkout() {
   if (items.length === 0) {
     navigate('/cart');
     return null;
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-[70vh] flex flex-col items-center justify-center bg-noor-cream px-4 text-center">
+        <Lock className="h-16 w-16 text-noor-green/80 mb-6" />
+        <h1 className="text-3xl font-serif font-bold text-noor-dark mb-4">Sign in to Checkout</h1>
+        <p className="text-lg text-noor-dark/70 mb-8 max-w-md">
+          Please sign in to your account to securely complete your purchase and track your order.
+        </p>
+        <div className="flex gap-4">
+          <button 
+            onClick={signInWithGoogle}
+            className="px-8 py-4 bg-noor-green text-white font-bold rounded-full hover:bg-noor-green/90 transition-colors"
+          >
+            Sign In with Google
+          </button>
+          <Link to="/cart" className="px-8 py-4 bg-white text-noor-dark border border-noor-light-green font-bold rounded-full hover:bg-stone-50 transition-colors">
+            Back to Cart
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (

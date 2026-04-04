@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
-import { Sparkles, PlayCircle, BookOpen, Users, ArrowRight, Heart } from 'lucide-react';
+import { Sparkles, PlayCircle, BookOpen, Users, ArrowRight, Heart, Loader2 } from 'lucide-react';
 import SEO from '../components/SEO';
 import ProductCarousel from '../components/ProductCarousel';
-import { products } from '../data/products';
+import { useProducts } from '../hooks/useProducts';
 
 export default function Academy() {
+  const { products, loading } = useProducts();
   const academyProducts = products.filter(p => p.category === 'academy');
 
   return (
@@ -30,7 +31,13 @@ export default function Academy() {
       {/* Academy Products Carousel */}
       <section className="py-16 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ProductCarousel products={academyProducts} title="Academy Subscriptions & Packs" />
+          {loading ? (
+            <div className="flex justify-center items-center py-12">
+              <Loader2 className="h-8 w-8 animate-spin text-noor-green" />
+            </div>
+          ) : (
+            <ProductCarousel products={academyProducts} title="Academy Subscriptions & Packs" />
+          )}
         </div>
       </section>
 

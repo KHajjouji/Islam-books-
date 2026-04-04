@@ -161,6 +161,7 @@ export default function Layout() {
                 <li><Link to="/bilingual-islamic-books-for-kids" className="hover:text-white transition-colors">Bilingual Books</Link></li>
                 <li><Link to="/islamic-bedtime-stories" className="hover:text-white transition-colors">Bedtime Stories</Link></li>
                 <li><Link to="/blog" className="hover:text-white transition-colors">Blog & Resources</Link></li>
+                <li><Link to="/admin" className="hover:text-white transition-colors">Admin Dashboard</Link></li>
               </ul>
             </div>
           </div>
