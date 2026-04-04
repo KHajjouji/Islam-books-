@@ -36,6 +36,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
+        if (currentUser.email !== 'hypocritic2002@gmail.com') {
+          const allowedRef = doc(db, 'allowed_emails', currentUser.email || '');
+          const allowedSnap = await getDoc(allowedRef);
+          
+          if (!allowedSnap.exists()) {
+            await firebaseSignOut(auth);
+            alert("You must be registered by an admin to log in.");
+            setUser(null);
+            setIsAdmin(false);
+            setLoading(false);
+            return;
+          }
+        }
+
         // Check if user document exists, if not create it
         const userRef = doc(db, 'users', currentUser.uid);
         const userSnap = await getDoc(userRef);
@@ -45,18 +59,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           await setDoc(userRef, {
             uid: currentUser.uid,
             email: currentUser.email,
-            role: 'customer',
+            role: currentUser.email === 'hypocritic2002@gmail.com' ? 'admin' : 'customer',
             createdAt: serverTimestamp()
           });
-          setIsAdmin(false);
+          setIsAdmin(currentUser.email === 'hypocritic2002@gmail.com');
         } else {
-          const userData = userSnap.data();
-          setIsAdmin(userData.role === 'admin' || currentUser.email === 'hypocritic2002@gmail.com');
-          
-          // Auto-upgrade the specific email to admin if it's not already
-          if (currentUser.email === 'hypocritic2002@gmail.com' && userData.role !== 'admin') {
-            await setDoc(userRef, { role: 'admin' }, { merge: true });
-          }
+          setIsAdmin(currentUser.email === 'hypocritic2002@gmail.com');
         }
       } else {
         setIsAdmin(false);
