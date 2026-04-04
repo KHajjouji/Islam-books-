@@ -9,27 +9,27 @@ export default function AdminLayout() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-noor-cream">
-        <Loader2 className="h-8 w-8 animate-spin text-noor-green" />
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
   }
 
   if (!user || !isAdmin) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-noor-cream px-4 text-center">
-        <h1 className="text-3xl font-serif font-bold text-noor-dark mb-4">Admin Access Required</h1>
-        <p className="text-noor-dark/70 mb-8">You must be logged in as an administrator to view this page.</p>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4 text-center">
+        <h1 className="text-3xl font-headline font-black text-primary mb-4 tracking-tight">Admin Access Required</h1>
+        <p className="text-primary/60 mb-8 font-medium">You must be logged in as an administrator to view this page.</p>
         <div className="flex gap-4">
           {!user && (
             <button 
               onClick={signInWithGoogle}
-              className="px-6 py-3 bg-noor-green text-white font-bold rounded-full hover:bg-noor-green/90 transition-colors"
+              className="px-8 py-4 bg-primary text-white font-black rounded-full hover:scale-105 transition-transform shadow-lg shadow-primary/10"
             >
               Sign In with Google
             </button>
           )}
-          <Link to="/" className="px-6 py-3 bg-white text-noor-dark border border-noor-light-green font-bold rounded-full hover:bg-stone-50 transition-colors">
+          <Link to="/" className="px-8 py-4 bg-white text-primary border-2 border-primary/10 font-black rounded-full hover:bg-primary/5 transition-all">
             Return to Home
           </Link>
         </div>
@@ -53,11 +53,12 @@ export default function AdminLayout() {
   ];
 
   return (
-    <div className="min-h-screen bg-stone-50 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-background flex flex-col md:flex-row font-body">
       {/* Sidebar */}
-      <aside className="w-full md:w-64 bg-noor-dark text-white flex flex-col">
-        <div className="p-6 border-b border-white/10">
-          <Link to="/" className="text-2xl font-serif font-bold text-noor-yellow">NoorKids Admin</Link>
+      <aside className="w-full md:w-64 bg-primary text-white flex flex-col shadow-2xl z-50">
+        <div className="p-8 border-b border-white/10">
+          <Link to="/" className="text-2xl font-headline font-black text-secondary tracking-tight">NoorKids Admin</Link>
+          <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mt-2">Control Center</p>
         </div>
         <nav className="flex-grow p-4 space-y-2">
           {navItems.map((item) => {
@@ -66,9 +67,9 @@ export default function AdminLayout() {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`flex items-center px-4 py-3 rounded-xl transition-colors ${
+                className={`flex items-center px-4 py-3 rounded-xl transition-all font-bold text-sm ${
                   isActive 
-                    ? 'bg-noor-green text-white' 
+                    ? 'bg-secondary text-primary shadow-lg' 
                     : 'text-white/70 hover:bg-white/10 hover:text-white'
                 }`}
               >
@@ -78,13 +79,13 @@ export default function AdminLayout() {
             );
           })}
         </nav>
-        <div className="p-4 border-t border-white/10">
-          <div className="mb-4 px-4 text-sm text-white/50 truncate">
+        <div className="p-6 border-t border-white/10 bg-black/5">
+          <div className="mb-4 px-2 text-xs font-bold text-white/40 truncate uppercase tracking-tighter">
             {user.email}
           </div>
           <button
             onClick={handleSignOut}
-            className="flex items-center w-full px-4 py-3 text-rose-400 hover:bg-white/10 rounded-xl transition-colors"
+            className="flex items-center w-full px-4 py-3 text-secondary hover:bg-white/10 rounded-xl transition-all font-bold text-sm"
           >
             <LogOut className="h-5 w-5 mr-3" />
             Sign Out
@@ -93,8 +94,10 @@ export default function AdminLayout() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-grow p-4 md:p-8 overflow-y-auto">
-        <Outlet />
+      <main className="flex-grow p-4 md:p-10 overflow-y-auto bg-surface-container-low">
+        <div className="max-w-7xl mx-auto">
+          <Outlet />
+        </div>
       </main>
     </div>
   );

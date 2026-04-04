@@ -30,7 +30,7 @@ export default function Layout() {
   return (
     <div className="min-h-screen flex flex-col bg-background text-on-surface font-body">
       {/* TopNavBar Shell */}
-      <nav className="fixed top-0 w-full z-50 bg-[#faf9f6]/80 backdrop-blur-md shadow-[0_10px_30px_rgba(30,86,49,0.05)] h-20">
+      <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md shadow-[0_10px_30px_rgba(30,86,49,0.05)] h-20 border-b border-outline-variant/10">
         <div className="flex justify-between items-center px-8 h-full max-w-[1440px] mx-auto">
           <Link to="/" className="text-2xl font-black text-primary font-headline tracking-tight">
             The Illuminated Path
@@ -39,31 +39,31 @@ export default function Layout() {
           <div className="hidden md:flex items-center gap-8 font-headline font-semibold text-primary">
             <Link 
               to="/" 
-              className={`${location.pathname === '/' ? 'text-primary border-b-2 border-primary pb-1' : 'text-on-primary-fixed-variant/70 hover:text-primary transition-all'}`}
+              className={`${location.pathname === '/' ? 'text-primary border-b-2 border-primary pb-1' : 'text-primary/60 hover:text-primary transition-all'}`}
             >
               Home
             </Link>
             <Link 
               to="/shop" 
-              className={`${location.pathname === '/shop' ? 'text-primary border-b-2 border-primary pb-1' : 'text-on-primary-fixed-variant/70 hover:text-primary transition-all'}`}
+              className={`${location.pathname === '/shop' ? 'text-primary border-b-2 border-primary pb-1' : 'text-primary/60 hover:text-primary transition-all'}`}
             >
               Books
             </Link>
             <Link 
               to="/quran-stories-for-kids" 
-              className={`${location.pathname === '/quran-stories-for-kids' ? 'text-primary border-b-2 border-primary pb-1' : 'text-on-primary-fixed-variant/70 hover:text-primary transition-all'}`}
+              className={`${location.pathname === '/quran-stories-for-kids' ? 'text-primary border-b-2 border-primary pb-1' : 'text-primary/60 hover:text-primary transition-all'}`}
             >
               Quran Stories
             </Link>
             <Link 
               to="/academy" 
-              className={`${location.pathname === '/academy' ? 'text-primary border-b-2 border-primary pb-1' : 'text-on-primary-fixed-variant/70 hover:text-primary transition-all'}`}
+              className={`${location.pathname === '/academy' ? 'text-primary border-b-2 border-primary pb-1' : 'text-primary/60 hover:text-primary transition-all'}`}
             >
               Academy
             </Link>
             <Link 
               to="/stories-of-the-prophets-for-kids" 
-              className={`${location.pathname === '/stories-of-the-prophets-for-kids' ? 'text-primary border-b-2 border-primary pb-1' : 'text-on-primary-fixed-variant/70 hover:text-primary transition-all'}`}
+              className={`${location.pathname === '/stories-of-the-prophets-for-kids' ? 'text-primary border-b-2 border-primary pb-1' : 'text-primary/60 hover:text-primary transition-all'}`}
             >
               Prophet Stories
             </Link>
@@ -82,7 +82,7 @@ export default function Layout() {
             <Link to="/cart" className="relative p-2 rounded-full hover:bg-surface-container-high transition-all text-primary">
               <ShoppingCart className="h-6 w-6" />
               {itemCount > 0 && (
-                <span className="absolute top-0 right-0 bg-secondary-container text-on-secondary-container text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1 shadow-sm">
+                <span className="absolute top-0 right-0 bg-secondary text-primary text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1 shadow-sm">
                   {itemCount}
                 </span>
               )}
@@ -108,7 +108,7 @@ export default function Layout() {
               </button>
             )}
 
-            <Link to="/academy" className="bg-primary text-on-primary px-6 py-2.5 rounded-full font-headline font-bold text-sm hover:scale-95 transition-transform hidden sm:block">
+            <Link to="/academy" className="bg-primary text-on-primary px-6 py-2.5 rounded-full font-headline font-bold text-sm hover:scale-95 transition-transform hidden sm:block shadow-lg shadow-primary/10">
               Join the Academy
             </Link>
 
@@ -139,7 +139,7 @@ export default function Layout() {
                   onClick={() => setIsMenuOpen(false)}
                   className={`block px-4 py-3 rounded-xl text-base font-bold ${
                     location.pathname === link.path
-                      ? 'bg-surface-container-low text-primary'
+                      ? 'bg-primary/5 text-primary'
                       : 'text-on-surface-variant hover:bg-surface-container-low'
                   }`}
                 >
@@ -174,7 +174,7 @@ export default function Layout() {
       </main>
 
       {/* Footer Shell */}
-      <footer className="bg-[#f4f3f1] pt-24 pb-12">
+      <footer className="bg-surface-container-low pt-24 pb-12 border-t border-outline-variant/10">
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 border-b border-primary/10 pb-16">
             <div className="col-span-1 md:col-span-1">

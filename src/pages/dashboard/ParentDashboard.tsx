@@ -32,10 +32,10 @@ export default function ParentDashboard() {
           <h1 className="text-4xl font-headline font-extrabold text-primary tracking-tight mb-2">
             Salaam, {user?.displayName?.split(' ')[0] || 'Parent'}!
           </h1>
-          <p className="text-on-surface-variant font-medium">Welcome to your family's nurturing sanctuary. Here's how everyone is growing.</p>
+          <p className="text-primary/60 font-medium">Welcome to your family's nurturing sanctuary. Here's how everyone is growing.</p>
         </div>
         <div className="flex gap-3">
-          <button className="px-6 py-3 bg-surface-low text-primary rounded-full font-bold text-sm border border-outline-variant/20 hover:bg-outline-variant/10 transition-all">
+          <button className="px-6 py-3 bg-surface-container-low text-primary rounded-full font-bold text-sm border border-outline-variant/10 hover:bg-primary/5 transition-all">
             View Analytics
           </button>
           <button className="px-6 py-3 bg-primary text-white rounded-full font-bold text-sm shadow-lg shadow-primary/10 hover:scale-[1.02] transition-all">
@@ -60,7 +60,7 @@ export default function ParentDashboard() {
           </div>
         </div>
 
-        <div className="bg-accent text-secondary p-8 rounded-3xl shadow-xl shadow-accent/10 flex flex-col justify-between relative overflow-hidden group">
+        <div className="bg-secondary text-primary p-8 rounded-3xl shadow-xl shadow-secondary/10 flex flex-col justify-between relative overflow-hidden group border border-primary/5">
           <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
             <BookOpen className="h-24 w-24" />
           </div>
@@ -68,18 +68,18 @@ export default function ParentDashboard() {
             <p className="text-xs font-bold uppercase tracking-widest opacity-80 mb-2">Books Completed</p>
             <h3 className="text-4xl font-headline font-extrabold">18</h3>
           </div>
-          <div className="mt-8 flex items-center gap-2 text-xs font-bold bg-black/5 w-fit px-3 py-1.5 rounded-full">
+          <div className="mt-8 flex items-center gap-2 text-xs font-bold bg-primary/5 w-fit px-3 py-1.5 rounded-full">
             <CheckCircle2 className="h-3 w-3" />
             <span>4 this week</span>
           </div>
         </div>
 
-        <div className="bg-surface-low border border-outline-variant/30 p-8 rounded-3xl flex flex-col justify-between relative overflow-hidden group">
+        <div className="bg-surface-container-low border border-outline-variant/10 p-8 rounded-3xl flex flex-col justify-between relative overflow-hidden group">
           <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:scale-110 transition-transform">
             <Award className="h-24 w-24" />
           </div>
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant/60 mb-2">Badges Earned</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-primary/40 mb-2">Badges Earned</p>
             <h3 className="text-4xl font-headline font-extrabold text-primary">42</h3>
           </div>
           <div className="mt-8 flex items-center gap-2 text-xs font-bold bg-primary/5 text-primary w-fit px-3 py-1.5 rounded-full">
@@ -91,7 +91,7 @@ export default function ParentDashboard() {
 
       {/* Children Progress */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-surface border border-outline-variant/20 rounded-3xl p-8 shadow-sm">
+        <div className="bg-surface border border-outline-variant/10 rounded-3xl p-8 shadow-sm">
           <div className="flex justify-between items-center mb-8">
             <h3 className="text-xl font-headline font-extrabold text-primary">Child Progress</h3>
             <button className="text-xs font-bold text-primary hover:underline uppercase tracking-widest">View All</button>
@@ -101,14 +101,14 @@ export default function ParentDashboard() {
               <div key={child.name} className="space-y-3">
                 <div className="flex justify-between items-end">
                   <div>
-                    <h4 className="text-lg font-bold text-on-surface">{child.name}</h4>
-                    <p className="text-xs text-on-surface-variant font-medium">Last read: {child.lastRead}</p>
+                    <h4 className="text-lg font-bold text-primary">{child.name}</h4>
+                    <p className="text-xs text-primary/60 font-medium">Last read: {child.lastRead}</p>
                   </div>
                   <span className="text-sm font-bold text-primary">{child.progress}%</span>
                 </div>
-                <div className="h-3 bg-surface-low rounded-full overflow-hidden border border-outline-variant/10">
+                <div className="h-3 bg-surface-container-low rounded-full overflow-hidden border border-outline-variant/5">
                   <div 
-                    className={`h-full ${child.color} rounded-full transition-all duration-1000`}
+                    className={`h-full ${child.color === 'bg-accent' ? 'bg-secondary' : 'bg-primary'} rounded-full transition-all duration-1000`}
                     style={{ width: `${child.progress}%` }}
                   />
                 </div>
@@ -118,7 +118,7 @@ export default function ParentDashboard() {
         </div>
 
         {/* Recent Activity */}
-        <div className="bg-surface border border-outline-variant/20 rounded-3xl p-8 shadow-sm">
+        <div className="bg-surface border border-outline-variant/10 rounded-3xl p-8 shadow-sm">
           <div className="flex justify-between items-center mb-8">
             <h3 className="text-xl font-headline font-extrabold text-primary">Recent Activity</h3>
             <button className="text-xs font-bold text-primary hover:underline uppercase tracking-widest">Full Log</button>
@@ -126,16 +126,16 @@ export default function ParentDashboard() {
           <div className="space-y-6">
             {recentActivity.map((activity, i) => (
               <div key={i} className="flex items-start gap-4 group cursor-pointer">
-                <div className="w-10 h-10 rounded-xl bg-surface-low flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                <div className="w-10 h-10 rounded-xl bg-surface-container-low flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
                   <Clock className="h-5 w-5" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-bold text-on-surface">
+                  <p className="text-sm font-bold text-primary">
                     <span className="text-primary">{activity.child}</span> {activity.action}
                   </p>
-                  <p className="text-xs text-on-surface-variant font-medium">{activity.item}</p>
+                  <p className="text-xs text-primary/60 font-medium">{activity.item}</p>
                 </div>
-                <span className="text-[10px] font-bold text-on-surface-variant/50 uppercase tracking-tighter">{activity.time}</span>
+                <span className="text-[10px] font-bold text-primary/30 uppercase tracking-tighter">{activity.time}</span>
               </div>
             ))}
           </div>
@@ -143,14 +143,14 @@ export default function ParentDashboard() {
       </div>
 
       {/* Suggested Next Steps */}
-      <div className="bg-primary-container text-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden">
+      <div className="bg-primary text-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 p-12 opacity-10">
           <Sparkles className="h-48 w-48" />
         </div>
         <div className="relative z-10 max-w-2xl">
           <h3 className="text-3xl font-headline font-extrabold mb-4">Ready for the next adventure?</h3>
           <p className="text-lg opacity-80 mb-8 font-medium">Based on Hakim's interest in Prophet stories, we recommend starting "The Story of Prophet Ibrahim" next.</p>
-          <button className="px-8 py-4 bg-accent text-secondary rounded-full font-bold text-sm shadow-xl shadow-black/10 hover:scale-105 transition-all flex items-center gap-2">
+          <button className="px-8 py-4 bg-secondary text-primary rounded-full font-bold text-sm shadow-xl shadow-black/10 hover:scale-105 transition-all flex items-center gap-2">
             <span>Start Reading Now</span>
             <ChevronRight className="h-4 w-4" />
           </button>
