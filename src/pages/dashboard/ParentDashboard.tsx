@@ -6,7 +6,14 @@ import {
   ChevronRight, 
   CheckCircle2,
   Users,
-  Sparkles
+  Sparkles,
+  LayoutDashboard,
+  CreditCard,
+  History,
+  Plus,
+  Heart,
+  ArrowRight,
+  Star
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -27,132 +34,136 @@ export default function ParentDashboard() {
   return (
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-        <div>
-          <h1 className="text-4xl font-headline font-extrabold text-primary tracking-tight mb-2">
-            Salaam, {user?.displayName?.split(' ')[0] || 'Parent'}!
-          </h1>
-          <p className="text-primary/60 font-medium">Welcome to your family's nurturing sanctuary. Here's how everyone is growing.</p>
-        </div>
-        <div className="flex gap-3">
-          <button className="px-6 py-3 bg-surface-container-low text-primary rounded-full font-bold text-sm border border-outline-variant/10 hover:bg-primary/5 transition-all">
-            View Analytics
-          </button>
-          <button className="px-6 py-3 bg-primary text-white rounded-full font-bold text-sm shadow-lg shadow-primary/10 hover:scale-[1.02] transition-all">
-            Manage Family
-          </button>
+      <div className="bg-white rounded-[3rem] p-12 shadow-sm border border-outline-variant/10 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="text-center md:text-left">
+            <div className="inline-flex items-center gap-2 bg-primary/5 px-4 py-2 rounded-full text-primary font-black text-xs uppercase tracking-widest mb-6 border border-primary/10">
+              <Sparkles className="h-4 w-4" />
+              <span>Level 4: Rising Star</span>
+            </div>
+            <h1 className="text-5xl font-headline font-black text-primary tracking-tight mb-4">
+              As-Salamu Alaykum, {user?.displayName?.split(' ')[0] || 'Parent'}!
+            </h1>
+            <p className="text-lg text-primary/60 font-medium max-w-xl">
+              Suleyman is making wonderful progress this week. He's currently a <span className="text-primary font-black underline decoration-secondary decoration-4 underline-offset-4">Prophet Story Explorer</span>.
+            </p>
+          </div>
+          <div className="flex flex-col items-center gap-4 bg-primary text-white p-8 rounded-[2.5rem] shadow-2xl shadow-primary/20 min-w-[280px]">
+            <div className="text-center">
+              <p className="text-xs font-bold uppercase tracking-widest opacity-60 mb-1">Today's Goal</p>
+              <p className="text-lg font-black">Read 'The Ark of Nuh' together</p>
+            </div>
+            <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden border border-white/10">
+              <div className="h-full bg-secondary w-[65%] rounded-full shadow-[0_0_10px_rgba(234,179,8,0.5)]"></div>
+            </div>
+            <p className="text-xs font-bold opacity-80">65% of daily path complete</p>
+          </div>
         </div>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-primary text-white p-8 rounded-3xl shadow-xl shadow-primary/10 flex flex-col justify-between relative overflow-hidden group">
-          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
-            <TrendingUp className="h-24 w-24" />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          { label: 'Stories Read', value: '12', icon: BookOpen, color: 'bg-blue-50 text-blue-600' },
+          { label: 'Quizzes Done', value: '8', icon: Award, color: 'bg-purple-50 text-purple-600' },
+          { label: 'Total Learning Time', value: '4.5 hrs', icon: Clock, color: 'bg-green-50 text-green-600', chart: true },
+        ].map((stat, i) => (
+          <div key={i} className="bg-white rounded-[3rem] p-10 shadow-sm border border-outline-variant/10 flex flex-col items-center text-center group hover:shadow-xl transition-all duration-500">
+            <div className={`w-20 h-20 ${stat.color} rounded-[2rem] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+              <stat.icon className="h-10 w-10" />
+            </div>
+            <h3 className="text-4xl font-headline font-black text-primary mb-2">{stat.value}</h3>
+            <p className="text-sm font-bold text-primary/40 uppercase tracking-widest">{stat.label}</p>
+            {stat.chart && (
+              <div className="mt-6 flex items-end gap-1 h-12">
+                {[40, 70, 45, 90, 60].map((h, j) => (
+                  <div key={j} className="w-2 bg-primary/10 rounded-full overflow-hidden">
+                    <div className="bg-primary rounded-full" style={{ height: `${h}%` }}></div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest opacity-80 mb-2">Total Learning Time</p>
-            <h3 className="text-4xl font-headline font-extrabold">124h</h3>
-          </div>
-          <div className="mt-8 flex items-center gap-2 text-xs font-bold bg-white/10 w-fit px-3 py-1.5 rounded-full">
-            <Sparkles className="h-3 w-3" />
-            <span>+12% from last month</span>
-          </div>
-        </div>
-
-        <div className="bg-secondary text-primary p-8 rounded-3xl shadow-xl shadow-secondary/10 flex flex-col justify-between relative overflow-hidden group border border-primary/5">
-          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:scale-110 transition-transform">
-            <BookOpen className="h-24 w-24" />
-          </div>
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest opacity-80 mb-2">Books Completed</p>
-            <h3 className="text-4xl font-headline font-extrabold">18</h3>
-          </div>
-          <div className="mt-8 flex items-center gap-2 text-xs font-bold bg-primary/5 w-fit px-3 py-1.5 rounded-full">
-            <CheckCircle2 className="h-3 w-3" />
-            <span>4 this week</span>
-          </div>
-        </div>
-
-        <div className="bg-surface-container-low border border-outline-variant/10 p-8 rounded-3xl flex flex-col justify-between relative overflow-hidden group">
-          <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:scale-110 transition-transform">
-            <Award className="h-24 w-24" />
-          </div>
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-primary/40 mb-2">Badges Earned</p>
-            <h3 className="text-4xl font-headline font-extrabold text-primary">42</h3>
-          </div>
-          <div className="mt-8 flex items-center gap-2 text-xs font-bold bg-primary/5 text-primary w-fit px-3 py-1.5 rounded-full">
-            <Users className="h-3 w-3" />
-            <span>Top 5% of learners</span>
-          </div>
-        </div>
+        ))}
       </div>
 
-      {/* Children Progress */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-surface border border-outline-variant/10 rounded-3xl p-8 shadow-sm">
-          <div className="flex justify-between items-center mb-8">
-            <h3 className="text-xl font-headline font-extrabold text-primary">Child Progress</h3>
-            <button className="text-xs font-bold text-primary hover:underline uppercase tracking-widest">View All</button>
+      {/* Children Progress - Nurturing the Next Generation */}
+      <div className="space-y-8">
+        <div className="flex justify-between items-end">
+          <div>
+            <h2 className="text-3xl font-headline font-black text-primary tracking-tight mb-2">Nurturing the Next Generation</h2>
+            <p className="text-primary/60 font-medium">Active learner profiles under this account</p>
           </div>
-          <div className="space-y-8">
-            {children.map((child) => (
-              <div key={child.name} className="space-y-3">
-                <div className="flex justify-between items-end">
-                  <div>
-                    <h4 className="text-lg font-bold text-primary">{child.name}</h4>
-                    <p className="text-xs text-primary/60 font-medium">Last read: {child.lastRead}</p>
-                  </div>
-                  <span className="text-sm font-bold text-primary">{child.progress}%</span>
-                </div>
-                <div className="h-3 bg-surface-container-low rounded-full overflow-hidden border border-outline-variant/5">
-                  <div 
-                    className={`h-full ${child.color === 'bg-accent' ? 'bg-secondary' : 'bg-primary'} rounded-full transition-all duration-1000`}
-                    style={{ width: `${child.progress}%` }}
+          <button className="bg-secondary text-primary px-8 py-3 rounded-full font-black text-sm shadow-lg shadow-secondary/20 flex items-center gap-2 hover:scale-105 transition-transform">
+            <Star className="h-4 w-4 fill-primary" />
+            Premium Family Plan
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {children.map((child) => (
+            <div key={child.name} className="bg-white rounded-[3rem] p-10 shadow-sm border border-outline-variant/10 relative group hover:shadow-2xl transition-all duration-500">
+              <div className="absolute -top-6 left-1/2 -translate-x-1/2">
+                <div className="w-24 h-24 rounded-[2rem] overflow-hidden border-4 border-white shadow-2xl">
+                  <img 
+                    src={child.name === 'Hakim' ? 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=200&h=200&fit=crop' : 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=200&h=200&fit=crop'} 
+                    alt={child.name} 
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Recent Activity */}
-        <div className="bg-surface border border-outline-variant/10 rounded-3xl p-8 shadow-sm">
-          <div className="flex justify-between items-center mb-8">
-            <h3 className="text-xl font-headline font-extrabold text-primary">Recent Activity</h3>
-            <button className="text-xs font-bold text-primary hover:underline uppercase tracking-widest">Full Log</button>
-          </div>
-          <div className="space-y-6">
-            {recentActivity.map((activity, i) => (
-              <div key={i} className="flex items-start gap-4 group cursor-pointer">
-                <div className="w-10 h-10 rounded-xl bg-surface-container-low flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
-                  <Clock className="h-5 w-5" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm font-bold text-primary">
-                    <span className="text-primary">{activity.child}</span> {activity.action}
-                  </p>
-                  <p className="text-xs text-primary/60 font-medium">{activity.item}</p>
-                </div>
-                <span className="text-[10px] font-bold text-primary/30 uppercase tracking-tighter">{activity.time}</span>
+              
+              <div className="mt-16 text-center mb-10">
+                <h3 className="text-2xl font-headline font-black text-primary mb-1">{child.name} Abdullah</h3>
+                <p className="text-sm font-bold text-primary/40 uppercase tracking-widest">Age: {child.age} • Level: {child.name === 'Hakim' ? 'Explorer' : 'Seedling'}</p>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
-      {/* Suggested Next Steps */}
-      <div className="bg-primary text-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 p-12 opacity-10">
-          <Sparkles className="h-48 w-48" />
-        </div>
-        <div className="relative z-10 max-w-2xl">
-          <h3 className="text-3xl font-headline font-extrabold mb-4">Ready for the next adventure?</h3>
-          <p className="text-lg opacity-80 mb-8 font-medium">Based on Hakim's interest in Prophet stories, we recommend starting "The Story of Prophet Ibrahim" next.</p>
-          <button className="px-8 py-4 bg-secondary text-primary rounded-full font-bold text-sm shadow-xl shadow-black/10 hover:scale-105 transition-all flex items-center gap-2">
-            <span>Start Reading Now</span>
-            <ChevronRight className="h-4 w-4" />
+              <div className="space-y-8">
+                <div className="space-y-3">
+                  <div className="flex justify-between text-[10px] font-black text-primary uppercase tracking-widest">
+                    <span>{child.name === 'Hakim' ? "QU'RAN JOURNEY" : "ARABIC LETTERS"}</span>
+                    <span>{child.progress}%</span>
+                  </div>
+                  <div className="h-2 bg-surface-container-low rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-secondary rounded-full relative"
+                      style={{ width: `${child.progress}%` }}
+                    >
+                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full border-2 border-secondary shadow-sm flex items-center justify-center">
+                        <div className="w-1 h-1 bg-secondary rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex justify-between text-[10px] font-black text-primary uppercase tracking-widest">
+                    <span>{child.name === 'Hakim' ? "ADAB & CHARACTER" : "PROPHET STORIES"}</span>
+                    <span>{child.name === 'Hakim' ? '90%' : '65%'}</span>
+                  </div>
+                  <div className="h-2 bg-surface-container-low rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-secondary rounded-full relative"
+                      style={{ width: `${child.name === 'Hakim' ? 90 : 65}%` }}
+                    >
+                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full border-2 border-secondary shadow-sm flex items-center justify-center">
+                        <div className="w-1 h-1 bg-secondary rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {/* Add New Profile */}
+          <button className="bg-transparent rounded-[3rem] border-4 border-dashed border-outline-variant/20 p-10 flex flex-col items-center justify-center text-center group hover:border-primary/20 hover:bg-primary/5 transition-all duration-500">
+            <div className="w-20 h-20 bg-surface-container-low rounded-full flex items-center justify-center text-primary/20 group-hover:text-primary group-hover:scale-110 transition-all mb-6">
+              <Plus className="h-10 w-10" />
+            </div>
+            <h3 className="text-xl font-headline font-black text-primary mb-2">Add New Profile</h3>
+            <p className="text-sm font-medium text-primary/40">Expand your family journey</p>
           </button>
         </div>
       </div>

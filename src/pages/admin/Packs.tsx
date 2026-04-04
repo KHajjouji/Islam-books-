@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, doc, setDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase';
-import { Plus, Trash2, Edit2, Loader2, Package as PackageIcon, Code, Globe, Sparkles, X } from 'lucide-react';
+import { Plus, Trash2, Edit2, Loader2, Package as PackageIcon, Code, Globe, Sparkles, X, Layout, Settings, CheckCircle2 } from 'lucide-react';
 import { GoogleGenAI } from '@google/genai';
 
 interface Pack {
@@ -208,22 +208,29 @@ export default function AdminPacks() {
   };
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-headline font-black text-primary tracking-tight">Packs Management</h1>
-        {!isEditing && (
-          <button
-            onClick={() => {
-              setCurrentPack({ title: '', description: '', price: 0, image: '', type: 'books', features: [], productIds: [], seoTitle: '', seoDescription: '', seoKeywords: '', customHtml: '', translations: {} });
-              setActiveTab('basic');
-              setIsEditing(true);
-            }}
-            className="flex items-center px-8 py-4 bg-primary text-white font-black rounded-full hover:scale-105 transition-transform shadow-lg shadow-primary/10"
-          >
-            <Plus className="h-5 w-5 mr-2" />
-            Create New Pack
-          </button>
-        )}
+    <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      {/* Header */}
+      <div className="bg-white rounded-[3rem] p-12 shadow-sm border border-outline-variant/10 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div>
+            <h1 className="text-5xl font-headline font-black text-primary tracking-tight mb-4">Packs Management</h1>
+            <p className="text-lg text-primary/60 font-medium max-w-xl">Create and manage premium educational bundles for your subscribers.</p>
+          </div>
+          {!isEditing && (
+            <button
+              onClick={() => {
+                setCurrentPack({ title: '', description: '', price: 0, image: '', type: 'books', features: [], productIds: [], seoTitle: '', seoDescription: '', seoKeywords: '', customHtml: '', translations: {} });
+                setActiveTab('basic');
+                setIsEditing(true);
+              }}
+              className="flex items-center px-10 py-4 bg-secondary text-primary font-black rounded-full hover:scale-105 transition-transform shadow-xl shadow-secondary/20"
+            >
+              <Plus className="h-5 w-5 mr-2" />
+              Create New Pack
+            </button>
+          )}
+        </div>
       </div>
 
       {isEditing ? (
@@ -452,56 +459,58 @@ export default function AdminPacks() {
           </div>
         </div>
       ) : loading ? (
-        <div className="flex justify-center py-32">
-          <Loader2 className="h-16 w-16 text-primary animate-spin" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[1, 2, 3].map(i => (
+            <div key={i} className="bg-white h-96 rounded-[3rem] border border-outline-variant/10 animate-pulse"></div>
+          ))}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {packs.map((pack) => (
-            <div key={pack.id} className="bg-white rounded-[2.5rem] shadow-sm border border-outline-variant/10 overflow-hidden flex flex-col group hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-              <div className="h-56 relative overflow-hidden">
+            <div key={pack.id} className="bg-white rounded-[3rem] shadow-sm border border-outline-variant/10 overflow-hidden flex flex-col group hover:shadow-2xl transition-all duration-500">
+              <div className="h-64 relative overflow-hidden">
                 <img src={pack.image} alt={pack.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl text-sm font-black text-primary shadow-xl">
+                <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-6 py-3 rounded-2xl text-lg font-black text-primary shadow-xl">
                   ${pack.price.toFixed(2)}
                 </div>
-                <div className="absolute top-6 left-6 bg-primary text-white px-4 py-2 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl">
+                <div className="absolute top-6 left-6 bg-primary text-white px-5 py-2 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl">
                   {pack.type}
                 </div>
               </div>
-              <div className="p-8 flex-grow flex flex-col">
-                <h3 className="text-xl font-headline font-black text-primary mb-3 tracking-tight">{pack.title}</h3>
-                <p className="text-primary/60 text-sm mb-6 line-clamp-2 font-medium leading-relaxed">{pack.description}</p>
+              <div className="p-10 flex-grow flex flex-col">
+                <h3 className="text-2xl font-headline font-black text-primary mb-4 tracking-tight leading-tight">{pack.title}</h3>
+                <p className="text-primary/60 text-sm mb-8 line-clamp-2 font-medium leading-relaxed">{pack.description}</p>
                 
-                <div className="mb-6">
-                  <h4 className="text-[10px] font-black text-primary/30 uppercase tracking-widest mb-4">Included Features</h4>
-                  <ul className="space-y-3">
+                <div className="mb-8">
+                  <h4 className="text-[10px] font-black text-primary/30 uppercase tracking-widest mb-6">Included Features</h4>
+                  <ul className="space-y-4">
                     {pack.features.slice(0, 3).map((feature, idx) => (
-                      <li key={idx} className="text-sm text-primary/80 flex items-center gap-3 font-bold">
-                        <div className="w-2 h-2 rounded-full bg-secondary shadow-sm shadow-secondary/50"></div>
+                      <li key={idx} className="text-sm text-primary/80 flex items-center gap-4 font-bold">
+                        <div className="w-2.5 h-2.5 rounded-full bg-secondary shadow-sm shadow-secondary/50"></div>
                         {feature}
                       </li>
                     ))}
                     {pack.features.length > 3 && (
-                      <li className="text-xs text-primary/40 font-black uppercase tracking-widest mt-2 pl-5">+ {pack.features.length - 3} more features</li>
+                      <li className="text-xs text-primary/40 font-black uppercase tracking-widest mt-4 pl-6">+ {pack.features.length - 3} more features</li>
                     )}
                   </ul>
                 </div>
 
-                <div className="mt-auto pt-6 border-t border-outline-variant/5 flex justify-end gap-3">
+                <div className="mt-auto pt-8 border-t border-outline-variant/5 flex justify-end gap-3">
                   <button
                     onClick={() => {
                       setCurrentPack(pack);
                       setActiveTab('basic');
                       setIsEditing(true);
                     }}
-                    className="p-3 text-primary bg-primary/5 hover:bg-primary hover:text-white rounded-2xl transition-all"
+                    className="p-4 text-primary bg-primary/5 hover:bg-primary hover:text-white rounded-2xl transition-all"
                     title="Edit Pack"
                   >
                     <Edit2 className="h-5 w-5" />
                   </button>
                   <button
                     onClick={() => handleDelete(pack.id)}
-                    className="p-3 text-rose-600 bg-rose-50 hover:bg-rose-600 hover:text-white rounded-2xl transition-all"
+                    className="p-4 text-rose-600 bg-rose-50 hover:bg-rose-600 hover:text-white rounded-2xl transition-all"
                     title="Delete Pack"
                   >
                     <Trash2 className="h-5 w-5" />

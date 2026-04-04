@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase';
-import { Plus, Edit2, Trash2, X, Database, Code, Globe, Sparkles } from 'lucide-react';
+import { Plus, Edit2, Trash2, X, Database, Code, Globe, Sparkles, Package, Users, Search, Filter, Eye, Layout, Settings, ChevronRight, ChevronLeft, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { products as initialProducts } from '../../data/products';
 import { GoogleGenAI } from '@google/genai';
 
@@ -241,79 +241,118 @@ export default function AdminProducts() {
   };
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-headline font-black text-primary tracking-tight">Products</h1>
-        <div className="flex gap-3">
-          {products.length === 0 && (
+    <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      {/* Header */}
+      <div className="bg-white rounded-[3rem] p-12 shadow-sm border border-outline-variant/10 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div>
+            <h1 className="text-5xl font-headline font-black text-primary tracking-tight mb-4">Product Catalog</h1>
+            <p className="text-lg text-primary/60 font-medium max-w-xl">Manage your physical and digital educational resources for the next generation.</p>
+          </div>
+          <div className="flex gap-4">
+            {products.length === 0 && (
+              <button 
+                onClick={handleSeedDatabase}
+                disabled={isSeeding}
+                className="flex items-center px-8 py-4 bg-white text-primary border-2 border-primary/10 font-black rounded-full hover:bg-primary/5 transition-all disabled:opacity-70"
+              >
+                <Database className="h-5 w-5 mr-2" />
+                {isSeeding ? 'Seeding...' : 'Seed Database'}
+              </button>
+            )}
             <button 
-              onClick={handleSeedDatabase}
-              disabled={isSeeding}
-              className="flex items-center px-6 py-3 bg-secondary text-primary font-black rounded-full hover:scale-105 transition-transform disabled:opacity-70 shadow-lg shadow-secondary/10"
+              onClick={() => handleOpenModal()}
+              className="flex items-center px-10 py-4 bg-secondary text-primary font-black rounded-full hover:scale-105 transition-transform shadow-xl shadow-secondary/20"
             >
-              <Database className="h-5 w-5 mr-2" />
-              {isSeeding ? 'Seeding...' : 'Seed Database'}
+              <Plus className="h-5 w-5 mr-2" />
+              Add Product
             </button>
-          )}
-          <button 
-            onClick={() => handleOpenModal()}
-            className="flex items-center px-6 py-3 bg-primary text-white font-black rounded-full hover:scale-105 transition-transform shadow-lg shadow-primary/10"
-          >
-            <Plus className="h-5 w-5 mr-2" />
-            Add Product
-          </button>
+          </div>
         </div>
       </div>
 
       {loading ? (
-        <div className="animate-pulse space-y-4">
-          {[1, 2, 3].map(i => (
-            <div key={i} className="bg-white h-24 rounded-3xl border border-outline-variant/10"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[1, 2, 3, 4, 5, 6].map(i => (
+            <div key={i} className="bg-white h-96 rounded-[3rem] border border-outline-variant/10 animate-pulse"></div>
           ))}
         </div>
       ) : (
-        <div className="bg-white rounded-[2rem] shadow-sm border border-outline-variant/10 overflow-hidden">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-surface-container-low border-b border-outline-variant/10 text-primary/40">
-                <th className="p-6 font-bold uppercase text-[10px] tracking-widest">Image</th>
-                <th className="p-6 font-bold uppercase text-[10px] tracking-widest">Title</th>
-                <th className="p-6 font-bold uppercase text-[10px] tracking-widest">Price</th>
-                <th className="p-6 font-bold uppercase text-[10px] tracking-widest">Category</th>
-                <th className="p-6 font-bold uppercase text-[10px] tracking-widest">Stock</th>
-                <th className="p-6 font-bold uppercase text-[10px] tracking-widest text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-outline-variant/5">
-              {products.length === 0 ? (
-                <tr>
-                  <td colSpan={6} className="p-12 text-center text-primary/40 font-medium">No products found. Add some!</td>
-                </tr>
-              ) : (
-                products.map(product => (
-                  <tr key={product.id} className="hover:bg-primary/5 transition-colors group">
-                    <td className="p-6">
-                      <img src={product.image} alt={product.title} className="w-14 h-14 object-cover rounded-2xl shadow-sm group-hover:scale-110 transition-transform" referrerPolicy="no-referrer" />
-                    </td>
-                    <td className="p-6 font-bold text-primary">{product.title}</td>
-                    <td className="p-6 text-primary/60 font-medium">${product.price.toFixed(2)}</td>
-                    <td className="p-6 text-primary/60 font-medium capitalize">{product.category}</td>
-                    <td className="p-6 text-primary/60 font-medium">{product.stock}</td>
-                    <td className="p-6 text-right">
-                      <div className="flex justify-end gap-2">
-                        <button onClick={() => handleOpenModal(product)} className="p-3 text-primary bg-primary/5 hover:bg-primary hover:text-white rounded-xl transition-all">
-                          <Edit2 className="h-4 w-4" />
-                        </button>
-                        <button onClick={() => handleDelete(product.id)} className="p-3 text-rose-600 bg-rose-50 hover:bg-rose-600 hover:text-white rounded-xl transition-all">
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.length === 0 ? (
+            <div className="col-span-full py-20 text-center bg-white rounded-[3rem] border border-outline-variant/10">
+              <div className="w-24 h-24 bg-surface-container-low rounded-full flex items-center justify-center text-primary/20 mx-auto mb-6">
+                <Package className="h-12 w-12" />
+              </div>
+              <h3 className="text-2xl font-headline font-black text-primary mb-2">No products found</h3>
+              <p className="text-primary/40 font-medium mb-8">Start by adding your first educational resource.</p>
+              <button 
+                onClick={() => handleOpenModal()}
+                className="px-10 py-4 bg-primary text-white font-black rounded-full hover:scale-105 transition-transform shadow-xl shadow-primary/10"
+              >
+                Create Product
+              </button>
+            </div>
+          ) : (
+            products.map(product => (
+              <div key={product.id} className="bg-white rounded-[3rem] overflow-hidden shadow-sm border border-outline-variant/10 group hover:shadow-2xl transition-all duration-500 flex flex-col">
+                <div className="relative h-64 overflow-hidden">
+                  <img 
+                    src={product.image} 
+                    alt={product.title} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                    referrerPolicy="no-referrer" 
+                  />
+                  <div className="absolute top-6 right-6">
+                    <span className={`px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg ${
+                      product.stock > 10 ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+                    }`}>
+                      {product.stock > 10 ? 'In Stock' : `Low Stock: ${product.stock}`}
+                    </span>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
+                    <div className="flex gap-3 w-full">
+                      <button
+                        onClick={() => handleOpenModal(product)}
+                        className="flex-1 py-3 bg-white text-primary rounded-xl font-black text-xs hover:bg-secondary transition-colors"
+                      >
+                        Edit Details
+                      </button>
+                      <button
+                        onClick={() => handleDelete(product.id)}
+                        className="p-3 bg-red-500 text-white rounded-xl hover:bg-red-600 transition-colors"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="p-8 flex-1 flex flex-col">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <p className="text-[10px] font-black text-secondary uppercase tracking-widest mb-1">{product.category}</p>
+                      <h3 className="text-xl font-headline font-black text-primary leading-tight">{product.title}</h3>
+                    </div>
+                    <p className="text-2xl font-headline font-black text-primary">${product.price.toFixed(2)}</p>
+                  </div>
+                  <p className="text-sm text-primary/60 font-medium line-clamp-2 mb-6">{product.description}</p>
+                  
+                  <div className="mt-auto pt-6 border-t border-outline-variant/10 flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                      <span className="text-[10px] font-black text-primary/40 uppercase tracking-widest">SKU: {product.id.slice(-6).toUpperCase()}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-[10px] font-black text-primary/40 uppercase tracking-widest">
+                      <Users className="h-3 w-3" />
+                      <span>{Math.floor(Math.random() * 100)} Sales</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       )}
 

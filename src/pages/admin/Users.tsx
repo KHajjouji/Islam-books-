@@ -119,29 +119,35 @@ export default function AdminUsers() {
   };
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-serif font-bold text-noor-dark">Users & Access</h1>
+    <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      {/* Header */}
+      <div className="bg-white rounded-[3rem] p-12 shadow-sm border border-outline-variant/10 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div className="relative z-10">
+          <h1 className="text-5xl font-headline font-black text-primary tracking-tight mb-4">Users & Access</h1>
+          <p className="text-lg text-primary/60 font-medium max-w-xl">Control platform access and manage user subscriptions and bundle assignments.</p>
+        </div>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 mb-8">
-        <h2 className="text-xl font-bold text-noor-dark mb-4">Register New User</h2>
-        <p className="text-sm text-noor-dark/70 mb-4">
-          Only users whose emails are registered here can log in using Google.
+      <div className="bg-white rounded-[3rem] shadow-sm border border-outline-variant/10 p-10 mb-8 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-secondary"></div>
+        <h2 className="text-2xl font-headline font-black text-primary mb-4 tracking-tight">Register New User</h2>
+        <p className="text-sm text-primary/60 mb-8 font-medium">
+          Whitelist email addresses to allow users to log in using Google Authentication.
         </p>
-        <form onSubmit={handleAddEmail} className="flex gap-4">
+        <form onSubmit={handleAddEmail} className="flex flex-col sm:flex-row gap-4">
           <input
             type="email"
             required
             placeholder="Enter email address"
             value={newEmail}
             onChange={(e) => setNewEmail(e.target.value)}
-            className="flex-grow px-4 py-2 rounded-xl border border-stone-300 focus:ring-2 focus:ring-noor-green outline-none"
+            className="flex-grow px-6 py-4 rounded-2xl border border-outline-variant/20 focus:ring-2 focus:ring-primary outline-none font-medium transition-all"
           />
           <button
             type="submit"
             disabled={isAdding}
-            className="flex items-center px-6 py-2 bg-noor-green text-white font-bold rounded-xl hover:bg-noor-green/90 transition-colors disabled:opacity-70"
+            className="flex items-center justify-center px-10 py-4 bg-primary text-white font-black rounded-2xl hover:scale-105 transition-transform disabled:opacity-70 shadow-xl shadow-primary/10"
           >
             <Plus className="h-5 w-5 mr-2" />
             {isAdding ? 'Adding...' : 'Allow Email'}
@@ -150,40 +156,40 @@ export default function AdminUsers() {
       </div>
 
       {loading ? (
-        <div className="animate-pulse space-y-4">
-          {[1, 2, 3].map(i => (
-            <div key={i} className="bg-white h-16 rounded-2xl border border-stone-200"></div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          {[1, 2].map(i => (
+            <div key={i} className="bg-white h-96 rounded-[3rem] border border-outline-variant/10 animate-pulse"></div>
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* Allowed Emails Table */}
-          <div>
-            <h2 className="text-xl font-bold text-noor-dark mb-4">Allowed Emails</h2>
-            <div className="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+          <div className="space-y-6">
+            <h2 className="text-2xl font-headline font-black text-primary tracking-tight px-4">Allowed Emails</h2>
+            <div className="bg-white rounded-[3rem] shadow-sm border border-outline-variant/10 overflow-hidden">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-stone-50 border-b border-stone-200 text-noor-dark/70">
-                    <th className="p-4 font-medium">Email</th>
-                    <th className="p-4 font-medium text-right">Actions</th>
+                  <tr className="bg-surface-container-low border-b border-outline-variant/10">
+                    <th className="p-8 text-[10px] font-black text-primary/40 uppercase tracking-widest">Email Address</th>
+                    <th className="p-8 text-[10px] font-black text-primary/40 uppercase tracking-widest text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-stone-200">
+                <tbody className="divide-y divide-outline-variant/5">
                   {allowedEmails.length === 0 ? (
                     <tr>
-                      <td colSpan={2} className="p-8 text-center text-noor-dark/60">No allowed emails found.</td>
+                      <td colSpan={2} className="p-12 text-center text-primary/40 font-medium">No allowed emails found.</td>
                     </tr>
                   ) : (
                     allowedEmails.map(item => (
-                      <tr key={item.id} className="hover:bg-stone-50 transition-colors">
-                        <td className="p-4 font-medium text-noor-dark">{item.email}</td>
-                        <td className="p-4 text-right">
+                      <tr key={item.id} className="hover:bg-surface-container-low transition-colors group">
+                        <td className="p-8 font-bold text-primary">{item.email}</td>
+                        <td className="p-8 text-right">
                           <button 
                             onClick={() => handleDeleteEmail(item.id)} 
-                            className="p-2 text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+                            className="p-4 text-rose-600 bg-rose-50 hover:bg-rose-600 hover:text-white rounded-2xl transition-all shadow-sm"
                             title="Remove access"
                           >
-                            <Trash2 className="h-4 w-4" />
+                            <Trash2 className="h-5 w-5" />
                           </button>
                         </td>
                       </tr>
@@ -195,52 +201,54 @@ export default function AdminUsers() {
           </div>
 
           {/* Active Users Table */}
-          <div>
-            <h2 className="text-xl font-bold text-noor-dark mb-4">Active Users & Packs</h2>
-            <div className="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+          <div className="space-y-6">
+            <h2 className="text-2xl font-headline font-black text-primary tracking-tight px-4">Active Users & Packs</h2>
+            <div className="bg-white rounded-[3rem] shadow-sm border border-outline-variant/10 overflow-hidden">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-stone-50 border-b border-stone-200 text-noor-dark/70">
-                    <th className="p-4 font-medium">User</th>
-                    <th className="p-4 font-medium">Assigned Packs</th>
+                  <tr className="bg-surface-container-low border-b border-outline-variant/10">
+                    <th className="p-8 text-[10px] font-black text-primary/40 uppercase tracking-widest">User</th>
+                    <th className="p-8 text-[10px] font-black text-primary/40 uppercase tracking-widest">Assigned Packs</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-stone-200">
+                <tbody className="divide-y divide-outline-variant/5">
                   {users.length === 0 ? (
                     <tr>
-                      <td colSpan={2} className="p-8 text-center text-noor-dark/60">No active users found.</td>
+                      <td colSpan={2} className="p-12 text-center text-primary/40 font-medium">No active users found.</td>
                     </tr>
                   ) : (
                     users.map(user => (
-                      <tr key={user.id} className="hover:bg-stone-50 transition-colors align-top">
-                        <td className="p-4">
-                          <div className="font-medium text-noor-dark">{user.email}</div>
-                          <span className={`inline-block mt-1 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                            user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-gray-100 text-gray-800'
+                      <tr key={user.id} className="hover:bg-surface-container-low transition-colors align-top">
+                        <td className="p-8">
+                          <div className="font-bold text-primary mb-2">{user.email}</div>
+                          <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${
+                            user.role === 'admin' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'bg-surface-container-high text-primary/60'
                           }`}>
                             {user.role}
                           </span>
                         </td>
-                        <td className="p-4">
-                          <div className="space-y-2">
+                        <td className="p-8">
+                          <div className="space-y-3">
                             {packs.map(pack => {
                               const isAssigned = user.assignedPacks?.includes(pack.id);
                               return (
-                                <label key={pack.id} className="flex items-center gap-2 cursor-pointer group">
-                                  <input
-                                    type="checkbox"
-                                    checked={isAssigned || false}
-                                    onChange={() => toggleUserPack(user.id, pack.id, user.assignedPacks)}
-                                    className="w-4 h-4 text-noor-green rounded focus:ring-noor-green"
-                                  />
-                                  <span className={`text-sm ${isAssigned ? 'text-noor-dark font-medium' : 'text-noor-dark/60 group-hover:text-noor-dark'}`}>
+                                <label key={pack.id} className="flex items-center gap-3 cursor-pointer group">
+                                  <div className="relative flex items-center">
+                                    <input
+                                      type="checkbox"
+                                      checked={isAssigned || false}
+                                      onChange={() => toggleUserPack(user.id, pack.id, user.assignedPacks)}
+                                      className="w-5 h-5 text-primary rounded-lg border-outline-variant/30 focus:ring-primary transition-all cursor-pointer"
+                                    />
+                                  </div>
+                                  <span className={`text-sm font-bold transition-colors ${isAssigned ? 'text-primary' : 'text-primary/40 group-hover:text-primary/60'}`}>
                                     {pack.title}
                                   </span>
                                 </label>
                               );
                             })}
                             {packs.length === 0 && (
-                              <span className="text-sm text-noor-dark/50 italic">No packs available</span>
+                              <span className="text-sm text-primary/30 italic font-medium">No packs available</span>
                             )}
                           </div>
                         </td>
