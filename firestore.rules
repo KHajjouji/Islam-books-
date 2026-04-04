@@ -78,10 +78,32 @@ service cloud.firestore {
     // Domain Validators
     // ===============================================================
     function isValidUser(data) {
-      return hasOnlyAllowedFields(['uid', 'email', 'role', 'createdAt']) &&
+      return hasOnlyAllowedFields(['uid', 'email', 'role', 'assignedPacks', 'createdAt']) &&
              data.uid is string && data.uid.size() > 0 && data.uid.size() < 100 &&
              data.email is string && isValidEmail(data.email) && data.email.size() < 150 &&
              data.role in ['admin', 'customer'] &&
+             (!('assignedPacks' in data) || (data.assignedPacks is list && data.assignedPacks.size() <= 50)) &&
+             data.createdAt is timestamp;
+    }
+
+    function isValidPack(data) {
+      return hasOnlyAllowedFields(['title', 'description', 'price', 'image', 'type', 'features', 'productIds', 'createdAt']) &&
+             data.title is string && data.title.size() > 0 && data.title.size() < 200 &&
+             data.description is string && data.description.size() > 0 && data.description.size() < 5000 &&
+             data.price is number && data.price >= 0 &&
+             data.image is string && data.image.size() > 0 && data.image.size() < 1000 &&
+             data.type in ['books', 'academy', 'mixed'] &&
+             data.features is list && data.features.size() <= 20 &&
+             (!('productIds' in data) || (data.productIds is list && data.productIds.size() <= 50)) &&
+             data.createdAt is timestamp;
+    }
+
+    function isValidCampaign(data) {
+      return hasOnlyAllowedFields(['subject', 'body', 'status', 'sentAt', 'createdAt']) &&
+             data.subject is string && data.subject.size() > 0 && data.subject.size() < 200 &&
+             data.body is string && data.body.size() > 0 && data.body.size() < 20000 &&
+             data.status in ['draft', 'sent'] &&
+             (!('sentAt' in data) || data.sentAt is timestamp) &&
              data.createdAt is timestamp;
     }
 
@@ -155,6 +177,20 @@ service cloud.firestore {
                     request.resource.data.userId == request.auth.uid &&
                     request.resource.data.status == 'pending';
       allow update: if isAdmin() && isValidOrder(request.resource.data); // Only admins can update orders
+      allow delete: if isAdmin();
+    }
+
+    match /packs/{packId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidPack(request.resource.data);
+      allow update: if isAdmin() && isValidPack(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    match /campaigns/{campaignId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin() && isValidCampaign(request.resource.data);
+      allow update: if isAdmin() && isValidCampaign(request.resource.data);
       allow delete: if isAdmin();
     }
   }

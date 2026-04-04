@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs, doc, setDoc, serverTimestamp, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, setDoc, serverTimestamp, deleteDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
-import { Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2, Package as PackageIcon } from 'lucide-react';
 
 interface User {
   id: string;
   email: string;
   role: string;
+  assignedPacks?: string[];
   createdAt: any;
 }
 
@@ -16,9 +17,15 @@ interface AllowedEmail {
   createdAt: any;
 }
 
+interface Pack {
+  id: string;
+  title: string;
+}
+
 export default function AdminUsers() {
   const [users, setUsers] = useState<User[]>([]);
   const [allowedEmails, setAllowedEmails] = useState<AllowedEmail[]>([]);
+  const [packs, setPacks] = useState<Pack[]>([]);
   const [loading, setLoading] = useState(true);
   const [newEmail, setNewEmail] = useState('');
   const [isAdding, setIsAdding] = useState(false);
@@ -26,9 +33,10 @@ export default function AdminUsers() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [usersSnap, allowedSnap] = await Promise.all([
+      const [usersSnap, allowedSnap, packsSnap] = await Promise.all([
         getDocs(collection(db, 'users')),
-        getDocs(collection(db, 'allowed_emails'))
+        getDocs(collection(db, 'allowed_emails')),
+        getDocs(collection(db, 'packs'))
       ]);
       
       const fetchedUsers: User[] = [];
@@ -42,6 +50,12 @@ export default function AdminUsers() {
         fetchedAllowed.push({ id: doc.id, ...doc.data() } as AllowedEmail);
       });
       setAllowedEmails(fetchedAllowed);
+
+      const fetchedPacks: Pack[] = [];
+      packsSnap.forEach((doc) => {
+        fetchedPacks.push({ id: doc.id, title: doc.data().title } as Pack);
+      });
+      setPacks(fetchedPacks);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -82,6 +96,25 @@ export default function AdminUsers() {
       } catch (error) {
         console.error("Error deleting email:", error);
       }
+    }
+  };
+
+  const toggleUserPack = async (userId: string, packId: string, currentPacks: string[] = []) => {
+    try {
+      const isAssigned = currentPacks.includes(packId);
+      const newPacks = isAssigned 
+        ? currentPacks.filter(id => id !== packId)
+        : [...currentPacks, packId];
+      
+      await updateDoc(doc(db, 'users', userId), {
+        assignedPacks: newPacks
+      });
+      
+      // Update local state
+      setUsers(users.map(u => u.id === userId ? { ...u, assignedPacks: newPacks } : u));
+    } catch (error) {
+      console.error("Error updating user packs:", error);
+      alert("Failed to update user packs.");
     }
   };
 
@@ -163,13 +196,13 @@ export default function AdminUsers() {
 
           {/* Active Users Table */}
           <div>
-            <h2 className="text-xl font-bold text-noor-dark mb-4">Active Users</h2>
+            <h2 className="text-xl font-bold text-noor-dark mb-4">Active Users & Packs</h2>
             <div className="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-stone-50 border-b border-stone-200 text-noor-dark/70">
-                    <th className="p-4 font-medium">Email</th>
-                    <th className="p-4 font-medium">Role</th>
+                    <th className="p-4 font-medium">User</th>
+                    <th className="p-4 font-medium">Assigned Packs</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-stone-200">
@@ -179,14 +212,37 @@ export default function AdminUsers() {
                     </tr>
                   ) : (
                     users.map(user => (
-                      <tr key={user.id} className="hover:bg-stone-50 transition-colors">
-                        <td className="p-4 font-medium text-noor-dark">{user.email}</td>
+                      <tr key={user.id} className="hover:bg-stone-50 transition-colors align-top">
                         <td className="p-4">
-                          <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
+                          <div className="font-medium text-noor-dark">{user.email}</div>
+                          <span className={`inline-block mt-1 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
                             user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-gray-100 text-gray-800'
                           }`}>
                             {user.role}
                           </span>
+                        </td>
+                        <td className="p-4">
+                          <div className="space-y-2">
+                            {packs.map(pack => {
+                              const isAssigned = user.assignedPacks?.includes(pack.id);
+                              return (
+                                <label key={pack.id} className="flex items-center gap-2 cursor-pointer group">
+                                  <input
+                                    type="checkbox"
+                                    checked={isAssigned || false}
+                                    onChange={() => toggleUserPack(user.id, pack.id, user.assignedPacks)}
+                                    className="w-4 h-4 text-noor-green rounded focus:ring-noor-green"
+                                  />
+                                  <span className={`text-sm ${isAssigned ? 'text-noor-dark font-medium' : 'text-noor-dark/60 group-hover:text-noor-dark'}`}>
+                                    {pack.title}
+                                  </span>
+                                </label>
+                              );
+                            })}
+                            {packs.length === 0 && (
+                              <span className="text-sm text-noor-dark/50 italic">No packs available</span>
+                            )}
+                          </div>
                         </td>
                       </tr>
                     ))

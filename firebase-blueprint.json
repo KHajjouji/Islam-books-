@@ -8,9 +8,48 @@
         "uid": { "type": "string", "description": "Firebase Auth UID" },
         "email": { "type": "string", "format": "email" },
         "role": { "type": "string", "enum": ["admin", "customer"] },
+        "assignedPacks": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
         "createdAt": { "type": "string", "format": "date-time" }
       },
       "required": ["uid", "email", "role", "createdAt"]
+    },
+    "Pack": {
+      "title": "Pack",
+      "description": "A bundle of products or academy access.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "image": { "type": "string", "format": "uri" },
+        "type": { "type": "string", "enum": ["books", "academy", "mixed"] },
+        "features": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "productIds": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "description", "price", "image", "type", "features", "createdAt"]
+    },
+    "Campaign": {
+      "title": "Campaign",
+      "description": "An email campaign to communicate with users.",
+      "type": "object",
+      "properties": {
+        "subject": { "type": "string" },
+        "body": { "type": "string" },
+        "status": { "type": "string", "enum": ["draft", "sent"] },
+        "sentAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["subject", "body", "status", "createdAt"]
     },
     "Product": {
       "title": "Product",
@@ -79,6 +118,14 @@
     "/orders/{orderId}": {
       "schema": { "$ref": "#/entities/Order" },
       "description": "Stores customer orders."
+    },
+    "/packs/{packId}": {
+      "schema": { "$ref": "#/entities/Pack" },
+      "description": "Stores product and academy packs."
+    },
+    "/campaigns/{campaignId}": {
+      "schema": { "$ref": "#/entities/Campaign" },
+      "description": "Stores email campaigns."
     }
   }
 }

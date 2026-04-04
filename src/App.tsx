@@ -31,6 +31,8 @@ import AdminDashboard from './pages/admin/Dashboard';
 import AdminProducts from './pages/admin/Products';
 import AdminOrders from './pages/admin/Orders';
 import AdminUsers from './pages/admin/Users';
+import AdminPacks from './pages/admin/Packs';
+import AdminCampaigns from './pages/admin/Campaigns';
 import './i18n';
 
 export default function App() {
@@ -70,8 +72,10 @@ export default function App() {
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<AdminDashboard />} />
                 <Route path="products" element={<AdminProducts />} />
+                <Route path="packs" element={<AdminPacks />} />
                 <Route path="orders" element={<AdminOrders />} />
                 <Route path="users" element={<AdminUsers />} />
+                <Route path="campaigns" element={<AdminCampaigns />} />
               </Route>
             </Routes>
           </BrowserRouter>
