@@ -87,7 +87,7 @@ service cloud.firestore {
     }
 
     function isValidPack(data) {
-      return hasOnlyAllowedFields(['title', 'description', 'price', 'image', 'type', 'features', 'productIds', 'createdAt']) &&
+      return hasOnlyAllowedFields(['title', 'description', 'price', 'image', 'type', 'features', 'productIds', 'seoTitle', 'seoDescription', 'seoKeywords', 'customHtml', 'translations', 'createdAt']) &&
              data.title is string && data.title.size() > 0 && data.title.size() < 200 &&
              data.description is string && data.description.size() > 0 && data.description.size() < 5000 &&
              data.price is number && data.price >= 0 &&
@@ -95,6 +95,11 @@ service cloud.firestore {
              data.type in ['books', 'academy', 'mixed'] &&
              data.features is list && data.features.size() <= 20 &&
              (!('productIds' in data) || (data.productIds is list && data.productIds.size() <= 50)) &&
+             (!('seoTitle' in data) || (data.seoTitle is string && data.seoTitle.size() < 200)) &&
+             (!('seoDescription' in data) || (data.seoDescription is string && data.seoDescription.size() < 1000)) &&
+             (!('seoKeywords' in data) || (data.seoKeywords is string && data.seoKeywords.size() < 500)) &&
+             (!('customHtml' in data) || (data.customHtml is string && data.customHtml.size() < 100000)) &&
+             (!('translations' in data) || data.translations is map) &&
              data.createdAt is timestamp;
     }
 
@@ -108,7 +113,7 @@ service cloud.firestore {
     }
 
     function isValidProduct(data) {
-      return hasOnlyAllowedFields(['title', 'description', 'price', 'image', 'category', 'author', 'ageRange', 'stock', 'createdAt']) &&
+      return hasOnlyAllowedFields(['title', 'description', 'price', 'image', 'category', 'author', 'ageRange', 'stock', 'seoTitle', 'seoDescription', 'seoKeywords', 'customHtml', 'translations', 'createdAt']) &&
              data.title is string && data.title.size() > 0 && data.title.size() < 200 &&
              data.description is string && data.description.size() > 0 && data.description.size() < 5000 &&
              data.price is number && data.price >= 0 &&
@@ -117,6 +122,11 @@ service cloud.firestore {
              (!('author' in data) || (data.author is string && data.author.size() < 100)) &&
              (!('ageRange' in data) || (data.ageRange is string && data.ageRange.size() < 50)) &&
              data.stock is number && data.stock >= 0 &&
+             (!('seoTitle' in data) || (data.seoTitle is string && data.seoTitle.size() < 200)) &&
+             (!('seoDescription' in data) || (data.seoDescription is string && data.seoDescription.size() < 1000)) &&
+             (!('seoKeywords' in data) || (data.seoKeywords is string && data.seoKeywords.size() < 500)) &&
+             (!('customHtml' in data) || (data.customHtml is string && data.customHtml.size() < 100000)) &&
+             (!('translations' in data) || data.translations is map) &&
              data.createdAt is timestamp;
     }
 
@@ -139,6 +149,17 @@ service cloud.firestore {
     function isValidAllowedEmail(data) {
       return hasOnlyAllowedFields(['email', 'createdAt']) &&
              data.email is string && isValidEmail(data.email) && data.email.size() < 150 &&
+             data.createdAt is timestamp;
+    }
+
+    function isValidSubscriptionPlan(data) {
+      return hasOnlyAllowedFields(['name', 'price', 'period', 'features', 'popular', 'status', 'createdAt']) &&
+             data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             data.price is number && data.price >= 0 &&
+             data.period in ['month', 'year'] &&
+             data.features is list && data.features.size() <= 50 &&
+             data.popular is bool &&
+             data.status in ['active', 'archived'] &&
              data.createdAt is timestamp;
     }
 
@@ -191,6 +212,13 @@ service cloud.firestore {
       allow read: if isAdmin();
       allow create: if isAdmin() && isValidCampaign(request.resource.data);
       allow update: if isAdmin() && isValidCampaign(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    match /subscription_plans/{planId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidSubscriptionPlan(request.resource.data);
+      allow update: if isAdmin() && isValidSubscriptionPlan(request.resource.data);
       allow delete: if isAdmin();
     }
   }

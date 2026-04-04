@@ -1,7 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-// Placeholder for translations. 
 // In a real app, these would be loaded from JSON files.
 const resources = {
   en: {
@@ -31,7 +30,11 @@ const resources = {
       "nav.shop": "تسوق الكل",
       "nav.blog": "المدونة",
     }
-  }
+  },
+  fr: { translation: { "nav.home": "Accueil", "nav.books": "Livres Islamiques", "nav.shop": "Boutique" } },
+  de: { translation: { "nav.home": "Startseite", "nav.books": "Islamische Bücher", "nav.shop": "Geschäft" } },
+  nl: { translation: { "nav.home": "Thuis", "nav.books": "Islamitische Boeken", "nav.shop": "Winkel" } },
+  es: { translation: { "nav.home": "Inicio", "nav.books": "Libros Islámicos", "nav.shop": "Tienda" } }
 };
 
 i18n

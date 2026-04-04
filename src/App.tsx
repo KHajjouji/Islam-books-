@@ -33,6 +33,7 @@ import AdminOrders from './pages/admin/Orders';
 import AdminUsers from './pages/admin/Users';
 import AdminPacks from './pages/admin/Packs';
 import AdminCampaigns from './pages/admin/Campaigns';
+import AdminSubscriptions from './pages/admin/Subscriptions';
 import './i18n';
 
 export default function App() {
@@ -76,6 +77,7 @@ export default function App() {
                 <Route path="orders" element={<AdminOrders />} />
                 <Route path="users" element={<AdminUsers />} />
                 <Route path="campaigns" element={<AdminCampaigns />} />
+                <Route path="subscriptions" element={<AdminSubscriptions />} />
               </Route>
             </Routes>
           </BrowserRouter>

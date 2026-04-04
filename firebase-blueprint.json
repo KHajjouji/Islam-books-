@@ -34,6 +34,11 @@
           "type": "array",
           "items": { "type": "string" }
         },
+        "seoTitle": { "type": "string" },
+        "seoDescription": { "type": "string" },
+        "seoKeywords": { "type": "string" },
+        "customHtml": { "type": "string" },
+        "translations": { "type": "object" },
         "createdAt": { "type": "string", "format": "date-time" }
       },
       "required": ["title", "description", "price", "image", "type", "features", "createdAt"]
@@ -64,6 +69,11 @@
         "author": { "type": "string" },
         "ageRange": { "type": "string" },
         "stock": { "type": "number" },
+        "seoTitle": { "type": "string" },
+        "seoDescription": { "type": "string" },
+        "seoKeywords": { "type": "string" },
+        "customHtml": { "type": "string" },
+        "translations": { "type": "object" },
         "createdAt": { "type": "string", "format": "date-time" }
       },
       "required": ["title", "description", "price", "image", "category", "stock", "createdAt"]
@@ -104,6 +114,24 @@
         "createdAt": { "type": "string", "format": "date-time" }
       },
       "required": ["userId", "items", "total", "status", "shippingAddress", "createdAt"]
+    },
+    "SubscriptionPlan": {
+      "title": "SubscriptionPlan",
+      "description": "A subscription plan offered to users.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "period": { "type": "string", "enum": ["month", "year"] },
+        "features": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "popular": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["active", "archived"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "price", "period", "features", "popular", "status", "createdAt"]
     }
   },
   "firestore": {
@@ -126,6 +154,10 @@
     "/campaigns/{campaignId}": {
       "schema": { "$ref": "#/entities/Campaign" },
       "description": "Stores email campaigns."
+    },
+    "/subscription_plans/{planId}": {
+      "schema": { "$ref": "#/entities/SubscriptionPlan" },
+      "description": "Stores subscription plans."
     }
   }
 }

@@ -1,19 +1,26 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { ShoppingCart, ArrowLeft, CheckCircle, Loader2, Star, ShieldCheck, Truck, RefreshCw, ExternalLink, Heart, Sparkles, Minus, Plus } from 'lucide-react';
+import { ShoppingCart, ArrowLeft, CheckCircle, Loader2, Star, ShieldCheck, Truck, RefreshCw, ExternalLink, Heart, Sparkles, Minus, Plus, Package } from 'lucide-react';
 import { useProducts } from '../hooks/useProducts';
 import { useCart } from '../context/CartContext';
 import SEO from '../components/SEO';
 import ProductCarousel from '../components/ProductCarousel';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
+import { useTranslation } from 'react-i18next';
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart } = useCart();
-  const { products, loading } = useProducts();
+  const { products, loading: productsLoading } = useProducts();
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const [activeImage, setActiveImage] = useState<string | null>(null);
+  const [packs, setPacks] = useState<any[]>([]);
+  const [packsLoading, setPacksLoading] = useState(true);
+  const { i18n } = useTranslation();
+  const currentLang = i18n.language;
 
   const product = products.find(p => p.id === id);
 
@@ -24,7 +31,29 @@ export default function ProductDetail() {
     }
   }, [product, id]);
 
-  if (loading) {
+  useEffect(() => {
+    const fetchPacks = async () => {
+      if (!id) return;
+      try {
+        const packsSnap = await getDocs(collection(db, 'packs'));
+        const fetchedPacks: any[] = [];
+        packsSnap.forEach(doc => {
+          const data = doc.data();
+          if (data.productIds && data.productIds.includes(id)) {
+            fetchedPacks.push({ id: doc.id, ...data });
+          }
+        });
+        setPacks(fetchedPacks);
+      } catch (error) {
+        console.error("Error fetching packs:", error);
+      } finally {
+        setPacksLoading(false);
+      }
+    };
+    fetchPacks();
+  }, [id]);
+
+  if (productsLoading || packsLoading) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center bg-background">
         <Loader2 className="h-10 w-10 animate-spin text-primary" />
@@ -57,11 +86,32 @@ export default function ProductDetail() {
     setTimeout(() => setAdded(false), 2000);
   };
 
+  // Handle translations
+  const displayTitle = (currentLang !== 'en' && product.translations?.[currentLang]?.title) || product.title;
+  const displayDescription = (currentLang !== 'en' && product.translations?.[currentLang]?.description) || product.description;
+  const displaySeoTitle = (currentLang !== 'en' && product.translations?.[currentLang]?.seoTitle) || product.seoTitle || product.title;
+  const displaySeoDescription = (currentLang !== 'en' && product.translations?.[currentLang]?.seoDescription) || product.seoDescription || product.description;
+
+  // If custom HTML is provided, render it directly
+  if (product.customHtml) {
+    return (
+      <>
+        <SEO 
+          title={`${displaySeoTitle} | Noor & Nurture`}
+          description={displaySeoDescription}
+          keywords={product.seoKeywords}
+        />
+        <div dangerouslySetInnerHTML={{ __html: product.customHtml }} />
+      </>
+    );
+  }
+
   return (
     <>
       <SEO 
-        title={`${product.title} | Noor & Nurture`}
-        description={product.description}
+        title={`${displaySeoTitle} | Noor & Nurture`}
+        description={displaySeoDescription}
+        keywords={product.seoKeywords}
       />
       
       <div className="bg-background py-16">
@@ -87,7 +137,7 @@ export default function ProductDetail() {
                 </div>
                 <img 
                   src={activeImage || product.image} 
-                  alt={product.title} 
+                  alt={displayTitle} 
                   className="max-w-full max-h-[600px] object-contain rounded-2xl shadow-2xl transition-all duration-500 group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
@@ -105,7 +155,7 @@ export default function ProductDetail() {
                           : 'border-outline-variant/10 hover:border-primary/30'
                       }`}
                     >
-                      <img src={img} alt={`${product.title} ${idx + 1}`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                      <img src={img} alt={`${displayTitle} ${idx + 1}`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     </button>
                   ))}
                 </div>
@@ -123,7 +173,7 @@ export default function ProductDetail() {
                 </div>
                 
                 <h1 className="text-4xl md:text-5xl font-headline font-extrabold text-primary mb-6 leading-tight tracking-tight">
-                  {product.title}
+                  {displayTitle}
                 </h1>
                 
                 <div className="flex items-center gap-6 mb-8">
@@ -146,7 +196,7 @@ export default function ProductDetail() {
                 </div>
                 
                 <p className="text-lg text-on-surface-variant font-medium leading-relaxed mb-10">
-                  {product.description}
+                  {displayDescription}
                 </p>
 
                 <div className="grid grid-cols-2 gap-6 mb-10">
@@ -250,6 +300,53 @@ export default function ProductDetail() {
             </div>
           </div>
 
+          {/* Included in Packs Section */}
+          {packs.length > 0 && (
+            <div className="mb-24">
+              <h3 className="text-3xl font-headline font-extrabold text-primary mb-8 tracking-tight flex items-center gap-3">
+                <Package className="h-8 w-8 text-accent" />
+                Available in Packs
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {packs.map(pack => {
+                  const packTitle = (currentLang !== 'en' && pack.translations?.[currentLang]?.title) || pack.title;
+                  const packDesc = (currentLang !== 'en' && pack.translations?.[currentLang]?.description) || pack.description;
+                  return (
+                    <div key={pack.id} className="bg-surface rounded-[2rem] border border-outline-variant/10 shadow-lg overflow-hidden flex flex-col group hover:border-primary/30 transition-all">
+                      <div className="h-48 relative overflow-hidden">
+                        <img src={pack.image} alt={packTitle} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-primary">
+                          ${pack.price.toFixed(2)}
+                        </div>
+                      </div>
+                      <div className="p-6 flex-grow flex flex-col">
+                        <h4 className="text-xl font-bold text-primary mb-2">{packTitle}</h4>
+                        <p className="text-on-surface-variant/70 text-sm mb-4 line-clamp-2">{packDesc}</p>
+                        <div className="mt-auto">
+                          <button 
+                            onClick={() => {
+                              addToCart({
+                                id: pack.id,
+                                title: packTitle,
+                                price: pack.price,
+                                image: pack.image,
+                                category: 'pack'
+                              } as any, 1);
+                              alert('Pack added to cart!');
+                            }}
+                            className="w-full py-3 bg-primary/10 text-primary font-bold rounded-xl hover:bg-primary hover:text-white transition-colors"
+                          >
+                            Add Pack to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {/* Detailed Info Tabs */}
           <div className="mb-32">
             <div className="bg-surface rounded-[3rem] shadow-xl shadow-primary/5 border border-outline-variant/10 overflow-hidden">
@@ -262,7 +359,7 @@ export default function ProductDetail() {
                 <div className="max-w-4xl">
                   <h3 className="text-3xl font-headline font-extrabold text-primary mb-8 tracking-tight">About this {product.category}</h3>
                   <p className="text-xl text-on-surface-variant font-medium leading-relaxed mb-12">
-                    {product.longDescription || product.description}
+                    {product.longDescription || displayDescription}
                   </p>
                   
                   {product.features && (
