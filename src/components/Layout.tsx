@@ -1,6 +1,6 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu, X, Globe, BookOpen, ShoppingCart, User, LogOut, Search, Bell, HelpCircle } from 'lucide-react';
+import { Menu, X, Globe, BookOpen, ShoppingCart, User, LogOut, Search, Bell, HelpCircle, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
@@ -29,105 +29,89 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-on-surface font-body">
-      {/* TopNavBar */}
-      <header className="bg-surface/80 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-20 items-center">
-            <div className="flex items-center">
-              <Link to="/" className="flex items-center gap-2 text-2xl font-headline font-extrabold text-primary tracking-tight">
-                <div className="bg-primary text-white p-1.5 rounded-lg">
-                  <BookOpen className="h-6 w-6" />
-                </div>
-                <span>Noor & Nurture</span>
-              </Link>
+      {/* TopNavBar Shell */}
+      <nav className="fixed top-0 w-full z-50 bg-[#faf9f6]/80 backdrop-blur-md shadow-[0_10px_30px_rgba(30,86,49,0.05)] h-20">
+        <div className="flex justify-between items-center px-8 h-full max-w-[1440px] mx-auto">
+          <Link to="/" className="text-2xl font-black text-primary font-headline tracking-tight">
+            The Illuminated Path
+          </Link>
+          
+          <div className="hidden md:flex items-center gap-8 font-headline font-semibold text-primary">
+            <Link 
+              to="/" 
+              className={`${location.pathname === '/' ? 'text-primary border-b-2 border-primary pb-1' : 'text-on-primary-fixed-variant/70 hover:text-primary transition-all'}`}
+            >
+              Home
+            </Link>
+            <Link 
+              to="/shop" 
+              className={`${location.pathname === '/shop' ? 'text-primary border-b-2 border-primary pb-1' : 'text-on-primary-fixed-variant/70 hover:text-primary transition-all'}`}
+            >
+              Books
+            </Link>
+            <Link 
+              to="/quran-stories-for-kids" 
+              className={`${location.pathname === '/quran-stories-for-kids' ? 'text-primary border-b-2 border-primary pb-1' : 'text-on-primary-fixed-variant/70 hover:text-primary transition-all'}`}
+            >
+              Quran Stories
+            </Link>
+            <Link 
+              to="/academy" 
+              className={`${location.pathname === '/academy' ? 'text-primary border-b-2 border-primary pb-1' : 'text-on-primary-fixed-variant/70 hover:text-primary transition-all'}`}
+            >
+              Academy
+            </Link>
+            <Link 
+              to="/stories-of-the-prophets-for-kids" 
+              className={`${location.pathname === '/stories-of-the-prophets-for-kids' ? 'text-primary border-b-2 border-primary pb-1' : 'text-on-primary-fixed-variant/70 hover:text-primary transition-all'}`}
+            >
+              Prophet Stories
+            </Link>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <div className="hidden md:flex items-center bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/15">
+              <Search className="text-primary h-5 w-5" />
+              <input 
+                className="bg-transparent border-none focus:ring-0 text-sm ml-2 w-32" 
+                placeholder="Search..." 
+                type="text"
+              />
             </div>
             
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex space-x-8 items-center">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`text-sm font-semibold transition-all hover:text-primary ${
-                    location.pathname === link.path ? 'text-primary' : 'text-on-surface-variant'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              
-              <div className="flex items-center gap-4 ml-6 pl-6 border-l border-outline-variant/30">
-                <button 
-                  onClick={toggleLanguage}
-                  className="p-2 rounded-full hover:bg-surface-low transition-colors text-on-surface-variant"
-                  aria-label="Toggle Language"
-                >
-                  <Globe className="h-5 w-5" />
-                </button>
-                
-                <Link 
-                  to="/cart"
-                  className="p-2 rounded-full hover:bg-surface-low transition-colors text-on-surface-variant relative"
-                  aria-label="View Cart"
-                >
-                  <ShoppingCart className="h-5 w-5" />
-                  {itemCount > 0 && (
-                    <span className="absolute top-0 right-0 bg-accent text-secondary text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1 shadow-sm">
-                      {itemCount}
-                    </span>
-                  )}
-                </Link>
+            <Link to="/cart" className="relative p-2 rounded-full hover:bg-surface-container-high transition-all text-primary">
+              <ShoppingCart className="h-6 w-6" />
+              {itemCount > 0 && (
+                <span className="absolute top-0 right-0 bg-secondary-container text-on-secondary-container text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1 shadow-sm">
+                  {itemCount}
+                </span>
+              )}
+            </Link>
 
-                {user ? (
-                  <div className="flex items-center gap-3">
-                    <Link 
-                      to="/dashboard"
-                      className="flex items-center gap-2 p-1.5 pr-4 rounded-full bg-surface-low hover:bg-outline-variant/20 transition-all border border-outline-variant/20"
-                    >
-                      <img 
-                        src={user.photoURL || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&h=80&fit=crop'} 
-                        alt={user.displayName || 'User'} 
-                        className="w-8 h-8 rounded-full object-cover"
-                      />
-                      <span className="text-xs font-bold font-headline">{user.displayName?.split(' ')[0] || 'Parent'}</span>
-                    </Link>
-                    <button 
-                      onClick={signOut}
-                      className="p-2 rounded-full hover:bg-surface-low transition-colors text-on-surface-variant"
-                      title="Sign Out"
-                    >
-                      <LogOut className="h-5 w-5" />
-                    </button>
-                  </div>
-                ) : (
-                  <button 
-                    onClick={signInWithGoogle}
-                    className="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-full font-bold text-sm transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-primary/10"
-                  >
-                    <User className="h-4 w-4" />
-                    <span>Sign In</span>
-                  </button>
-                )}
-              </div>
-            </nav>
+            {user ? (
+              <Link to="/dashboard" className="p-2 rounded-full hover:bg-surface-container-high transition-all text-primary">
+                <User className="h-6 w-6" />
+              </Link>
+            ) : (
+              <button 
+                onClick={signInWithGoogle}
+                className="p-2 rounded-full hover:bg-surface-container-high transition-all text-primary"
+              >
+                <User className="h-6 w-6" />
+              </button>
+            )}
+
+            <Link to="/academy" className="bg-primary text-on-primary px-6 py-2.5 rounded-full font-headline font-bold text-sm hover:scale-95 transition-transform hidden sm:block">
+              Join the Academy
+            </Link>
 
             {/* Mobile menu button */}
-            <div className="md:hidden flex items-center gap-3">
-              <Link to="/cart" className="relative p-2 text-on-surface-variant">
-                <ShoppingCart className="h-6 w-6" />
-                {itemCount > 0 && (
-                  <span className="absolute top-0 right-0 bg-accent text-secondary text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
-                    {itemCount}
-                  </span>
-                )}
-              </Link>
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-on-surface-variant p-2"
-              >
-                {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
-              </button>
-            </div>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden text-primary p-2"
+            >
+              {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+            </button>
           </div>
         </div>
 
@@ -135,28 +119,27 @@ export default function Layout() {
         {isMenuOpen && (
           <div className="md:hidden bg-surface border-t border-outline-variant/30 animate-in slide-in-from-top duration-300">
             <div className="px-4 pt-4 pb-8 space-y-2">
-              {navLinks.map((link) => (
+              {[
+                { path: '/', label: 'Home' },
+                { path: '/shop', label: 'Books' },
+                { path: '/quran-stories-for-kids', label: 'Quran Stories' },
+                { path: '/academy', label: 'Academy' },
+                { path: '/stories-of-the-prophets-for-kids', label: 'Prophet Stories' },
+              ].map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsMenuOpen(false)}
                   className={`block px-4 py-3 rounded-xl text-base font-bold ${
                     location.pathname === link.path
-                      ? 'bg-surface-low text-primary'
-                      : 'text-on-surface-variant hover:bg-surface-low'
+                      ? 'bg-surface-container-low text-primary'
+                      : 'text-on-surface-variant hover:bg-surface-container-low'
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
               <div className="pt-4 mt-4 border-t border-outline-variant/30 flex flex-col gap-3">
-                <button 
-                  onClick={toggleLanguage}
-                  className="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-bold"
-                >
-                  <Globe className="h-5 w-5" />
-                  <span>{i18n.language === 'en' ? 'العربية' : 'English'}</span>
-                </button>
                 {user ? (
                   <>
                     <Link to="/dashboard" className="px-4 py-3 text-on-surface-variant font-bold">Dashboard</Link>
@@ -174,58 +157,71 @@ export default function Layout() {
             </div>
           </div>
         )}
-      </header>
+      </nav>
 
       <main className="flex-grow">
         <Outlet />
       </main>
 
-      {/* Footer */}
-      <footer className="bg-surface-low border-t border-outline-variant/30 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-            <div className="col-span-1 md:col-span-2">
-              <Link to="/" className="flex items-center gap-2 text-2xl font-headline font-extrabold text-primary mb-6">
-                <div className="bg-primary text-white p-1.5 rounded-lg">
-                  <BookOpen className="h-6 w-6" />
-                </div>
-                <span>Noor & Nurture</span>
-              </Link>
-              <p className="text-on-surface-variant text-sm leading-relaxed max-w-md font-medium">
-                The Nurturing Sanctuary: A premium Islamic learning platform combining physical books with a digital academy. Nurturing the next generation of the Ummah with faith, character, and knowledge.
+      {/* Footer Shell */}
+      <footer className="bg-[#f4f3f1] pt-24 pb-12">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 border-b border-primary/10 pb-16">
+            <div className="col-span-1 md:col-span-1">
+              <span className="text-2xl font-bold text-primary mb-6 block font-headline">The Illuminated Path</span>
+              <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
+                Nurturing hearts through stories. We create premium Islamic educational resources for the modern Muslim family.
               </p>
-              <div className="mt-8 flex gap-4">
-                {/* Social placeholders */}
-                <div className="w-10 h-10 rounded-full bg-outline-variant/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all cursor-pointer">
-                  <span className="material-symbols-outlined text-xl">share</span>
+              <div className="flex gap-4">
+                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary hover:text-secondary transition-colors cursor-pointer shadow-sm">
+                  <Globe className="h-5 w-5" />
+                </div>
+                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary hover:text-secondary transition-colors cursor-pointer shadow-sm">
+                  <Bell className="h-5 w-5" />
+                </div>
+                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary hover:text-secondary transition-colors cursor-pointer shadow-sm">
+                  <HelpCircle className="h-5 w-5" />
                 </div>
               </div>
             </div>
             
             <div>
-              <h3 className="text-primary font-bold mb-6 uppercase tracking-widest text-xs">Explore</h3>
-              <ul className="space-y-4 text-sm font-medium text-on-surface-variant">
-                <li><Link to="/shop" className="hover:text-primary transition-colors">Book Shop</Link></li>
-                <li><Link to="/academy" className="hover:text-primary transition-colors">Academy Landing</Link></li>
-                <li><Link to="/quran-stories-for-kids" className="hover:text-primary transition-colors">Quran Stories</Link></li>
-                <li><Link to="/stories-of-the-prophets-for-kids" className="hover:text-primary transition-colors">Prophet Stories</Link></li>
+              <h4 className="font-bold text-primary mb-6 uppercase text-xs tracking-widest">Explore</h4>
+              <ul className="space-y-4 text-sm text-on-surface-variant">
+                <li><Link to="/about" className="hover:text-secondary transition-colors">About Us</Link></li>
+                <li><Link to="/authors" className="hover:text-secondary transition-colors">Our Authors</Link></li>
+                <li><Link to="/academy" className="hover:text-secondary transition-colors">Academy Login</Link></li>
+                <li><Link to="/resources" className="hover:text-secondary transition-colors">Free Resources</Link></li>
               </ul>
             </div>
             
             <div>
-              <h3 className="text-primary font-bold mb-6 uppercase tracking-widest text-xs">Support</h3>
-              <ul className="space-y-4 text-sm font-medium text-on-surface-variant">
-                <li><Link to="/blog" className="hover:text-primary transition-colors">Blog & Resources</Link></li>
-                <li><Link to="/dashboard" className="hover:text-primary transition-colors">Parent Dashboard</Link></li>
-                <li><Link to="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
-                <li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
+              <h4 className="font-bold text-primary mb-6 uppercase text-xs tracking-widest">Support</h4>
+              <ul className="space-y-4 text-sm text-on-surface-variant">
+                <li><Link to="/shipping" className="hover:text-secondary transition-colors">Shipping Policy</Link></li>
+                <li><Link to="/dashboard" className="hover:text-secondary transition-colors">Parent Dashboard</Link></li>
+                <li><Link to="/wholesale" className="hover:text-secondary transition-colors">Wholesale</Link></li>
+                <li><Link to="/contact" className="hover:text-secondary transition-colors">Contact</Link></li>
               </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-bold text-primary mb-6 uppercase text-xs tracking-widest">Academy</h4>
+              <div className="bg-primary/5 p-6 rounded-xl">
+                <p className="text-xs text-on-surface-variant mb-4">Give the gift of knowledge. Academy gift cards available now.</p>
+                <Link to="/gift-cards" className="text-primary font-bold text-sm flex items-center gap-2">
+                  Buy Gift Card <ArrowRight className="h-3 w-3" />
+                </Link>
+              </div>
             </div>
           </div>
           
-          <div className="border-t border-outline-variant/30 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold text-on-surface-variant/60">
-            <p>© {new Date().getFullYear()} Noor & Nurture. All rights reserved.</p>
-            <p>Designed with love for the Ummah.</p>
+          <div className="flex flex-col md:flex-row justify-between items-center text-xs text-on-surface-variant/60 font-body">
+            <p>© {new Date().getFullYear()} The Illuminated Path. Nurturing hearts through stories.</p>
+            <div className="flex gap-6 mt-4 md:mt-0">
+              <Link to="/privacy" className="hover:text-primary">Privacy Policy</Link>
+              <Link to="/terms" className="hover:text-primary">Terms of Service</Link>
+            </div>
           </div>
         </div>
       </footer>

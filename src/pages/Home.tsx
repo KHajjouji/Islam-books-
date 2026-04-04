@@ -1,181 +1,201 @@
 import { Link } from 'react-router-dom';
-import { BookOpen, Star, Heart, Sparkles, ArrowRight, Loader2, CheckCircle2, PlayCircle, Bell } from 'lucide-react';
-import SEO from '../components/SEO';
-import ProductCarousel from '../components/ProductCarousel';
+import { 
+  BookOpen, 
+  GraduationCap, 
+  Star, 
+  ShieldCheck, 
+  Palette, 
+  Globe, 
+  MousePointer2, 
+  ArrowRight, 
+  ShoppingCart, 
+  Zap, 
+  Volume2, 
+  Quote,
+  PlayCircle,
+  Loader2,
+  CheckCircle2
+} from 'lucide-react';
+import { motion } from 'motion/react';
 import { useProducts } from '../hooks/useProducts';
 
 export default function Home() {
   const { products, loading } = useProducts();
-  const featuredBooks = products.filter(p => p.category === 'book').slice(0, 5);
+  const featuredProducts = products.slice(0, 3);
 
   return (
-    <>
-      <SEO 
-        title="Islamic Children's Books & Interactive Learning for Muslim Kids | Noor & Nurture"
-        description="Discover Islamic children's books, Quran stories for kids, Prophet stories, Ramadan books, and interactive Islamic learning for Muslim families in the West."
-      />
-      
+    <div className="pt-20">
       {/* Hero Section */}
-      <section className="relative bg-primary text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]"></div>
-        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/10 mb-8 backdrop-blur-sm">
-                <Sparkles className="h-4 w-4 text-accent" />
-                <span className="text-xs font-bold uppercase tracking-widest">The Nurturing Sanctuary</span>
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#faf9f6]">
+        {/* Background Patterns */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 px-4 py-2 rounded-full text-primary font-bold text-xs mb-8 uppercase tracking-widest">
+              <Star className="h-4 w-4 fill-primary" />
+              <span>Nurturing the Next Generation</span>
+            </div>
+            
+            <h1 className="text-6xl lg:text-7xl font-black text-primary font-headline leading-[1.1] mb-8 tracking-tight">
+              Where Faith Meets <span className="text-secondary italic">Wonder.</span>
+            </h1>
+            
+            <p className="text-xl text-on-surface-variant leading-relaxed mb-12 max-w-xl font-medium">
+              Premium Islamic children's books and interactive learning designed to inspire love for Allah and the Prophet (SAW) in every child's heart.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6">
+              <Link 
+                to="/shop" 
+                className="bg-primary text-on-primary px-10 py-5 rounded-full font-headline font-black text-lg hover:scale-105 transition-transform shadow-xl shadow-primary/20 flex items-center justify-center gap-3"
+              >
+                <ShoppingCart className="h-5 w-5" />
+                Shop the Books
+              </Link>
+              <Link 
+                to="/academy" 
+                className="bg-white text-primary border-2 border-primary/10 px-10 py-5 rounded-full font-headline font-black text-lg hover:bg-primary/5 transition-all flex items-center justify-center gap-3"
+              >
+                <PlayCircle className="h-5 w-5" />
+                Explore Academy
+              </Link>
+            </div>
+
+            <div className="mt-12 flex items-center gap-6">
+              <div className="flex -space-x-4">
+                {[1, 2, 3, 4].map((i) => (
+                  <img 
+                    key={i}
+                    src={`https://i.pravatar.cc/100?img=${i + 10}`} 
+                    alt="User" 
+                    className="w-12 h-12 rounded-full border-4 border-white shadow-sm"
+                  />
+                ))}
               </div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-headline font-extrabold leading-[1.1] mb-8 tracking-tight">
-                Nurturing the <span className="text-accent">Next Generation</span> of the Ummah
-              </h1>
-              <p className="text-lg md:text-xl text-white/80 mb-10 font-medium leading-relaxed">
-                Premium Islamic learning ecosystem combining beautifully illustrated books with an interactive digital academy. Designed for Muslim families in the West.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/shop" className="inline-flex justify-center items-center px-10 py-4 bg-accent text-secondary font-bold rounded-full hover:scale-105 transition-all text-lg shadow-xl shadow-black/10">
-                  Shop All Products
-                </Link>
-                <Link to="/academy" className="inline-flex justify-center items-center px-10 py-4 bg-white/10 text-white font-bold rounded-full hover:bg-white/20 border border-white/20 transition-all text-lg backdrop-blur-sm">
-                  <PlayCircle className="mr-2 h-5 w-5" />
-                  Explore Academy
-                </Link>
-              </div>
-              <div className="mt-12 flex items-center gap-6">
-                <div className="flex -space-x-3">
-                  {[1,2,3,4].map(i => (
-                    <img key={i} src={`https://i.pravatar.cc/100?img=${i+10}`} alt="User" className="w-10 h-10 rounded-full border-2 border-primary object-cover" />
-                  ))}
+              <div>
+                <div className="flex text-secondary mb-1">
+                  {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="h-4 w-4 fill-current" />)}
                 </div>
-                <p className="text-sm font-bold text-white/70">Joined by 5,000+ Muslim families</p>
+                <p className="text-sm font-bold text-primary">Trusted by 10,000+ Muslim Parents</p>
               </div>
             </div>
-            <div className="hidden lg:block relative">
-              <div className="relative z-10 bg-surface-low/10 backdrop-blur-sm p-4 rounded-[3rem] border border-white/10 shadow-2xl">
-                <img 
-                  src="https://picsum.photos/seed/noorkids-hero/800/1000" 
-                  alt="Hakim and Hana characters" 
-                  className="rounded-[2.5rem] shadow-2xl w-full object-cover aspect-[4/5]" 
-                  referrerPolicy="no-referrer" 
-                />
-              </div>
-              {/* Floating badges */}
-              <div className="absolute -top-6 -right-6 bg-white p-4 rounded-2xl shadow-xl animate-bounce duration-[3000ms]">
-                <CheckCircle2 className="h-8 w-8 text-primary" />
-              </div>
-              <div className="absolute bottom-12 -left-12 bg-accent p-4 rounded-2xl shadow-xl animate-pulse">
-                <Star className="h-8 w-8 text-secondary" />
-              </div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="relative"
+          >
+            <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-2xl border-8 border-white">
+              <img 
+                src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&h=1000&fit=crop" 
+                alt="Hakim and Hana 3D Illustration" 
+                className="w-full aspect-[4/5] object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
             </div>
-          </div>
+            
+            {/* Floating Elements */}
+            <motion.div 
+              animate={{ y: [0, -20, 0] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="absolute -top-10 -right-10 bg-white p-6 rounded-3xl shadow-xl z-20 flex items-center gap-4 border border-primary/5"
+            >
+              <div className="w-12 h-12 bg-secondary-container rounded-2xl flex items-center justify-center text-on-secondary-container">
+                <Zap className="h-6 w-6" />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-on-surface-variant uppercase tracking-widest">New Release</p>
+                <p className="text-lg font-black text-primary">Ramadan Quest</p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              animate={{ y: [0, 20, 0] }}
+              transition={{ duration: 5, repeat: Infinity }}
+              className="absolute -bottom-10 -left-10 bg-white p-6 rounded-3xl shadow-xl z-20 flex items-center gap-4 border border-primary/5"
+            >
+              <div className="w-12 h-12 bg-primary-container rounded-2xl flex items-center justify-center text-on-primary-container">
+                <Volume2 className="h-6 w-6" />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Audio Books</p>
+                <p className="text-lg font-black text-primary">Prophet Stories</p>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Brand Pillars */}
-      <section className="py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl md:text-5xl font-headline font-extrabold text-primary mb-6 tracking-tight">
-              The Illuminated Path to Learning
-            </h2>
-            <p className="text-lg text-on-surface-variant font-medium">
-              We combine traditional values with modern learning techniques to create a holistic ecosystem for your child's spiritual growth.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* Trust Pillars */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="grid md:grid-cols-4 gap-8">
             {[
-              {
-                title: "Faith-Centered",
-                text: "Every story and activity is rooted in authentic Islamic teachings, helping children build a strong connection with Allah.",
-                icon: Heart,
-                color: "bg-primary/5 text-primary"
-              },
-              {
-                title: "Modern & Engaging",
-                text: "High-quality illustrations and interactive digital content that compete with mainstream media while keeping values at the core.",
-                icon: Sparkles,
-                color: "bg-accent/10 text-secondary"
-              },
-              {
-                title: "Family First",
-                text: "Designed to create meaningful moments between parents and children, fostering discussion and shared growth.",
-                icon: Star,
-                color: "bg-surface-low text-primary"
-              }
-            ].map((pillar, idx) => (
-              <div key={idx} className="bg-surface p-10 rounded-[2.5rem] border border-outline-variant/20 shadow-sm hover:shadow-md transition-all group">
-                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 ${pillar.color} group-hover:scale-110 transition-transform`}>
+              { icon: ShieldCheck, title: "Authentic Content", desc: "Verified by scholars for accuracy and age-appropriateness." },
+              { icon: Palette, title: "Premium Design", desc: "Breathtaking 3D illustrations that captivate young minds." },
+              { icon: Globe, title: "Practical for West", desc: "Stories that resonate with children growing up in the West." },
+              { icon: MousePointer2, title: "Interactive", desc: "Beyond books—interactive learning through our Academy." }
+            ].map((pillar, i) => (
+              <motion.div 
+                key={i}
+                whileHover={{ y: -10 }}
+                className="p-8 rounded-[2.5rem] bg-[#faf9f6] border border-primary/5 hover:shadow-xl transition-all"
+              >
+                <div className="w-16 h-16 bg-primary text-on-primary rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-primary/10">
                   <pillar.icon className="h-8 w-8" />
                 </div>
-                <h3 className="text-2xl font-headline font-extrabold text-primary mb-4">{pillar.title}</h3>
-                <p className="text-on-surface-variant font-medium leading-relaxed">{pillar.text}</p>
-              </div>
+                <h3 className="text-xl font-black text-primary mb-3 font-headline">{pillar.title}</h3>
+                <p className="text-on-surface-variant text-sm leading-relaxed font-medium">{pillar.desc}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Pathways */}
-      <section className="py-24 bg-surface-low">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div className="max-w-2xl">
-              <h2 className="text-4xl md:text-5xl font-headline font-extrabold text-primary mb-4 tracking-tight">
-                Explore the Sanctuary
-              </h2>
-              <p className="text-lg text-on-surface-variant font-medium">
-                Choose the learning journey that best fits your family's current needs.
-              </p>
+      {/* Featured Categories */}
+      <section className="py-24 bg-[#faf9f6]">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="flex justify-between items-end mb-16">
+            <div>
+              <h2 className="text-5xl font-black text-primary font-headline mb-4 tracking-tight">Explore Our World</h2>
+              <p className="text-on-surface-variant font-medium">Discover the perfect companion for your child's journey.</p>
             </div>
-            <Link to="/shop" className="px-8 py-4 bg-primary text-white rounded-full font-bold text-sm shadow-lg shadow-primary/10 hover:scale-105 transition-all flex items-center gap-2">
-              <span>View All Products</span>
-              <ArrowRight className="h-4 w-4" />
+            <Link to="/shop" className="text-primary font-bold flex items-center gap-2 hover:gap-4 transition-all group">
+              View All Categories <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <div className="grid md:grid-cols-4 gap-8">
             {[
-              {
-                title: "Book Shop",
-                text: "Physical books that children can touch, feel, and treasure forever.",
-                link: "/shop",
-                icon: BookOpen,
-                color: "bg-primary text-white"
-              },
-              {
-                title: "Quran Stories",
-                text: "Age-appropriate stories from the Holy Quran for young hearts.",
-                link: "/quran-stories-for-kids",
-                icon: Sparkles,
-                color: "bg-accent text-secondary"
-              },
-              {
-                title: "Prophet Stories",
-                text: "Learning courage and kindness from the lives of the Prophets.",
-                link: "/stories-of-the-prophets-for-kids",
-                icon: Star,
-                color: "bg-surface text-primary"
-              },
-              {
-                title: "Digital Academy",
-                text: "Interactive classes and activities to deepen the learning experience.",
-                link: "/academy",
-                icon: PlayCircle,
-                color: "bg-secondary text-white"
-              }
-            ].map((card, idx) => (
-              <Link key={idx} to={card.link} className="group block h-full">
-                <div className="bg-surface rounded-[2rem] p-8 shadow-sm card-hover border border-outline-variant/20 h-full flex flex-col">
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 ${card.color} shadow-lg`}>
-                    <card.icon className="h-7 w-7" />
-                  </div>
-                  <h3 className="text-xl font-headline font-extrabold text-primary mb-3 group-hover:text-secondary transition-colors">{card.title}</h3>
-                  <p className="text-on-surface-variant text-sm font-medium flex-grow leading-relaxed">{card.text}</p>
-                  <div className="mt-8 flex items-center text-primary font-bold text-xs uppercase tracking-widest">
-                    Explore <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              { title: "Islamic Children's Books", img: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=500&fit=crop", path: "/islamic-childrens-books" },
+              { title: "Quran Stories", img: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=500&fit=crop", path: "/quran-stories-for-kids" },
+              { title: "Prophet Stories", img: "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=500&fit=crop", path: "/stories-of-the-prophets-for-kids" },
+              { title: "Prepare for Ramadan", img: "https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=400&h=500&fit=crop", path: "/ramadan-books-for-kids" }
+            ].map((cat, i) => (
+              <Link 
+                key={i}
+                to={cat.path}
+                className="group relative h-[450px] rounded-[3rem] overflow-hidden shadow-lg"
+              >
+                <img 
+                  src={cat.img} 
+                  alt={cat.title} 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent flex flex-col justify-end p-8">
+                  <h3 className="text-2xl font-black text-white font-headline leading-tight mb-4">{cat.title}</h3>
+                  <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+                    <ArrowRight className="h-6 w-6" />
                   </div>
                 </div>
               </Link>
@@ -184,113 +204,176 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Books Carousel */}
-      <section className="py-24 bg-background overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Bestsellers Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-black text-primary font-headline mb-4 tracking-tight">Parent Favorites</h2>
+            <p className="text-on-surface-variant font-medium max-w-2xl mx-auto">Our most loved books that have found a special place in thousands of Muslim homes worldwide.</p>
+          </div>
+
           {loading ? (
-            <div className="flex justify-center items-center py-24">
-              <Loader2 className="h-12 w-12 animate-spin text-primary" />
+            <div className="flex justify-center py-20">
+              <Loader2 className="h-12 w-12 text-primary animate-spin" />
             </div>
           ) : (
-            <ProductCarousel products={featuredBooks} title="Featured in the Shop" />
+            <div className="grid md:grid-cols-3 gap-12">
+              {featuredProducts.map((product) => (
+                <motion.div 
+                  key={product.id}
+                  whileHover={{ y: -10 }}
+                  className="group"
+                >
+                  <div className="relative aspect-[3/4] rounded-[3rem] overflow-hidden mb-8 shadow-xl border border-primary/5">
+                    <img 
+                      src={product.image} 
+                      alt={product.name} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full text-primary font-black text-sm shadow-sm">
+                      ${product.price}
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-black text-primary mb-2 font-headline">{product.name}</h3>
+                  <p className="text-on-surface-variant text-sm mb-6 line-clamp-2 font-medium">{product.description}</p>
+                  <Link 
+                    to={`/product/${product.id}`}
+                    className="w-full bg-[#faf9f6] text-primary border border-primary/10 py-4 rounded-full font-headline font-black text-sm hover:bg-primary hover:text-on-primary transition-all flex items-center justify-center gap-2"
+                  >
+                    <ShoppingCart className="h-4 w-4" />
+                    Add to Cart
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
           )}
         </div>
       </section>
 
-      {/* Interactive Learning / Academy */}
-      <section className="py-24 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-primary text-white rounded-[4rem] p-12 md:p-24 relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 p-24 opacity-10">
-              <Sparkles className="h-64 w-64" />
+      {/* Academy Teaser */}
+      <section className="py-24 bg-primary overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[150px] translate-x-1/3 -translate-y-1/3"></div>
+        
+        <div className="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+          <div>
+            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-4 py-2 rounded-full text-white font-bold text-xs mb-8 uppercase tracking-widest">
+              <GraduationCap className="h-4 w-4" />
+              <span>Interactive Learning</span>
             </div>
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-headline font-extrabold mb-8 tracking-tight leading-tight">
-                  Interactive Learning <br />
-                  <span className="text-accent">Beyond the Book</span>
-                </h2>
-                <p className="text-xl text-white/80 mb-12 font-medium leading-relaxed">
-                  Our digital academy brings stories to life with guided pathways, audio-supported reading, and child-friendly activities.
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
-                  {[
-                    "Story-based learning journeys",
-                    "Audio-supported reading",
-                    "Child-friendly activities",
-                    "Parent-guided moments"
-                  ].map((item, i) => (
-                    <div key={i} className="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/10 flex items-center gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-accent" />
-                      <span className="text-sm font-bold">{item}</span>
-                    </div>
-                  ))}
+            <h2 className="text-5xl lg:text-6xl font-black text-white font-headline leading-tight mb-8 tracking-tight">
+              The Academy: <br />
+              <span className="text-secondary italic">Beyond the Page.</span>
+            </h2>
+            <p className="text-xl text-white/80 leading-relaxed mb-10 font-medium">
+              Turn storytime into a lifelong journey. Our digital academy offers interactive lessons, quizzes, and activities that bring our books to life.
+            </p>
+            
+            <ul className="space-y-6 mb-12">
+              {[
+                "Interactive Quranic Arabic lessons",
+                "Character building (Akhlaq) workshops",
+                "Live storytelling sessions with authors",
+                "Progress tracking for parents"
+              ].map((item, i) => (
+                <li key={i} className="flex items-center gap-4 text-white font-bold">
+                  <div className="w-6 h-6 bg-secondary text-on-secondary rounded-full flex items-center justify-center">
+                    <CheckCircle2 className="h-4 w-4" />
+                  </div>
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <Link 
+              to="/academy" 
+              className="inline-flex bg-secondary text-on-secondary px-10 py-5 rounded-full font-headline font-black text-lg hover:scale-105 transition-transform shadow-xl shadow-secondary/20 items-center gap-3"
+            >
+              Start Free Trial
+              <ArrowRight className="h-5 w-5" />
+            </Link>
+          </div>
+
+          <div className="relative">
+            <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-2xl border-8 border-white/10">
+              <img 
+                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop" 
+                alt="Academy Interface" 
+                className="w-full aspect-video object-cover"
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-20 h-20 bg-white text-primary rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform cursor-pointer">
+                  <PlayCircle className="h-10 w-10 fill-current" />
                 </div>
-                <Link to="/academy" className="inline-flex justify-center items-center px-10 py-5 bg-accent text-secondary font-bold rounded-full hover:scale-105 transition-all text-lg shadow-xl shadow-black/10">
-                  Join the Academy
-                </Link>
-              </div>
-              <div className="relative">
-                <img 
-                  src="https://picsum.photos/seed/academy-preview/800/600" 
-                  alt="Academy Interface" 
-                  className="rounded-3xl shadow-2xl w-full object-cover border-8 border-white/10" 
-                  referrerPolicy="no-referrer" 
-                />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Email Lead Magnet */}
-      <section className="py-32 bg-surface-low">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="w-20 h-20 bg-accent rounded-3xl flex items-center justify-center text-secondary mx-auto mb-10 shadow-lg rotate-3">
-            <Bell className="h-10 w-10" />
+      {/* Testimonials */}
+      <section className="py-24 bg-[#faf9f6]">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-black text-primary font-headline mb-4 tracking-tight">Parent Stories</h2>
+            <p className="text-on-surface-variant font-medium">Real experiences from families in our community.</p>
           </div>
-          <h2 className="text-4xl md:text-5xl font-headline font-extrabold text-primary mb-6 tracking-tight">
-            Join the Nurturing Community
-          </h2>
-          <p className="text-xl text-on-surface-variant font-medium mb-12 max-w-2xl mx-auto">
-            Get a free Islamic story resource and stay updated with new releases, seasonal activities, and parenting tips.
-          </p>
-          <form className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto" onSubmit={(e) => e.preventDefault()}>
-            <input 
-              type="email" 
-              placeholder="Your email address" 
-              className="flex-grow px-8 py-5 rounded-full border border-outline-variant/30 bg-surface focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-lg font-medium transition-all"
-              required
-            />
-            <button type="submit" className="px-10 py-5 bg-primary text-white font-bold rounded-full hover:scale-[1.02] active:scale-95 transition-all text-lg whitespace-nowrap shadow-xl shadow-primary/10">
-              Get Free Resource
-            </button>
-          </form>
-          <p className="mt-6 text-xs font-bold text-on-surface-variant/40 uppercase tracking-widest">No spam, just pure nurturing content.</p>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { name: "Sarah M.", role: "Mother of 3, London", text: "Finally, books that my children can relate to. The quality of the illustrations is unlike anything I've seen in Islamic publishing." },
+              { name: "Omar K.", role: "Father of 2, New York", text: "The Academy has transformed our weekends. My kids actually look forward to learning about the Prophets now." },
+              { name: "Aisha R.", role: "Educator, Toronto", text: "A breath of fresh air. The language is accessible yet profound. A must-have for every Muslim home library." }
+            ].map((t, i) => (
+              <div key={i} className="bg-white p-10 rounded-[3rem] shadow-sm border border-primary/5 relative">
+                <Quote className="absolute top-8 right-8 h-12 w-12 text-primary/5" />
+                <div className="flex text-secondary mb-6">
+                  {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="h-4 w-4 fill-current" />)}
+                </div>
+                <p className="text-lg text-primary font-medium leading-relaxed mb-8 italic">"{t.text}"</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-black">
+                    {t.name[0]}
+                  </div>
+                  <div>
+                    <p className="font-black text-primary">{t.name}</p>
+                    <p className="text-xs text-on-surface-variant font-bold uppercase tracking-widest">{t.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-32 bg-background text-center relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl -z-10"></div>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-headline font-extrabold text-primary mb-8 tracking-tight leading-tight">
-            Start Your Family's <br />
-            <span className="text-accent">Illuminated Path</span> Today
-          </h2>
-          <p className="text-xl text-on-surface-variant font-medium mb-12">
-            Build a home library that helps your child love Islam through stories, books, and interactive learning.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link to="/shop" className="inline-flex justify-center items-center px-12 py-5 bg-primary text-white font-bold rounded-full hover:scale-105 transition-all text-lg shadow-2xl shadow-primary/20">
-              Shop All Products
-            </Link>
-            <Link to="/academy" className="inline-flex justify-center items-center px-12 py-5 bg-white text-primary font-bold rounded-full hover:bg-surface-low border border-outline-variant/30 transition-all text-lg shadow-xl shadow-black/5">
-              Join the Academy
-            </Link>
+      {/* Newsletter */}
+      <section className="py-24 bg-white">
+        <div className="max-w-5xl mx-auto px-8">
+          <div className="bg-secondary-container rounded-[4rem] p-16 relative overflow-hidden text-center">
+            <div className="absolute top-0 left-0 w-64 h-64 bg-white/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+            
+            <div className="relative z-10">
+              <h2 className="text-4xl lg:text-5xl font-black text-on-secondary-container font-headline mb-6 tracking-tight">Join the Sanctuary</h2>
+              <p className="text-on-secondary-container/80 font-medium mb-10 max-w-2xl mx-auto">
+                Get weekly Islamic parenting tips, free activity sheets, and early access to new releases.
+              </p>
+              
+              <form className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+                <input 
+                  type="email" 
+                  placeholder="Your email address" 
+                  className="flex-grow px-8 py-5 rounded-full border-none focus:ring-2 focus:ring-primary text-primary font-medium"
+                />
+                <button className="bg-primary text-on-primary px-10 py-5 rounded-full font-headline font-black hover:scale-105 transition-transform shadow-lg">
+                  Subscribe
+                </button>
+              </form>
+              <p className="mt-6 text-xs text-on-secondary-container/60 font-bold uppercase tracking-widest">
+                No spam, just love. Unsubscribe anytime.
+              </p>
+            </div>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
