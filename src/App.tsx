@@ -24,6 +24,7 @@ import AdminLayout from './pages/admin/AdminLayout';
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminProducts from './pages/admin/Products';
 import AdminOrders from './pages/admin/Orders';
+import AdminUsers from './pages/admin/Users';
 import './i18n';
 
 export default function App() {
@@ -54,6 +55,7 @@ export default function App() {
                 <Route index element={<AdminDashboard />} />
                 <Route path="products" element={<AdminProducts />} />
                 <Route path="orders" element={<AdminOrders />} />
+                <Route path="users" element={<AdminUsers />} />
               </Route>
             </Routes>
           </BrowserRouter>

@@ -1,14 +1,16 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu, X, Globe, BookOpen, ShoppingCart } from 'lucide-react';
+import { Menu, X, Globe, BookOpen, ShoppingCart, User, LogOut } from 'lucide-react';
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 
 export default function Layout() {
   const { t, i18n } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const { itemCount } = useCart();
+  const { user, isAdmin, signInWithGoogle, signOut } = useAuth();
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'ar' : 'en';
@@ -54,6 +56,11 @@ export default function Layout() {
                 </Link>
               ))}
               <div className="flex items-center gap-2 ml-4 pl-4 border-l border-noor-light-green/50">
+                {isAdmin && (
+                  <Link to="/admin" className="text-sm font-medium text-noor-yellow hover:text-noor-green transition-colors mr-2">
+                    Admin
+                  </Link>
+                )}
                 <button 
                   onClick={toggleLanguage}
                   className="p-2 rounded-full hover:bg-noor-light-green transition-colors text-noor-dark/70"
@@ -73,6 +80,25 @@ export default function Layout() {
                     </span>
                   )}
                 </Link>
+                {user ? (
+                  <button 
+                    onClick={signOut}
+                    className="p-2 rounded-full hover:bg-noor-light-green transition-colors text-noor-dark/70"
+                    aria-label="Sign Out"
+                    title="Sign Out"
+                  >
+                    <LogOut className="h-5 w-5" />
+                  </button>
+                ) : (
+                  <button 
+                    onClick={signInWithGoogle}
+                    className="p-2 rounded-full hover:bg-noor-light-green transition-colors text-noor-dark/70"
+                    aria-label="Sign In"
+                    title="Sign In"
+                  >
+                    <User className="h-5 w-5" />
+                  </button>
+                )}
               </div>
             </nav>
 
@@ -124,6 +150,36 @@ export default function Layout() {
                   {link.label}
                 </Link>
               ))}
+              {isAdmin && (
+                <Link
+                  to="/admin"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-noor-yellow hover:bg-noor-light-green hover:text-noor-green"
+                >
+                  Admin Dashboard
+                </Link>
+              )}
+              {user ? (
+                <button
+                  onClick={() => {
+                    signOut();
+                    setIsMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-noor-dark/70 hover:bg-noor-light-green hover:text-noor-dark"
+                >
+                  Sign Out
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    signInWithGoogle();
+                    setIsMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-noor-dark/70 hover:bg-noor-light-green hover:text-noor-dark"
+                >
+                  Sign In
+                </button>
+              )}
             </div>
           </div>
         )}
@@ -161,7 +217,9 @@ export default function Layout() {
                 <li><Link to="/bilingual-islamic-books-for-kids" className="hover:text-white transition-colors">Bilingual Books</Link></li>
                 <li><Link to="/islamic-bedtime-stories" className="hover:text-white transition-colors">Bedtime Stories</Link></li>
                 <li><Link to="/blog" className="hover:text-white transition-colors">Blog & Resources</Link></li>
-                <li><Link to="/admin" className="hover:text-white transition-colors">Admin Dashboard</Link></li>
+                {isAdmin && (
+                  <li><Link to="/admin" className="hover:text-white transition-colors text-noor-yellow">Admin Dashboard</Link></li>
+                )}
               </ul>
             </div>
           </div>
