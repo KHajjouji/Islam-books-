@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 
 export default function DashboardLayout() {
-  const { user, signOut } = useAuth();
+  const { user, isAdmin, signOut } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,6 +30,10 @@ export default function DashboardLayout() {
     { path: '/dashboard/orders', label: 'Orders', icon: History },
     { path: '/dashboard/profile', label: 'Family Profile', icon: Users },
   ];
+
+  if (isAdmin) {
+    menuItems.push({ path: '/admin', label: 'Admin Panel', icon: Settings });
+  }
 
   return (
     <div className="min-h-screen bg-background flex font-body">

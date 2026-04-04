@@ -89,9 +89,16 @@ export default function Layout() {
             </Link>
 
             {user ? (
-              <Link to="/dashboard" className="p-2 rounded-full hover:bg-surface-container-high transition-all text-primary">
-                <User className="h-6 w-6" />
-              </Link>
+              <div className="flex items-center gap-2">
+                {isAdmin && (
+                  <Link to="/admin" className="hidden md:flex items-center px-4 py-2 bg-primary/10 text-primary rounded-full font-bold text-sm hover:bg-primary/20 transition-colors">
+                    Admin Panel
+                  </Link>
+                )}
+                <Link to="/dashboard" className="p-2 rounded-full hover:bg-surface-container-high transition-all text-primary">
+                  <User className="h-6 w-6" />
+                </Link>
+              </div>
             ) : (
               <button 
                 onClick={signInWithGoogle}
@@ -142,6 +149,9 @@ export default function Layout() {
               <div className="pt-4 mt-4 border-t border-outline-variant/30 flex flex-col gap-3">
                 {user ? (
                   <>
+                    {isAdmin && (
+                      <Link to="/admin" className="px-4 py-3 text-primary font-bold bg-primary/5 rounded-xl">Admin Panel</Link>
+                    )}
                     <Link to="/dashboard" className="px-4 py-3 text-on-surface-variant font-bold">Dashboard</Link>
                     <button onClick={signOut} className="px-4 py-3 text-on-surface-variant font-bold text-left">Sign Out</button>
                   </>

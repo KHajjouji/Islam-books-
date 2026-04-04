@@ -56,15 +56,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         if (!userSnap.exists()) {
           // Create new user document
+          const isDefaultAdmin = currentUser.email === 'hypocritic2002@gmail.com';
           await setDoc(userRef, {
             uid: currentUser.uid,
             email: currentUser.email,
-            role: currentUser.email === 'hypocritic2002@gmail.com' ? 'admin' : 'customer',
+            role: isDefaultAdmin ? 'admin' : 'customer',
             createdAt: serverTimestamp()
           });
-          setIsAdmin(currentUser.email === 'hypocritic2002@gmail.com');
+          setIsAdmin(isDefaultAdmin);
         } else {
-          setIsAdmin(currentUser.email === 'hypocritic2002@gmail.com');
+          const userData = userSnap.data();
+          setIsAdmin(userData.role === 'admin' || currentUser.email === 'hypocritic2002@gmail.com');
         }
       } else {
         setIsAdmin(false);
