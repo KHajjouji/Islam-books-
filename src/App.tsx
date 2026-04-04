@@ -8,6 +8,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import Layout from './components/Layout';
+import DashboardLayout from './components/DashboardLayout';
 import Home from './pages/Home';
 import IslamicChildrensBooks from './pages/IslamicChildrensBooks';
 import QuranStories from './pages/QuranStories';
@@ -21,6 +22,10 @@ import ProductDetail from './pages/ProductDetail';
 import Shop from './pages/Shop';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import ParentDashboard from './pages/dashboard/ParentDashboard';
+import SubscriptionManagement from './pages/dashboard/SubscriptionManagement';
+import OrderHistory from './pages/dashboard/OrderHistory';
+import FamilyProfile from './pages/dashboard/FamilyProfile';
 import AdminLayout from './pages/admin/AdminLayout';
 import AdminDashboard from './pages/admin/Dashboard';
 import AdminProducts from './pages/admin/Products';
@@ -35,6 +40,7 @@ export default function App() {
         <CartProvider>
           <BrowserRouter>
             <Routes>
+              {/* Main Site Routes */}
               <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
                 <Route path="islamic-childrens-books" element={<IslamicChildrensBooks />} />
@@ -52,6 +58,14 @@ export default function App() {
                 <Route path="checkout" element={<Checkout />} />
               </Route>
               
+              {/* Parent Dashboard Routes */}
+              <Route path="/dashboard" element={<DashboardLayout />}>
+                <Route index element={<ParentDashboard />} />
+                <Route path="subscription" element={<SubscriptionManagement />} />
+                <Route path="orders" element={<OrderHistory />} />
+                <Route path="profile" element={<FamilyProfile />} />
+              </Route>
+
               {/* Admin Routes */}
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<AdminDashboard />} />

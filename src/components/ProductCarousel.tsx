@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 import { Product } from '../data/products';
 import ProductCard from './ProductCard';
 
@@ -22,24 +22,30 @@ export default function ProductCarousel({ products, title }: ProductCarouselProp
   if (!products || products.length === 0) return null;
 
   return (
-    <div className="relative">
+    <div className="relative group/carousel">
       {title && (
-        <div className="flex justify-between items-end mb-6">
-          <h2 className="text-2xl md:text-3xl font-serif font-bold text-noor-dark">{title}</h2>
-          <div className="hidden sm:flex gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-6">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-accent" />
+              <span className="text-[10px] font-bold text-primary uppercase tracking-widest">Handpicked for you</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-headline font-extrabold text-primary tracking-tight">{title}</h2>
+          </div>
+          <div className="flex gap-3">
             <button 
               onClick={() => scroll('left')}
-              className="p-2 rounded-full border border-noor-light-green/50 hover:bg-noor-cream text-noor-dark/70 transition-colors"
+              className="w-12 h-12 rounded-full border border-outline-variant/30 bg-surface flex items-center justify-center text-primary hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm active:scale-95"
               aria-label="Scroll left"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-6 w-6" />
             </button>
             <button 
               onClick={() => scroll('right')}
-              className="p-2 rounded-full border border-noor-light-green/50 hover:bg-noor-cream text-noor-dark/70 transition-colors"
+              className="w-12 h-12 rounded-full border border-outline-variant/30 bg-surface flex items-center justify-center text-primary hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm active:scale-95"
               aria-label="Scroll right"
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-6 w-6" />
             </button>
           </div>
         </div>
@@ -47,11 +53,11 @@ export default function ProductCarousel({ products, title }: ProductCarouselProp
       
       <div 
         ref={scrollContainerRef}
-        className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory hide-scrollbar"
+        className="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {products.map(product => (
-          <div key={product.id} className="min-w-[280px] max-w-[280px] sm:min-w-[300px] sm:max-w-[300px] snap-start flex-shrink-0">
+          <div key={product.id} className="min-w-[280px] max-w-[280px] sm:min-w-[340px] sm:max-w-[340px] snap-start flex-shrink-0">
             <ProductCard product={product} />
           </div>
         ))}

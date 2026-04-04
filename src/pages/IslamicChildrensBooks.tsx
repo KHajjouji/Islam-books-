@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BookOpen, Star, Heart, Sparkles, ArrowRight, HelpCircle, Loader2 } from 'lucide-react';
+import { BookOpen, Star, Heart, Sparkles, ArrowRight, HelpCircle, Loader2, Zap, ShieldCheck } from 'lucide-react';
 import SEO from '../components/SEO';
 import ProductCarousel from '../components/ProductCarousel';
 import { useProducts } from '../hooks/useProducts';
@@ -11,49 +11,43 @@ export default function IslamicChildrensBooks() {
   return (
     <>
       <SEO 
-        title="Islamic Children's Books for Muslim Families | NoorKids"
+        title="Islamic Children's Books for Muslim Families | Noor & Nurture"
         description="Explore a growing collection of Islamic children's books created to help Muslim kids learn faith, values, stories, and identity through beautiful storytelling."
       />
       
       {/* Header */}
-      <div className="bg-noor-cream py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-noor-dark mb-6 text-gradient">
-            Islamic Children's Books for Muslim Families
+      <div className="bg-surface-low py-24 md:py-32 relative overflow-hidden">
+        <div className="absolute top-0 right-0 p-20 opacity-5 pointer-events-none">
+          <BookOpen className="w-64 h-64 text-primary" />
+        </div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/5 rounded-full border border-primary/10 mb-8">
+            <Sparkles className="h-4 w-4 text-primary" />
+            <span className="text-[10px] font-bold uppercase tracking-widest text-primary">Curated Collection</span>
+          </div>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-headline font-extrabold text-primary mb-8 tracking-tight leading-[1.1]">
+            Islamic Children's Books <br className="hidden md:block" />
+            <span className="text-accent-dark">for Muslim Families</span>
           </h1>
-          <p className="text-lg md:text-xl text-noor-dark/70 leading-relaxed">
-            Explore a growing collection of Islamic children's books created to help Muslim kids learn faith, values, stories, and identity through beautiful storytelling and thoughtful design. Whether you are looking for Islamic books for kids, Muslim kids books, or meaningful gifts for young Muslim children, this collection is designed to support family learning in a practical and inspiring way.
+          <p className="text-lg md:text-2xl text-on-surface-variant font-medium leading-relaxed max-w-3xl mx-auto mb-12">
+            Explore a growing collection of Islamic children's books created to help Muslim kids learn faith, values, stories, and identity through beautiful storytelling and thoughtful design.
           </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {["Quran stories", "Prophet stories", "Ramadan and Eid", "Bedtime stories", "Islamic values", "Muslim identity"].map((tag, i) => (
+              <span key={i} className="px-6 py-2 bg-primary/5 text-primary border border-primary/10 rounded-full text-sm font-bold uppercase tracking-wider">
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Shop Intro */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-serif font-bold text-noor-dark mb-6">
-              A Curated Collection of Islamic Books for Kids
-            </h2>
-            <p className="text-lg text-noor-dark/70">
-              Our books are designed for families who want Islamic learning to feel calm, joyful, and engaging. You will find titles across different themes, ages, and reading moments, including:
-            </p>
-            <div className="flex flex-wrap justify-center gap-3 mt-8">
-              {["Quran stories", "Prophet stories", "Ramadan and Eid", "Bedtime stories", "Islamic values and character", "Family life and Muslim identity"].map((tag, i) => (
-                <span key={i} className="px-4 py-2 bg-noor-light-green text-noor-green rounded-full text-sm font-medium">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* All Books Carousel */}
-      <section className="py-12 bg-noor-cream overflow-hidden">
+      <section className="py-24 bg-background overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (
-            <div className="flex justify-center items-center py-12">
-              <Loader2 className="h-8 w-8 animate-spin text-noor-green" />
+            <div className="flex justify-center items-center py-24">
+              <Loader2 className="h-12 w-12 animate-spin text-primary" />
             </div>
           ) : (
             <ProductCarousel products={allBooks} title="Shop All Books" />
@@ -62,29 +56,41 @@ export default function IslamicChildrensBooks() {
       </section>
 
       {/* Shop by Age */}
-      <section className="py-20 bg-white">
+      <section className="py-32 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-noor-dark mb-12 text-center">
-            Islamic Books for Every Stage of Childhood
-          </h2>
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full border border-accent/20 mb-6">
+              <Zap className="h-4 w-4 text-accent-dark" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-accent-dark">Growth Stages</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-headline font-extrabold text-primary mb-6 tracking-tight">
+              Islamic Books for Every <br /> Stage of Childhood
+            </h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                age: "For Toddlers and Early Learners",
-                desc: "Simple, visual, repetitive books that introduce Islamic vocabulary, family moments, and gentle faith-centered routines."
+                age: "Toddlers & Early Learners",
+                desc: "Simple, visual, repetitive books that introduce Islamic vocabulary, family moments, and gentle faith-centered routines.",
+                icon: Heart
               },
               {
-                age: "For Ages 4–7",
-                desc: "Picture books and guided stories that help children understand values, Prophets, the Quran, and Muslim life in a warm and memorable format."
+                age: "Ages 4–7",
+                desc: "Picture books and guided stories that help children understand values, Prophets, the Quran, and Muslim life in a warm format.",
+                icon: Star
               },
               {
-                age: "For Ages 8–12",
-                desc: "More detailed books that deepen understanding, build reflection, and support stronger independent learning."
+                age: "Ages 8–12",
+                desc: "More detailed books that deepen understanding, build reflection, and support stronger independent learning.",
+                icon: ShieldCheck
               }
             ].map((item, i) => (
-              <div key={i} className="bg-noor-cream p-8 rounded-2xl shadow-sm border border-noor-light-green">
-                <h3 className="text-xl font-bold text-noor-green mb-4">{item.age}</h3>
-                <p className="text-noor-dark/70">{item.desc}</p>
+              <div key={i} className="bg-background p-12 rounded-[3rem] shadow-xl shadow-primary/5 border border-outline-variant/10 group hover:border-primary/30 transition-all">
+                <div className="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-all">
+                  <item.icon className="h-7 w-7" />
+                </div>
+                <h3 className="text-2xl font-headline font-extrabold text-primary mb-4">{item.age}</h3>
+                <p className="text-lg text-on-surface-variant font-medium leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -92,11 +98,17 @@ export default function IslamicChildrensBooks() {
       </section>
 
       {/* Shop by Theme */}
-      <section className="py-20 bg-noor-cream">
+      <section className="py-32 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-serif font-bold text-noor-dark mb-12 text-center">
-            Find the Right Islamic Story or Book Theme
-          </h2>
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/5 rounded-full border border-primary/10 mb-6">
+              <BookOpen className="h-4 w-4 text-primary" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-primary">Explore Themes</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-headline font-extrabold text-primary mb-6 tracking-tight">
+              Find the Right Islamic <br /> Story or Book Theme
+            </h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
@@ -105,7 +117,7 @@ export default function IslamicChildrensBooks() {
                 link: "/quran-stories-for-kids"
               },
               {
-                title: "Stories of the Prophets for Kids",
+                title: "Stories of the Prophets",
                 desc: "Character-rich Islamic storytelling that introduces children to the lives and lessons of the Prophets.",
                 link: "/stories-of-the-prophets-for-kids"
               },
@@ -120,17 +132,17 @@ export default function IslamicChildrensBooks() {
                 link: "/islamic-bedtime-stories"
               },
               {
-                title: "Islamic Values and Character",
+                title: "Values & Character",
                 desc: "Books that support akhlaq, adab, gratitude, honesty, patience, compassion, and trust in Allah.",
                 link: "#"
               }
             ].map((item, i) => (
               <Link key={i} to={item.link} className="group block h-full">
-                <div className="bg-white p-8 rounded-2xl hover:bg-noor-light-green transition-colors h-full flex flex-col border border-noor-light-green hover:border-noor-light-green shadow-sm">
-                  <h3 className="text-xl font-bold text-noor-dark mb-3 group-hover:text-noor-green transition-colors">{item.title}</h3>
-                  <p className="text-noor-dark/70 flex-grow">{item.desc}</p>
-                  <div className="mt-6 flex items-center text-noor-green font-medium">
-                    Explore Theme <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <div className="bg-surface p-10 rounded-[2.5rem] hover:bg-primary transition-all h-full flex flex-col border border-outline-variant/10 shadow-sm group-hover:shadow-2xl group-hover:shadow-primary/20 group-hover:-translate-y-2">
+                  <h3 className="text-2xl font-headline font-extrabold text-primary mb-4 group-hover:text-white transition-colors">{item.title}</h3>
+                  <p className="text-lg text-on-surface-variant font-medium flex-grow group-hover:text-white/70 transition-colors leading-relaxed">{item.desc}</p>
+                  <div className="mt-8 flex items-center text-primary font-bold group-hover:text-accent transition-colors">
+                    Explore Theme <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-2 transition-transform" />
                   </div>
                 </div>
               </Link>
@@ -140,46 +152,56 @@ export default function IslamicChildrensBooks() {
       </section>
 
       {/* Why Parents Choose These Books */}
-      <section className="py-20 bg-noor-dark text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-serif font-bold mb-6">
-              Why Families Choose Our Islamic Books for Children
-            </h2>
-            <p className="text-lg text-noor-light-green/90">
-              Parents are not only searching for information. They are searching for resources that children enjoy, remember, and ask to revisit.
-            </p>
-          </div>
-          <div className="bg-noor-green/50 rounded-2xl p-8 md:p-12 backdrop-blur-sm">
-            <p className="text-lg font-medium mb-6 text-noor-light-green">Our books are created to offer:</p>
-            <ul className="space-y-4">
-              {[
-                "Natural Islamic learning through storytelling",
-                "Age-appropriate language",
-                "Strong visual quality",
-                "Meaningful family use",
-                "Relevance for Muslim children growing up in Western societies"
-              ].map((item, i) => (
-                <li key={i} className="flex items-start">
-                  <Sparkles className="h-6 w-6 text-noor-yellow/80 mr-4 flex-shrink-0" />
-                  <span className="text-lg text-noor-light-green">{item}</span>
-                </li>
-              ))}
-            </ul>
+      <section className="py-32 bg-primary text-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 p-20 opacity-5 pointer-events-none">
+          <Sparkles className="w-64 h-64 text-white" />
+        </div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-headline font-extrabold mb-8 tracking-tight leading-tight">
+                Why Families Choose Our <br /> Islamic Books for Children
+              </h2>
+              <p className="text-xl text-white/70 font-medium leading-relaxed">
+                Parents are not only searching for information. They are searching for resources that children enjoy, remember, and ask to revisit.
+              </p>
+            </div>
+            <div className="bg-white/10 rounded-[3rem] p-12 backdrop-blur-md border border-white/10 shadow-2xl">
+              <p className="text-xl font-bold mb-8 text-accent">Our books are created to offer:</p>
+              <ul className="space-y-6">
+                {[
+                  "Natural Islamic learning through storytelling",
+                  "Age-appropriate language",
+                  "Strong visual quality",
+                  "Meaningful family use",
+                  "Relevance for Muslim children in the West"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start">
+                    <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center mr-6 flex-shrink-0">
+                      <Sparkles className="h-4 w-4 text-secondary" />
+                    </div>
+                    <span className="text-lg font-medium text-white/90">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-white">
+      <section className="py-32 bg-background">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <HelpCircle className="h-12 w-12 text-noor-green mx-auto mb-4" />
-            <h2 className="text-3xl font-serif font-bold text-noor-dark">
-              Frequently Asked Questions About Islamic Children's Books
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/5 rounded-full border border-primary/10 mb-6">
+              <HelpCircle className="h-4 w-4 text-primary" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-primary">Common Questions</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-headline font-extrabold text-primary tracking-tight">
+              Frequently Asked Questions
             </h2>
           </div>
-          <div className="space-y-8">
+          <div className="space-y-6">
             {[
               {
                 q: "What age are these Islamic books for?",
@@ -191,12 +213,12 @@ export default function IslamicChildrensBooks() {
               },
               {
                 q: "Do you offer Quran stories and Prophet stories?",
-                a: "Yes. These are among the main pillars of our collection and reflect strong audience interest in current market categories."
+                a: "Yes. These are among the main pillars of our collection and reflect strong audience interest."
               }
             ].map((faq, i) => (
-              <div key={i} className="bg-noor-cream p-6 rounded-xl">
-                <h3 className="text-lg font-bold text-noor-dark mb-2">{faq.q}</h3>
-                <p className="text-noor-dark/70">{faq.a}</p>
+              <div key={i} className="bg-surface p-10 rounded-[2.5rem] border border-outline-variant/10">
+                <h3 className="text-xl font-headline font-extrabold text-primary mb-4">{faq.q}</h3>
+                <p className="text-lg text-on-surface-variant font-medium leading-relaxed">{faq.a}</p>
               </div>
             ))}
           </div>
