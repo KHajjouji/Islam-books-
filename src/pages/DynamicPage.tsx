@@ -74,32 +74,47 @@ export default function DynamicPage() {
       {page.sections.map((section) => {
         if (section.type === 'hero') {
           return (
-            <section key={section.id} className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
-              {section.image && (
-                <img 
-                  src={section.image} 
-                  alt={section.title || page.title} 
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              )}
+            <section key={section.id} className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#faf9f6]">
+              {/* Islamic Pattern Background */}
               <div 
-                className="absolute inset-0" 
+                className="absolute inset-0 opacity-[0.03] pointer-events-none" 
                 style={{ 
-                  backgroundColor: section.overlayColor || '#000000', 
-                  opacity: (section.overlayOpacity || 40) / 100 
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l6 14 14 6-14 6-6 14-6-14L0 20l14-6z' fill='%23000' fill-rule='evenodd'/%3E%3C/svg%3E")`, 
+                  backgroundSize: '40px 40px' 
                 }}
-              />
-              <div className="relative z-10 text-center px-8 max-w-4xl mx-auto">
-                {section.title && (
-                  <h1 className="text-5xl lg:text-7xl font-black text-white font-headline leading-tight mb-6 tracking-tight">
-                    {section.title}
+              ></div>
+
+              {/* Background Gradients */}
+              <div className="absolute inset-0 opacity-10 pointer-events-none">
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
+                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
+              </div>
+
+              <div className="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+                <div className="animate-fade-in-left">
+                  <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 px-4 py-2 rounded-full text-primary font-bold text-xs mb-8 uppercase tracking-widest">
+                    <span>Featured</span>
+                  </div>
+                  
+                  <h1 className="text-6xl lg:text-7xl font-black text-primary font-headline leading-[1.1] mb-8 tracking-tight">
+                    {section.title || page.title}
                   </h1>
-                )}
-                {section.subtitle && (
-                  <p className="text-xl text-white/90 font-medium leading-relaxed">
-                    {section.subtitle}
+                  
+                  <p className="text-xl text-on-surface-variant leading-relaxed mb-12 max-w-xl font-medium">
+                    {section.subtitle || "Discover our premium collection."}
                   </p>
-                )}
+                </div>
+
+                <div className="relative animate-fade-in-up">
+                  <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-2xl border-8 border-white">
+                    <img 
+                      src={section.image || "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&h=1000&fit=crop"} 
+                      alt={section.title || "Featured Book"} 
+                      className="w-full aspect-[4/5] object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
+                  </div>
+                </div>
               </div>
             </section>
           );

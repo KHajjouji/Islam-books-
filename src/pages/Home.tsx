@@ -92,208 +92,282 @@ export default function Home() {
     );
   }
 
-  // If we have dynamic sections from the visual editor, render them
-  if (homePageData && homePageData.sections && homePageData.sections.length > 0) {
-    return (
-      <div className="pt-20">
-        <SEO 
-          title={homePageData.title || "Home"} 
-          description="Premium Islamic children's books and interactive learning designed to inspire love for Allah and the Prophet (SAW) in every child's heart."
-        />
-        {homePageData.sections.map((section) => {
-          if (section.type === 'hero') {
-            return (
-              <section key={section.id} className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-                {section.image && (
-                  <img 
-                    src={section.image} 
-                    alt={section.title || "Hero"} 
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                )}
-                <div 
-                  className="absolute inset-0" 
-                  style={{ 
-                    backgroundColor: section.overlayColor || '#000000', 
-                    opacity: (section.overlayOpacity || 40) / 100 
-                  }}
-                />
-                <div className="relative z-10 text-center px-8 max-w-5xl mx-auto">
-                  {section.title && (
-                    <h1 className="text-6xl lg:text-8xl font-black text-white font-headline leading-tight mb-8 tracking-tight">
-                      {section.title}
-                    </h1>
-                  )}
-                  {section.subtitle && (
-                    <p className="text-2xl text-white/90 font-medium leading-relaxed mb-12">
-                      {section.subtitle}
-                    </p>
-                  )}
-                  <div className="flex justify-center gap-6">
+  const hasCustomHero = homePageData?.sections?.some(s => s.type === 'hero');
+
+  return (
+    <div className="pt-20">
+      <SEO 
+        title={homePageData?.title || "Home"} 
+        description="Premium Islamic children's books and interactive learning designed to inspire love for Allah and the Prophet (SAW) in every child's heart."
+      />
+
+      {/* Render Custom Sections First */}
+      {homePageData?.sections?.map((section) => {
+        if (section.type === 'hero') {
+          return (
+            <section key={section.id} className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#faf9f6]">
+              {/* Islamic Pattern Background */}
+              <div 
+                className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+                style={{ 
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l6 14 14 6-14 6-6 14-6-14L0 20l14-6z' fill='%23000' fill-rule='evenodd'/%3E%3C/svg%3E")`, 
+                  backgroundSize: '40px 40px' 
+                }}
+              ></div>
+
+              {/* Background Gradients */}
+              <div className="absolute inset-0 opacity-10 pointer-events-none">
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
+                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
+              </div>
+
+              <div className="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+                <motion.div 
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 px-4 py-2 rounded-full text-primary font-bold text-xs mb-8 uppercase tracking-widest">
+                    <Star className="h-4 w-4 fill-primary" />
+                    <span>Nurturing the Next Generation</span>
+                  </div>
+                  
+                  <h1 className="text-6xl lg:text-7xl font-black text-primary font-headline leading-[1.1] mb-8 tracking-tight">
+                    {section.title || "Where Faith Meets Wonder."}
+                  </h1>
+                  
+                  <p className="text-xl text-on-surface-variant leading-relaxed mb-12 max-w-xl font-medium">
+                    {section.subtitle || "Premium Islamic children's books and interactive learning designed to inspire love for Allah and the Prophet (SAW) in every child's heart."}
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-6">
                     <Link 
                       to="/shop" 
                       className="bg-primary text-on-primary px-10 py-5 rounded-full font-headline font-black text-lg hover:scale-105 transition-transform shadow-xl shadow-primary/20 flex items-center justify-center gap-3"
                     >
                       <ShoppingCart className="h-5 w-5" />
-                      Shop Now
+                      Shop the Books
+                    </Link>
+                    <Link 
+                      to="/academy" 
+                      className="bg-white text-primary border-2 border-primary/10 px-10 py-5 rounded-full font-headline font-black text-lg hover:bg-primary/5 transition-all flex items-center justify-center gap-3"
+                    >
+                      <PlayCircle className="h-5 w-5" />
+                      Explore Academy
                     </Link>
                   </div>
-                </div>
-              </section>
-            );
-          }
 
-          if (section.type === 'product_slider') {
-            const filteredProducts = section.category && section.category !== 'all'
-              ? products.filter(p => p.category === section.category || p.theme === section.category)
-              : products;
+                  <div className="mt-12 flex items-center gap-6">
+                    <div className="flex -space-x-4">
+                      {[1, 2, 3, 4].map((i) => (
+                        <img 
+                          key={i}
+                          src={`https://i.pravatar.cc/100?img=${i + 10}`} 
+                          alt="User" 
+                          className="w-12 h-12 rounded-full border-4 border-white shadow-sm"
+                        />
+                      ))}
+                    </div>
+                    <div>
+                      <div className="flex text-secondary mb-1">
+                        {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="h-4 w-4 fill-current" />)}
+                      </div>
+                      <p className="text-sm font-bold text-primary">Trusted by 10,000+ Muslim Parents</p>
+                    </div>
+                  </div>
+                </motion.div>
 
-            if (filteredProducts.length === 0) return null;
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1, delay: 0.2 }}
+                  className="relative"
+                >
+                  <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-2xl border-8 border-white">
+                    <img 
+                      src={section.image || "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&h=1000&fit=crop"} 
+                      alt={section.title || "Featured Book"} 
+                      className="w-full aspect-[4/5] object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
+                  </div>
+                  
+                  {/* Floating Elements */}
+                  <motion.div 
+                    animate={{ y: [0, -20, 0] }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                    className="absolute -top-10 -right-10 bg-white p-6 rounded-3xl shadow-xl z-20 flex items-center gap-4 border border-primary/5"
+                  >
+                    <div className="w-12 h-12 bg-secondary-container rounded-2xl flex items-center justify-center text-on-secondary-container">
+                      <Zap className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-on-surface-variant uppercase tracking-widest">New Release</p>
+                      <p className="text-lg font-black text-primary">Must Read</p>
+                    </div>
+                  </motion.div>
 
-            return (
-              <div key={section.id} className="bg-[#faf9f6]">
-                <ProductSlider 
-                  products={filteredProducts} 
-                  title={section.title || "Featured Products"} 
-                />
+                  <motion.div 
+                    animate={{ y: [0, 20, 0] }}
+                    transition={{ duration: 5, repeat: Infinity }}
+                    className="absolute -bottom-10 -left-10 bg-white p-6 rounded-3xl shadow-xl z-20 flex items-center gap-4 border border-primary/5"
+                  >
+                    <div className="w-12 h-12 bg-primary-container rounded-2xl flex items-center justify-center text-on-primary-container">
+                      <Volume2 className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Audio Books</p>
+                      <p className="text-lg font-black text-primary">Prophet Stories</p>
+                    </div>
+                  </motion.div>
+                </motion.div>
               </div>
-            );
-          }
+            </section>
+          );
+        }
 
-          if (section.type === 'html') {
-            return (
-              <section key={section.id} className="py-16 bg-white">
-                <div className="max-w-7xl mx-auto px-8">
-                  <div dangerouslySetInnerHTML={{ __html: section.content || '' }} />
-                </div>
-              </section>
-            );
-          }
+        if (section.type === 'product_slider') {
+          const filteredProducts = section.category && section.category !== 'all'
+            ? products.filter(p => p.category === section.category || p.theme === section.category)
+            : products;
 
-          return null;
-        })}
-      </div>
-    );
-  }
+          if (filteredProducts.length === 0) return null;
 
-  // Fallback to the original static layout if no dynamic sections exist
-  return (
-    <div className="pt-20">
-      <SEO 
-        title="Home" 
-        description="Premium Islamic children's books and interactive learning designed to inspire love for Allah and the Prophet (SAW) in every child's heart."
-      />
-
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#faf9f6]">
-        {/* Background Patterns */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 px-4 py-2 rounded-full text-primary font-bold text-xs mb-8 uppercase tracking-widest">
-              <Star className="h-4 w-4 fill-primary" />
-              <span>Nurturing the Next Generation</span>
-            </div>
-            
-            <h1 className="text-6xl lg:text-7xl font-black text-primary font-headline leading-[1.1] mb-8 tracking-tight">
-              Where Faith Meets <span className="text-secondary italic">Wonder.</span>
-            </h1>
-            
-            <p className="text-xl text-on-surface-variant leading-relaxed mb-12 max-w-xl font-medium">
-              Premium Islamic children's books and interactive learning designed to inspire love for Allah and the Prophet (SAW) in every child's heart.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6">
-              <Link 
-                to="/shop" 
-                className="bg-primary text-on-primary px-10 py-5 rounded-full font-headline font-black text-lg hover:scale-105 transition-transform shadow-xl shadow-primary/20 flex items-center justify-center gap-3"
-              >
-                <ShoppingCart className="h-5 w-5" />
-                Shop the Books
-              </Link>
-              <Link 
-                to="/academy" 
-                className="bg-white text-primary border-2 border-primary/10 px-10 py-5 rounded-full font-headline font-black text-lg hover:bg-primary/5 transition-all flex items-center justify-center gap-3"
-              >
-                <PlayCircle className="h-5 w-5" />
-                Explore Academy
-              </Link>
-            </div>
-
-            <div className="mt-12 flex items-center gap-6">
-              <div className="flex -space-x-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <img 
-                    key={i}
-                    src={`https://i.pravatar.cc/100?img=${i + 10}`} 
-                    alt="User" 
-                    className="w-12 h-12 rounded-full border-4 border-white shadow-sm"
-                  />
-                ))}
-              </div>
-              <div>
-                <div className="flex text-secondary mb-1">
-                  {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="h-4 w-4 fill-current" />)}
-                </div>
-                <p className="text-sm font-bold text-primary">Trusted by 10,000+ Muslim Parents</p>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-2xl border-8 border-white">
-              <img 
-                src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&h=1000&fit=crop" 
-                alt="Hakim and Hana 3D Illustration" 
-                className="w-full aspect-[4/5] object-cover"
+          return (
+            <div key={section.id} className="bg-[#faf9f6]">
+              <ProductSlider 
+                products={filteredProducts} 
+                title={section.title || "Featured Products"} 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
             </div>
-            
-            {/* Floating Elements */}
-            <motion.div 
-              animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="absolute -top-10 -right-10 bg-white p-6 rounded-3xl shadow-xl z-20 flex items-center gap-4 border border-primary/5"
-            >
-              <div className="w-12 h-12 bg-secondary-container rounded-2xl flex items-center justify-center text-on-secondary-container">
-                <Zap className="h-6 w-6" />
+          );
+        }
+
+        if (section.type === 'html') {
+          return (
+            <section key={section.id} className="py-16 bg-white">
+              <div className="max-w-7xl mx-auto px-8">
+                <div dangerouslySetInnerHTML={{ __html: section.content || '' }} />
               </div>
-              <div>
-                <p className="text-xs font-bold text-on-surface-variant uppercase tracking-widest">New Release</p>
-                <p className="text-lg font-black text-primary">Ramadan Quest</p>
+            </section>
+          );
+        }
+
+        return null;
+      })}
+
+      {/* Default Hero Section - Only show if no custom hero is added */}
+      {!hasCustomHero && (
+        <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#faf9f6]">
+          {/* Background Patterns */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none">
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 px-4 py-2 rounded-full text-primary font-bold text-xs mb-8 uppercase tracking-widest">
+                <Star className="h-4 w-4 fill-primary" />
+                <span>Nurturing the Next Generation</span>
+              </div>
+              
+              <h1 className="text-6xl lg:text-7xl font-black text-primary font-headline leading-[1.1] mb-8 tracking-tight">
+                Where Faith Meets <span className="text-secondary italic">Wonder.</span>
+              </h1>
+              
+              <p className="text-xl text-on-surface-variant leading-relaxed mb-12 max-w-xl font-medium">
+                Premium Islamic children's books and interactive learning designed to inspire love for Allah and the Prophet (SAW) in every child's heart.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-6">
+                <Link 
+                  to="/shop" 
+                  className="bg-primary text-on-primary px-10 py-5 rounded-full font-headline font-black text-lg hover:scale-105 transition-transform shadow-xl shadow-primary/20 flex items-center justify-center gap-3"
+                >
+                  <ShoppingCart className="h-5 w-5" />
+                  Shop the Books
+                </Link>
+                <Link 
+                  to="/academy" 
+                  className="bg-white text-primary border-2 border-primary/10 px-10 py-5 rounded-full font-headline font-black text-lg hover:bg-primary/5 transition-all flex items-center justify-center gap-3"
+                >
+                  <PlayCircle className="h-5 w-5" />
+                  Explore Academy
+                </Link>
+              </div>
+
+              <div className="mt-12 flex items-center gap-6">
+                <div className="flex -space-x-4">
+                  {[1, 2, 3, 4].map((i) => (
+                    <img 
+                      key={i}
+                      src={`https://i.pravatar.cc/100?img=${i + 10}`} 
+                      alt="User" 
+                      className="w-12 h-12 rounded-full border-4 border-white shadow-sm"
+                    />
+                  ))}
+                </div>
+                <div>
+                  <div className="flex text-secondary mb-1">
+                    {[1, 2, 3, 4, 5].map((i) => <Star key={i} className="h-4 w-4 fill-current" />)}
+                  </div>
+                  <p className="text-sm font-bold text-primary">Trusted by 10,000+ Muslim Parents</p>
+                </div>
               </div>
             </motion.div>
 
             <motion.div 
-              animate={{ y: [0, 20, 0] }}
-              transition={{ duration: 5, repeat: Infinity }}
-              className="absolute -bottom-10 -left-10 bg-white p-6 rounded-3xl shadow-xl z-20 flex items-center gap-4 border border-primary/5"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="relative"
             >
-              <div className="w-12 h-12 bg-primary-container rounded-2xl flex items-center justify-center text-on-primary-container">
-                <Volume2 className="h-6 w-6" />
+              <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-2xl border-8 border-white">
+                <img 
+                  src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800&h=1000&fit=crop" 
+                  alt="Hakim and Hana 3D Illustration" 
+                  className="w-full aspect-[4/5] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
               </div>
-              <div>
-                <p className="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Audio Books</p>
-                <p className="text-lg font-black text-primary">Prophet Stories</p>
-              </div>
+              
+              {/* Floating Elements */}
+              <motion.div 
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="absolute -top-10 -right-10 bg-white p-6 rounded-3xl shadow-xl z-20 flex items-center gap-4 border border-primary/5"
+              >
+                <div className="w-12 h-12 bg-secondary-container rounded-2xl flex items-center justify-center text-on-secondary-container">
+                  <Zap className="h-6 w-6" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-on-surface-variant uppercase tracking-widest">New Release</p>
+                  <p className="text-lg font-black text-primary">Ramadan Quest</p>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                animate={{ y: [0, 20, 0] }}
+                transition={{ duration: 5, repeat: Infinity }}
+                className="absolute -bottom-10 -left-10 bg-white p-6 rounded-3xl shadow-xl z-20 flex items-center gap-4 border border-primary/5"
+              >
+                <div className="w-12 h-12 bg-primary-container rounded-2xl flex items-center justify-center text-on-primary-container">
+                  <Volume2 className="h-6 w-6" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Audio Books</p>
+                  <p className="text-lg font-black text-primary">Prophet Stories</p>
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
       {/* Trust Pillars */}
       <section className="py-24 bg-white">

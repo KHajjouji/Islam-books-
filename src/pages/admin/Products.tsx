@@ -80,7 +80,46 @@ export default function AdminProducts() {
           createdAt: serverTimestamp()
         });
       }
-      alert("Database seeded successfully!");
+      
+      // Add a few extra demo products for specific categories to test sliders
+      const demoProducts = [
+        {
+          title: "The Prophet's Kindness",
+          description: "A beautiful story about the Prophet's kindness to animals.",
+          price: 14.99,
+          image: "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=500&fit=crop",
+          category: "prophet-stories",
+          theme: "prophets",
+          stock: 50,
+          createdAt: serverTimestamp()
+        },
+        {
+          title: "My First Quran Words",
+          description: "Learn simple words from the Quran with beautiful illustrations.",
+          price: 12.99,
+          image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=500&fit=crop",
+          category: "quran-stories",
+          theme: "quran",
+          stock: 50,
+          createdAt: serverTimestamp()
+        },
+        {
+          title: "Bedtime Sunnahs",
+          description: "A soothing bedtime story teaching the sunnahs of sleep.",
+          price: 16.99,
+          image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=500&fit=crop",
+          category: "bedtime",
+          theme: "bedtime",
+          stock: 50,
+          createdAt: serverTimestamp()
+        }
+      ];
+
+      for (const demo of demoProducts) {
+        await addDoc(collection(db, 'products'), demo);
+      }
+
+      alert("Database seeded successfully with demo products!");
       fetchProducts();
     } catch (error) {
       console.error("Error seeding database:", error);

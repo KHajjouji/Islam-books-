@@ -307,7 +307,7 @@ export default function AdminPages() {
                       {section.type === 'hero' && (
                         <div className="grid md:grid-cols-2 gap-4">
                           <div className="col-span-2">
-                            <label className="block text-xs font-bold text-primary mb-1">Background Image URL</label>
+                            <label className="block text-xs font-bold text-primary mb-1">Book Cover Image URL</label>
                             <input type="text" value={section.image || ''} onChange={(e) => updateSection(section.id, { image: e.target.value })} className="w-full px-3 py-2 rounded-lg border border-primary/10" placeholder="https://..." />
                           </div>
                           <div>
@@ -318,18 +318,7 @@ export default function AdminPages() {
                             <label className="block text-xs font-bold text-primary mb-1">Subtitle Text</label>
                             <input type="text" value={section.subtitle || ''} onChange={(e) => updateSection(section.id, { subtitle: e.target.value })} className="w-full px-3 py-2 rounded-lg border border-primary/10" />
                           </div>
-                          <div>
-                            <label className="block text-xs font-bold text-primary mb-1">Overlay Color (Hex)</label>
-                            <div className="flex gap-2">
-                              <input type="color" value={section.overlayColor || '#000000'} onChange={(e) => updateSection(section.id, { overlayColor: e.target.value })} className="h-10 w-10 rounded cursor-pointer" />
-                              <input type="text" value={section.overlayColor || '#000000'} onChange={(e) => updateSection(section.id, { overlayColor: e.target.value })} className="flex-grow px-3 py-2 rounded-lg border border-primary/10" />
-                            </div>
-                          </div>
-                          <div>
-                            <label className="block text-xs font-bold text-primary mb-1">Overlay Opacity (%)</label>
-                            <input type="range" min="0" max="100" value={section.overlayOpacity || 40} onChange={(e) => updateSection(section.id, { overlayOpacity: parseInt(e.target.value) })} className="w-full" />
-                            <div className="text-right text-xs text-on-surface-variant">{section.overlayOpacity || 40}%</div>
-                          </div>
+                          {/* Overlay settings kept for backward compatibility but hidden from UI to avoid confusion since the new layout doesn't use them */}
                         </div>
                       )}
 
