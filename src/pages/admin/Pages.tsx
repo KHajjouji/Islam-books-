@@ -1,8 +1,15 @@
 import { useState, useEffect } from 'react';
 import { doc, getDoc, setDoc, collection, getDocs, addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
-import { Loader2, Plus, Edit2, Trash2, Save, Image as ImageIcon, LayoutTemplate, Settings, Eye } from 'lucide-react';
+import { Loader2, Plus, Edit2, Trash2, Save, Image as ImageIcon, LayoutTemplate, Settings, Eye, Copy, Languages, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { GoogleGenAI } from '@google/genai';
+
+// Helper to clean JSON response from AI
+const cleanJsonResponse = (text: string) => {
+  const cleaned = text.replace(/```json\n?|```\n?/g, '').trim();
+  return cleaned;
+};
 
 interface PageSection {
   id: string;
@@ -30,6 +37,7 @@ export default function AdminPages() {
   const [editingPage, setEditingPage] = useState<PageData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
 
   useEffect(() => {
     fetchPages();
@@ -75,6 +83,84 @@ export default function AdminPages() {
       sections: []
     });
     setIsModalOpen(true);
+  };
+
+  const handleDuplicate = (page: PageData) => {
+    const { id, ...pageData } = page;
+    setEditingPage({
+      ...pageData,
+      title: `${page.title} (Copy)`,
+      slug: `${page.slug}-copy`,
+      status: 'draft'
+    });
+    setIsModalOpen(true);
+  };
+
+  const translatePage = async () => {
+    if (!editingPage) return;
+    const targetLang = prompt("Enter target language code (e.g., ar, fr, es):", "ar");
+    if (!targetLang) return;
+
+    setIsTranslating(true);
+    try {
+      const apiKey = process.env.GEMINI_API_KEY;
+      if (!apiKey) throw new Error('Gemini API key not found');
+
+      const ai = new GoogleGenAI({ apiKey });
+      const promptText = `
+        Translate the following page content to ${targetLang}. 
+        Maintain the exact same JSON structure. 
+        Translate the title and all text fields within sections (title, subtitle, content).
+        Return ONLY the translated JSON object.
+
+        Page Data:
+        ${JSON.stringify({ title: editingPage.title, sections: editingPage.sections })}
+      `;
+
+      const response = await ai.models.generateContent({
+        model: 'gemini-3.1-pro-preview',
+        contents: promptText,
+        config: { responseMimeType: 'application/json' }
+      });
+
+      const result = JSON.parse(cleanJsonResponse(response.text));
+      setEditingPage({
+        ...editingPage,
+        title: result.title,
+        sections: result.sections
+      });
+      alert(`Page translated to ${targetLang} successfully!`);
+    } catch (error) {
+      console.error('Error translating page:', error);
+      alert('Failed to translate page.');
+    } finally {
+      setIsTranslating(false);
+    }
+  };
+
+  const applyTemplate = (templateName: string) => {
+    if (!editingPage) return;
+    
+    let sections: PageSection[] = [];
+    
+    if (templateName === 'product_landing') {
+      sections = [
+        { id: '1', type: 'hero', title: 'New Book Release', subtitle: 'Discover the latest in story-based learning.', image: 'https://picsum.photos/seed/book/1920/1080' },
+        { id: '2', type: 'product_slider', title: 'Featured Products', category: 'book' },
+        { id: '3', type: 'html', content: '<div class="py-20 bg-surface-low"><div class="max-w-4xl mx-auto px-4 text-center"><h2 class="text-4xl font-headline font-black text-primary mb-8">Why Choose This Book?</h2><div class="grid md:grid-cols-3 gap-8 text-left"><div class="p-6 bg-white rounded-3xl shadow-sm"><h3 class="font-bold text-primary mb-2">Islamic Values</h3><p class="text-on-surface-variant text-sm">Rooted in authentic teachings and values.</p></div><div class="p-6 bg-white rounded-3xl shadow-sm"><h3 class="font-bold text-primary mb-2">Engaging Stories</h3><p class="text-on-surface-variant text-sm">Captivating narratives that kids love.</p></div><div class="p-6 bg-white rounded-3xl shadow-sm"><h3 class="font-bold text-primary mb-2">Interactive</h3><p class="text-on-surface-variant text-sm">Includes activities and discussion points.</p></div></div></div></div>' }
+      ];
+    } else if (templateName === 'training_landing') {
+      sections = [
+        { id: '1', type: 'hero', title: 'Academy Training', subtitle: 'Empowering parents and educators.', image: 'https://picsum.photos/seed/training/1920/1080' },
+        { id: '2', type: 'product_slider', title: 'Available Courses', category: 'academy' },
+        { id: '3', type: 'html', content: '<div class="py-20 bg-primary text-white"><div class="max-w-3xl mx-auto px-4 text-center"><h2 class="text-4xl font-headline font-black mb-6">Start Your Journey Today</h2><p class="text-xl opacity-80 mb-10">Join thousands of parents worldwide in creating a nurturing Islamic environment.</p><button class="bg-accent text-secondary px-10 py-4 rounded-full font-bold text-lg">Enroll Now</button></div></div>' }
+      ];
+    }
+    
+    setEditingPage({
+      ...editingPage,
+      sections: [...editingPage.sections, ...sections]
+    });
   };
 
   const handleSave = async () => {
@@ -204,6 +290,13 @@ export default function AdminPages() {
                     >
                       <Edit2 className="h-5 w-5" />
                     </button>
+                    <button
+                      onClick={() => handleDuplicate(page)}
+                      className="p-2 text-secondary hover:bg-secondary/10 rounded-lg transition-colors"
+                      title="Duplicate Page"
+                    >
+                      <Copy className="h-5 w-5" />
+                    </button>
                     {page.slug !== 'home' && (
                       <button
                         onClick={() => handleDelete(page.id!)}
@@ -235,6 +328,14 @@ export default function AdminPages() {
                   className="px-6 py-2 rounded-full font-bold text-primary hover:bg-primary/5 transition-colors"
                 >
                   Cancel
+                </button>
+                <button
+                  onClick={translatePage}
+                  disabled={isTranslating}
+                  className="px-6 py-2 rounded-full font-bold text-secondary border-2 border-secondary hover:bg-secondary/5 transition-colors flex items-center gap-2 disabled:opacity-50"
+                >
+                  {isTranslating ? <Loader2 className="h-5 w-5 animate-spin" /> : <Languages className="h-5 w-5" />}
+                  AI Translate
                 </button>
                 <button
                   onClick={handleSave}
@@ -269,6 +370,29 @@ export default function AdminPages() {
                     className="w-full px-4 py-3 rounded-xl border border-primary/10 focus:ring-2 focus:ring-primary outline-none disabled:bg-primary/5"
                     placeholder="e.g. about-us"
                   />
+                </div>
+              </div>
+
+              <div className="mb-8 p-6 bg-white rounded-2xl border border-primary/10 shadow-sm">
+                <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
+                  <LayoutTemplate className="h-5 w-5" />
+                  Quick Templates
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <button
+                    onClick={() => applyTemplate('product_landing')}
+                    className="p-4 border-2 border-primary/10 rounded-xl hover:border-primary hover:bg-primary/5 transition-all text-left group"
+                  >
+                    <h4 className="font-bold text-primary group-hover:text-primary transition-colors">Product Landing Page</h4>
+                    <p className="text-xs text-on-surface-variant mt-1">Hero + Featured Products + Features Grid</p>
+                  </button>
+                  <button
+                    onClick={() => applyTemplate('training_landing')}
+                    className="p-4 border-2 border-primary/10 rounded-xl hover:border-primary hover:bg-primary/5 transition-all text-left group"
+                  >
+                    <h4 className="font-bold text-primary group-hover:text-primary transition-colors">Training/Academy Page</h4>
+                    <p className="text-xs text-on-surface-variant mt-1">Hero + Courses Slider + Call to Action</p>
+                  </button>
                 </div>
               </div>
 

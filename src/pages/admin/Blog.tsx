@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, doc, setDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
 import { db, auth } from '../../firebase';
-import { Plus, Trash2, Edit2, Loader2, Sparkles, Image as ImageIcon, CheckCircle2, AlertCircle, X, Search, FileText, Send } from 'lucide-react';
+import { Plus, Trash2, Edit2, Loader2, Sparkles, Image as ImageIcon, CheckCircle2, AlertCircle, X, Search, FileText, Send, Copy, Languages, Key } from 'lucide-react';
 import { GoogleGenAI } from '@google/genai';
 import { analyzeSEO, SEOAnalysisResult } from '../../lib/seoAnalyzer';
 import slugify from 'slugify';
@@ -34,6 +34,8 @@ export default function AdminBlog() {
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
+  const [isSuggestingKeywords, setIsSuggestingKeywords] = useState(false);
   const [seoResult, setSeoResult] = useState<SEOAnalysisResult | null>(null);
 
   const [formData, setFormData] = useState<Partial<BlogPost>>({
@@ -167,6 +169,93 @@ export default function AdminBlog() {
     setEditingPost(post);
     setFormData(post);
     setIsModalOpen(true);
+  };
+
+  const handleDuplicate = (post: BlogPost) => {
+    const { id, ...postData } = post;
+    setEditingPost(null);
+    setFormData({
+      ...postData,
+      title: `${post.title} (Copy)`,
+      slug: `${post.slug}-copy`,
+      status: 'draft'
+    });
+    setIsModalOpen(true);
+  };
+
+  const translateArticle = async () => {
+    if (!formData.content) return;
+    const targetLang = prompt("Enter target language code (e.g., ar, fr, es):", "ar");
+    if (!targetLang) return;
+
+    setIsTranslating(true);
+    try {
+      const apiKey = process.env.GEMINI_API_KEY;
+      if (!apiKey) throw new Error('Gemini API key not found');
+
+      const ai = new GoogleGenAI({ apiKey });
+      const promptText = `
+        Translate the following blog post content to ${targetLang}. 
+        Translate the title, content (keep HTML tags), excerpt, seoTitle, and seoDescription.
+        Return ONLY a JSON object with these fields.
+
+        Article Data:
+        ${JSON.stringify({ 
+          title: formData.title, 
+          content: formData.content, 
+          excerpt: formData.excerpt,
+          seoTitle: formData.seoTitle,
+          seoDescription: formData.seoDescription
+        })}
+      `;
+
+      const response = await ai.models.generateContent({
+        model: 'gemini-3.1-pro-preview',
+        contents: promptText,
+        config: { responseMimeType: 'application/json' }
+      });
+
+      const result = JSON.parse(cleanJsonResponse(response.text));
+      setFormData(prev => ({
+        ...prev,
+        ...result
+      }));
+      alert(`Article translated to ${targetLang} successfully!`);
+    } catch (error) {
+      console.error('Error translating article:', error);
+      alert('Failed to translate article.');
+    } finally {
+      setIsTranslating(false);
+    }
+  };
+
+  const suggestKeywords = async () => {
+    if (!formData.title && !aiPrompt) return;
+    setIsSuggestingKeywords(true);
+    try {
+      const apiKey = process.env.GEMINI_API_KEY;
+      if (!apiKey) throw new Error('Gemini API key not found');
+
+      const ai = new GoogleGenAI({ apiKey });
+      const promptText = `
+        Based on the topic "${formData.title || aiPrompt}", suggest 5 high-traffic SEO keywords for a blog post.
+        Return ONLY a comma-separated list of keywords.
+      `;
+
+      const response = await ai.models.generateContent({
+        model: 'gemini-3.1-pro-preview',
+        contents: promptText
+      });
+
+      const keywords = response.text.trim();
+      setFormData(prev => ({ ...prev, focusKeyword: keywords.split(',')[0].trim() }));
+      alert(`Suggested Keywords: ${keywords}`);
+    } catch (error) {
+      console.error('Error suggesting keywords:', error);
+      alert('Failed to suggest keywords.');
+    } finally {
+      setIsSuggestingKeywords(false);
+    }
   };
 
   const generateArticle = async () => {
@@ -345,12 +434,21 @@ export default function AdminBlog() {
                 <button
                   onClick={() => openEditModal(post)}
                   className="p-3 text-primary hover:bg-primary/5 rounded-xl transition-colors"
+                  title="Edit Article"
                 >
                   <Edit2 className="h-5 w-5" />
                 </button>
                 <button
+                  onClick={() => handleDuplicate(post)}
+                  className="p-3 text-secondary hover:bg-secondary/5 rounded-xl transition-colors"
+                  title="Duplicate Article"
+                >
+                  <Copy className="h-5 w-5" />
+                </button>
+                <button
                   onClick={() => handleDelete(post.id)}
                   className="p-3 text-error hover:bg-error/5 rounded-xl transition-colors"
+                  title="Delete Article"
                 >
                   <Trash2 className="h-5 w-5" />
                 </button>
@@ -371,9 +469,19 @@ export default function AdminBlog() {
         <div className="fixed inset-0 bg-primary/20 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
           <div className="bg-white rounded-[3rem] w-full max-w-5xl my-8 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
             <div className="p-8 border-b border-primary/5 flex justify-between items-center bg-[#faf9f6] shrink-0">
-              <h2 className="text-2xl font-black text-primary font-headline">
-                {editingPost ? 'Edit Article' : 'New Article'}
-              </h2>
+              <div className="flex items-center gap-4">
+                <h2 className="text-2xl font-black text-primary font-headline">
+                  {editingPost ? 'Edit Article' : 'New Article'}
+                </h2>
+                <button
+                  onClick={translateArticle}
+                  disabled={isTranslating}
+                  className="px-4 py-2 bg-white border border-primary/10 rounded-full text-xs font-bold text-primary hover:bg-primary/5 flex items-center gap-2 disabled:opacity-50"
+                >
+                  {isTranslating ? <Loader2 className="h-3 w-3 animate-spin" /> : <Languages className="h-3 w-3" />}
+                  AI Translate
+                </button>
+              </div>
               <button onClick={() => setIsModalOpen(false)} className="p-2 hover:bg-primary/5 rounded-full transition-colors">
                 <X className="h-6 w-6 text-primary" />
               </button>
@@ -506,7 +614,17 @@ export default function AdminBlog() {
                   <h3 className="text-lg font-black text-primary mb-4">SEO Settings</h3>
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-bold text-primary mb-2">Focus Keyword</label>
+                      <label className="block text-sm font-bold text-primary mb-2 flex justify-between items-center">
+                        Focus Keyword
+                        <button 
+                          onClick={suggestKeywords}
+                          disabled={isSuggestingKeywords}
+                          className="text-[10px] text-secondary hover:underline flex items-center gap-1 disabled:opacity-50"
+                        >
+                          {isSuggestingKeywords ? <Loader2 className="h-3 w-3 animate-spin" /> : <Key className="h-3 w-3" />}
+                          AI Suggest
+                        </button>
+                      </label>
                       <input
                         type="text"
                         value={formData.focusKeyword}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase';
-import { Plus, Edit2, Trash2, X, Database, Code, Globe, Sparkles, Package, Users, Search, Filter, Eye, Layout, Settings, ChevronRight, ChevronLeft, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Plus, Edit2, Trash2, X, Database, Code, Globe, Sparkles, Package, Users, Search, Filter, Eye, Layout, Settings, ChevronRight, ChevronLeft, Loader2, AlertCircle, CheckCircle2, Copy } from 'lucide-react';
 import { products as initialProducts } from '../../data/products';
 import { GoogleGenAI } from '@google/genai';
 
@@ -198,6 +198,27 @@ export default function AdminProducts() {
     setIsModalOpen(true);
   };
 
+  const handleDuplicate = (product: Product) => {
+    const { id, ...productData } = product;
+    setEditingProduct(null); // It's a new product
+    setFormData({
+      title: `${product.title} (Copy)`,
+      description: product.description,
+      price: product.price.toString(),
+      image: product.image,
+      category: product.category,
+      author: product.author || '',
+      ageRange: product.ageRange || '',
+      stock: product.stock.toString(),
+      seoTitle: product.seoTitle || '',
+      seoDescription: product.seoDescription || '',
+      seoKeywords: product.seoKeywords || '',
+      customHtml: product.customHtml || '',
+      translations: product.translations || {}
+    });
+    setIsModalOpen(true);
+  };
+
   const handleAutoTranslate = async () => {
     if (!formData.title || !formData.description) {
       alert("Please fill in the English title and description first.");
@@ -386,6 +407,13 @@ export default function AdminProducts() {
                         className="flex-1 py-3 bg-white text-primary rounded-xl font-black text-xs hover:bg-secondary transition-colors"
                       >
                         Edit Details
+                      </button>
+                      <button
+                        onClick={() => handleDuplicate(product)}
+                        className="p-3 bg-white text-primary rounded-xl hover:bg-secondary transition-colors"
+                        title="Duplicate Product"
+                      >
+                        <Copy className="h-4 w-4" />
                       </button>
                       <button
                         onClick={() => handleDelete(product.id)}

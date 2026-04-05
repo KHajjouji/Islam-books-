@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, doc, setDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase';
-import { Plus, Trash2, Edit2, Loader2, Package as PackageIcon, Code, Globe, Sparkles, X, Layout, Settings, CheckCircle2 } from 'lucide-react';
+import { Plus, Trash2, Edit2, Loader2, Package as PackageIcon, Code, Globe, Sparkles, X, Layout, Settings, CheckCircle2, Copy } from 'lucide-react';
 import { GoogleGenAI } from '@google/genai';
 
 interface Pack {
@@ -173,6 +173,17 @@ export default function AdminPacks() {
         console.error("Error deleting pack:", error);
       }
     }
+  };
+
+  const handleDuplicate = (pack: Pack) => {
+    const { id, ...packData } = pack;
+    setCurrentPack({
+      ...packData,
+      title: `${pack.title} (Copy)`,
+      createdAt: serverTimestamp()
+    });
+    setActiveTab('basic');
+    setIsEditing(true);
   };
 
   const addFeature = () => {
@@ -507,6 +518,13 @@ export default function AdminPacks() {
                     title="Edit Pack"
                   >
                     <Edit2 className="h-5 w-5" />
+                  </button>
+                  <button
+                    onClick={() => handleDuplicate(pack)}
+                    className="p-4 text-secondary bg-secondary/5 hover:bg-secondary hover:text-primary rounded-2xl transition-all"
+                    title="Duplicate Pack"
+                  >
+                    <Copy className="h-5 w-5" />
                   </button>
                   <button
                     onClick={() => handleDelete(pack.id)}
