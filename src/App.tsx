@@ -18,6 +18,7 @@ import BedtimeStories from './pages/BedtimeStories';
 import Academy from './pages/Academy';
 import BilingualBooks from './pages/BilingualBooks';
 import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import ProductDetail from './pages/ProductDetail';
 import Shop from './pages/Shop';
 import Cart from './pages/Cart';
@@ -34,6 +35,7 @@ import AdminUsers from './pages/admin/Users';
 import AdminPacks from './pages/admin/Packs';
 import AdminCampaigns from './pages/admin/Campaigns';
 import AdminSubscriptions from './pages/admin/Subscriptions';
+import AdminBlog from './pages/admin/Blog';
 import './i18n';
 
 export default function App() {
@@ -55,6 +57,7 @@ export default function App() {
                 <Route path="online-islamic-classes-for-kids" element={<Academy />} />
                 <Route path="bilingual-islamic-books-for-kids" element={<BilingualBooks />} />
                 <Route path="blog" element={<Blog />} />
+                <Route path="blog/:slug" element={<BlogPost />} />
                 <Route path="product/:id" element={<ProductDetail />} />
                 <Route path="shop" element={<Shop />} />
                 <Route path="cart" element={<Cart />} />
@@ -78,6 +81,7 @@ export default function App() {
                 <Route path="users" element={<AdminUsers />} />
                 <Route path="campaigns" element={<AdminCampaigns />} />
                 <Route path="subscriptions" element={<AdminSubscriptions />} />
+                <Route path="blog" element={<AdminBlog />} />
               </Route>
             </Routes>
           </BrowserRouter>

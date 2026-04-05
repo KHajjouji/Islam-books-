@@ -1,6 +1,6 @@
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { LayoutDashboard, Package, ShoppingCart, LogOut, Loader2, Users, Mail, CreditCard, ShieldCheck, Bell } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingCart, LogOut, Loader2, Users, Mail, CreditCard, ShieldCheck, Bell, FileText } from 'lucide-react';
 
 export default function AdminLayout() {
   const { user, isAdmin, loading, signOut, signInWithGoogle } = useAuth();
@@ -50,6 +50,7 @@ export default function AdminLayout() {
     { name: 'Users', path: '/admin/users', icon: Users },
     { name: 'Campaigns', path: '/admin/campaigns', icon: Mail },
     { name: 'Subscriptions', path: '/admin/subscriptions', icon: CreditCard },
+    { name: 'Blog & SEO', path: '/admin/blog', icon: FileText },
   ];
 
   return (

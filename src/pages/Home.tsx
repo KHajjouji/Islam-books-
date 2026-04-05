@@ -18,13 +18,37 @@ import {
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useProducts } from '../hooks/useProducts';
+import ProductSlider from '../components/ProductSlider';
+import SEO from '../components/SEO';
 
 export default function Home() {
   const { products, loading } = useProducts();
-  const featuredProducts = products.slice(0, 3);
+  
+  // Simulate new arrivals and on sale for the sliders
+  const newArrivals = products.slice(0, 6).map(p => ({
+    id: p.id,
+    title: p.title,
+    description: p.description,
+    price: p.price,
+    image: p.image
+  }));
+
+  const onSaleBooks = products.slice(2, 8).map(p => ({
+    id: p.id,
+    title: p.title,
+    description: p.description,
+    price: p.price,
+    salePrice: Math.round(p.price * 0.8), // 20% off simulation
+    image: p.image
+  }));
 
   return (
     <div className="pt-20">
+      <SEO 
+        title="Home" 
+        description="Premium Islamic children's books and interactive learning designed to inspire love for Allah and the Prophet (SAW) in every child's heart."
+      />
+
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#faf9f6]">
         {/* Background Patterns */}
@@ -162,25 +186,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Categories */}
+      {/* New Arrivals Slider */}
+      {!loading && newArrivals.length > 0 && (
+        <ProductSlider 
+          products={newArrivals} 
+          title="New Arrivals" 
+          subtitle="Discover our latest additions to inspire young minds."
+        />
+      )}
+
+      {/* Featured Themes (Categories) */}
       <section className="py-24 bg-[#faf9f6]">
         <div className="max-w-7xl mx-auto px-8">
           <div className="flex justify-between items-end mb-16">
             <div>
-              <h2 className="text-5xl font-black text-primary font-headline mb-4 tracking-tight">Explore Our World</h2>
-              <p className="text-on-surface-variant font-medium">Discover the perfect companion for your child's journey.</p>
+              <h2 className="text-5xl font-black text-primary font-headline mb-4 tracking-tight">Book Themes</h2>
+              <p className="text-on-surface-variant font-medium">Explore our collection by themes and topics.</p>
             </div>
             <Link to="/shop" className="text-primary font-bold flex items-center gap-2 hover:gap-4 transition-all group">
-              View All Categories <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              View All Books <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { title: "Islamic Children's Books", img: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=500&fit=crop", path: "/islamic-childrens-books" },
-              { title: "Quran Stories", img: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=500&fit=crop", path: "/quran-stories-for-kids" },
-              { title: "Prophet Stories", img: "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=500&fit=crop", path: "/stories-of-the-prophets-for-kids" },
-              { title: "Prepare for Ramadan", img: "https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=400&h=500&fit=crop", path: "/ramadan-books-for-kids" }
+              { title: "Quran Stories", img: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&h=500&fit=crop", path: "/shop?category=quran-stories" },
+              { title: "Prophet Stories", img: "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=500&fit=crop", path: "/shop?category=prophet-stories" },
+              { title: "Ramadan & Eid", img: "https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=400&h=500&fit=crop", path: "/shop?category=ramadan" },
+              { title: "Bedtime Stories", img: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=500&fit=crop", path: "/shop?category=bedtime" }
             ].map((cat, i) => (
               <Link 
                 key={i}
@@ -204,51 +237,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Bestsellers Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-black text-primary font-headline mb-4 tracking-tight">Parent Favorites</h2>
-            <p className="text-on-surface-variant font-medium max-w-2xl mx-auto">Our most loved books that have found a special place in thousands of Muslim homes worldwide.</p>
-          </div>
-
-          {loading ? (
-            <div className="flex justify-center py-20">
-              <Loader2 className="h-12 w-12 text-primary animate-spin" />
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-3 gap-12">
-              {featuredProducts.map((product) => (
-                <motion.div 
-                  key={product.id}
-                  whileHover={{ y: -10 }}
-                  className="group"
-                >
-                  <div className="relative aspect-[3/4] rounded-[3rem] overflow-hidden mb-8 shadow-xl border border-primary/5">
-                    <img 
-                      src={product.image} 
-                      alt={product.name} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full text-primary font-black text-sm shadow-sm">
-                      ${product.price}
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-black text-primary mb-2 font-headline">{product.name}</h3>
-                  <p className="text-on-surface-variant text-sm mb-6 line-clamp-2 font-medium">{product.description}</p>
-                  <Link 
-                    to={`/product/${product.id}`}
-                    className="w-full bg-[#faf9f6] text-primary border border-primary/10 py-4 rounded-full font-headline font-black text-sm hover:bg-primary hover:text-on-primary transition-all flex items-center justify-center gap-2"
-                  >
-                    <ShoppingCart className="h-4 w-4" />
-                    Add to Cart
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          )}
+      {/* On Sale Slider */}
+      {!loading && onSaleBooks.length > 0 && (
+        <div className="bg-[#faf9f6]">
+          <ProductSlider 
+            products={onSaleBooks} 
+            title="Special Offers" 
+            subtitle="Limited time deals on our most loved collections."
+          />
         </div>
-      </section>
+      )}
 
       {/* Academy Teaser */}
       <section className="py-24 bg-primary overflow-hidden relative">

@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Search, Filter, SlidersHorizontal, Loader2, BookOpen, GraduationCap, Sparkles, X } from 'lucide-react';
 import { useProducts } from '../hooks/useProducts';
 import SEO from '../components/SEO';
@@ -10,10 +11,26 @@ type SortOption = 'newest' | 'price-low' | 'price-high' | 'popular';
 
 export default function Shop() {
   const { products, loading } = useProducts();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('all');
   const [themeFilter, setThemeFilter] = useState<ThemeFilter>('all');
   const [sortBy, setSortBy] = useState<SortOption>('newest');
+
+  useEffect(() => {
+    const categoryParam = searchParams.get('category');
+    if (categoryParam) {
+      if (['book', 'academy'].includes(categoryParam)) {
+        setCategoryFilter(categoryParam as CategoryFilter);
+      } else if (['quran', 'prophets', 'ramadan', 'bedtime', 'general', 'bilingual'].includes(categoryParam)) {
+        setThemeFilter(categoryParam as ThemeFilter);
+      } else if (categoryParam === 'quran-stories') {
+        setThemeFilter('quran');
+      } else if (categoryParam === 'prophet-stories') {
+        setThemeFilter('prophets');
+      }
+    }
+  }, [searchParams]);
 
   const filteredProducts = useMemo(() => {
     let result = [...products];

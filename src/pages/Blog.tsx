@@ -1,46 +1,46 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, ArrowRight, Sparkles, Zap, Mail } from 'lucide-react';
+import { BookOpen, ArrowRight, Sparkles, Zap, Mail, Loader2 } from 'lucide-react';
+import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
+import { db } from '../firebase';
 import SEO from '../components/SEO';
 
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  image: string;
+  createdAt: any;
+}
+
 export default function Blog() {
-  const articles = [
-    {
-      title: "Best Islamic Children's Books for Ages 3–5",
-      category: "Reading Guides",
-      date: "March 15, 2026",
-      image: "https://picsum.photos/seed/blog1/800/600"
-    },
-    {
-      title: "Quran Stories for Kids: What to Read First",
-      category: "Quran",
-      date: "March 10, 2026",
-      image: "https://picsum.photos/seed/blog2/800/600"
-    },
-    {
-      title: "How to Make Ramadan Meaningful for Young Children",
-      category: "Ramadan",
-      date: "March 5, 2026",
-      image: "https://picsum.photos/seed/blog3/800/600"
-    },
-    {
-      title: "Stories of the Prophets for Kids: A Parent's Guide",
-      category: "Prophets",
-      date: "February 28, 2026",
-      image: "https://picsum.photos/seed/blog4/800/600"
-    },
-    {
-      title: "Islamic Bedtime Stories That Build Daily Habits",
-      category: "Bedtime",
-      date: "February 20, 2026",
-      image: "https://picsum.photos/seed/blog5/800/600"
-    },
-    {
-      title: "Bilingual Islamic Books for Families in the West",
-      category: "Bilingual",
-      date: "February 15, 2026",
-      image: "https://picsum.photos/seed/blog6/800/600"
-    }
-  ];
+  const [articles, setArticles] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const q = query(
+          collection(db, 'blog_posts'),
+          where('status', '==', 'published'),
+          orderBy('createdAt', 'desc')
+        );
+        const querySnapshot = await getDocs(q);
+        const postsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        })) as BlogPost[];
+        setArticles(postsData);
+      } catch (error) {
+        console.error('Error fetching blog posts:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   return (
     <>
@@ -82,34 +82,50 @@ export default function Blog() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article, i) => (
-              <article key={i} className="bg-surface rounded-[3rem] overflow-hidden border border-outline-variant/10 flex flex-col h-full group hover:shadow-2xl hover:shadow-primary/5 transition-all hover:-translate-y-2">
-                <div className="h-64 bg-primary/5 relative overflow-hidden">
-                  <img 
-                    src={article.image} 
-                    alt={article.title} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                    referrerPolicy="no-referrer" 
-                  />
-                  <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full text-[10px] font-bold text-primary uppercase tracking-widest shadow-lg">
-                    {article.category}
+          {loading ? (
+            <div className="flex justify-center py-20">
+              <Loader2 className="h-12 w-12 text-primary animate-spin" />
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {articles.map((article) => (
+                <article key={article.id} className="bg-surface rounded-[3rem] overflow-hidden border border-outline-variant/10 flex flex-col h-full group hover:shadow-2xl hover:shadow-primary/5 transition-all hover:-translate-y-2">
+                  <div className="h-64 bg-primary/5 relative overflow-hidden">
+                    {article.image ? (
+                      <img 
+                        src={article.image} 
+                        alt={article.title} 
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                        referrerPolicy="no-referrer" 
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-primary/20">
+                        <BookOpen className="h-16 w-16" />
+                      </div>
+                    )}
                   </div>
-                </div>
-                <div className="p-10 flex flex-col flex-grow">
-                  <span className="text-sm font-bold text-primary/40 mb-4 tracking-widest uppercase">{article.date}</span>
-                  <h3 className="text-2xl font-headline font-extrabold text-primary mb-6 group-hover:text-accent-dark transition-colors leading-tight">
-                    {article.title}
-                  </h3>
-                  <div className="mt-auto pt-8 border-t border-outline-variant/10">
-                    <Link to="#" className="text-primary font-bold flex items-center hover:text-accent-dark transition-colors group/link">
-                      Read Article <ArrowRight className="ml-3 h-5 w-5 group-hover/link:translate-x-2 transition-transform" />
-                    </Link>
+                  <div className="p-10 flex flex-col flex-grow">
+                    <h3 className="text-2xl font-headline font-extrabold text-primary mb-6 group-hover:text-accent-dark transition-colors leading-tight">
+                      {article.title}
+                    </h3>
+                    <p className="text-on-surface-variant mb-8 line-clamp-3">
+                      {article.excerpt}
+                    </p>
+                    <div className="mt-auto pt-8 border-t border-outline-variant/10">
+                      <Link to={`/blog/${article.slug}`} className="text-primary font-bold flex items-center hover:text-accent-dark transition-colors group/link">
+                        Read Article <ArrowRight className="ml-3 h-5 w-5 group-hover/link:translate-x-2 transition-transform" />
+                      </Link>
+                    </div>
                   </div>
+                </article>
+              ))}
+              {articles.length === 0 && (
+                <div className="col-span-full text-center py-12">
+                  <p className="text-on-surface-variant font-medium text-lg">No articles published yet. Check back soon!</p>
                 </div>
-              </article>
-            ))}
-          </div>
+              )}
+            </div>
+          )}
         </div>
       </section>
 
