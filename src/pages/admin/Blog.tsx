@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, doc, setDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../../firebase';
-import { Plus, Trash2, Edit2, Loader2, Sparkles, Image as ImageIcon, CheckCircle2, AlertCircle, X, Search, FileText } from 'lucide-react';
+import { db, auth } from '../../firebase';
+import { Plus, Trash2, Edit2, Loader2, Sparkles, Image as ImageIcon, CheckCircle2, AlertCircle, X, Search, FileText, Send } from 'lucide-react';
 import { GoogleGenAI } from '@google/genai';
 import { analyzeSEO, SEOAnalysisResult } from '../../lib/seoAnalyzer';
 import slugify from 'slugify';
+
+// Helper to clean JSON response from AI
+const cleanJsonResponse = (text: string) => {
+  // Remove markdown code blocks if present
+  const cleaned = text.replace(/```json\n?|```\n?/g, '').trim();
+  return cleaned;
+};
 
 interface BlogPost {
   id: string;
@@ -83,17 +90,42 @@ export default function AdminBlog() {
       const postId = editingPost?.id || doc(collection(db, 'blog_posts')).id;
       const postRef = doc(db, 'blog_posts', postId);
       
-      await setDoc(postRef, {
+      const saveContent = {
         ...formData,
         updatedAt: serverTimestamp(),
         ...(editingPost ? {} : { createdAt: serverTimestamp() })
-      }, { merge: true });
+      };
+
+      await setDoc(postRef, saveContent, { merge: true });
 
       await fetchPosts();
       setIsModalOpen(false);
       resetForm();
-    } catch (error) {
+      alert('Article saved successfully!');
+    } catch (error: any) {
       console.error('Error saving post:', error);
+      
+      // Error handling spec for Firestore operations
+      const errInfo = {
+        error: error instanceof Error ? error.message : String(error),
+        authInfo: {
+          userId: auth.currentUser?.uid,
+          email: auth.currentUser?.email,
+          emailVerified: auth.currentUser?.emailVerified,
+          isAnonymous: auth.currentUser?.isAnonymous,
+          tenantId: auth.currentUser?.tenantId,
+          providerInfo: auth.currentUser?.providerData.map(provider => ({
+            providerId: provider.providerId,
+            displayName: provider.displayName,
+            email: provider.email,
+            photoUrl: provider.photoURL
+          })) || []
+        },
+        operationType: 'write',
+        path: 'blog_posts'
+      };
+      console.error('Firestore Error: ', JSON.stringify(errInfo));
+      alert('Failed to save article: ' + (error.message || 'Unknown error'));
     } finally {
       setLoading(false);
     }
@@ -105,8 +137,10 @@ export default function AdminBlog() {
     try {
       await deleteDoc(doc(db, 'blog_posts', id));
       await fetchPosts();
-    } catch (error) {
+      alert('Article deleted successfully!');
+    } catch (error: any) {
       console.error('Error deleting post:', error);
+      alert('Failed to delete article: ' + (error.message || 'Unknown error'));
     } finally {
       setLoading(false);
     }
@@ -171,7 +205,7 @@ export default function AdminBlog() {
         }
       });
 
-      const result = JSON.parse(response.text);
+      const result = JSON.parse(cleanJsonResponse(response.text));
       setFormData(prev => ({
         ...prev,
         title: result.title,
@@ -187,6 +221,37 @@ export default function AdminBlog() {
       alert('Failed to generate article. Check API key and console.');
     } finally {
       setIsGenerating(false);
+    }
+  };
+
+  const handleSaveAndPublish = async (e: React.FormEvent) => {
+    setFormData(prev => ({ ...prev, status: 'published' }));
+    // We need to pass the updated status directly because setFormData is async
+    const updatedFormData = { ...formData, status: 'published' as const };
+    
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const postId = editingPost?.id || doc(collection(db, 'blog_posts')).id;
+      const postRef = doc(db, 'blog_posts', postId);
+      
+      const saveContent = {
+        ...updatedFormData,
+        updatedAt: serverTimestamp(),
+        ...(editingPost ? {} : { createdAt: serverTimestamp() })
+      };
+
+      await setDoc(postRef, saveContent, { merge: true });
+
+      await fetchPosts();
+      setIsModalOpen(false);
+      resetForm();
+      alert('Article published successfully!');
+    } catch (error: any) {
+      console.error('Error publishing post:', error);
+      alert('Failed to publish article: ' + (error.message || 'Unknown error'));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -508,10 +573,19 @@ export default function AdminBlog() {
               <button
                 onClick={handleSave}
                 disabled={loading}
+                className="bg-white border-2 border-primary text-primary px-8 py-3 rounded-full font-headline font-black hover:bg-primary/5 transition-colors flex items-center gap-2 disabled:opacity-50"
+              >
+                {loading && <Loader2 className="h-5 w-5 animate-spin" />}
+                Save as Draft
+              </button>
+              <button
+                onClick={handleSaveAndPublish}
+                disabled={loading}
                 className="bg-primary text-on-primary px-8 py-3 rounded-full font-headline font-black hover:scale-105 transition-transform shadow-lg flex items-center gap-2 disabled:opacity-50"
               >
                 {loading && <Loader2 className="h-5 w-5 animate-spin" />}
-                Save Article
+                <Send className="h-5 w-5" />
+                Publish Article
               </button>
             </div>
           </div>
