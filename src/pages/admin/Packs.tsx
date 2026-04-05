@@ -86,9 +86,9 @@ export default function AdminPacks() {
       return;
     }
 
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      alert("Gemini API key not found. Please set VITE_GEMINI_API_KEY in your environment.");
+      alert("Gemini API key not found. Please set GEMINI_API_KEY in your environment.");
       return;
     }
 

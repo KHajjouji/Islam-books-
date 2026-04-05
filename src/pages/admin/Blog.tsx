@@ -139,7 +139,7 @@ export default function AdminBlog() {
     if (!aiPrompt) return;
     setIsGenerating(true);
     try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      const apiKey = process.env.GEMINI_API_KEY;
       if (!apiKey) throw new Error('Gemini API key not found');
 
       const ai = new GoogleGenAI({ apiKey });
@@ -194,7 +194,7 @@ export default function AdminBlog() {
     if (!formData.title) return;
     setIsGeneratingImage(true);
     try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      const apiKey = process.env.GEMINI_API_KEY;
       if (!apiKey) throw new Error('Gemini API key not found');
 
       const ai = new GoogleGenAI({ apiKey });
