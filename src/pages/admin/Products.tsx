@@ -112,6 +112,35 @@ export default function AdminProducts() {
           theme: "bedtime",
           stock: 50,
           createdAt: serverTimestamp()
+        },
+        {
+          title: "Interactive HTML Demo Book",
+          description: "This product demonstrates the custom HTML feature for rich product descriptions.",
+          price: 24.99,
+          image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400&h=500&fit=crop",
+          category: "book",
+          theme: "educational",
+          stock: 50,
+          customHtml: `<div style="padding: 2rem; background-color: #f8f9fa; border-radius: 1rem; border: 2px dashed #006B5F;">
+  <h2 style="color: #006B5F; font-size: 2rem; margin-bottom: 1rem;">Welcome to the Custom HTML Experience!</h2>
+  <p style="font-size: 1.2rem; line-height: 1.6; color: #333;">This section is entirely built using the <strong>Custom HTML Code</strong> field in the admin panel. You can use this to create highly customized landing pages for specific products.</p>
+  
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+    <div style="background: white; padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+      <h3 style="color: #D4AF37; margin-bottom: 0.5rem;">Feature 1</h3>
+      <p>Embed videos, custom interactive elements, or unique layouts that go beyond the standard description text.</p>
+    </div>
+    <div style="background: white; padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+      <h3 style="color: #D4AF37; margin-bottom: 0.5rem;">Feature 2</h3>
+      <p>Perfect for special edition books, digital courses, or products that need a bit more storytelling.</p>
+    </div>
+  </div>
+  
+  <div style="margin-top: 2rem; text-align: center;">
+    <button style="background-color: #006B5F; color: white; padding: 1rem 2rem; border: none; border-radius: 2rem; font-weight: bold; cursor: pointer;" onclick="alert('Custom HTML buttons work too!')">Click Me (Interactive HTML)</button>
+  </div>
+</div>`,
+          createdAt: serverTimestamp()
         }
       ];
 

@@ -92,20 +92,6 @@ export default function ProductDetail() {
   const displaySeoTitle = (currentLang !== 'en' && product.translations?.[currentLang]?.seoTitle) || product.seoTitle || product.title;
   const displaySeoDescription = (currentLang !== 'en' && product.translations?.[currentLang]?.seoDescription) || product.seoDescription || product.description;
 
-  // If custom HTML is provided, render it directly
-  if (product.customHtml) {
-    return (
-      <>
-        <SEO 
-          title={`${displaySeoTitle} | Noor & Nurture`}
-          description={displaySeoDescription}
-          keywords={product.seoKeywords}
-        />
-        <div dangerouslySetInnerHTML={{ __html: product.customHtml }} />
-      </>
-    );
-  }
-
   return (
     <>
       <SEO 
@@ -356,28 +342,32 @@ export default function ProductDetail() {
                 <button className="px-10 py-8 font-bold text-on-surface-variant/60 hover:text-primary transition-colors whitespace-nowrap">Reviews (120)</button>
               </div>
               <div className="p-10 md:p-20">
-                <div className="max-w-4xl">
-                  <h3 className="text-3xl font-headline font-extrabold text-primary mb-8 tracking-tight">About this {product.category}</h3>
-                  <p className="text-xl text-on-surface-variant font-medium leading-relaxed mb-12">
-                    {product.longDescription || displayDescription}
-                  </p>
-                  
-                  {product.features && (
-                    <div className="mt-16">
-                      <h4 className="text-2xl font-headline font-extrabold text-primary mb-8">Key Features & Benefits:</h4>
-                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {product.features.map((feature, i) => (
-                          <li key={i} className="flex items-start p-6 bg-surface-low rounded-2xl border border-outline-variant/10 group hover:border-primary/30 transition-colors">
-                            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-all">
-                              <CheckCircle className="h-5 w-5" />
-                            </div>
-                            <span className="text-on-surface-variant font-bold leading-tight">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
+                {product.customHtml ? (
+                  <div dangerouslySetInnerHTML={{ __html: product.customHtml }} />
+                ) : (
+                  <div className="max-w-4xl">
+                    <h3 className="text-3xl font-headline font-extrabold text-primary mb-8 tracking-tight">About this {product.category}</h3>
+                    <p className="text-xl text-on-surface-variant font-medium leading-relaxed mb-12">
+                      {product.longDescription || displayDescription}
+                    </p>
+                    
+                    {product.features && (
+                      <div className="mt-16">
+                        <h4 className="text-2xl font-headline font-extrabold text-primary mb-8">Key Features & Benefits:</h4>
+                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          {product.features.map((feature, i) => (
+                            <li key={i} className="flex items-start p-6 bg-surface-low rounded-2xl border border-outline-variant/10 group hover:border-primary/30 transition-colors">
+                              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-all">
+                                <CheckCircle className="h-5 w-5" />
+                              </div>
+                              <span className="text-on-surface-variant font-bold leading-tight">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
