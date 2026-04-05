@@ -1,4 +1,7 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 import { 
   BookOpen, 
   GraduationCap, 
@@ -21,8 +24,47 @@ import { useProducts } from '../hooks/useProducts';
 import ProductSlider from '../components/ProductSlider';
 import SEO from '../components/SEO';
 
+interface PageSection {
+  id: string;
+  type: 'hero' | 'html' | 'product_slider';
+  title?: string;
+  subtitle?: string;
+  content?: string;
+  image?: string;
+  overlayColor?: string;
+  overlayOpacity?: number;
+  category?: string;
+}
+
+interface PageData {
+  id?: string;
+  slug: string;
+  title: string;
+  status: 'draft' | 'published';
+  sections: PageSection[];
+}
+
 export default function Home() {
   const { products, loading } = useProducts();
+  const [homePageData, setHomePageData] = useState<PageData | null>(null);
+  const [homeLoading, setHomeLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchHomePage = async () => {
+      try {
+        const docRef = doc(db, 'site_settings', 'homepage');
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setHomePageData(docSnap.data() as PageData);
+        }
+      } catch (error) {
+        console.error("Error fetching home page data:", error);
+      } finally {
+        setHomeLoading(false);
+      }
+    };
+    fetchHomePage();
+  }, []);
   
   // Simulate new arrivals and on sale for the sliders
   const newArrivals = products.slice(0, 6).map(p => ({
@@ -42,6 +84,99 @@ export default function Home() {
     image: p.image
   }));
 
+  if (homeLoading || loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center pt-20">
+        <Loader2 className="h-12 w-12 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  // If we have dynamic sections from the visual editor, render them
+  if (homePageData && homePageData.sections && homePageData.sections.length > 0) {
+    return (
+      <div className="pt-20">
+        <SEO 
+          title={homePageData.title || "Home"} 
+          description="Premium Islamic children's books and interactive learning designed to inspire love for Allah and the Prophet (SAW) in every child's heart."
+        />
+        {homePageData.sections.map((section) => {
+          if (section.type === 'hero') {
+            return (
+              <section key={section.id} className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+                {section.image && (
+                  <img 
+                    src={section.image} 
+                    alt={section.title || "Hero"} 
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                )}
+                <div 
+                  className="absolute inset-0" 
+                  style={{ 
+                    backgroundColor: section.overlayColor || '#000000', 
+                    opacity: (section.overlayOpacity || 40) / 100 
+                  }}
+                />
+                <div className="relative z-10 text-center px-8 max-w-5xl mx-auto">
+                  {section.title && (
+                    <h1 className="text-6xl lg:text-8xl font-black text-white font-headline leading-tight mb-8 tracking-tight">
+                      {section.title}
+                    </h1>
+                  )}
+                  {section.subtitle && (
+                    <p className="text-2xl text-white/90 font-medium leading-relaxed mb-12">
+                      {section.subtitle}
+                    </p>
+                  )}
+                  <div className="flex justify-center gap-6">
+                    <Link 
+                      to="/shop" 
+                      className="bg-primary text-on-primary px-10 py-5 rounded-full font-headline font-black text-lg hover:scale-105 transition-transform shadow-xl shadow-primary/20 flex items-center justify-center gap-3"
+                    >
+                      <ShoppingCart className="h-5 w-5" />
+                      Shop Now
+                    </Link>
+                  </div>
+                </div>
+              </section>
+            );
+          }
+
+          if (section.type === 'product_slider') {
+            const filteredProducts = section.category && section.category !== 'all'
+              ? products.filter(p => p.category === section.category || p.theme === section.category)
+              : products;
+
+            if (filteredProducts.length === 0) return null;
+
+            return (
+              <div key={section.id} className="bg-[#faf9f6]">
+                <ProductSlider 
+                  products={filteredProducts} 
+                  title={section.title || "Featured Products"} 
+                />
+              </div>
+            );
+          }
+
+          if (section.type === 'html') {
+            return (
+              <section key={section.id} className="py-16 bg-white">
+                <div className="max-w-7xl mx-auto px-8">
+                  <div dangerouslySetInnerHTML={{ __html: section.content || '' }} />
+                </div>
+              </section>
+            );
+          }
+
+          return null;
+        })}
+      </div>
+    );
+  }
+
+  // Fallback to the original static layout if no dynamic sections exist
   return (
     <div className="pt-20">
       <SEO 

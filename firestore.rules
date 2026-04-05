@@ -224,5 +224,26 @@ service cloud.firestore {
       allow update: if isAdmin() && isValidSubscriptionPlan(request.resource.data);
       allow delete: if isAdmin();
     }
+
+    match /blog_posts/{postId} {
+      allow read: if true;
+      allow create: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    match /pages/{pageId} {
+      allow read: if true;
+      allow create: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    match /site_settings/{settingId} {
+      allow read: if true;
+      allow create: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
   }
 }
