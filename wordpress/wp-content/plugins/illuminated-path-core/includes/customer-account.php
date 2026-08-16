@@ -67,3 +67,68 @@ function ip_core_account_dashboard(): void {
 
 /** Fallback for themes using WooCommerce's standard dashboard template. */
 add_action( 'woocommerce_account_dashboard', 'ip_core_account_dashboard', 5 );
+
+/**
+ * Make the normal WooCommerce order history more useful for a bookstore while
+ * keeping WooCommerce's own template and action links intact.
+ */
+function ip_core_my_orders_columns( array $columns ): array {
+    $new = array();
+    foreach ( $columns as $key => $label ) {
+        if ( 'order-status' === $key ) {
+            $new['order-books']    = __( 'Books', 'illuminated-path-core' );
+            $new['order-status']   = $label;
+            $new['order-delivery'] = __( 'Delivery', 'illuminated-path-core' );
+            continue;
+        }
+        $new[ $key ] = $label;
+    }
+    if ( ! isset( $new['order-books'] ) ) {
+        $new['order-books'] = __( 'Books', 'illuminated-path-core' );
+    }
+    if ( ! isset( $new['order-delivery'] ) ) {
+        $new['order-delivery'] = __( 'Delivery', 'illuminated-path-core' );
+    }
+    return $new;
+}
+add_filter( 'woocommerce_my_account_my_orders_columns', 'ip_core_my_orders_columns', 30 );
+
+function ip_core_my_orders_books_column( WC_Order $order ): void {
+    $shown = 0;
+    echo '<div class="ip-order-book-list">';
+    foreach ( $order->get_items( 'line_item' ) as $item ) {
+        if ( ! $item instanceof WC_Order_Item_Product ) {
+            continue;
+        }
+        $product = $item->get_product();
+        if ( ! $product ) {
+            continue;
+        }
+        ++$shown;
+        if ( $shown > 3 ) {
+            break;
+        }
+        echo '<div class="ip-order-book"><a href="' . esc_url( get_permalink( $product->get_id() ) ) . '">' . wp_kses_post( $product->get_image( 'woocommerce_thumbnail', array( 'loading' => 'lazy' ) ) ) . '</a><div><a href="' . esc_url( get_permalink( $product->get_id() ) ) . '"><strong>' . esc_html( $item->get_name() ) . '</strong></a><span>× ' . esc_html( (string) $item->get_quantity() ) . '</span></div></div>';
+    }
+    $remaining = max( 0, $order->get_item_count() - $shown );
+    if ( $remaining ) {
+        echo '<small>' . sprintf( esc_html__( '+%d more item(s)', 'illuminated-path-core' ), $remaining ) . '</small>';
+    }
+    echo '</div>';
+}
+add_action( 'woocommerce_my_account_my_orders_column_order-books', 'ip_core_my_orders_books_column' );
+
+function ip_core_my_orders_delivery_column( WC_Order $order ): void {
+    $status = sanitize_key( (string) $order->get_meta( '_ip_fulfillment_status' ) );
+    if ( ! $status || ! function_exists( 'ip_core_fulfillment_status_options' ) ) {
+        echo '<span class="ip-order-delivery-muted">—</span>';
+        return;
+    }
+    $statuses = ip_core_fulfillment_status_options();
+    echo '<span class="ip-order-delivery-pill">' . esc_html( $statuses[ $status ] ?? $status ) . '</span>';
+    $tracking = trim( (string) $order->get_meta( '_ip_fulfillment_tracking_url' ) );
+    if ( $tracking ) {
+        echo '<a class="ip-order-track-link" target="_blank" rel="noopener" href="' . esc_url( $tracking ) . '">' . esc_html__( 'Track package', 'illuminated-path-core' ) . '</a>';
+    }
+}
+add_action( 'woocommerce_my_account_my_orders_column_order-delivery', 'ip_core_my_orders_delivery_column' );
