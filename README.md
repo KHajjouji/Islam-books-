@@ -1,20 +1,7 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Illuminated Path — Islamic Books Store
 
-# Run and deploy your AI Studio app
+The active migration target in this branch is a lightweight **WordPress + WooCommerce** storefront under `wordpress/`.
 
-This contains everything you need to run your app locally.
+There is no Firebase, React, Vite or custom payment/order backend in this branch. The previous experimental React/Firebase implementation remains available on the `main` branch for historical/design reference.
 
-View your app in AI Studio: https://ai.studio/apps/42b6955e-d71d-4e82-9b67-b30e5a892c8f
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+See [`wordpress/README.md`](wordpress/README.md) for architecture, multilingual, WooCommerce, MailPoet, learning-library and hosting instructions.
