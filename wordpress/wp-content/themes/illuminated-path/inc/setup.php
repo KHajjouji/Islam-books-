@@ -13,6 +13,7 @@ function ip_theme_setup(): void {
     add_theme_support( 'automatic-feed-links' );
     add_theme_support( 'responsive-embeds' );
     add_theme_support( 'align-wide' );
+    add_theme_support( 'editor-styles' );
     add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script', 'navigation-widgets' ) );
     add_theme_support( 'woocommerce', array( 'thumbnail_image_width' => 520, 'single_image_width' => 900, 'product_grid' => array( 'default_rows' => 3, 'min_rows' => 1, 'max_rows' => 8, 'default_columns' => 4, 'min_columns' => 2, 'max_columns' => 5 ) ) );
     add_theme_support( 'wc-product-gallery-zoom' );
@@ -25,13 +26,17 @@ add_action( 'after_setup_theme', 'ip_theme_setup' );
 
 function ip_register_widget_areas(): void {
     register_sidebar( array( 'name' => __( 'Newsletter / Marketing', 'illuminated-path' ), 'id' => 'newsletter', 'description' => __( 'Place a MailPoet form, newsletter block, or other marketing widget here.', 'illuminated-path' ), 'before_widget' => '<div class="newsletter-widget %2$s">', 'after_widget' => '</div>', 'before_title' => '<h3 class="newsletter-widget-title">', 'after_title' => '</h3>' ) );
-    register_sidebar( array( 'name' => __( 'Shop Sidebar', 'illuminated-path' ), 'id' => 'shop-sidebar', 'description' => __( 'Optional product filters and WooCommerce widgets.', 'illuminated-path' ), 'before_widget' => '<section class="shop-widget %2$s">', 'after_widget' => '</section>', 'before_title' => '<h3 class="shop-widget-title">', 'after_title' => '</h3>' ) );
+    register_sidebar( array( 'name' => __( 'Shop Sidebar', 'illuminated-path' ), 'id' => 'shop-sidebar', 'description' => __( 'Optional WooCommerce widgets. The theme also provides a built-in bookstore filter bar.', 'illuminated-path' ), 'before_widget' => '<section class="shop-widget %2$s">', 'after_widget' => '</section>', 'before_title' => '<h3 class="shop-widget-title">', 'after_title' => '</h3>' ) );
 }
 add_action( 'widgets_init', 'ip_register_widget_areas' );
 
 function ip_enqueue_assets(): void {
     wp_enqueue_style( 'illuminated-path-style', get_stylesheet_uri(), array(), IP_THEME_VERSION );
     wp_enqueue_style( 'illuminated-path-site', IP_THEME_URI . '/assets/css/site.css', array( 'illuminated-path-style' ), IP_THEME_VERSION );
+    wp_enqueue_style( 'illuminated-path-bookstore', IP_THEME_URI . '/assets/css/bookstore.css', array( 'illuminated-path-site' ), IP_THEME_VERSION );
+    if ( is_rtl() ) {
+        wp_enqueue_style( 'illuminated-path-rtl', IP_THEME_URI . '/rtl.css', array( 'illuminated-path-bookstore' ), IP_THEME_VERSION );
+    }
     wp_enqueue_script( 'illuminated-path-site', IP_THEME_URI . '/assets/js/site.js', array(), IP_THEME_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'ip_enqueue_assets' );
