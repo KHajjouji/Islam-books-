@@ -42,11 +42,7 @@ function ip_core_boot(): void {
     require_once IP_CORE_DIR . 'includes/migration.php';
     require_once IP_CORE_DIR . 'includes/store-api.php';
 
-    /**
-     * The previous learning-library module intentionally remains in the repository
-     * but is not loaded in the commercial bookstore phase. The Academy will be a
-     * separate application later.
-     */
+    /** Academy/family learning is intentionally outside this commercial plugin. */
 }
 add_action( 'plugins_loaded', 'ip_core_boot', 20 );
 
