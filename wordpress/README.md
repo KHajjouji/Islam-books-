@@ -19,6 +19,7 @@ It provides:
 - configurable public promotion bar
 - native WordPress blog/resources
 - order-focused WooCommerce My Account experience
+- provider-aware physical-book fulfilment, including a KDP author-copy queue
 - legacy React/Firebase product JSON importer
 - public Woo Store API book metadata for future clients
 
@@ -32,8 +33,8 @@ It provides:
 4. Activate **Illuminated Path Core**.
 5. Activate the **Illuminated Path** theme.
 6. Run WooCommerce onboarding: store address, currency, shipping, tax and transactional email configuration.
-7. Install a supported WooCommerce payment gateway (for example Stripe/WooPayments/PayPal according to your market).
-8. Install **one** multilingual stack (WPML + WooCommerce Multilingual or Polylang/Polylang for WooCommerce, depending on the chosen production license/setup).
+7. Install a supported WooCommerce payment gateway.
+8. Install **one** multilingual stack (WPML + WooCommerce Multilingual or Polylang/Polylang for WooCommerce).
 9. Install an SEO plugin such as Rank Math or Yoast. The theme does not duplicate canonical/hreflang/sitemap management.
 10. Install MailPoet (or another marketing plugin) and place its form in **Appearance → Widgets → Newsletter / Marketing**.
 
@@ -101,13 +102,11 @@ Product search is extended beyond title/description to include ISBN, SKU, publis
 
 Use normal WordPress Pages and the block editor. For campaign/SEO pages where the block content should control the visible H1 and full layout, select the **Store Landing Page** page template.
 
-The homepage can also be made block-editable: assign a normal WordPress page as the static Home page, then enable **Appearance → Customize → Store Identity & Homepage → Use the assigned Home page content**. The theme keeps the commercial hero and replaces the default lower sections with the blocks/shortcodes from that page. Under the **Little Muslim Books** pattern category there are starting patterns for:
+The homepage can also be made block-editable: assign a normal WordPress page as the static Home page, then enable **Appearance → Customize → Store Identity & Homepage → Use the assigned Home page content**. The theme keeps the commercial hero and replaces the default lower sections with the blocks/shortcodes from that page.
 
-- Book Collection Landing Page
-- Sale / Campaign Page
-- Language Collection Page
+Under the **Little Muslim Books** pattern category there are starting patterns for Book Collection, Sale/Campaign and Language Collection pages.
 
-Reusable shortcodes can be inserted in a WordPress Shortcode block:
+Reusable shortcodes:
 
 ```text
 [ip_book_slider title="New releases" source="newest" limit="8"]
@@ -120,42 +119,49 @@ Reusable shortcodes can be inserted in a WordPress Shortcode block:
 [ip_book_search]
 ```
 
-Slider sources: `newest`, `featured`, `sale`, `best_selling`, `top_rated`, `manual`.
-
-For manual selection use `ids="12,48,91"`.
+Slider sources: `newest`, `featured`, `sale`, `best_selling`, `top_rated`, `manual`. For manual selection use `ids="12,48,91"`.
 
 ## Offers and coupons
 
 Coupons remain standard WooCommerce coupons or extension/plugin coupons. The theme never calculates a fake discount.
 
-To advertise a coupon publicly, go to:
-
-**Appearance → Customize → Store Promotion Bar**
-
-Enable the bar, enter promotional text, an optional public coupon code, and optional landing-page URL.
-
-Sale sliders read actual WooCommerce sale products/prices.
+To advertise a coupon publicly, go to **Appearance → Customize → Store Promotion Bar** and enter promotional text, an optional public coupon code, and optional landing-page URL. Sale sliders read actual WooCommerce sale products/prices.
 
 ## Customer area
 
-The commercial customer dashboard focuses on:
-
-- orders
-- order status/details
-- downloads when relevant
-- billing/shipping addresses
-- payment methods provided by the installed gateway
-- account details/password
+The commercial customer dashboard focuses on orders, order details/status, downloads, billing/shipping addresses, gateway payment methods and account details. Fulfilment/tracking information appears on the customer's order when the store has entered it.
 
 The old Academy/family-learning dashboard is intentionally not active in this phase.
 
+## Physical-book fulfilment / KDP author copies
+
+Each physical product can choose a fulfilment provider in the WooCommerce product editor:
+
+- Manual / own stock
+- Amazon KDP author copy
+- Bookvault
+- Lulu Direct
+
+For KDP books you can also store an internal KDP/printer reference and a private order-page shortcut.
+
+When a paid/processing WooCommerce order contains a KDP-author-copy product, the plugin can email the store administrator a fulfilment sheet containing the customer's name, email, phone, shipping address, books/quantities and printer references.
+
+Open **WooCommerce → Book Fulfilment** for the KDP queue. Each WooCommerce order also has fulfilment controls for:
+
+- waiting to order / ordered / shipped / delivered / issue
+- Amazon or printer order number
+- estimated delivery date
+- tracking URL
+- internal fulfilment note
+- optional customer update email
+
+This deliberately does **not** automate Amazon/KDP checkout. The KDP purchase remains manual while address/order preparation, tracking and customer communication are centralized in WooCommerce. If Bookvault/Lulu or another provider is connected later, the same provider layer can be extended instead of redesigning the store.
+
 ## Legacy product import
 
-If real product data exists in the previous React/Firebase model, export it as a JSON array and open:
+If real product data exists in the previous React/Firebase model, export it as a JSON array and open **WooCommerce → Legacy Book Import**.
 
-**WooCommerce → Legacy Book Import**
-
-The importer maps legacy title, descriptions, price, stock, author, age, theme and features into WooCommerce/book metadata. Products are saved as **drafts** for review. Remote covers can optionally be sideloaded into the WordPress Media Library.
+The importer maps legacy title, descriptions, price, stock, author, age, theme and features into WooCommerce/book metadata. Products are saved as drafts for review. Remote covers can optionally be sideloaded into the WordPress Media Library.
 
 Do not import demo orders/subscriptions from the prototype as real customer data.
 
