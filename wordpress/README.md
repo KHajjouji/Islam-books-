@@ -1,63 +1,166 @@
-# Illuminated Path — WordPress / WooCommerce storefront
+# Little Muslim Books — Production Bookstore Architecture
 
-This folder is the migration target for `KHajjouji/Islam-books-`.
+## Scope
 
-## Architecture
+This WordPress package is the production commercial bookstore. It intentionally does **not** implement the future Academy/family-learning application.
 
-- **WordPress + MySQL/MariaDB**: CMS, users, pages, blog, plugin ecosystem.
-- **WooCommerce**: products, variations, inventory, taxes, shipping, coupons, cart, checkout, orders and customer accounts.
-- **Illuminated Path Store theme**: lightweight PHP/HTML/CSS/JS presentation layer. It deliberately does not replace WooCommerce cart/checkout templates.
-- **Illuminated Path Core plugin**: book metadata, purchased interactive-resource access, and public Store API extensions for future mobile/headless clients.
-- **No Firebase** is required by this architecture.
+It provides:
 
-## Multilingual
+- custom lightweight PHP theme (`illuminated-path`)
+- WooCommerce as the only commerce/order source of truth
+- companion publishing plugin (`illuminated-path-core`)
+- English / French / Arabic-ready UI with RTL support
+- compatibility adapters for WPML or Polylang language switching
+- book metadata and taxonomies
+- advanced catalog filters and product search
+- product sliders/grids for editable campaign pages
+- WordPress block patterns for landing pages
+- WooCommerce sale/coupon compatibility
+- configurable public promotion bar
+- native WordPress blog/resources
+- order-focused WooCommerce My Account experience
+- legacy React/Firebase product JSON importer
+- public Woo Store API book metadata for future clients
 
-The theme shell includes EN/FR/AR copy and automatic RTL styling. Product/page translation should be managed by a WordPress multilingual plugin so each language has real indexable URLs, translated products, SEO metadata and hreflang.
+## Install
 
-Supported integration paths:
+1. Install a normal WordPress site on PlanetHoster, GoDaddy, or another PHP/MySQL host.
+2. Install and activate WooCommerce.
+3. Copy/upload:
+   - `wordpress/wp-content/themes/illuminated-path`
+   - `wordpress/wp-content/plugins/illuminated-path-core`
+4. Activate **Illuminated Path Core**.
+5. Activate the **Illuminated Path** theme.
+6. Run WooCommerce onboarding: store address, currency, shipping, tax and transactional email configuration.
+7. Install a supported WooCommerce payment gateway (for example Stripe/WooPayments/PayPal according to your market).
+8. Install **one** multilingual stack (WPML + WooCommerce Multilingual or Polylang/Polylang for WooCommerce, depending on the chosen production license/setup).
+9. Install an SEO plugin such as Rank Math or Yoast. The theme does not duplicate canonical/hreflang/sitemap management.
+10. Install MailPoet (or another marketing plugin) and place its form in **Appearance → Widgets → Newsletter / Marketing**.
 
-1. WPML + WooCommerce multilingual components, or
-2. Polylang + its WooCommerce integration.
+## Catalog model
 
-The theme automatically detects either WPML or Polylang for the header language switcher. German, Dutch, Spanish or other languages can be added later without changing the commerce architecture.
+WooCommerce owns price, sale price, stock, variations, coupons, checkout, orders, refunds, shipping and taxes.
 
-## Marketing and plugin compatibility
+The companion plugin adds public book taxonomies:
 
-The theme uses normal WordPress and WooCommerce hooks instead of replacing transactional templates. This is intentional so standard extensions can inject their own UI and logic.
+- Authors
+- Series
+- Book languages
+- Age ranges
+- Book formats
+- Book themes
 
-Typical compatible functions include WooCommerce coupons and sale pricing, Stripe / WooPayments / PayPal gateways, subscription extensions, MailPoet, AutomateWoo, SEO plugins, shipping, tax and invoice extensions.
+It also adds publishing fields to each WooCommerce product:
 
-A `Newsletter / Marketing` widget area is provided specifically for MailPoet or another opt-in form.
+- subtitle
+- ISBN
+- illustrator
+- publisher
+- page count
+- reading level
+- binding
+- dimensions
+- publication date
+- edition
+- themes / learning points
+- optional public preview URL
 
-## Book catalog model
+Baseline terms are seeded automatically for English, French and Arabic, standard age bands, common formats and core Islamic book themes. Add German, Dutch, Spanish or additional markets simply by adding terms/translations.
 
-Use WooCommerce as the single source of truth. Recommended global product attributes: Language, Age, Format, Series and Reading level.
+## Multilingual production
 
-Recommended product categories: `stories-of-the-prophets`, `quran-stories`, `ramadan`, `bilingual`, `bedtime`, `activities`.
+The theme UI includes EN/FR/AR strings and Arabic RTL CSS. Actual page/product translations should be managed by the selected multilingual plugin so every translation can have its own title, slug, content and SEO metadata.
 
-The companion plugin adds optional book-specific fields: subtitle, ISBN, age range, page count, audio URL, interactive activity URL, course URL and learning objectives.
+Recommended URL model:
 
-## Purchased interactive activities
+- `/en/...`
+- `/fr/...`
+- `/ar/...`
 
-When a product has an interactive/course/audio resource, buyers see it in **My Account → Learning Library**. The raw purchased resource URL is not exposed by the public Store API. Access can be extended later with subscriptions/memberships using the `illuminated_path_customer_can_access_product_resource` filter.
+The multilingual plugin + SEO plugin should own canonical URLs, hreflang and language-specific XML sitemaps.
 
-## Future mobile app
+## Shop and search
 
-WooCommerce remains the product/order engine. The companion plugin extends `wc/store/products` under the `extensions.illuminated-path` namespace with safe book metadata. This means an iOS/Android client can consume the same catalog later instead of creating a second database.
+The storefront filter bar supports:
 
-## Installation on PlanetHoster / GoDaddy / standard PHP hosting
+- free-text search
+- language
+- age
+- theme
+- series
+- format
+- in-stock only
+- on-sale only
+- normal WooCommerce sorting
 
-1. Create a normal WordPress installation with MySQL/MariaDB and HTTPS.
-2. Install WooCommerce.
-3. Copy `wp-content/themes/illuminated-path` to the site's `wp-content/themes/` folder and activate it.
-4. Copy `wp-content/plugins/illuminated-path-core` to `wp-content/plugins/` and activate it.
-5. Configure WooCommerce pages, currency, taxes, shipping and payment gateway.
-6. Install/configure a multilingual plugin and create English, French and Arabic versions.
-7. Add product attributes/categories and import or create the books.
-8. Add a MailPoet form to **Appearance → Widgets → Newsletter / Marketing**.
-9. In **Settings → Permalinks**, use a readable structure and save once after activating the companion plugin.
-10. Configure backups, SMTP/domain email authentication, caching and security at the hosting level.
+Product search is extended beyond title/description to include ISBN, SKU, publisher, illustrator, author, series, language, age, format and theme names.
 
-## Development rule
+## Editable merchandising / landing pages
 
-Do not put payment logic, order storage, coupon calculations or subscription billing into the theme. Those belong to WooCommerce/extensions. Theme code owns presentation; the core plugin owns store-specific business metadata/access; WooCommerce owns commerce.
+Use normal WordPress Pages and the block editor. Under the **Little Muslim Books** pattern category there are starting patterns for:
+
+- Book Collection Landing Page
+- Sale / Campaign Page
+- Language Collection Page
+
+Reusable shortcodes can be inserted in a WordPress Shortcode block:
+
+```text
+[ip_book_slider title="New releases" source="newest" limit="8"]
+[ip_book_slider title="Best sellers" source="best_selling" limit="8"]
+[ip_book_slider title="Special offers" source="sale" limit="8"]
+[ip_book_slider title="French books" language="french" limit="8"]
+[ip_book_slider title="Prophet series" series="stories-of-the-prophets" limit="8"]
+[ip_book_grid theme="ramadan-eid" limit="12"]
+[ip_collection_grid taxonomy="ip_book_language" limit="8"]
+[ip_book_search]
+```
+
+Slider sources: `newest`, `featured`, `sale`, `best_selling`, `top_rated`, `manual`.
+
+For manual selection use `ids="12,48,91"`.
+
+## Offers and coupons
+
+Coupons remain standard WooCommerce coupons or extension/plugin coupons. The theme never calculates a fake discount.
+
+To advertise a coupon publicly, go to:
+
+**Appearance → Customize → Store Promotion Bar**
+
+Enable the bar, enter promotional text, an optional public coupon code, and optional landing-page URL.
+
+Sale sliders read actual WooCommerce sale products/prices.
+
+## Customer area
+
+The commercial customer dashboard focuses on:
+
+- orders
+- order status/details
+- downloads when relevant
+- billing/shipping addresses
+- payment methods provided by the installed gateway
+- account details/password
+
+The old Academy/family-learning dashboard is intentionally not active in this phase.
+
+## Legacy product import
+
+If real product data exists in the previous React/Firebase model, export it as a JSON array and open:
+
+**WooCommerce → Legacy Book Import**
+
+The importer maps legacy title, descriptions, price, stock, author, age, theme and features into WooCommerce/book metadata. Products are saved as **drafts** for review. Remote covers can optionally be sideloaded into the WordPress Media Library.
+
+Do not import demo orders/subscriptions from the prototype as real customer data.
+
+## SEO
+
+Use real server-rendered WordPress pages for keyword/collection landing pages. Product structured data is still generated by WooCommerce; the core plugin extends it with ISBN, publisher/brand and selected publishing properties.
+
+Create substantial multilingual landing pages for themes and markets rather than relying only on thin product-category archives.
+
+## Future Academy
+
+Academy, child profiles, activities and progress are intentionally outside this bookstore package. They should be implemented as a separate application and integrated with store purchases later through an API/entitlement bridge.
