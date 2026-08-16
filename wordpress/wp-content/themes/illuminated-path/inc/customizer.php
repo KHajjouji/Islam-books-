@@ -48,6 +48,9 @@ function ip_customize_register( WP_Customize_Manager $wp_customize ): void {
         $wp_customize->add_control( $id, array( 'label' => $config['label'], 'section' => 'ip_store_identity', 'type' => $config['type'] ) );
     }
 
+    $wp_customize->add_setting( 'ip_home_use_page_content', array( 'default' => false, 'sanitize_callback' => 'wp_validate_boolean' ) );
+    $wp_customize->add_control( 'ip_home_use_page_content', array( 'label' => __( 'Use the assigned Home page content instead of the default homepage sections', 'illuminated-path' ), 'description' => __( 'Keep the theme hero, then build the rest of the homepage with WordPress blocks, patterns and book shortcodes.', 'illuminated-path' ), 'section' => 'ip_store_identity', 'type' => 'checkbox' ) );
+
     $wp_customize->add_section(
         'ip_promotions',
         array(
