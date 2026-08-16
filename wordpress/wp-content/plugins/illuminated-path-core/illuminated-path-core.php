@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Illuminated Path Core
- * Description: Publishing metadata, bookstore catalog tools, customer order experience, import utilities and WooCommerce extensions for Little Muslim Books / Illuminated Path.
- * Version: 0.2.0
+ * Description: Publishing metadata, bookstore catalog tools, customer order experience, fulfilment workflows, import utilities and WooCommerce extensions for Little Muslim Books / Illuminated Path.
+ * Version: 0.3.0
  * Requires at least: 6.5
  * Requires PHP: 8.0
  * WC requires at least: 8.2
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'IP_CORE_VERSION', '0.2.0' );
+define( 'IP_CORE_VERSION', '0.3.0' );
 define( 'IP_CORE_FILE', __FILE__ );
 define( 'IP_CORE_DIR', plugin_dir_path( __FILE__ ) );
 
@@ -38,6 +38,7 @@ function ip_core_boot(): void {
     require_once IP_CORE_DIR . 'includes/product-meta.php';
     require_once IP_CORE_DIR . 'includes/storefront-controls.php';
     require_once IP_CORE_DIR . 'includes/customer-account.php';
+    require_once IP_CORE_DIR . 'includes/fulfillment.php';
     require_once IP_CORE_DIR . 'includes/admin-dashboard.php';
     require_once IP_CORE_DIR . 'includes/seo.php';
     require_once IP_CORE_DIR . 'includes/migration.php';
