@@ -1,6 +1,9 @@
 name: Package WordPress Storefront
 
 on:
+  push:
+    branches:
+      - feature/wordpress-woocommerce-storefront
   pull_request:
     branches: [ main ]
   workflow_dispatch:
