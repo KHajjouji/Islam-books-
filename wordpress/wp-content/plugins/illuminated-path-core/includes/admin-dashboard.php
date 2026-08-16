@@ -15,6 +15,18 @@ function ip_core_count_orders_by_status( string $status ): int {
     return is_object( $result ) && isset( $result->total ) ? absint( $result->total ) : 0;
 }
 
+function ip_core_count_open_kdp_orders(): int {
+    if ( ! function_exists( 'wc_get_orders' ) || ! function_exists( 'ip_core_order_has_provider' ) ) { return 0; }
+    $orders = wc_get_orders( array( 'limit' => 100, 'orderby' => 'date', 'order' => 'DESC', 'status' => array_keys( wc_get_order_statuses() ), 'return' => 'objects' ) );
+    $count = 0;
+    foreach ( $orders as $order ) {
+        if ( ! $order instanceof WC_Order || ! ip_core_order_has_provider( $order, 'kdp_author_copy' ) ) { continue; }
+        $status = sanitize_key( (string) $order->get_meta( '_ip_fulfillment_status' ) ) ?: 'pending';
+        if ( ! in_array( $status, array( 'delivered' ), true ) ) { ++$count; }
+    }
+    return $count;
+}
+
 function ip_core_render_store_dashboard_widget(): void {
     $published = wp_count_posts( 'product' );
     $published_count = isset( $published->publish ) ? absint( $published->publish ) : 0;
@@ -23,7 +35,7 @@ function ip_core_render_store_dashboard_widget(): void {
     $coupon_counts = wp_count_posts( 'shop_coupon' );
     $coupon_count = isset( $coupon_counts->publish ) ? absint( $coupon_counts->publish ) : 0;
     $processing = ip_core_count_orders_by_status( 'processing' );
-    $on_hold = ip_core_count_orders_by_status( 'on-hold' );
+    $open_kdp = ip_core_count_open_kdp_orders();
 
     echo '<div class="ip-admin-overview" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">';
     foreach ( array(
@@ -32,7 +44,7 @@ function ip_core_render_store_dashboard_widget(): void {
         __( 'Products on sale', 'illuminated-path-core' ) => $sale_count,
         __( 'Active coupons', 'illuminated-path-core' ) => $coupon_count,
         __( 'Processing orders', 'illuminated-path-core' ) => $processing,
-        __( 'Orders on hold', 'illuminated-path-core' ) => $on_hold,
+        __( 'KDP fulfilment open', 'illuminated-path-core' ) => $open_kdp,
     ) as $label => $value ) {
         echo '<div style="padding:12px;border:1px solid #dcdcde;border-radius:8px;background:#fff"><strong style="font-size:20px;display:block">' . esc_html( (string) $value ) . '</strong><span>' . esc_html( $label ) . '</span></div>';
     }
@@ -41,6 +53,7 @@ function ip_core_render_store_dashboard_widget(): void {
         admin_url( 'post-new.php?post_type=product' ) => __( 'Add book', 'illuminated-path-core' ),
         admin_url( 'edit.php?post_type=product' ) => __( 'Products', 'illuminated-path-core' ),
         admin_url( 'admin.php?page=wc-orders' ) => __( 'Orders', 'illuminated-path-core' ),
+        admin_url( 'admin.php?page=ip-book-fulfillment' ) => __( 'Book fulfilment', 'illuminated-path-core' ),
         admin_url( 'edit.php?post_type=shop_coupon' ) => __( 'Coupons', 'illuminated-path-core' ),
         admin_url( 'post-new.php?post_type=page' ) => __( 'New landing page', 'illuminated-path-core' ),
         admin_url( 'edit.php' ) => __( 'Blog / Resources', 'illuminated-path-core' ),
