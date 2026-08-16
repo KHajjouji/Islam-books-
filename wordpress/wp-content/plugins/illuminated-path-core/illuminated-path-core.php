@@ -38,6 +38,7 @@ function ip_core_boot(): void {
     require_once IP_CORE_DIR . 'includes/product-meta.php';
     require_once IP_CORE_DIR . 'includes/storefront-controls.php';
     require_once IP_CORE_DIR . 'includes/customer-account.php';
+    require_once IP_CORE_DIR . 'includes/admin-dashboard.php';
     require_once IP_CORE_DIR . 'includes/seo.php';
     require_once IP_CORE_DIR . 'includes/migration.php';
     require_once IP_CORE_DIR . 'includes/store-api.php';
