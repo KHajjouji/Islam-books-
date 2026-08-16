@@ -1,7 +1,7 @@
-# Illuminated Path — Islamic Books Store
+# Little Muslim Books / Illuminated Path — WordPress Bookstore
 
-The active migration target in this branch is a lightweight **WordPress + WooCommerce** storefront under `wordpress/`.
+This branch contains the commercial storefront migration for **Little Muslim Books**. It is a lightweight WordPress + WooCommerce bookstore with no Firebase and no React/Vite runtime.
 
-There is no Firebase, React, Vite or custom payment/order backend in this branch. The previous experimental React/Firebase implementation remains available on the `main` branch for historical/design reference.
+The current product scope is deliberately commercial: multilingual book presentation, catalog discovery, SEO/content pages, offers, coupons, checkout and customer order management. Academy/family-learning features are deferred to a separate application.
 
-See [`wordpress/README.md`](wordpress/README.md) for architecture, multilingual, WooCommerce, MailPoet, learning-library and hosting instructions.
+See [`wordpress/README.md`](wordpress/README.md) for installation and configuration.
