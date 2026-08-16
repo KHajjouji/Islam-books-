@@ -1,0 +1,9 @@
+/* Customer-facing fulfilment/tracking presentation. */
+.ip-fulfillment-card{margin:28px 0;padding:26px;border:1px solid var(--line);border-radius:24px;background:#fff;box-shadow:0 14px 34px rgba(16,40,59,.06)}
+.ip-fulfillment-card h2{font-family:'Playfair Display',serif;color:var(--navy);margin:6px 0 20px;font-size:1.8rem}
+.ip-fulfillment-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.ip-fulfillment-grid>div{padding:15px;border-radius:16px;background:var(--ivory);border:1px solid var(--line);display:flex;flex-direction:column;gap:5px}
+.ip-fulfillment-grid strong{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.ip-fulfillment-grid span{font-weight:850;color:var(--navy)}
+.ip-fulfillment-card .button{background:var(--emerald)!important;color:#fff!important;border-radius:999px!important}
+@media(max-width:700px){.ip-fulfillment-grid{grid-template-columns:1fr}}
