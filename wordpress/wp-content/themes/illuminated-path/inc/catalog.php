@@ -22,6 +22,18 @@ function ip_catalog_selected( string $key ): string {
     return isset( $_GET[ $key ] ) ? sanitize_title( wp_unslash( $_GET[ $key ] ) ) : '';
 }
 
+function ip_catalog_base_url(): string {
+    if ( ( is_tax() || is_product_category() || is_product_tag() ) && ( $term = get_queried_object() ) instanceof WP_Term ) {
+        $url = get_term_link( $term );
+        if ( ! is_wp_error( $url ) ) { return (string) $url; }
+    }
+    return ip_shop_url();
+}
+
+function ip_catalog_price_value( string $key ): string {
+    return isset( $_GET[ $key ] ) ? wc_format_decimal( wp_unslash( $_GET[ $key ] ) ) : '';
+}
+
 function ip_catalog_term_select( string $taxonomy, string $name, string $label ): void {
     if ( ! taxonomy_exists( $taxonomy ) ) {
         return;
@@ -46,20 +58,23 @@ function ip_catalog_filter_form(): void {
     ?>
     <section class="ip-catalog-tools" data-catalog-tools>
         <button type="button" class="ip-filter-toggle" data-filter-toggle aria-expanded="false"><?php esc_html_e( 'Filters', 'illuminated-path' ); ?></button>
-        <form class="ip-catalog-filter" method="get" action="<?php echo esc_url( ip_shop_url() ); ?>" data-filter-form>
+        <form class="ip-catalog-filter" method="get" action="<?php echo esc_url( ip_catalog_base_url() ); ?>" data-filter-form>
             <label class="ip-catalog-search"><span><?php esc_html_e( 'Search', 'illuminated-path' ); ?></span><input type="search" name="s" value="<?php echo esc_attr( $search ); ?>" placeholder="<?php echo esc_attr( ip_text( 'search' ) ); ?>"></label>
             <input type="hidden" name="post_type" value="product">
             <?php
+            ip_catalog_term_select( 'ip_book_author', 'book_author', __( 'Author', 'illuminated-path' ) );
             ip_catalog_term_select( 'ip_book_language', 'book_language', __( 'Language', 'illuminated-path' ) );
             ip_catalog_term_select( 'ip_book_age', 'book_age', __( 'Age', 'illuminated-path' ) );
             ip_catalog_term_select( 'ip_book_theme', 'book_theme', __( 'Theme', 'illuminated-path' ) );
             ip_catalog_term_select( 'ip_book_series', 'book_series', __( 'Series', 'illuminated-path' ) );
             ip_catalog_term_select( 'ip_book_format', 'book_format', __( 'Format', 'illuminated-path' ) );
             ?>
+            <label><span><?php esc_html_e( 'Min price', 'illuminated-path' ); ?></span><input type="number" min="0" step="0.01" name="min_price" value="<?php echo esc_attr( ip_catalog_price_value( 'min_price' ) ); ?>"></label>
+            <label><span><?php esc_html_e( 'Max price', 'illuminated-path' ); ?></span><input type="number" min="0" step="0.01" name="max_price" value="<?php echo esc_attr( ip_catalog_price_value( 'max_price' ) ); ?>"></label>
             <label><span><?php esc_html_e( 'Availability', 'illuminated-path' ); ?></span><select name="availability"><option value=""><?php esc_html_e( 'All', 'illuminated-path' ); ?></option><option value="instock" <?php selected( ip_catalog_selected( 'availability' ), 'instock' ); ?>><?php esc_html_e( 'In stock', 'illuminated-path' ); ?></option><option value="sale" <?php selected( ip_catalog_selected( 'availability' ), 'sale' ); ?>><?php esc_html_e( 'On sale', 'illuminated-path' ); ?></option></select></label>
             <?php if ( isset( $_GET['orderby'] ) ) : ?><input type="hidden" name="orderby" value="<?php echo esc_attr( sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) ); ?>"><?php endif; ?>
             <button class="btn btn-primary" type="submit"><?php esc_html_e( 'Apply', 'illuminated-path' ); ?></button>
-            <a class="ip-clear-filters" href="<?php echo esc_url( ip_shop_url() ); ?>"><?php esc_html_e( 'Clear', 'illuminated-path' ); ?></a>
+            <a class="ip-clear-filters" href="<?php echo esc_url( ip_catalog_base_url() ); ?>"><?php esc_html_e( 'Clear', 'illuminated-path' ); ?></a>
         </form>
     </section>
     <?php
@@ -72,6 +87,7 @@ function ip_catalog_apply_filters( WP_Query $query ): void {
     }
 
     $map = array(
+        'book_author'   => 'ip_book_author',
         'book_language' => 'ip_book_language',
         'book_age'      => 'ip_book_age',
         'book_theme'    => 'ip_book_theme',
@@ -143,7 +159,7 @@ function ip_catalog_product_search_sql( string $search, WP_Query $query ): strin
 
     global $wpdb;
     $tokens = preg_split( '/\s+/', $raw );
-    $tokens = array_slice( array_values( array_filter( array_map( 'sanitize_text_field', (array) $tokens ), static fn( $token ) => mb_strlen( $token ) >= 2 ) ), 0, 8 );
+    $tokens = array_slice( array_values( array_filter( array_map( 'sanitize_text_field', (array) $tokens ), static fn( $token ) => ( function_exists( 'mb_strlen' ) ? mb_strlen( $token ) : strlen( $token ) ) >= 2 ) ), 0, 8 );
     if ( empty( $tokens ) ) {
         $tokens = array( $raw );
     }
