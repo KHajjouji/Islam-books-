@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'IP_THEME_VERSION', '0.2.0' );
+define( 'IP_THEME_VERSION', '0.3.0' );
 define( 'IP_THEME_DIR', get_template_directory() );
 define( 'IP_THEME_URI', get_template_directory_uri() );
 
