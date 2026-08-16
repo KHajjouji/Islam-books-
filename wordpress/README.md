@@ -84,11 +84,13 @@ The multilingual plugin + SEO plugin should own canonical URLs, hreflang and lan
 The storefront filter bar supports:
 
 - free-text search
+- author
 - language
 - age
 - theme
 - series
 - format
+- minimum/maximum price
 - in-stock only
 - on-sale only
 - normal WooCommerce sorting
@@ -97,7 +99,9 @@ Product search is extended beyond title/description to include ISBN, SKU, publis
 
 ## Editable merchandising / landing pages
 
-Use normal WordPress Pages and the block editor. Under the **Little Muslim Books** pattern category there are starting patterns for:
+Use normal WordPress Pages and the block editor. For campaign/SEO pages where the block content should control the visible H1 and full layout, select the **Store Landing Page** page template.
+
+The homepage can also be made block-editable: assign a normal WordPress page as the static Home page, then enable **Appearance → Customize → Store Identity & Homepage → Use the assigned Home page content**. The theme keeps the commercial hero and replaces the default lower sections with the blocks/shortcodes from that page. Under the **Little Muslim Books** pattern category there are starting patterns for:
 
 - Book Collection Landing Page
 - Sale / Campaign Page
