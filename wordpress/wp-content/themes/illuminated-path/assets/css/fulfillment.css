@@ -6,4 +6,13 @@
 .ip-fulfillment-grid strong{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 .ip-fulfillment-grid span{font-weight:850;color:var(--navy)}
 .ip-fulfillment-card .button{background:var(--emerald)!important;color:#fff!important;border-radius:999px!important}
-@media(max-width:700px){.ip-fulfillment-grid{grid-template-columns:1fr}}
+.woocommerce-account table.my_account_orders{border-collapse:separate!important;border-spacing:0 12px!important;border:0!important;background:transparent!important}
+.woocommerce-account table.my_account_orders thead th{border:0!important;color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;padding:0 12px 4px!important}
+.woocommerce-account table.my_account_orders tbody tr{background:#fff;box-shadow:0 10px 28px rgba(16,40,59,.05)}
+.woocommerce-account table.my_account_orders tbody td{padding:16px 12px!important;border-top:1px solid var(--line)!important;border-bottom:1px solid var(--line)!important;vertical-align:middle}
+.woocommerce-account table.my_account_orders tbody td:first-child{border-left:1px solid var(--line)!important;border-radius:18px 0 0 18px}
+.woocommerce-account table.my_account_orders tbody td:last-child{border-right:1px solid var(--line)!important;border-radius:0 18px 18px 0}
+.ip-order-book-list{display:grid;gap:8px;min-width:230px}.ip-order-book{display:grid;grid-template-columns:42px minmax(0,1fr);gap:9px;align-items:center}.ip-order-book img{width:42px;height:54px;border-radius:6px;object-fit:cover;background:var(--sand)}.ip-order-book>div{display:flex;flex-direction:column;gap:2px}.ip-order-book strong{font-size:.82rem;color:var(--navy);line-height:1.2}.ip-order-book span,.ip-order-book-list small{font-size:.72rem;color:var(--muted)}
+.ip-order-delivery-pill{display:inline-flex;padding:6px 9px;border-radius:999px;background:#e4f4ee;color:#136b58;font-size:.7rem;font-weight:900;white-space:nowrap}.ip-order-track-link{display:block;margin-top:7px;color:var(--emerald);font-size:.72rem;font-weight:850}.ip-order-delivery-muted{color:var(--muted)}
+@media(max-width:900px){.woocommerce-account table.my_account_orders tbody td:first-child,.woocommerce-account table.my_account_orders tbody td:last-child{border-radius:0}.woocommerce-account table.my_account_orders tbody tr{display:block;border:1px solid var(--line);border-radius:18px;overflow:hidden}.woocommerce-account table.my_account_orders tbody td{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;border:0!important;border-bottom:1px solid var(--line)!important}.woocommerce-account table.my_account_orders tbody td:last-child{border-bottom:0!important}.woocommerce-account table.my_account_orders tbody td:before{font-weight:850;color:var(--muted)}}
+@media(max-width:700px){.ip-fulfillment-grid{grid-template-columns:1fr}.ip-order-book-list{min-width:0}.woocommerce-account table.my_account_orders tbody td{grid-template-columns:90px minmax(0,1fr)}}
