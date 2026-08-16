@@ -35,8 +35,9 @@ function ip_enqueue_assets(): void {
     wp_enqueue_style( 'illuminated-path-site', IP_THEME_URI . '/assets/css/site.css', array( 'illuminated-path-style' ), IP_THEME_VERSION );
     wp_enqueue_style( 'illuminated-path-bookstore', IP_THEME_URI . '/assets/css/bookstore.css', array( 'illuminated-path-site' ), IP_THEME_VERSION );
     wp_enqueue_style( 'illuminated-path-catalog-enhancements', IP_THEME_URI . '/assets/css/catalog-enhancements.css', array( 'illuminated-path-bookstore' ), IP_THEME_VERSION );
+    wp_enqueue_style( 'illuminated-path-fulfillment', IP_THEME_URI . '/assets/css/fulfillment.css', array( 'illuminated-path-catalog-enhancements' ), IP_THEME_VERSION );
     if ( is_rtl() ) {
-        wp_enqueue_style( 'illuminated-path-rtl', IP_THEME_URI . '/rtl.css', array( 'illuminated-path-catalog-enhancements' ), IP_THEME_VERSION );
+        wp_enqueue_style( 'illuminated-path-rtl', IP_THEME_URI . '/rtl.css', array( 'illuminated-path-fulfillment' ), IP_THEME_VERSION );
     }
     wp_enqueue_script( 'illuminated-path-site', IP_THEME_URI . '/assets/js/site.js', array(), IP_THEME_VERSION, true );
 }
