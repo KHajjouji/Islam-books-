@@ -1,15 +1,28 @@
 <?php
 get_header();
-$hero_image = get_theme_mod( 'ip_hero_image', '' );
-$use_custom_home = (bool) get_theme_mod( 'ip_home_use_page_content', false );
-$front_page_id = get_queried_object_id();
+$hero_image         = get_theme_mod( 'ip_hero_image', '' );
+$front_page_id      = get_queried_object_id();
 $custom_home_content = $front_page_id ? (string) get_post_field( 'post_content', $front_page_id ) : '';
+$home_mode          = (string) get_theme_mod( 'ip_home_layout_mode', 'default' );
+if ( 'default' === $home_mode && get_theme_mod( 'ip_home_use_page_content', false ) ) {
+    $home_mode = 'editor_after_hero';
+}
+if ( function_exists( 'ip_is_elementor_built' ) && ip_is_elementor_built( (int) $front_page_id ) ) {
+    $home_mode = 'full_builder';
+}
+
+if ( 'full_builder' === $home_mode ) :
 ?>
+<main id="primary" class="site-main ip-home-builder">
+<?php while ( have_posts() ) : the_post(); the_content(); endwhile; ?>
+</main>
+<?php get_footer(); return; endif; ?>
+
 <main id="primary" class="site-main">
 <section class="hero"><div class="container hero-grid"><div class="hero-copy"><span class="eyebrow"><?php echo esc_html( get_theme_mod( 'ip_hero_eyebrow', ip_text( 'hero_eyebrow' ) ) ); ?></span><h1><?php echo esc_html( get_theme_mod( 'ip_hero_title', ip_text( 'hero_title' ) ) ); ?></h1><p><?php echo esc_html( get_theme_mod( 'ip_hero_body', ip_text( 'hero_body' ) ) ); ?></p><div class="hero-actions"><a class="btn btn-primary" href="<?php echo esc_url( ip_shop_url() ); ?>"><?php esc_html_e( 'Shop the books', 'illuminated-path' ); ?> →</a><a class="btn btn-outline" href="#book-themes"><?php esc_html_e( 'Explore collections', 'illuminated-path' ); ?></a></div><div class="trust-row"><span>✓ <?php esc_html_e( 'Secure WooCommerce checkout', 'illuminated-path' ); ?></span><span>✓ <?php esc_html_e( 'Multilingual editions', 'illuminated-path' ); ?></span><span>✓ <?php esc_html_e( 'Worldwide family bookstore', 'illuminated-path' ); ?></span></div><?php if ( shortcode_exists( 'ip_book_search' ) ) : ?><div class="hero-search"><?php echo do_shortcode( '[ip_book_search]' ); ?></div><?php endif; ?></div>
 <div class="hero-books"><?php if ( $hero_image ) : ?><img class="hero-feature-image" src="<?php echo esc_url( $hero_image ); ?>" alt=""><?php elseif ( class_exists( 'WooCommerce' ) ) : $hero_products = wc_get_products( array( 'status' => 'publish', 'featured' => true, 'limit' => 3, 'orderby' => 'date', 'order' => 'DESC' ) ); if ( empty( $hero_products ) ) { $hero_products = wc_get_products( array( 'status' => 'publish', 'limit' => 3, 'orderby' => 'date', 'order' => 'DESC' ) ); } foreach ( $hero_products as $index => $hero_product ) { echo '<a class="hero-book hero-book-' . esc_attr( (string) ( $index + 1 ) ) . '" href="' . esc_url( get_permalink( $hero_product->get_id() ) ) . '">' . $hero_product->get_image( 'woocommerce_single', array( 'loading' => 0 === $index ? 'eager' : 'lazy' ) ) . '</a>'; } endif; ?></div></div></section>
 
-<?php if ( $use_custom_home && '' !== trim( $custom_home_content ) ) : ?>
+<?php if ( 'editor_after_hero' === $home_mode && '' !== trim( $custom_home_content ) ) : ?>
 <section class="home-editor-content"><div class="container page-content-container"><?php echo apply_filters( 'the_content', $custom_home_content ); ?></div></section>
 <?php else : ?>
 <section id="book-themes" class="collection-section section-pad"><div class="container"><div class="section-heading center"><span class="section-kicker"><?php esc_html_e( 'Book themes', 'illuminated-path' ); ?></span><h2><?php esc_html_e( 'Find the right story for every stage', 'illuminated-path' ); ?></h2><p><?php esc_html_e( 'Explore the collection by faith theme, season and family reading moment.', 'illuminated-path' ); ?></p></div><div class="collection-grid"><?php $collections = array( array( 'slug' => 'stories-of-the-prophets', 'title' => ip_text( 'prophets_title' ), 'icon' => '☾' ), array( 'slug' => 'quran-stories', 'title' => __( 'Quran Stories', 'illuminated-path' ), 'icon' => '✦' ), array( 'slug' => 'ramadan', 'title' => ip_text( 'ramadan_title' ), 'icon' => '☼' ), array( 'slug' => 'bilingual', 'title' => ip_text( 'bilingual_title' ), 'icon' => 'Aa' ) ); foreach ( $collections as $collection ) { echo '<a class="collection-card" href="' . esc_url( ip_product_category_url( $collection['slug'] ) ) . '"><span class="collection-icon">' . esc_html( $collection['icon'] ) . '</span><h3>' . esc_html( $collection['title'] ) . '</h3><span class="collection-arrow">→</span></a>'; } ?></div></div></section>
@@ -18,11 +31,17 @@ $custom_home_content = $front_page_id ? (string) get_post_field( 'post_content',
 <?php if ( shortcode_exists( 'ip_book_slider' ) ) { echo do_shortcode( '[ip_book_slider title="' . esc_attr__( 'New releases', 'illuminated-path' ) . '" subtitle="' . esc_attr__( 'Fresh stories and new editions for your family library.', 'illuminated-path' ) . '" source="newest" limit="8" link="' . esc_url( ip_shop_url() ) . '"]' ); echo do_shortcode( '[ip_book_slider title="' . esc_attr__( 'Best sellers', 'illuminated-path' ) . '" subtitle="' . esc_attr__( 'Books families return to again and again.', 'illuminated-path' ) . '" source="best_selling" limit="8" link="' . esc_url( ip_shop_url() ) . '"]' ); } else { ip_render_product_rail( array( 'title' => ip_text( 'featured_title' ), 'featured' => true, 'limit' => 8 ) ); } ?>
 </div>
 
+<?php $spotlight_id = absint( get_theme_mod( 'ip_home_spotlight_product_id', 0 ) ); if ( $spotlight_id && shortcode_exists( 'ip_product_spotlight' ) ) : ?>
+<section class="section-pad"><div class="container"><?php echo do_shortcode( '[ip_product_spotlight id="' . $spotlight_id . '" eyebrow="' . esc_attr__( 'Book spotlight', 'illuminated-path' ) . '" body="' . esc_attr( (string) get_theme_mod( 'ip_home_spotlight_body', '' ) ) . '"]' ); ?></div></section>
+<?php endif; ?>
+
 <?php if ( class_exists( 'WooCommerce' ) && wc_get_product_ids_on_sale() ) : ?><section class="sale-home section-pad"><div class="container"><div class="sale-home-copy"><span class="section-kicker"><?php esc_html_e( 'Special offers', 'illuminated-path' ); ?></span><h2><?php esc_html_e( 'Build their library for less', 'illuminated-path' ); ?></h2><p><?php esc_html_e( 'Current sale prices are pulled directly from WooCommerce, so the storefront always matches checkout.', 'illuminated-path' ); ?></p></div><?php echo shortcode_exists( 'ip_book_slider' ) ? do_shortcode( '[ip_book_slider title="' . esc_attr__( 'Books on sale', 'illuminated-path' ) . '" source="sale" limit="8"]' ) : ''; ?></div></section><?php endif; ?>
 
 <section class="discover-section section-pad"><div class="container"><div class="section-heading center"><span class="section-kicker"><?php esc_html_e( 'Shop your way', 'illuminated-path' ); ?></span><h2><?php esc_html_e( 'Books for your family, language and reading stage', 'illuminated-path' ); ?></h2></div><div class="discover-grid"><div><h3><?php esc_html_e( 'Shop by age', 'illuminated-path' ); ?></h3><?php if ( shortcode_exists( 'ip_collection_grid' ) ) { echo do_shortcode( '[ip_collection_grid taxonomy="ip_book_age" limit="6"]' ); } ?></div><div><h3><?php esc_html_e( 'Shop by language', 'illuminated-path' ); ?></h3><?php if ( shortcode_exists( 'ip_collection_grid' ) ) { echo do_shortcode( '[ip_collection_grid taxonomy="ip_book_language" limit="6"]' ); } ?></div></div></div></section>
 
 <section class="promise section-pad"><div class="container promise-grid"><div><span class="section-kicker"><?php esc_html_e( 'Made for Muslim families', 'illuminated-path' ); ?></span><h2><?php esc_html_e( 'A bookstore built around meaningful children’s publishing', 'illuminated-path' ); ?></h2><p><?php esc_html_e( 'Discover books by age, language, series and theme, with clear previews, secure checkout and a simple order history after purchase.', 'illuminated-path' ); ?></p><a class="btn btn-primary" href="<?php echo esc_url( ip_shop_url() ); ?>"><?php esc_html_e( 'Browse all books', 'illuminated-path' ); ?> →</a></div><div class="promise-cards"><article><span>01</span><h3><?php esc_html_e( 'Discover', 'illuminated-path' ); ?></h3><p><?php esc_html_e( 'Search and filter a growing multilingual catalog.', 'illuminated-path' ); ?></p></article><article><span>02</span><h3><?php esc_html_e( 'Choose', 'illuminated-path' ); ?></h3><p><?php esc_html_e( 'Compare editions, ages, formats, series and offers.', 'illuminated-path' ); ?></p></article><article><span>03</span><h3><?php esc_html_e( 'Order', 'illuminated-path' ); ?></h3><p><?php esc_html_e( 'Checkout securely and follow your orders from My Account.', 'illuminated-path' ); ?></p></article></div></div></section>
+
+<?php if ( shortcode_exists( 'ip_review_grid' ) ) : ?><section class="section-pad"><div class="container"><?php echo do_shortcode( '[ip_review_grid limit="3"]' ); ?></div></section><?php endif; ?>
 
 <section class="editorial-home section-pad"><div class="container"><div class="section-heading center"><span class="section-kicker"><?php esc_html_e( 'Resources', 'illuminated-path' ); ?></span><h2><?php esc_html_e( 'Reading ideas for Muslim families', 'illuminated-path' ); ?></h2></div><?php $posts = get_posts( array( 'numberposts' => 3, 'post_status' => 'publish' ) ); if ( $posts ) : ?><div class="home-post-grid"><?php foreach ( $posts as $post ) : setup_postdata( $post ); ?><article><a class="home-post-image" href="<?php the_permalink(); ?>"><?php if ( has_post_thumbnail() ) { the_post_thumbnail( 'large' ); } ?></a><div><span><?php echo esc_html( get_the_date() ); ?></span><h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3><p><?php echo esc_html( wp_trim_words( get_the_excerpt(), 22 ) ); ?></p><a class="text-link" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Read article', 'illuminated-path' ); ?> →</a></div></article><?php endforeach; wp_reset_postdata(); ?></div><?php else : ?><p class="empty-editorial"><?php esc_html_e( 'Publish WordPress posts to show reading guides and family resources here.', 'illuminated-path' ); ?></p><?php endif; ?></div></section>
 
