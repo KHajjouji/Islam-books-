@@ -55,9 +55,28 @@ function ip_core_taxonomy_image_admin_assets( string $hook ): void {
     $taxonomy = isset( $_GET['taxonomy'] ) ? sanitize_key( wp_unslash( $_GET['taxonomy'] ) ) : '';
     if ( ! in_array( $taxonomy, ip_core_image_taxonomies(), true ) ) { return; }
     wp_enqueue_media();
-    wp_add_inline_script(
-        'jquery-core',
-        "jQuery(function($){$(document).on('click','.ip-term-image-select',function(e){e.preventDefault();var box=$(this).closest('.ip-term-image-field');var frame=wp.media({title:'Choose collection image',multiple:false,library:{type:'image'}});frame.on('select',function(){var a=frame.state().get('selection').first().toJSON();box.find('input[name=ip_term_thumbnail_id]').val(a.id);box.find('.ip-term-image-preview').html('<img src=\"'+(a.sizes&&a.sizes.thumbnail?a.sizes.thumbnail.url:a.url)+'\" style=\"max-width:150px;height:auto\">');});frame.open();});$(document).on('click','.ip-term-image-remove',function(e){e.preventDefault();var box=$(this).closest('.ip-term-image-field');box.find('input[name=ip_term_thumbnail_id]').val('');box.find('.ip-term-image-preview').empty();});});"
-    );
+    $script = <<<'JS'
+jQuery(function($){
+    $(document).on('click','.ip-term-image-select',function(e){
+        e.preventDefault();
+        var box=$(this).closest('.ip-term-image-field');
+        var frame=wp.media({title:'Choose collection image',multiple:false,library:{type:'image'}});
+        frame.on('select',function(){
+            var a=frame.state().get('selection').first().toJSON();
+            var src=(a.sizes&&a.sizes.thumbnail)?a.sizes.thumbnail.url:a.url;
+            box.find('input[name=ip_term_thumbnail_id]').val(a.id);
+            box.find('.ip-term-image-preview').html('<img src="'+src+'" style="max-width:150px;height:auto">');
+        });
+        frame.open();
+    });
+    $(document).on('click','.ip-term-image-remove',function(e){
+        e.preventDefault();
+        var box=$(this).closest('.ip-term-image-field');
+        box.find('input[name=ip_term_thumbnail_id]').val('');
+        box.find('.ip-term-image-preview').empty();
+    });
+});
+JS;
+    wp_add_inline_script( 'jquery-core', $script );
 }
 add_action( 'admin_enqueue_scripts', 'ip_core_taxonomy_image_admin_assets' );
