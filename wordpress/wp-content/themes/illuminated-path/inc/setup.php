@@ -50,8 +50,9 @@ function ip_enqueue_assets(): void {
     wp_enqueue_style( 'illuminated-path-brand-builder', IP_THEME_URI . '/assets/css/brand-builder.css', array( 'illuminated-path-fulfillment' ), IP_THEME_VERSION );
     wp_enqueue_style( 'illuminated-path-product-story', IP_THEME_URI . '/assets/css/product-story.css', array( 'illuminated-path-brand-builder' ), IP_THEME_VERSION );
     wp_enqueue_style( 'illuminated-path-catalog-landing', IP_THEME_URI . '/assets/css/catalog-landing.css', array( 'illuminated-path-product-story' ), IP_THEME_VERSION );
+    wp_enqueue_style( 'illuminated-path-navigation', IP_THEME_URI . '/assets/css/navigation.css', array( 'illuminated-path-catalog-landing' ), IP_THEME_VERSION );
     if ( is_rtl() ) {
-        wp_enqueue_style( 'illuminated-path-rtl', IP_THEME_URI . '/rtl.css', array( 'illuminated-path-catalog-landing' ), IP_THEME_VERSION );
+        wp_enqueue_style( 'illuminated-path-rtl', IP_THEME_URI . '/rtl.css', array( 'illuminated-path-navigation' ), IP_THEME_VERSION );
     }
     wp_enqueue_script( 'illuminated-path-site', IP_THEME_URI . '/assets/js/site.js', array(), IP_THEME_VERSION, true );
 }
