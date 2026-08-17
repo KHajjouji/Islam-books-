@@ -18,6 +18,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Validate PHP syntax
+        run: |
+          php -v
+          find wordpress -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
       - name: Build ZIP packages
         run: |
           mkdir -p dist/full-package
@@ -25,6 +30,9 @@ jobs:
           (cd dist/full-package && zip -r ../little-muslim-books-wordpress-full.zip wordpress)
           (cd wordpress/wp-content/themes && zip -r ../../../dist/illuminated-path-theme.zip illuminated-path)
           (cd wordpress/wp-content/plugins && zip -r ../../../dist/illuminated-path-core-plugin.zip illuminated-path-core)
+          unzip -t dist/little-muslim-books-wordpress-full.zip
+          unzip -t dist/illuminated-path-theme.zip
+          unzip -t dist/illuminated-path-core-plugin.zip
 
       - name: Upload full package
         uses: actions/upload-artifact@v4
