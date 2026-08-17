@@ -1,6 +1,6 @@
 <?php
 /**
- * Reusable storefront shortcodes for WordPress pages and campaigns.
+ * Reusable storefront shortcodes for WordPress pages, Elementor and campaigns.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -173,9 +173,98 @@ function ip_core_shortcode_collection_grid( array $atts ): string {
         if ( is_wp_error( $url ) ) {
             continue;
         }
-        echo '<a class="ip-collection-shortcode-card" href="' . esc_url( $url ) . '"><span class="ip-collection-shortcode-count">' . esc_html( (string) $term->count ) . '</span><h3>' . esc_html( $term->name ) . '</h3><p>' . esc_html( wp_trim_words( wp_strip_all_tags( $term->description ), 18 ) ) . '</p><span>' . esc_html__( 'Explore', 'illuminated-path-core' ) . ' →</span></a>';
+        $thumb_id = absint( get_term_meta( $term->term_id, 'thumbnail_id', true ) );
+        $image    = $thumb_id ? wp_get_attachment_image( $thumb_id, 'medium_large', false, array( 'loading' => 'lazy' ) ) : '';
+        echo '<a class="ip-collection-shortcode-card" href="' . esc_url( $url ) . '">';
+        if ( $image ) { echo '<span class="ip-collection-shortcode-image">' . wp_kses_post( $image ) . '</span>'; }
+        echo '<span class="ip-collection-shortcode-count">' . esc_html( (string) $term->count ) . '</span><h3>' . esc_html( $term->name ) . '</h3><p>' . esc_html( wp_trim_words( wp_strip_all_tags( $term->description ), 18 ) ) . '</p><span>' . esc_html__( 'Explore', 'illuminated-path-core' ) . ' →</span></a>';
     }
     echo '</div>';
     return (string) ob_get_clean();
 }
 add_shortcode( 'ip_collection_grid', 'ip_core_shortcode_collection_grid' );
+
+/** Single-product editorial spotlight for homepages and campaign pages. */
+function ip_core_shortcode_product_spotlight( array $atts ): string {
+    $atts = shortcode_atts(
+        array(
+            'id'         => 0,
+            'eyebrow'    => __( 'Featured book', 'illuminated-path-core' ),
+            'heading'    => '',
+            'body'       => '',
+            'badge'      => '',
+            'button'     => __( 'Discover the book', 'illuminated-path-core' ),
+            'image_side' => 'left',
+        ),
+        $atts,
+        'ip_product_spotlight'
+    );
+    $product = wc_get_product( absint( $atts['id'] ) );
+    if ( ! $product || 'publish' !== get_post_status( $product->get_id() ) ) {
+        return '';
+    }
+    $heading  = trim( (string) $atts['heading'] ) ?: $product->get_name();
+    $body     = trim( (string) $atts['body'] );
+    $subtitle = trim( (string) $product->get_meta( '_ip_book_subtitle' ) );
+    if ( ! $body ) {
+        $body = wp_trim_words( wp_strip_all_tags( $product->get_short_description() ?: $product->get_description() ), 42 );
+    }
+    $side = 'right' === $atts['image_side'] ? 'right' : 'left';
+    ob_start();
+    ?>
+    <section class="ip-product-spotlight ip-image-<?php echo esc_attr( $side ); ?>">
+        <a class="ip-product-spotlight-image" href="<?php echo esc_url( get_permalink( $product->get_id() ) ); ?>">
+            <?php echo wp_kses_post( $product->get_image( 'woocommerce_single', array( 'loading' => 'lazy' ) ) ); ?>
+        </a>
+        <div class="ip-product-spotlight-copy">
+            <span class="ip-spotlight-eyebrow"><?php echo esc_html( $atts['eyebrow'] ); ?></span>
+            <?php if ( $atts['badge'] ) : ?><span class="ip-spotlight-badge"><?php echo esc_html( $atts['badge'] ); ?></span><?php endif; ?>
+            <h2><?php echo esc_html( $heading ); ?></h2>
+            <?php if ( $subtitle ) : ?><p class="ip-spotlight-subtitle"><?php echo esc_html( $subtitle ); ?></p><?php endif; ?>
+            <p><?php echo esc_html( $body ); ?></p>
+            <div class="ip-spotlight-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></div>
+            <a class="button" href="<?php echo esc_url( get_permalink( $product->get_id() ) ); ?>"><?php echo esc_html( $atts['button'] ); ?> →</a>
+        </div>
+    </section>
+    <?php
+    return (string) ob_get_clean();
+}
+add_shortcode( 'ip_product_spotlight', 'ip_core_shortcode_product_spotlight' );
+
+/** Approved WooCommerce reviews as social proof for landing pages. */
+function ip_core_shortcode_review_grid( array $atts ): string {
+    $atts = shortcode_atts( array( 'title' => __( 'What families are saying', 'illuminated-path-core' ), 'limit' => 3 ), $atts, 'ip_review_grid' );
+    $comments = get_comments(
+        array(
+            'status'    => 'approve',
+            'post_type' => 'product',
+            'number'    => max( 1, min( 12, absint( $atts['limit'] ) ) ),
+            'meta_query' => array(
+                array( 'key' => 'rating', 'value' => 0, 'compare' => '>' ),
+            ),
+        )
+    );
+    if ( ! $comments ) {
+        return '';
+    }
+    ob_start();
+    ?>
+    <section class="ip-review-section">
+        <?php if ( $atts['title'] ) : ?><div class="ip-shortcode-heading"><div><h2><?php echo esc_html( $atts['title'] ); ?></h2></div></div><?php endif; ?>
+        <div class="ip-review-grid">
+            <?php foreach ( $comments as $comment ) :
+                $rating = max( 1, min( 5, absint( get_comment_meta( $comment->comment_ID, 'rating', true ) ) ) );
+                $product_name = get_the_title( $comment->comment_post_ID );
+                ?>
+                <article class="ip-review-card">
+                    <div class="ip-review-stars" aria-label="<?php echo esc_attr( sprintf( __( '%d out of 5 stars', 'illuminated-path-core' ), $rating ) ); ?>"><?php echo esc_html( str_repeat( '★', $rating ) . str_repeat( '☆', 5 - $rating ) ); ?></div>
+                    <blockquote><?php echo esc_html( wp_trim_words( wp_strip_all_tags( $comment->comment_content ), 38 ) ); ?></blockquote>
+                    <p><strong><?php echo esc_html( $comment->comment_author ); ?></strong><?php if ( $product_name ) : ?><span><?php echo esc_html( $product_name ); ?></span><?php endif; ?></p>
+                </article>
+            <?php endforeach; ?>
+        </div>
+    </section>
+    <?php
+    return (string) ob_get_clean();
+}
+add_shortcode( 'ip_review_grid', 'ip_core_shortcode_review_grid' );
