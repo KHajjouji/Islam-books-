@@ -21,4 +21,5 @@ require_once IP_THEME_DIR . '/inc/patterns.php';
 require_once IP_THEME_DIR . '/inc/patterns-brand.php';
 require_once IP_THEME_DIR . '/inc/customizer.php';
 require_once IP_THEME_DIR . '/inc/home-controls.php';
+require_once IP_THEME_DIR . '/inc/menu-enhancements.php';
 require_once IP_THEME_DIR . '/inc/elementor.php';
