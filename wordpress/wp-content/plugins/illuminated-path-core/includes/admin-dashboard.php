@@ -54,6 +54,7 @@ function ip_core_store_overview_metrics(): array {
 
 function ip_core_store_quick_links(): array {
     return array(
+        admin_url( 'admin.php?page=ip-store-setup' ) => __( 'Bookstore setup / starter pages', 'illuminated-path-core' ),
         admin_url( 'post-new.php?post_type=product' ) => __( 'Add book', 'illuminated-path-core' ),
         admin_url( 'edit.php?post_type=product' ) => __( 'Products', 'illuminated-path-core' ),
         admin_url( 'admin.php?page=wc-orders' ) => __( 'Orders', 'illuminated-path-core' ),
@@ -63,6 +64,8 @@ function ip_core_store_quick_links(): array {
         admin_url( 'edit-tags.php?taxonomy=ip_book_series&post_type=product' ) => __( 'Book series', 'illuminated-path-core' ),
         admin_url( 'edit-tags.php?taxonomy=ip_book_language&post_type=product' ) => __( 'Book languages', 'illuminated-path-core' ),
         admin_url( 'edit.php?post_type=page' ) => __( 'Pages / landing pages', 'illuminated-path-core' ),
+        admin_url( 'nav-menus.php' ) => __( 'Header / footer menus', 'illuminated-path-core' ),
+        admin_url( 'customize.php' ) => __( 'Brand / homepage settings', 'illuminated-path-core' ),
         admin_url( 'edit.php' ) => __( 'Blog / Resources', 'illuminated-path-core' ),
         admin_url( 'admin.php?page=ip-legacy-book-import' ) => __( 'Legacy import', 'illuminated-path-core' ),
     );
@@ -88,7 +91,7 @@ function ip_core_render_bookstore_dashboard_page(): void {
     ?>
     <div class="wrap">
         <h1><?php esc_html_e( 'Little Muslim Books — Bookstore Dashboard', 'illuminated-path-core' ); ?></h1>
-        <p><?php esc_html_e( 'Commercial control center for books, orders, promotions, content and fulfilment. WooCommerce and WordPress remain the underlying source of truth.', 'illuminated-path-core' ); ?></p>
+        <p><?php esc_html_e( 'Commercial control center for books, orders, promotions, content, brand presentation and fulfilment. WooCommerce and WordPress remain the underlying source of truth.', 'illuminated-path-core' ); ?></p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:24px 0">
             <?php foreach ( ip_core_store_overview_metrics() as $label => $value ) : ?>
                 <article style="padding:20px;border:1px solid #dcdcde;border-radius:12px;background:#fff"><strong style="font-size:28px;display:block;margin-bottom:4px"><?php echo esc_html( (string) $value ); ?></strong><span><?php echo esc_html( $label ); ?></span></article>
@@ -102,7 +105,7 @@ function ip_core_render_bookstore_dashboard_page(): void {
         </div>
         <div style="margin-top:28px;padding:18px;border-left:4px solid #2271b1;background:#fff">
             <strong><?php esc_html_e( 'Production rule', 'illuminated-path-core' ); ?></strong>
-            <p style="margin-bottom:0"><?php esc_html_e( 'Payments, coupons, taxes, shipping, invoices, multilingual synchronization and email marketing should stay with their dedicated WordPress/WooCommerce plugins. The Little Muslim Books code controls presentation, publishing metadata and store-specific workflows.', 'illuminated-path-core' ); ?></p>
+            <p style="margin-bottom:0"><?php esc_html_e( 'Payments, coupons, taxes, shipping, invoices, multilingual synchronization and email marketing stay with their dedicated WordPress/WooCommerce plugins. The Little Muslim Books code controls brand presentation, publishing metadata, page-building components and store-specific workflows.', 'illuminated-path-core' ); ?></p>
         </div>
     </div>
     <?php
