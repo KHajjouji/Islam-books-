@@ -2,6 +2,14 @@
 /** Branded WooCommerce book-page presentation that remains data-driven. */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+function ip_core_product_landing_page_options(): array {
+    $options = array( 0 => __( 'No extended landing content', 'illuminated-path-core' ) );
+    foreach ( get_pages( array( 'post_status' => array( 'publish', 'draft', 'private' ), 'sort_column' => 'post_title' ) ) as $page ) {
+        $options[ $page->ID ] = $page->post_title . ' (#' . $page->ID . ')';
+    }
+    return $options;
+}
+
 function ip_core_product_presentation_fields(): void {
     echo '<div class="options_group">';
     woocommerce_wp_text_input(
@@ -21,6 +29,15 @@ function ip_core_product_presentation_fields(): void {
             'desc_tip'    => true,
         )
     );
+    woocommerce_wp_select(
+        array(
+            'id'          => '_ip_product_landing_page_id',
+            'label'       => __( 'Extended product story', 'illuminated-path-core' ),
+            'options'     => ip_core_product_landing_page_options(),
+            'description' => __( 'Optional WordPress page rendered inside this product after the normal description. Build that page with Elementor or blocks for page previews, image/text sections, reviews, video or other book-specific storytelling.', 'illuminated-path-core' ),
+            'desc_tip'    => true,
+        )
+    );
     echo '</div>';
 }
 add_action( 'woocommerce_product_options_general_product_data', 'ip_core_product_presentation_fields', 35 );
@@ -31,6 +48,10 @@ function ip_core_save_product_presentation_fields( WC_Product $product ): void {
     }
     if ( isset( $_POST['_ip_marketing_callout'] ) ) {
         $product->update_meta_data( '_ip_marketing_callout', sanitize_textarea_field( wp_unslash( $_POST['_ip_marketing_callout'] ) ) );
+    }
+    if ( isset( $_POST['_ip_product_landing_page_id'] ) ) {
+        $page_id = absint( wp_unslash( $_POST['_ip_product_landing_page_id'] ) );
+        $product->update_meta_data( '_ip_product_landing_page_id', $page_id );
     }
 }
 add_action( 'woocommerce_admin_process_product_object', 'ip_core_save_product_presentation_fields', 35 );
@@ -59,6 +80,33 @@ function ip_core_product_trust_row(): void {
 }
 add_action( 'woocommerce_single_product_summary', 'ip_core_product_trust_row', 36 );
 
+function ip_core_render_extended_product_story(): void {
+    global $product;
+    if ( ! $product instanceof WC_Product ) { return; }
+    $page_id = absint( $product->get_meta( '_ip_product_landing_page_id' ) );
+    if ( ! $page_id ) { return; }
+    $page = get_post( $page_id );
+    if ( ! $page instanceof WP_Post || 'page' !== $page->post_type || ! in_array( $page->post_status, array( 'publish', 'private' ), true ) ) { return; }
+
+    $content = '';
+    if ( did_action( 'elementor/loaded' ) && class_exists( '\\Elementor\\Plugin' ) ) {
+        try {
+            $document = \Elementor\Plugin::$instance->documents->get( $page_id );
+            if ( $document && method_exists( $document, 'is_built_with_elementor' ) && $document->is_built_with_elementor() ) {
+                $content = (string) \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $page_id, true );
+            }
+        } catch ( Throwable $e ) {
+            $content = '';
+        }
+    }
+    if ( '' === trim( $content ) ) {
+        $content = apply_filters( 'the_content', $page->post_content );
+    }
+    if ( '' === trim( wp_strip_all_tags( $content ) ) && false === strpos( $content, '<img' ) ) { return; }
+    echo '<section class="ip-product-extended-story">' . $content . '</section>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- rendered WP/Elementor page content.
+}
+add_action( 'woocommerce_after_single_product_summary', 'ip_core_render_extended_product_story', 12 );
+
 function ip_core_same_series_products( WC_Product $product, int $limit = 8 ): array {
     $terms = wp_get_post_terms( $product->get_id(), 'ip_book_series' );
     if ( is_wp_error( $terms ) || empty( $terms ) ) { return array(); }
@@ -72,8 +120,7 @@ function ip_core_same_series_products( WC_Product $product, int $limit = 8 ): ar
             'tax_query'      => array(
                 array( 'taxonomy' => 'ip_book_series', 'field' => 'term_id', 'terms' => $term_ids ),
             ),
-            'orderby'        => 'menu_order date',
-            'order'          => 'ASC',
+            'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
             'fields'         => 'ids',
         )
     );
