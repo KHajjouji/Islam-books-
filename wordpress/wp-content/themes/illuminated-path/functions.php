@@ -19,4 +19,5 @@ require_once IP_THEME_DIR . '/inc/woocommerce.php';
 require_once IP_THEME_DIR . '/inc/catalog.php';
 require_once IP_THEME_DIR . '/inc/patterns.php';
 require_once IP_THEME_DIR . '/inc/customizer.php';
+require_once IP_THEME_DIR . '/inc/home-controls.php';
 require_once IP_THEME_DIR . '/inc/elementor.php';
