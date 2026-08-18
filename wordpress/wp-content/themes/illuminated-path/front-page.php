@@ -1,9 +1,9 @@
 <?php
 get_header();
-$hero_image         = get_theme_mod( 'ip_hero_image', '' );
-$front_page_id      = get_queried_object_id();
+$hero_image          = get_theme_mod( 'ip_hero_image', '' );
+$front_page_id       = get_queried_object_id();
 $custom_home_content = $front_page_id ? (string) get_post_field( 'post_content', $front_page_id ) : '';
-$home_mode          = (string) get_theme_mod( 'ip_home_layout_mode', 'default' );
+$home_mode           = (string) get_theme_mod( 'ip_home_layout_mode', 'default' );
 if ( 'default' === $home_mode && get_theme_mod( 'ip_home_use_page_content', false ) ) {
     $home_mode = 'editor_after_hero';
 }
@@ -30,6 +30,10 @@ if ( 'full_builder' === $home_mode ) :
 <div class="container product-home-sections">
 <?php if ( shortcode_exists( 'ip_book_slider' ) ) { echo do_shortcode( '[ip_book_slider title="' . esc_attr__( 'New releases', 'illuminated-path' ) . '" subtitle="' . esc_attr__( 'Fresh stories and new editions for your family library.', 'illuminated-path' ) . '" source="newest" limit="8" link="' . esc_url( ip_shop_url() ) . '"]' ); echo do_shortcode( '[ip_book_slider title="' . esc_attr__( 'Best sellers', 'illuminated-path' ) . '" subtitle="' . esc_attr__( 'Books families return to again and again.', 'illuminated-path' ) . '" source="best_selling" limit="8" link="' . esc_url( ip_shop_url() ) . '"]' ); } else { ip_render_product_rail( array( 'title' => ip_text( 'featured_title' ), 'featured' => true, 'limit' => 8 ) ); } ?>
 </div>
+
+<?php if ( shortcode_exists( 'ip_home_mission' ) ) : ?>
+<section class="home-mission-section"><div class="container"><?php echo do_shortcode( '[ip_home_mission]' ); ?></div></section>
+<?php endif; ?>
 
 <?php $spotlight_id = absint( get_theme_mod( 'ip_home_spotlight_product_id', 0 ) ); if ( $spotlight_id && shortcode_exists( 'ip_product_spotlight' ) ) : ?>
 <section class="section-pad"><div class="container"><?php echo do_shortcode( '[ip_product_spotlight id="' . $spotlight_id . '" eyebrow="' . esc_attr__( 'Book spotlight', 'illuminated-path' ) . '" body="' . esc_attr( (string) get_theme_mod( 'ip_home_spotlight_body', '' ) ) . '"]' ); ?></div></section>
