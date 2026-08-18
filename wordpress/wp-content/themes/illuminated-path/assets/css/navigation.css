@@ -1,0 +1,20 @@
+/* WordPress menu structure + responsive branded navigation. */
+.brand-custom-logo{display:block;max-height:54px;width:auto;max-width:220px;object-fit:contain}
+.main-nav>.primary-menu{display:flex;align-items:center;gap:24px;list-style:none;margin:0;padding:0}
+.main-nav>.primary-menu>li{margin:0;padding:0}
+.main-nav>.primary-menu>li>a{display:flex;align-items:center;min-height:78px}
+.main-nav .sub-menu{list-style:none;margin:0}
+.main-nav .menu-item-has-children>a:after{content:'⌄';font-size:.72em;margin-left:5px;opacity:.65}
+.main-nav .sub-menu .menu-item-has-children>a:after{content:'›';float:right;margin-left:16px}
+.main-nav .sub-menu .sub-menu:not(.mega-menu .sub-menu .sub-menu){left:100%;top:-14px}
+.site-footer .brand-custom-logo{filter:brightness(0) invert(1);max-height:46px}
+
+@media(max-width:900px){
+  .main-nav.is-open{display:block!important;max-height:calc(100vh - 100px);overflow:auto}
+  .main-nav.is-open>.primary-menu{display:flex;flex-direction:column;align-items:stretch;gap:2px}
+  .main-nav.is-open>.primary-menu>li>a{min-height:auto;padding:10px 8px}
+  .main-nav.is-open .menu-item-has-children>a:after{margin-left:auto}
+  .main-nav.is-open .sub-menu{position:static!important;display:grid!important;transform:none!important;width:auto!important;min-width:0!important;box-shadow:none!important;border:0!important;background:var(--ip-brand-ivory)!important;margin:2px 0 8px!important;padding:8px 12px!important;border-radius:12px!important}
+  .main-nav.is-open .sub-menu .sub-menu{padding:4px 0 4px 14px!important;background:transparent!important}
+  .main-nav.is-open .sub-menu a{white-space:normal!important}
+}

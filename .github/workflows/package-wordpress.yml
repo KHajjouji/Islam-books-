@@ -1,0 +1,56 @@
+name: Package WordPress Storefront
+
+on:
+  push:
+    branches:
+      - feature/wordpress-woocommerce-storefront
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate PHP syntax
+        run: |
+          php -v
+          find wordpress -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Build ZIP packages
+        run: |
+          mkdir -p dist/full-package
+          cp -R wordpress dist/full-package/wordpress
+          (cd dist/full-package && zip -r ../little-muslim-books-wordpress-full.zip wordpress)
+          (cd wordpress/wp-content/themes && zip -r ../../../dist/illuminated-path-theme.zip illuminated-path)
+          (cd wordpress/wp-content/plugins && zip -r ../../../dist/illuminated-path-core-plugin.zip illuminated-path-core)
+          unzip -t dist/little-muslim-books-wordpress-full.zip
+          unzip -t dist/illuminated-path-theme.zip
+          unzip -t dist/illuminated-path-core-plugin.zip
+
+      - name: Upload full package
+        uses: actions/upload-artifact@v4
+        with:
+          name: little-muslim-books-wordpress-full
+          path: dist/little-muslim-books-wordpress-full.zip
+          if-no-files-found: error
+
+      - name: Upload installable theme
+        uses: actions/upload-artifact@v4
+        with:
+          name: illuminated-path-theme
+          path: dist/illuminated-path-theme.zip
+          if-no-files-found: error
+
+      - name: Upload installable plugin
+        uses: actions/upload-artifact@v4
+        with:
+          name: illuminated-path-core-plugin
+          path: dist/illuminated-path-core-plugin.zip
+          if-no-files-found: error

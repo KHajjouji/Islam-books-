@@ -1,0 +1,1 @@
+<?php if(!defined('ABSPATH')){exit;}if(is_active_sidebar('shop-sidebar')):?><aside class="shop-sidebar" aria-label="<?php esc_attr_e('Shop filters','illuminated-path'); ?>"><?php dynamic_sidebar('shop-sidebar'); ?></aside><?php endif; ?>

@@ -1,0 +1,10 @@
+/* Product-specific landing content attached from WordPress/Elementor pages. */
+.ip-product-extended-story{clear:both;margin:56px 0 30px;padding:0;width:100%}
+.ip-product-extended-story>.wp-block-group,
+.ip-product-extended-story>.wp-block-columns,
+.ip-product-extended-story>.wp-block-cover,
+.ip-product-extended-story>.elementor{margin-left:auto;margin-right:auto}
+.ip-product-extended-story h2,.ip-product-extended-story h3{color:var(--ip-brand-navy)}
+.ip-product-extended-story .wp-block-image img{border-radius:22px}
+.ip-product-extended-story .wp-block-cover{border-radius:28px;overflow:hidden}
+.ip-product-extended-story .wp-block-button__link{border-radius:999px;background:var(--ip-brand-green);font-weight:800}

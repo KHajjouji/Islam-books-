@@ -1,0 +1,51 @@
+/* Brand & Visual Commerce Builder layer. */
+
+:root{
+  --ip-brand-green:var(--emerald,#005B3A);
+  --ip-brand-gold:var(--gold,#EAB308);
+  --ip-brand-navy:var(--navy,#10283B);
+  --ip-brand-ivory:var(--ivory,#FAF7F0);
+  --ip-radius-xl:32px;
+  --ip-radius-lg:24px;
+  --ip-shadow-soft:0 20px 55px rgba(16,40,59,.10);
+}
+
+/* Elementor and Gutenberg pages inherit the same brand language. */
+.ip-elementor-page .elementor-widget-container,
+.store-landing-page,
+.page-content-container{font-family:inherit;color:var(--ip-brand-navy)}
+.ip-elementor-page .elementor-button,
+.store-landing-page .wp-element-button{border-radius:999px;font-weight:800}
+
+/* Product spotlight. */
+.ip-product-spotlight{display:grid;grid-template-columns:minmax(260px,.85fr) minmax(0,1.15fr);gap:clamp(28px,5vw,76px);align-items:center;margin:44px 0;padding:clamp(28px,5vw,68px);border-radius:var(--ip-radius-xl);background:linear-gradient(135deg,#fff 0%,var(--ip-brand-ivory) 100%);border:1px solid rgba(16,40,59,.09);box-shadow:var(--ip-shadow-soft)}
+.ip-product-spotlight.ip-image-right .ip-product-spotlight-image{order:2}.ip-product-spotlight.ip-image-right .ip-product-spotlight-copy{order:1}
+.ip-product-spotlight-image{display:flex;justify-content:center;align-items:center;min-height:320px}
+.ip-product-spotlight-image img{max-height:520px;width:auto;object-fit:contain;filter:drop-shadow(0 24px 26px rgba(16,40,59,.16));transition:transform .25s ease}
+.ip-product-spotlight-image:hover img{transform:translateY(-5px) rotate(-.4deg)}
+.ip-product-spotlight-copy{position:relative}.ip-spotlight-eyebrow{display:inline-flex;font-size:.78rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase;color:var(--ip-brand-green);margin-bottom:12px}.ip-spotlight-badge{display:inline-flex;margin-left:10px;padding:6px 10px;border-radius:999px;background:var(--ip-brand-gold);color:#1f2800;font-size:.68rem;font-weight:900;letter-spacing:.08em}.ip-product-spotlight h2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,4vw,3.8rem);line-height:1.02;margin:.15em 0;color:var(--ip-brand-navy)}.ip-spotlight-subtitle{font-weight:800;color:var(--ip-brand-green);font-size:1.1rem}.ip-product-spotlight-copy>p:not(.ip-spotlight-subtitle){font-size:1.08rem;line-height:1.75;color:var(--muted,#607064);max-width:62ch}.ip-spotlight-price{font-size:1.45rem;font-weight:900;margin:20px 0}.ip-product-spotlight .button{display:inline-flex!important;border-radius:999px!important;background:var(--ip-brand-green)!important;color:#fff!important;padding:14px 22px!important;font-weight:900!important}
+
+/* Reviews / social proof. */
+.ip-review-section{margin:48px 0}.ip-review-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.ip-review-card{padding:26px;border-radius:var(--ip-radius-lg);background:#fff;border:1px solid rgba(16,40,59,.09);box-shadow:0 14px 35px rgba(16,40,59,.06)}.ip-review-stars{color:var(--ip-brand-gold);letter-spacing:.05em;font-size:1rem}.ip-review-card blockquote{margin:18px 0;font-family:Georgia,serif;font-size:1.05rem;line-height:1.65;color:var(--ip-brand-navy)}.ip-review-card>p{display:flex;flex-direction:column;gap:2px;margin:0}.ip-review-card>p span{font-size:.78rem;color:var(--muted,#607064)}
+
+/* Campaign banner widget. */
+.ip-sale-banner{min-height:320px;display:flex;align-items:center;padding:clamp(32px,6vw,72px);margin:42px 0;border-radius:var(--ip-radius-xl);background:linear-gradient(135deg,var(--ip-brand-green),#0b6a47);background-size:cover;background-position:center;color:#fff;overflow:hidden;box-shadow:var(--ip-shadow-soft)}.ip-sale-banner>div{max-width:680px}.ip-sale-banner-eyebrow{display:inline-block;font-size:.75rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#ffe36a}.ip-sale-banner h2{font-size:clamp(2.2rem,5vw,4.2rem);line-height:1;margin:.2em 0;color:#fff}.ip-sale-banner p{font-size:1.08rem;line-height:1.7;color:rgba(255,255,255,.88)}.ip-sale-banner-code{display:flex;align-items:center;gap:10px}.ip-sale-banner-code span{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em}.ip-sale-banner-code strong{padding:8px 13px;background:#fff;color:var(--ip-brand-green);border-radius:10px;letter-spacing:.08em}.ip-sale-banner .button{border-radius:999px!important;background:var(--ip-brand-gold)!important;color:#1f2a12!important;font-weight:900!important;padding:14px 22px!important}
+
+/* Collection cards can use taxonomy images. */
+.ip-collection-shortcode-card{position:relative;overflow:hidden}.ip-collection-shortcode-image{display:block;margin:-1px -1px 18px;height:170px;overflow:hidden}.ip-collection-shortcode-image img{width:100%;height:100%;object-fit:cover;transition:transform .25s ease}.ip-collection-shortcode-card:hover .ip-collection-shortcode-image img{transform:scale(1.035)}
+
+/* Rich global footer. */
+.site-footer .footer-grid-rich{display:grid;grid-template-columns:minmax(220px,1.35fr) repeat(3,minmax(140px,.75fr));gap:clamp(28px,4vw,60px);padding-top:58px}.footer-column h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:15px}.footer-newsletter-area{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);gap:28px;align-items:center;margin-top:8px;padding:28px;border-radius:22px;background:rgba(255,255,255,.06)}.footer-socials{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.footer-socials a{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:42px;padding:0 12px;border:1px solid rgba(255,255,255,.15);border-radius:999px;text-decoration:none}.footer-payment-note{font-size:.78rem;opacity:.72;margin-top:14px}
+
+/* Native WP mega-menu support: add CSS class `mega-menu` to any top-level menu item. */
+.main-nav .menu-item{position:relative}.main-nav .sub-menu{display:none;position:absolute;top:100%;left:0;min-width:230px;padding:14px;background:#fff;border:1px solid rgba(16,40,59,.09);border-radius:18px;box-shadow:0 22px 60px rgba(16,40,59,.14);z-index:60}.main-nav .menu-item:hover>.sub-menu,.main-nav .menu-item:focus-within>.sub-menu{display:grid}.main-nav .sub-menu a{display:block;padding:9px 11px;border-radius:10px;white-space:nowrap}.main-nav .sub-menu a:hover{background:var(--ip-brand-ivory)}.main-nav .mega-menu{position:static}.main-nav .mega-menu>.sub-menu{left:50%;transform:translateX(-50%);width:min(920px,92vw);grid-template-columns:repeat(3,minmax(0,1fr));padding:24px}.main-nav .mega-menu>.sub-menu>li>a{font-weight:850}.main-nav .mega-menu>.sub-menu .sub-menu{position:static;display:grid!important;box-shadow:none;border:0;padding:5px 0 0;background:transparent;min-width:0}.main-nav .mega-menu>.sub-menu .sub-menu a{font-weight:500;padding:6px 0;color:var(--muted,#607064)}
+
+/* Product page brand continuity. */
+.single-product div.product{border-radius:26px}.single-product .summary .product_title{font-family:'Playfair Display',Georgia,serif;line-height:1.04}.single-product .woocommerce-product-gallery{border-radius:24px}.single-product .woocommerce-tabs{margin-top:46px}.single-product .woocommerce-tabs .tabs{display:flex;gap:10px;flex-wrap:wrap;border:0!important}.single-product .woocommerce-tabs .tabs li{border:0!important;border-radius:999px!important;background:var(--ip-brand-ivory)!important}.single-product .woocommerce-tabs .tabs li.active{background:var(--ip-brand-green)!important}.single-product .woocommerce-tabs .tabs li.active a{color:#fff!important}.single-product .related.products>h2,.single-product .upsells.products>h2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.8rem,3vw,2.7rem)}
+.ip-product-marketing-callout{margin:18px 0;padding:17px 18px;border-left:4px solid var(--ip-brand-gold);border-radius:0 14px 14px 0;background:var(--ip-brand-ivory)}.ip-product-marketing-callout span{display:inline-flex;margin-bottom:6px;padding:5px 9px;border-radius:999px;background:var(--ip-brand-gold);font-size:.67rem;font-weight:900;letter-spacing:.08em;color:#263000}.ip-product-marketing-callout p{margin:0;line-height:1.65;color:var(--ip-brand-navy);font-weight:650}.ip-product-trust-row{display:grid;gap:8px;margin:20px 0;padding:16px 0;border-top:1px solid rgba(16,40,59,.1);border-bottom:1px solid rgba(16,40,59,.1);font-size:.84rem;color:var(--muted,#607064)}.ip-product-trust-row span{display:flex;gap:7px}.ip-single-series{clear:both;margin:54px 0}.ip-single-series .ip-shortcode-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+/* Full-width visual builder page. */
+.page-template-elementor-full-width .site-main,.ip-full-width-builder{width:100%;max-width:none;margin:0;padding:0}.ip-full-width-builder>.entry-content{width:100%;max-width:none;margin:0}
+
+@media(max-width:900px){.ip-product-spotlight{grid-template-columns:1fr}.ip-product-spotlight.ip-image-right .ip-product-spotlight-image,.ip-product-spotlight.ip-image-right .ip-product-spotlight-copy{order:initial}.ip-review-grid{grid-template-columns:1fr}.site-footer .footer-grid-rich{grid-template-columns:repeat(2,minmax(0,1fr))}.footer-newsletter-area{grid-template-columns:1fr}.main-nav .mega-menu>.sub-menu{position:static;transform:none;width:auto;grid-template-columns:1fr}.ip-single-series .ip-shortcode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.site-footer .footer-grid-rich{grid-template-columns:1fr}.ip-product-spotlight{padding:24px}.ip-product-spotlight-image{min-height:220px}.ip-sale-banner{border-radius:22px;padding:30px 22px}.ip-single-series .ip-shortcode-grid{grid-template-columns:1fr}}
