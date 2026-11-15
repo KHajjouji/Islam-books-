@@ -128,6 +128,14 @@ function ip_core_elementor_starter_specs(): array {
             ip_core_elementor_slider( __( 'Bilingual books', 'illuminated-path-core' ), 'newest', 'bilingual-books', array( 'category' => 'bilingual' ) ),
             ip_core_elementor_collection_grid( __( 'Shop by language', 'illuminated-path-core' ), 'ip_book_language', 'bilingual-languages' ),
         ),
+        'islamic-bedtime-stories' => array(
+            ip_core_elementor_hero( __( 'Quiet stories for the end of the day', 'illuminated-path-core' ), __( 'Islamic Bedtime Stories', 'illuminated-path-core' ), __( 'Gentle family reading that creates space for gratitude, dua, reflection and the reassuring rhythms of Muslim home life.', 'illuminated-path-core' ), 'bedtime' ),
+            ip_core_elementor_slider( __( 'Bedtime reading', 'illuminated-path-core' ), 'newest', 'bedtime-books', array( 'category' => 'bedtime' ) ),
+        ),
+        'islamic-values-books-for-kids' => array(
+            ip_core_elementor_hero( __( 'Character in everyday life', 'illuminated-path-core' ), __( 'Islamic Values & Akhlaq Books for Kids', 'illuminated-path-core' ), __( 'Stories that help families discuss patience, honesty, gratitude, generosity, mercy, responsibility and good manners.', 'illuminated-path-core' ), 'values' ),
+            ip_core_elementor_slider( __( 'Akhlaq & values', 'illuminated-path-core' ), 'newest', 'values-books', array( 'category' => 'akhlaq-values' ) ),
+        ),
         'new-releases' => array(
             ip_core_elementor_hero( __( 'Fresh from the studio', 'illuminated-path-core' ), __( 'New Releases', 'illuminated-path-core' ), __( 'The latest books, new editions and additions to the Little Muslim Books collection.', 'illuminated-path-core' ), 'new-releases' ),
             ip_core_elementor_shortcode_widget( '[ip_book_grid source="newest" limit="24"]', 'new-releases-grid' ),
