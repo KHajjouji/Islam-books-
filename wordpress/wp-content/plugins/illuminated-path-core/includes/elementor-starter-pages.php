@@ -219,7 +219,8 @@ function ip_core_elementor_is_generated_page( WP_Post $page ): bool {
     $specs = ip_core_elementor_starter_specs();
     if ( ! isset( $specs[ $page->post_name ] ) ) { return false; }
     $content = (string) $page->post_content;
-    return str_contains( $content, '<!-- ip-brand-starter -->' )
+    return str_contains( $content, '<!-- ip-production-editorial-v1 -->' )
+        || str_contains( $content, '<!-- ip-brand-starter -->' )
         || str_contains( $content, '<!-- ip-parent-message-v2 -->' )
         || str_contains( $content, 'Introduce your publishing mission' )
         || str_contains( $content, 'Replace this starter' )
