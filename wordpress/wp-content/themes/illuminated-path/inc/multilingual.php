@@ -48,3 +48,46 @@ function ip_language_switcher(): void {
     foreach ( $links as $link ) { printf( '<a href="%1$s" lang="%2$s"%3$s>%4$s</a>', esc_url($link['url']), esc_attr(strtolower($link['code'])), $link['current'] ? ' aria-current="page"' : '', esc_html($link['code']) ); }
     echo '</div></div>';
 }
+
+
+/**
+ * Translate editable Customizer strings through Polylang/WPML when available.
+ * The stored theme_mod remains the source value; translation plugins own the
+ * translated variants.
+ */
+function ip_theme_translatable_mods(): array {
+    return array(
+        'ip_brand_suffix'       => __( 'Islamic children’s books', 'illuminated-path' ),
+        'ip_hero_eyebrow'       => __( 'Stories that nurture faith and curiosity', 'illuminated-path' ),
+        'ip_hero_title'         => __( 'Beautiful Islamic books for growing Muslim hearts.', 'illuminated-path' ),
+        'ip_hero_body'          => __( 'Thoughtful children’s books, bilingual editions and meaningful stories for Muslim families around the world.', 'illuminated-path' ),
+        'ip_promo_text'         => __( 'Free shipping on qualifying orders', 'illuminated-path' ),
+        'ip_home_spotlight_body'=> '',
+    );
+}
+
+function ip_register_translatable_theme_mods(): void {
+    foreach ( ip_theme_translatable_mods() as $id => $fallback ) {
+        $value = trim( (string) get_theme_mod( $id, $fallback ) );
+        if ( '' === $value ) {
+            continue;
+        }
+        if ( function_exists( 'pll_register_string' ) ) {
+            pll_register_string( 'illuminated-path-' . $id, $value, 'Little Muslim Books — Theme', false );
+        }
+        do_action( 'wpml_register_single_string', 'Little Muslim Books — Theme', $id, $value );
+    }
+}
+add_action( 'admin_init', 'ip_register_translatable_theme_mods', 40 );
+
+function ip_localized_theme_mod( string $id, string $fallback = '' ): string {
+    $value = (string) get_theme_mod( $id, $fallback );
+    if ( '' === $value ) {
+        return '';
+    }
+    if ( function_exists( 'pll__' ) ) {
+        $value = (string) pll__( $value );
+    }
+    $value = (string) apply_filters( 'wpml_translate_single_string', $value, 'Little Muslim Books — Theme', $id );
+    return $value;
+}
