@@ -105,6 +105,8 @@ function ip_core_publish_safe_editorial_pages(): array {
         'quran-stories-for-kids',
         'ramadan-eid-books',
         'bilingual-islamic-books',
+        'islamic-bedtime-stories',
+        'islamic-values-books-for-kids',
         'new-releases',
         'best-sellers',
         'special-offers',
@@ -259,6 +261,7 @@ function ip_core_install_production_site(): array {
         'base_pages'        => array(),
         'brand_pages'       => array(),
         'production_pages'  => array(),
+        'editorial_pages'   => array(),
         'published_pages'   => array(),
         'categories'        => array(),
         'elementor_pages'   => array(),
@@ -274,6 +277,9 @@ function ip_core_install_production_site(): array {
     }
 
     $result['production_pages'] = ip_core_ensure_production_pages();
+    if ( function_exists( 'ip_core_install_production_editorial_content' ) ) {
+        $result['editorial_pages'] = ip_core_install_production_editorial_content();
+    }
     $result['published_pages']  = ip_core_publish_safe_editorial_pages();
     $result['categories']       = ip_core_ensure_product_categories();
 
@@ -348,6 +354,7 @@ function ip_core_render_production_site_page(): void {
                         <li><?php echo esc_html( sprintf( __( '%d base page(s) created.', 'illuminated-path-core' ), count( $summary['base_pages'] ) ) ); ?></li>
                         <li><?php echo esc_html( sprintf( __( '%d brand page(s) prepared.', 'illuminated-path-core' ), count( $summary['brand_pages'] ) ) ); ?></li>
                         <li><?php echo esc_html( sprintf( __( '%d production utility page(s) created.', 'illuminated-path-core' ), count( $summary['production_pages'] ) ) ); ?></li>
+                        <li><?php echo esc_html( sprintf( __( '%d production editorial page(s) created or upgraded.', 'illuminated-path-core' ), count( $summary['editorial_pages'] ) ) ); ?></li>
                         <li><?php echo esc_html( sprintf( __( '%d safe editorial page(s) published.', 'illuminated-path-core' ), count( $summary['published_pages'] ) ) ); ?></li>
                         <li><?php echo esc_html( sprintf( __( '%d book category/categories created.', 'illuminated-path-core' ), count( $summary['categories'] ) ) ); ?></li>
                         <li><?php echo esc_html( sprintf( __( '%d Elementor layout(s) prepared.', 'illuminated-path-core' ), count( $summary['elementor_pages'] ) ) ); ?></li>
