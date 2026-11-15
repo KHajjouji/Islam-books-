@@ -57,6 +57,7 @@ function ip_core_boot(): void {
     require_once IP_CORE_DIR . 'includes/elementor-starter-pages.php';
     require_once IP_CORE_DIR . 'includes/production-site.php';
     require_once IP_CORE_DIR . 'includes/ecosystem.php';
+    require_once IP_CORE_DIR . 'includes/legacy-urls.php';
 
     /** Academy/family learning is intentionally outside this commercial plugin. */
 }
