@@ -23,6 +23,26 @@ jobs:
           php -v
           find wordpress -type f -name '*.php' -print0 | xargs -0 -n1 php -l
 
+      - name: Validate release integration
+        run: |
+          set -euo pipefail
+          test -f wordpress/wp-content/plugins/illuminated-path-core/includes/production-site.php
+          test -f wordpress/wp-content/plugins/illuminated-path-core/includes/production-content.php
+          test -f wordpress/wp-content/plugins/illuminated-path-core/includes/elementor-starter-pages.php
+          test -f wordpress/wp-content/plugins/illuminated-path-core/includes/multilingual-integration.php
+          test -f wordpress/wp-content/plugins/illuminated-path-core/includes/ecosystem.php
+          test -f wordpress/wp-content/themes/illuminated-path/assets/css/account.css
+          grep -q "Version: 0.7.0" wordpress/wp-content/plugins/illuminated-path-core/illuminated-path-core.php
+          grep -q "IP_CORE_VERSION', '0.7.0" wordpress/wp-content/plugins/illuminated-path-core/illuminated-path-core.php
+          grep -q "Version: 0.7.0" wordpress/wp-content/themes/illuminated-path/style.css
+          grep -q "IP_THEME_VERSION', '0.7.0" wordpress/wp-content/themes/illuminated-path/functions.php
+          test "$(grep -c "require_once IP_CORE_DIR . 'includes/elementor-starter-pages.php';" wordpress/wp-content/plugins/illuminated-path-core/illuminated-path-core.php)" -eq 1
+          grep -q "includes/production-content.php" wordpress/wp-content/plugins/illuminated-path-core/illuminated-path-core.php
+          grep -q "includes/production-site.php" wordpress/wp-content/plugins/illuminated-path-core/illuminated-path-core.php
+          grep -q "includes/ecosystem.php" wordpress/wp-content/plugins/illuminated-path-core/illuminated-path-core.php
+          python -m json.tool wordpress/wp-content/themes/illuminated-path/theme.json >/dev/null
+          find wordpress -type f -name '*.js' -print0 | xargs -0 -r -n1 node --check
+
       - name: Build ZIP packages
         run: |
           mkdir -p dist/full-package
