@@ -23,18 +23,21 @@ It combines:
 
 ## Installation
 
-1. Install WordPress on PlanetHoster, GoDaddy or another normal PHP/MySQL host.
-2. Install and activate WooCommerce.
-3. Upload and activate `illuminated-path-core`.
-4. Upload and activate the `illuminated-path` theme.
-5. Open **WooCommerce → Bookstore Setup** and create the missing starter commercial/SEO pages. They are created as **drafts**, not auto-published.
-6. Edit/translate those pages, publish the pages you actually want, then return to **WooCommerce → Bookstore Setup** and build/refresh the branded menus.
-7. Complete WooCommerce store address, currency, taxes, shipping and transactional-email configuration.
-8. Install your preferred WooCommerce payment gateway.
-9. Install **one** multilingual stack, for example WPML + WooCommerce Multilingual or Polylang + its WooCommerce integration.
-10. Install an SEO plugin such as Rank Math or Yoast. Canonical URLs, hreflang and XML sitemaps should stay with the SEO/multilingual stack rather than being duplicated by the theme.
-11. Install MailPoet or another marketing plugin and place its form in **Newsletter / Marketing** or **Footer Newsletter**.
-12. Elementor is optional. Elementor Free can be used for normal visual pages and the Little Muslim Books widgets. Elementor Pro is needed if you want Elementor Theme Builder to replace global header/footer/single/archive locations.
+1. Install WordPress on a normal supported PHP/MySQL/MariaDB host.
+2. Install and activate the latest stable **WooCommerce**.
+3. Upload and activate **Illuminated Path Core**. WooCommerce is declared as a plugin dependency.
+4. Upload and activate the **Illuminated Path** theme.
+5. If you want drag-and-drop editing, install **Elementor** before running the production installer. Elementor is optional; Gutenberg remains the fallback.
+6. Install one complete multilingual-commerce stack before translating the catalogue: **Polylang + Polylang for WooCommerce** or **WPML with its WooCommerce integration**.
+7. Open **WooCommerce → Production Site Setup → Prepare Production Bookstore**. This creates the real page/navigation/catalog structure, assigns Home and Journal, creates order tracking, installs publishable editorial starter copy, and prepares native Elementor layouts when Elementor is active.
+8. Open **WooCommerce → Bookstore System Check** and resolve every Required item plus the Recommended integrations you intend to use.
+9. Complete WooCommerce store address, currency, taxes, shipping zones, transactional email and at least one production payment gateway.
+10. Install/configure a dedicated SEO plugin such as **Rank Math** or **Yoast**. It should own canonical URLs, hreflang coordination, XML sitemaps and social metadata.
+11. Install/configure **MailPoet** (or another marketing platform) and place its form in **Newsletter / Marketing** or **Footer Newsletter**. Marketing consent remains separate from transactional order email.
+12. Complete the merchant-specific drafts before launch: Shipping & Delivery, Returns & Refunds, Privacy, Terms and Cookie Policy.
+13. Add the real products/covers/prices/ISBNs, real creator profiles, business/contact details and reviewed translations. Never import the old prototype's fake orders/reviews/products as production commerce data.
+
+The older **WooCommerce → Bookstore Setup** screen remains available for granular page/menu operations, but **Production Site Setup** is the preferred first-install workflow.
 
 ## Brand architecture
 
@@ -141,7 +144,7 @@ Slider sources: `newest`, `featured`, `sale`, `best_selling`, `top_rated`, `manu
 - FAQ
 - Contact
 
-These are starter structures. Replace the starter text with final original brand/SEO content and translate each page before publishing.
+Production Site Setup upgrades these generated structures with publishable Little Muslim Books editorial copy and real dynamic WooCommerce sections. It also adds Islamic Bedtime Stories and Islamic Values & Akhlaq pages. Merchant-specific legal, shipping and returns promises intentionally remain drafts until the actual business terms are entered.
 
 ## Header, footer and mega menu
 
@@ -256,10 +259,13 @@ The commercial customer dashboard focuses only on what the bookstore needs now:
 
 - orders and order details/status
 - fulfilment/tracking information when available
+- **Order Updates**, aggregating WooCommerce customer-visible order notes
 - downloads, when a product supports them
 - billing/shipping addresses
 - payment methods supplied by compatible gateways
 - account details
+
+Store staff communicate order-specific information through WooCommerce **Note to customer** order notes. WooCommerce remains the source of truth, emails the note to the customer, and the branded account area also collects those messages in one place.
 
 The old Academy/family-learning dashboard is deliberately not active.
 
@@ -294,4 +300,6 @@ Academy, child profiles, learning activities and progress are outside this packa
 
 ## Production validation
 
-The repository packaging workflow PHP-lints the entire WordPress package and integrity-checks the generated ZIP files. Before production launch, still test the package on a staging WordPress installation with the actual versions/configuration of WooCommerce, Elementor (if used), multilingual plugin, SEO plugin, MailPoet, payment gateways, shipping/tax and invoice plugins.
+The repository packaging workflow PHP-lints the entire WordPress package and integrity-checks the generated ZIP files. The companion plugin also includes **WooCommerce → Bookstore System Check** to verify the intended ecosystem rather than silently replacing it with custom code.
+
+A green repository build means the package is syntactically/package-valid; it is not a substitute for a real staging test. Before production launch, test the installed package with the actual versions/configuration of WooCommerce, Elementor (if used), multilingual plugin, SEO plugin, MailPoet, payment gateways, shipping/tax/invoice/consent extensions and transactional email delivery.
