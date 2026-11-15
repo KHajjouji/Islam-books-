@@ -5,6 +5,8 @@
  * Version: 0.6.0
  * Requires at least: 6.5
  * Requires PHP: 8.0
+ * Requires Plugins: woocommerce
+ * WC tested up to: 11.3
  * WC requires at least: 8.2
  * Text Domain: illuminated-path-core
  * License: GPL-2.0-or-later
@@ -50,6 +52,8 @@ function ip_core_boot(): void {
     require_once IP_CORE_DIR . 'includes/migration.php';
     require_once IP_CORE_DIR . 'includes/store-api.php';
     require_once IP_CORE_DIR . 'includes/elementor.php';
+    require_once IP_CORE_DIR . 'includes/elementor-starter-pages.php';
+    require_once IP_CORE_DIR . 'includes/production-site.php';
     require_once IP_CORE_DIR . 'includes/elementor-starter-pages.php';
 
     /** Academy/family learning is intentionally outside this commercial plugin. */
