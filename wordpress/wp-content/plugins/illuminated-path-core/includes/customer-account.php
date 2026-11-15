@@ -7,9 +7,26 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+function ip_core_register_order_updates_endpoint(): void {
+    add_rewrite_endpoint( 'order-updates', EP_ROOT | EP_PAGES );
+}
+add_action( 'init', 'ip_core_register_order_updates_endpoint', 20 );
+
 function ip_core_commercial_account_menu( array $items ): array {
     unset( $items['learning-library'] );
-    $preferred = array( 'dashboard', 'orders', 'downloads', 'edit-address', 'payment-methods', 'edit-account', 'customer-logout' );
+    if ( isset( $items['orders'] ) ) {
+        $rebuilt = array();
+        foreach ( $items as $key => $label ) {
+            $rebuilt[ $key ] = $label;
+            if ( 'orders' === $key ) {
+                $rebuilt['order-updates'] = __( 'Order updates', 'illuminated-path-core' );
+            }
+        }
+        $items = $rebuilt;
+    } else {
+        $items['order-updates'] = __( 'Order updates', 'illuminated-path-core' );
+    }
+    $preferred = array( 'dashboard', 'orders', 'order-updates', 'downloads', 'edit-address', 'payment-methods', 'edit-account', 'customer-logout' );
     $ordered   = array();
     foreach ( $preferred as $key ) {
         if ( isset( $items[ $key ] ) ) {
@@ -54,8 +71,9 @@ function ip_core_account_dashboard(): void {
     }
 
     $cards = array(
-        'orders'       => array( __( 'Orders', 'illuminated-path-core' ), __( 'View order history and order details.', 'illuminated-path-core' ) ),
-        'edit-address' => array( __( 'Addresses', 'illuminated-path-core' ), __( 'Manage billing and delivery addresses.', 'illuminated-path-core' ) ),
+        'orders'        => array( __( 'Orders', 'illuminated-path-core' ), __( 'View order history and order details.', 'illuminated-path-core' ) ),
+        'order-updates' => array( __( 'Order updates', 'illuminated-path-core' ), __( 'Read customer-visible notes and delivery messages from your orders.', 'illuminated-path-core' ) ),
+        'edit-address'  => array( __( 'Addresses', 'illuminated-path-core' ), __( 'Manage billing and delivery addresses.', 'illuminated-path-core' ) ),
         'edit-account' => array( __( 'Account details', 'illuminated-path-core' ), __( 'Update your name, email and password.', 'illuminated-path-core' ) ),
     );
     echo '<div class="ip-account-links">';
@@ -132,3 +150,76 @@ function ip_core_my_orders_delivery_column( WC_Order $order ): void {
     }
 }
 add_action( 'woocommerce_my_account_my_orders_column_order-delivery', 'ip_core_my_orders_delivery_column' );
+
+
+/**
+ * Central customer-facing timeline using WooCommerce public order notes.
+ * The notes remain owned by WooCommerce, are also visible on each order, and
+ * WooCommerce can email the customer when staff sends a public customer note.
+ */
+function ip_core_account_order_updates(): void {
+    if ( ! is_user_logged_in() ) {
+        return;
+    }
+
+    $orders = wc_get_orders(
+        array(
+            'customer_id' => get_current_user_id(),
+            'limit'       => 30,
+            'orderby'     => 'date',
+            'order'       => 'DESC',
+            'return'      => 'objects',
+        )
+    );
+
+    $updates = array();
+    foreach ( $orders as $order ) {
+        if ( ! $order instanceof WC_Order ) {
+            continue;
+        }
+        foreach ( $order->get_customer_order_notes() as $note ) {
+            if ( ! $note instanceof WP_Comment ) {
+                continue;
+            }
+            $updates[] = array(
+                'timestamp' => strtotime( $note->comment_date_gmt . ' GMT' ) ?: 0,
+                'date'      => $note->comment_date,
+                'content'   => $note->comment_content,
+                'order'     => $order,
+            );
+        }
+    }
+
+    usort(
+        $updates,
+        static function ( array $a, array $b ): int {
+            return (int) $b['timestamp'] <=> (int) $a['timestamp'];
+        }
+    );
+
+    echo '<section class="ip-order-updates">';
+    echo '<div class="ip-account-welcome"><span class="ip-account-kicker">' . esc_html__( 'Messages about your purchases', 'illuminated-path-core' ) . '</span><h2>' . esc_html__( 'Order updates', 'illuminated-path-core' ) . '</h2><p>' . esc_html__( 'Customer-visible notes sent by the bookstore are collected here and remain attached to the order they belong to.', 'illuminated-path-core' ) . '</p></div>';
+
+    if ( ! $updates ) {
+        echo '<div class="woocommerce-info">' . esc_html__( 'There are no order messages yet. Delivery and order-status information is still available in your Orders section.', 'illuminated-path-core' ) . '</div>';
+    } else {
+        echo '<div class="ip-order-update-list">';
+        foreach ( array_slice( $updates, 0, 30 ) as $update ) {
+            /** @var WC_Order $order */
+            $order = $update['order'];
+            echo '<article class="ip-order-update-card">';
+            echo '<div class="ip-order-update-meta"><strong>' . sprintf( esc_html__( 'Order #%s', 'illuminated-path-core' ), esc_html( $order->get_order_number() ) ) . '</strong><span>' . esc_html( mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $update['date'] ) ) . '</span></div>';
+            echo '<div class="ip-order-update-copy">' . wp_kses_post( wpautop( $update['content'] ) ) . '</div>';
+            echo '<a class="text-link" href="' . esc_url( $order->get_view_order_url() ) . '">' . esc_html__( 'View this order', 'illuminated-path-core' ) . ' →</a>';
+            echo '</article>';
+        }
+        echo '</div>';
+    }
+
+    $contact = get_page_by_path( 'contact', OBJECT, 'page' );
+    if ( $contact instanceof WP_Post && 'publish' === $contact->post_status ) {
+        echo '<p class="ip-account-help"><a class="button" href="' . esc_url( get_permalink( $contact ) ) . '">' . esc_html__( 'Need help? Contact us', 'illuminated-path-core' ) . '</a></p>';
+    }
+    echo '</section>';
+}
+add_action( 'woocommerce_account_order-updates_endpoint', 'ip_core_account_order_updates' );
