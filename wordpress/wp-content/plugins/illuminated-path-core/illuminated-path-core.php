@@ -47,6 +47,7 @@ function ip_core_boot(): void {
     require_once IP_CORE_DIR . 'includes/site-setup.php';
     require_once IP_CORE_DIR . 'includes/brand-story.php';
     require_once IP_CORE_DIR . 'includes/parent-message.php';
+    require_once IP_CORE_DIR . 'includes/production-content.php';
     require_once IP_CORE_DIR . 'includes/brand-home.php';
     require_once IP_CORE_DIR . 'includes/seo.php';
     require_once IP_CORE_DIR . 'includes/migration.php';
