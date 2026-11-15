@@ -292,6 +292,8 @@ function ip_core_install_production_site(): array {
         $result['elementor_pages'] = ip_core_elementor_prepare_all_generated_pages( false );
     }
 
+    do_action( 'ip_core_after_production_site_setup', $result );
+
     update_option( 'ip_core_production_site_installed', IP_CORE_VERSION, false );
     flush_rewrite_rules( false );
 
