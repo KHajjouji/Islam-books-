@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Illuminated Path Core
  * Description: Publishing metadata, bookstore catalog tools, visual-commerce widgets, brand storytelling, creator profiles, customer order experience, fulfilment workflows, import utilities and WooCommerce extensions for Little Muslim Books / Illuminated Path.
- * Version: 0.6.0
+ * Version: 0.7.0
  * Requires at least: 6.5
  * Requires PHP: 8.0
  * Requires Plugins: woocommerce
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'IP_CORE_VERSION', '0.6.0' );
+define( 'IP_CORE_VERSION', '0.7.0' );
 define( 'IP_CORE_FILE', __FILE__ );
 define( 'IP_CORE_DIR', plugin_dir_path( __FILE__ ) );
 
@@ -57,7 +57,6 @@ function ip_core_boot(): void {
     require_once IP_CORE_DIR . 'includes/elementor-starter-pages.php';
     require_once IP_CORE_DIR . 'includes/production-site.php';
     require_once IP_CORE_DIR . 'includes/ecosystem.php';
-    require_once IP_CORE_DIR . 'includes/elementor-starter-pages.php';
 
     /** Academy/family learning is intentionally outside this commercial plugin. */
 }
