@@ -19,7 +19,7 @@ function ip_core_render_product_card( WC_Product $product ): string {
         <a class="ip-shortcode-card-image" href="<?php echo esc_url( $permalink ); ?>">
             <?php echo wp_kses_post( $image ); ?>
             <?php if ( $product->is_on_sale() ) : ?>
-                <span class="ip-sale-pill"><?php esc_html_e( 'Sale', 'illuminated-path-core' ); ?></span>
+                <span class="ip-sale-pill"><?php echo esc_html( ip_core_t( 'sale' ) ); ?></span>
             <?php endif; ?>
         </a>
         <div class="ip-shortcode-card-body">
@@ -28,7 +28,7 @@ function ip_core_render_product_card( WC_Product $product ): string {
             <?php endif; ?>
             <h3><a href="<?php echo esc_url( $permalink ); ?>"><?php echo esc_html( $product->get_name() ); ?></a></h3>
             <div class="ip-shortcode-price"><?php echo wp_kses_post( $product->get_price_html() ); ?></div>
-            <a class="button ip-view-book" href="<?php echo esc_url( $permalink ); ?>"><?php esc_html_e( 'View book', 'illuminated-path-core' ); ?></a>
+            <a class="button ip-view-book" href="<?php echo esc_url( $permalink ); ?>"><?php echo esc_html( ip_core_t( 'view_book' ) ); ?></a>
         </div>
     </article>
     <?php
@@ -38,7 +38,7 @@ function ip_core_render_product_card( WC_Product $product ): string {
 function ip_core_shortcode_book_slider( array $atts ): string {
     $atts = shortcode_atts(
         array(
-            'title'    => __( 'Featured books', 'illuminated-path-core' ),
+            'title'    => ip_core_t( 'featured_books' ),
             'subtitle' => '',
             'source'   => 'newest',
             'category' => '',
@@ -81,14 +81,14 @@ function ip_core_shortcode_book_slider( array $atts ): string {
                 <h2><?php echo esc_html( $atts['title'] ); ?></h2>
                 <?php if ( $atts['subtitle'] ) : ?><p><?php echo esc_html( $atts['subtitle'] ); ?></p><?php endif; ?>
             </div>
-            <?php if ( $atts['link'] ) : ?><a class="ip-section-link" href="<?php echo esc_url( $atts['link'] ); ?>"><?php esc_html_e( 'View all', 'illuminated-path-core' ); ?> →</a><?php endif; ?>
+            <?php if ( $atts['link'] ) : ?><a class="ip-section-link" href="<?php echo esc_url( $atts['link'] ); ?>"><?php echo esc_html( ip_core_t( 'view_all' ) ); ?> →</a><?php endif; ?>
         </div>
         <div class="ip-slider-shell">
-            <button class="rail-arrow rail-prev" type="button" aria-label="<?php esc_attr_e( 'Previous books', 'illuminated-path-core' ); ?>">‹</button>
+            <button class="rail-arrow rail-prev" type="button" aria-label="<?php echo esc_attr( ip_core_t( 'previous_books' ) ); ?>">‹</button>
             <div class="ip-shortcode-track" data-product-track>
                 <?php foreach ( $products as $product ) : echo ip_core_render_product_card( $product ); endforeach; ?>
             </div>
-            <button class="rail-arrow rail-next" type="button" aria-label="<?php esc_attr_e( 'Next books', 'illuminated-path-core' ); ?>">›</button>
+            <button class="rail-arrow rail-next" type="button" aria-label="<?php echo esc_attr( ip_core_t( 'next_books' ) ); ?>">›</button>
         </div>
     </section>
     <?php
@@ -139,14 +139,14 @@ function ip_core_shortcode_book_grid( array $atts ): string {
 add_shortcode( 'ip_book_grid', 'ip_core_shortcode_book_grid' );
 
 function ip_core_shortcode_book_search( array $atts ): string {
-    $atts = shortcode_atts( array( 'placeholder' => __( 'Search books, authors or series…', 'illuminated-path-core' ) ), $atts, 'ip_book_search' );
+    $atts = shortcode_atts( array( 'placeholder' => ip_core_t( 'search_placeholder' ) ), $atts, 'ip_book_search' );
     ob_start();
     ?>
     <form class="ip-book-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-        <label class="screen-reader-text" for="ip-book-search-field"><?php esc_html_e( 'Search books', 'illuminated-path-core' ); ?></label>
+        <label class="screen-reader-text" for="ip-book-search-field"><?php echo esc_html( ip_core_t( 'search_books' ) ); ?></label>
         <input id="ip-book-search-field" type="search" name="s" value="<?php echo esc_attr( get_search_query() ); ?>" placeholder="<?php echo esc_attr( $atts['placeholder'] ); ?>">
         <input type="hidden" name="post_type" value="product">
-        <button type="submit"><?php esc_html_e( 'Search', 'illuminated-path-core' ); ?></button>
+        <button type="submit"><?php echo esc_html( ip_core_t( 'search' ) ); ?></button>
     </form>
     <?php
     return (string) ob_get_clean();
@@ -177,7 +177,7 @@ function ip_core_shortcode_collection_grid( array $atts ): string {
         $image    = $thumb_id ? wp_get_attachment_image( $thumb_id, 'medium_large', false, array( 'loading' => 'lazy' ) ) : '';
         echo '<a class="ip-collection-shortcode-card" href="' . esc_url( $url ) . '">';
         if ( $image ) { echo '<span class="ip-collection-shortcode-image">' . wp_kses_post( $image ) . '</span>'; }
-        echo '<span class="ip-collection-shortcode-count">' . esc_html( (string) $term->count ) . '</span><h3>' . esc_html( $term->name ) . '</h3><p>' . esc_html( wp_trim_words( wp_strip_all_tags( $term->description ), 18 ) ) . '</p><span>' . esc_html__( 'Explore', 'illuminated-path-core' ) . ' →</span></a>';
+        echo '<span class="ip-collection-shortcode-count">' . esc_html( (string) $term->count ) . '</span><h3>' . esc_html( $term->name ) . '</h3><p>' . esc_html( wp_trim_words( wp_strip_all_tags( $term->description ), 18 ) ) . '</p><span>' . esc_html( ip_core_t( 'explore' ) ) . ' →</span></a>';
     }
     echo '</div>';
     return (string) ob_get_clean();
@@ -189,11 +189,11 @@ function ip_core_shortcode_product_spotlight( array $atts ): string {
     $atts = shortcode_atts(
         array(
             'id'         => 0,
-            'eyebrow'    => __( 'Featured book', 'illuminated-path-core' ),
+            'eyebrow'    => ip_core_t( 'featured_book' ),
             'heading'    => '',
             'body'       => '',
             'badge'      => '',
-            'button'     => __( 'Discover the book', 'illuminated-path-core' ),
+            'button'     => ip_core_t( 'discover_book' ),
             'image_side' => 'left',
         ),
         $atts,
@@ -233,7 +233,7 @@ add_shortcode( 'ip_product_spotlight', 'ip_core_shortcode_product_spotlight' );
 
 /** Approved WooCommerce reviews as social proof for landing pages. */
 function ip_core_shortcode_review_grid( array $atts ): string {
-    $atts = shortcode_atts( array( 'title' => __( 'What families are saying', 'illuminated-path-core' ), 'limit' => 3 ), $atts, 'ip_review_grid' );
+    $atts = shortcode_atts( array( 'title' => ip_core_t( 'reviews_title' ), 'limit' => 3 ), $atts, 'ip_review_grid' );
     $comments = get_comments(
         array(
             'status'    => 'approve',
