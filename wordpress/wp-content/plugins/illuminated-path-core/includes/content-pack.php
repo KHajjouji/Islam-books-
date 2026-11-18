@@ -326,10 +326,56 @@ add_shortcode( 'ip_newsletter_slot', 'ip_core_shortcode_newsletter_slot' );
 
 function ip_core_content_pack_can_update( WP_Post $page ): bool {
     $stored_hash = (string) get_post_meta( $page->ID, '_ip_content_pack_hash', true );
-    if ( ! $stored_hash ) {
+    if ( ! $stored_hash || ! hash_equals( $stored_hash, hash( 'sha256', (string) $page->post_content ) ) ) {
         return false;
     }
-    return hash_equals( $stored_hash, hash( 'sha256', (string) $page->post_content ) );
+
+    $stored_elementor_hash = (string) get_post_meta( $page->ID, '_ip_content_pack_elementor_hash', true );
+    if ( $stored_elementor_hash ) {
+        $current_elementor = (string) get_post_meta( $page->ID, '_elementor_data', true );
+        if ( ! hash_equals( $stored_elementor_hash, hash( 'sha256', $current_elementor ) ) ) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function ip_core_content_pack_adopt_existing_page( string $key, string $lang, array $spec ): int {
+    $slug = sanitize_title( (string) ( $spec['slug'] ?? '' ) );
+    if ( ! $slug ) {
+        return 0;
+    }
+    $existing = get_page_by_path( $slug, OBJECT, 'page' );
+    if ( ! $existing instanceof WP_Post || get_post_meta( $existing->ID, '_ip_content_pack_key', true ) ) {
+        return 0;
+    }
+
+    $content = (string) $existing->post_content;
+    $generated_markers = array(
+        '<!-- ip-production-editorial-v1 -->',
+        '<!-- ip-parent-message-v2 -->',
+        '<!-- ip-brand-starter -->',
+        'Tell the publishing story',
+        'Add an original introduction',
+        'Introduce your publishing mission',
+    );
+    $is_generated = '' === trim( $content );
+    foreach ( $generated_markers as $marker ) {
+        if ( str_contains( $content, $marker ) ) {
+            $is_generated = true;
+            break;
+        }
+    }
+    if ( ! $is_generated ) {
+        return -1;
+    }
+
+    update_post_meta( $existing->ID, '_ip_content_pack_key', sanitize_key( $key ) );
+    update_post_meta( $existing->ID, '_ip_content_pack_language', sanitize_key( $lang ) );
+    update_post_meta( $existing->ID, '_ip_content_pack_version', (string) ( ip_core_content_pack_data()['version'] ?? '1' ) );
+    update_post_meta( $existing->ID, '_ip_content_pack_hash', hash( 'sha256', $content ) );
+    ip_core_content_pack_assign_language( $existing->ID, $lang );
+    return absint( $existing->ID );
 }
 
 function ip_core_elementor_id( string $seed ): string {
@@ -596,6 +642,8 @@ function ip_core_content_pack_seed_elementor( int $post_id, string $key, string 
     update_post_meta( $post_id, '_elementor_edit_mode', 'builder' );
     update_post_meta( $post_id, '_elementor_template_type', 'wp-page' );
     update_post_meta( $post_id, '_elementor_data', wp_slash( wp_json_encode( ip_core_content_pack_elementor_data( $key, $lang ) ) ) );
+    $stored_elementor = (string) get_post_meta( $post_id, '_elementor_data', true );
+    update_post_meta( $post_id, '_ip_content_pack_elementor_hash', hash( 'sha256', $stored_elementor ) );
     update_post_meta( $post_id, '_wp_page_template', 'templates/elementor-full-width.php' );
     if ( defined( 'ELEMENTOR_VERSION' ) ) {
         update_post_meta( $post_id, '_elementor_version', ELEMENTOR_VERSION );
@@ -949,7 +997,16 @@ function ip_core_install_final_content_pack(): array {
                     ++$result['skipped'];
                 }
             } else {
-                $page_id = wp_insert_post(
+                $adopted = ip_core_content_pack_adopt_existing_page( $key, $lang, $spec );
+                if ( -1 === $adopted ) {
+                    ++$result['skipped'];
+                    continue;
+                }
+                if ( $adopted > 0 ) {
+                    $page_id = $adopted;
+                    $can_write = true;
+                } else {
+                    $page_id = wp_insert_post(
                     array(
                         'post_type'    => 'page',
                         'post_status'  => 'publish',
@@ -966,13 +1023,14 @@ function ip_core_install_final_content_pack(): array {
                     ),
                     true
                 );
-                if ( is_wp_error( $page_id ) ) {
-                    continue;
+                    if ( is_wp_error( $page_id ) ) {
+                        continue;
+                    }
+                    $page_id = absint( $page_id );
+                    ip_core_content_pack_assign_language( $page_id, $lang );
+                    ++$result['created'];
+                    $can_write = true;
                 }
-                $page_id = absint( $page_id );
-                ip_core_content_pack_assign_language( $page_id, $lang );
-                ++$result['created'];
-                $can_write = true;
             }
 
             if ( $page_id ) {
