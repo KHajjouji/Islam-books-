@@ -246,7 +246,7 @@ function ip_core_shortcode_final_page( array $atts ): string {
 add_shortcode( 'ip_final_page', 'ip_core_shortcode_final_page' );
 
 function ip_core_shortcode_latest_posts( array $atts ): string {
-    $atts = shortcode_atts( array( 'title' => ip_core_t( 'read_article' ), 'limit' => 3 ), $atts, 'ip_latest_posts' );
+    $atts = shortcode_atts( array( 'title' => ip_core_t( 'latest_journal' ), 'limit' => 3 ), $atts, 'ip_latest_posts' );
     $posts = get_posts( array( 'post_status' => 'publish', 'numberposts' => max( 1, min( 12, absint( $atts['limit'] ) ) ), 'suppress_filters' => false ) );
     if ( ! $posts ) {
         return '';
