@@ -129,12 +129,21 @@ function ip_core_catalog_query_args( array $args = array() ): array {
     }
 
     if ( ! empty( $args['category'] ) ) {
-        $query['category'] = array( sanitize_title( (string) $args['category'] ) );
+        $category_slug = sanitize_title( (string) $args['category'] );
+        if ( function_exists( 'ip_core_content_pack_translated_term_slug' ) ) {
+            $category_slug = ip_core_content_pack_translated_term_slug( 'product_cat', $category_slug );
+        }
+        $query['category'] = array( $category_slug );
     }
 
     foreach ( array( 'series', 'language', 'theme', 'age', 'format' ) as $arg_key ) {
         if ( ! empty( $args[ $arg_key ] ) ) {
-            $query[ 'ip_' . $arg_key ] = sanitize_text_field( (string) $args[ $arg_key ] );
+            $value = sanitize_text_field( (string) $args[ $arg_key ] );
+        if ( function_exists( 'ip_core_content_pack_translated_term_slug' ) ) {
+            $taxonomy = 'ip_book_' . $arg_key;
+            $value = ip_core_content_pack_translated_term_slug( $taxonomy, $value );
+        }
+        $query[ 'ip_' . $arg_key ] = $value;
         }
     }
     return $query;
