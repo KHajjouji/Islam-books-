@@ -25,7 +25,7 @@ function ip_core_front_strings(): array {
         'en' => array(
             'sale'=>'Sale','view_book'=>'View book','featured_books'=>'Featured books','view_all'=>'View all','previous_books'=>'Previous books','next_books'=>'Next books',
             'search_placeholder'=>'Search books, authors or series…','search_books'=>'Search books','search'=>'Search','explore'=>'Explore','featured_book'=>'Featured book','discover_book'=>'Discover the book',
-            'reviews_title'=>'What families are saying','read_article'=>'Read article','orders_care'=>'Orders & customer care','orders_care_body'=>'Questions about an order, delivery, returns or a book you purchased.',
+            'reviews_title'=>'What families are saying','latest_journal'=>'Latest from the journal','read_article'=>'Read article','orders_care'=>'Orders & customer care','orders_care_body'=>'Questions about an order, delivery, returns or a book you purchased.',
             'schools'=>'Schools, libraries & bookshops','schools_body'=>'Bulk orders, classroom/library enquiries and wholesale conversations.','creative'=>'Creative collaborations','creative_body'=>'Illustrators, writers, educators, designers and creative partners who want to work with us.',
             'press'=>'Press & partnerships','press_body'=>'Media, cultural institutions, events, partnerships and publishing conversations.','response_time'=>'Response time','based_in'=>'Based in',
             'account_kicker'=>'Your bookstore account','welcome'=>'Welcome, %s','account_intro'=>'Track your orders, manage delivery addresses and keep your account information up to date.','orders'=>'Orders','total_purchased'=>'Total purchased',
@@ -37,7 +37,7 @@ function ip_core_front_strings(): array {
         'fr' => array(
             'sale'=>'Promo','view_book'=>'Voir le livre','featured_books'=>'Livres à la une','view_all'=>'Tout voir','previous_books'=>'Livres précédents','next_books'=>'Livres suivants',
             'search_placeholder'=>'Rechercher un livre, un auteur ou une série…','search_books'=>'Rechercher des livres','search'=>'Rechercher','explore'=>'Explorer','featured_book'=>'Livre à la une','discover_book'=>'Découvrir le livre',
-            'reviews_title'=>'Ce que disent les familles','read_article'=>'Lire l’article','orders_care'=>'Commandes & service client','orders_care_body'=>'Questions sur une commande, la livraison, un retour ou un livre acheté.',
+            'reviews_title'=>'Ce que disent les familles','latest_journal'=>'Derniers articles du journal','read_article'=>'Lire l’article','orders_care'=>'Commandes & service client','orders_care_body'=>'Questions sur une commande, la livraison, un retour ou un livre acheté.',
             'schools'=>'Écoles, bibliothèques & librairies','schools_body'=>'Commandes en volume, demandes scolaires/bibliothèques et échanges professionnels.','creative'=>'Collaborations créatives','creative_body'=>'Illustrateurs, auteurs, éducateurs, designers et partenaires créatifs souhaitant travailler avec nous.',
             'press'=>'Presse & partenariats','press_body'=>'Médias, institutions culturelles, événements, partenariats et échanges éditoriaux.','response_time'=>'Délai de réponse','based_in'=>'Basé à',
             'account_kicker'=>'Votre compte librairie','welcome'=>'Bienvenue, %s','account_intro'=>'Suivez vos commandes, gérez vos adresses de livraison et tenez vos informations à jour.','orders'=>'Commandes','total_purchased'=>'Total acheté',
@@ -49,7 +49,7 @@ function ip_core_front_strings(): array {
         'es' => array(
             'sale'=>'Oferta','view_book'=>'Ver libro','featured_books'=>'Libros destacados','view_all'=>'Ver todo','previous_books'=>'Libros anteriores','next_books'=>'Libros siguientes',
             'search_placeholder'=>'Buscar libros, autores o series…','search_books'=>'Buscar libros','search'=>'Buscar','explore'=>'Explorar','featured_book'=>'Libro destacado','discover_book'=>'Descubrir el libro',
-            'reviews_title'=>'Lo que dicen las familias','read_article'=>'Leer artículo','orders_care'=>'Pedidos y atención al cliente','orders_care_body'=>'Consultas sobre un pedido, entrega, devolución o un libro comprado.',
+            'reviews_title'=>'Lo que dicen las familias','latest_journal'=>'Últimos artículos del blog','read_article'=>'Leer artículo','orders_care'=>'Pedidos y atención al cliente','orders_care_body'=>'Consultas sobre un pedido, entrega, devolución o un libro comprado.',
             'schools'=>'Colegios, bibliotecas y librerías','schools_body'=>'Pedidos grandes, consultas para aulas/bibliotecas y conversaciones de venta al por mayor.','creative'=>'Colaboraciones creativas','creative_body'=>'Ilustradores, escritores, educadores, diseñadores y colaboradores creativos que quieran trabajar con nosotros.',
             'press'=>'Prensa y colaboraciones','press_body'=>'Medios, instituciones culturales, eventos, colaboraciones y conversaciones editoriales.','response_time'=>'Tiempo de respuesta','based_in'=>'Con sede en',
             'account_kicker'=>'Tu cuenta de la librería','welcome'=>'Bienvenido/a, %s','account_intro'=>'Sigue tus pedidos, gestiona las direcciones de entrega y mantén actualizada tu información.','orders'=>'Pedidos','total_purchased'=>'Total comprado',
@@ -61,7 +61,7 @@ function ip_core_front_strings(): array {
         'ar' => array(
             'sale'=>'تخفيض','view_book'=>'عرض الكتاب','featured_books'=>'كتب مختارة','view_all'=>'عرض الكل','previous_books'=>'الكتب السابقة','next_books'=>'الكتب التالية',
             'search_placeholder'=>'ابحث عن كتاب أو مؤلف أو سلسلة…','search_books'=>'البحث عن الكتب','search'=>'بحث','explore'=>'استكشف','featured_book'=>'كتاب مميز','discover_book'=>'اكتشف الكتاب',
-            'reviews_title'=>'ماذا تقول العائلات','read_article'=>'اقرأ المقال','orders_care'=>'الطلبات وخدمة العملاء','orders_care_body'=>'أسئلة حول طلب أو توصيل أو إرجاع أو كتاب تم شراؤه.',
+            'reviews_title'=>'ماذا تقول العائلات','latest_journal'=>'أحدث المقالات','read_article'=>'اقرأ المقال','orders_care'=>'الطلبات وخدمة العملاء','orders_care_body'=>'أسئلة حول طلب أو توصيل أو إرجاع أو كتاب تم شراؤه.',
             'schools'=>'المدارس والمكتبات ومحلات الكتب','schools_body'=>'الطلبات الكبيرة واستفسارات الفصول والمكتبات ومحادثات الجملة.','creative'=>'التعاون الإبداعي','creative_body'=>'الرسامون والكتاب والمربون والمصممون والشركاء الإبداعيون الراغبون في العمل معنا.',
             'press'=>'الإعلام والشراكات','press_body'=>'وسائل الإعلام والمؤسسات الثقافية والفعاليات والشراكات والمحادثات المتعلقة بالنشر.','response_time'=>'مدة الرد','based_in'=>'المقر',
             'account_kicker'=>'حسابك في المتجر','welcome'=>'مرحباً، %s','account_intro'=>'تابع طلباتك وأدر عناوين التوصيل وحافظ على تحديث معلومات حسابك.','orders'=>'الطلبات','total_purchased'=>'إجمالي المشتريات',
