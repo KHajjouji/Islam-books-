@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": "Little Muslim Books Final Multilingual Content Pack",
   "languages": {
     "en": {
@@ -4130,6 +4130,290 @@
           "name": "ثنائي اللغة",
           "slug": "ثنائي-اللغة"
         }
+      }
+    }
+  },
+  "posts": {
+    "visual-storytelling": {
+      "en": {
+        "title": "Why visual storytelling matters for Muslim children",
+        "slug": "why-visual-storytelling-matters-muslim-children",
+        "excerpt": "Children remember images, characters and emotional moments. Thoughtful visual storytelling can help faith and heritage become part of that memory.",
+        "sections": [
+          {
+            "h2": "Children already live in a visual world",
+            "p": "From animation and games to picture books and digital media, children learn through visual language every day. Images help them understand characters, places, emotions and relationships before they can explain all of those ideas in words."
+          },
+          {
+            "h2": "Representation is more than seeing a familiar face",
+            "p": "For Muslim children, representation also means encountering family rhythms, Islamic values, Prophetic stories and cultural references with dignity. The goal is not to decorate a generic story with Muslim symbols, but to let faith and culture belong naturally inside the story."
+          },
+          {
+            "h2": "Quality creates attention",
+            "p": "A meaningful subject does not automatically create an engaging book. Illustration, composition, typography and pacing all help invite a child to look closely, ask questions and return. That repeated attention is one of the ways a story becomes part of memory."
+          },
+          {
+            "h2": "Parents remain part of the experience",
+            "p": "The strongest children’s books do not replace family teaching. They create openings for it. A picture can invite a question; a scene can start a conversation; a familiar story can become part of bedtime, Ramadan or a quiet moment shared together."
+          }
+        ]
+      },
+      "fr": {
+        "title": "Pourquoi la narration visuelle compte pour les enfants musulmans",
+        "slug": "pourquoi-narration-visuelle-enfants-musulmans",
+        "excerpt": "Les enfants retiennent les images, les personnages et les moments chargés d’émotion. Une narration visuelle soignée peut aider la foi et l’héritage à entrer dans cette mémoire.",
+        "sections": [
+          {
+            "h2": "Les enfants vivent déjà dans un monde visuel",
+            "p": "De l’animation aux jeux, des albums aux médias numériques, les enfants apprennent chaque jour par le langage visuel. Les images les aident à comprendre personnages, lieux, émotions et relations avant même de pouvoir tout expliquer avec des mots."
+          },
+          {
+            "h2": "La représentation ne se limite pas à un visage familier",
+            "p": "Pour un enfant musulman, elle signifie aussi rencontrer des rythmes familiaux, des valeurs islamiques, des récits prophétiques et des références culturelles avec dignité. Il ne s’agit pas d’ajouter quelques symboles à une histoire générique, mais de laisser la foi et la culture habiter naturellement le récit."
+          },
+          {
+            "h2": "La qualité crée l’attention",
+            "p": "Un sujet important ne suffit pas à faire un livre captivant. L’illustration, la composition, la typographie et le rythme donnent envie à l’enfant d’observer, de questionner et de revenir. C’est souvent ainsi qu’une histoire entre dans la mémoire."
+          },
+          {
+            "h2": "Les parents restent au cœur de l’expérience",
+            "p": "Les meilleurs livres jeunesse ne remplacent pas la transmission familiale. Ils lui ouvrent des portes. Une image peut provoquer une question, une scène lancer une conversation et une histoire familière devenir un moment partagé au coucher ou pendant Ramadan."
+          }
+        ]
+      },
+      "es": {
+        "title": "Por qué la narración visual importa para los niños musulmanes",
+        "slug": "por-que-narracion-visual-ninos-musulmanes",
+        "excerpt": "Los niños recuerdan imágenes, personajes y momentos emocionales. Una buena narración visual puede ayudar a que la fe y la herencia formen parte de esa memoria.",
+        "sections": [
+          {
+            "h2": "Los niños ya viven en un mundo visual",
+            "p": "Desde la animación y los videojuegos hasta los álbumes y los medios digitales, los niños aprenden mediante lenguaje visual todos los días. Las imágenes les ayudan a comprender personajes, lugares, emociones y relaciones antes de poder explicarlo todo con palabras."
+          },
+          {
+            "h2": "Representación es más que ver un rostro familiar",
+            "p": "Para un niño musulmán también significa encontrar rutinas familiares, valores islámicos, historias proféticas y referencias culturales tratadas con dignidad. No se trata de decorar una historia genérica con símbolos musulmanes, sino de permitir que la fe y la cultura pertenezcan de forma natural al relato."
+          },
+          {
+            "h2": "La calidad crea atención",
+            "p": "Un tema con valor no convierte por sí solo un libro en atractivo. Ilustración, composición, tipografía y ritmo ayudan a que el niño observe, pregunte y quiera volver. Esa atención repetida es una de las formas en que una historia entra en la memoria."
+          },
+          {
+            "h2": "Los padres siguen formando parte de la experiencia",
+            "p": "Los mejores libros infantiles no sustituyen la enseñanza familiar. Crean oportunidades para ella. Una imagen puede provocar una pregunta, una escena iniciar una conversación y una historia conocida convertirse en parte de la hora de dormir o de Ramadán."
+          }
+        ]
+      },
+      "ar": {
+        "title": "لماذا يهم السرد البصري للأطفال المسلمين؟",
+        "slug": "لماذا-يهم-السرد-البصري-للأطفال-المسلمين",
+        "excerpt": "يتذكر الأطفال الصور والشخصيات واللحظات المؤثرة. ويمكن للسرد البصري الجيد أن يساعد الإيمان والتراث على أن يصبحا جزءاً من هذه الذاكرة.",
+        "sections": [
+          {
+            "h2": "الأطفال يعيشون أصلاً في عالم بصري",
+            "p": "من الرسوم المتحركة والألعاب إلى كتب الصور والوسائط الرقمية، يتعلم الأطفال كل يوم عبر اللغة البصرية. تساعدهم الصور على فهم الشخصيات والأماكن والمشاعر والعلاقات قبل أن يستطيعوا شرح كل ذلك بالكلمات."
+          },
+          {
+            "h2": "التمثيل أعمق من مجرد رؤية وجه مألوف",
+            "p": "بالنسبة للطفل المسلم، يعني التمثيل أيضاً أن يرى إيقاع الأسرة والقيم الإسلامية وقصص الأنبياء والمرجعيات الثقافية مقدمة بكرامة. الهدف ليس تزيين قصة عامة ببعض الرموز الإسلامية، بل أن يكون الإيمان والثقافة جزءاً طبيعياً من الحكاية."
+          },
+          {
+            "h2": "الجودة تصنع الانتباه",
+            "p": "لا يكفي أن يكون موضوع الكتاب مهماً حتى يصبح جذاباً. الرسم والتكوين والخط والإيقاع كلها تدعو الطفل إلى التوقف والملاحظة والسؤال والعودة. ومن خلال هذا التكرار تصبح القصة جزءاً من الذاكرة."
+          },
+          {
+            "h2": "الآباء جزء من التجربة",
+            "p": "الكتاب الجيد لا يحل محل دور الأسرة في التربية. بل يفتح له باباً. قد تصنع صورة سؤالاً، وقد تبدأ لقطة حواراً، وقد تصبح القصة جزءاً من وقت النوم أو رمضان أو لحظة هادئة يتشاركها الجميع."
+          }
+        ]
+      }
+    },
+    "choosing-books-by-age": {
+      "en": {
+        "title": "How to choose Islamic books for your child’s age",
+        "slug": "how-to-choose-islamic-books-by-age",
+        "excerpt": "Age ranges are useful, but the best choice also considers attention span, reading confidence, interests and how the family plans to use the book.",
+        "sections": [
+          {
+            "h2": "Use age as a guide, not a rule",
+            "p": "Two children of the same age may enjoy very different kinds of books. One may be ready for longer independent reading while another still loves a richly illustrated story read aloud with a parent."
+          },
+          {
+            "h2": "Think about how the book will be used",
+            "p": "A bedtime story, a Ramadan family book, a first book about a Prophet and an independent reader all ask for different pacing, language and visual density. Start with the moment you want the book to serve."
+          },
+          {
+            "h2": "Look for a bridge between familiarity and discovery",
+            "p": "Children often engage best when a book gives them something recognisable and something new. A familiar family value can open the door to a new Islamic concept; a known story can introduce richer vocabulary."
+          },
+          {
+            "h2": "Let interest lead",
+            "p": "If a child is fascinated by animals, journeys, family relationships, courage or celebration, use that curiosity. The right theme can make the educational value feel natural rather than imposed."
+          }
+        ]
+      },
+      "fr": {
+        "title": "Comment choisir un livre islamique adapté à l’âge de votre enfant",
+        "slug": "choisir-livre-islamique-age-enfant",
+        "excerpt": "Les tranches d’âge sont utiles, mais le bon choix dépend aussi de l’attention, de l’aisance en lecture, des intérêts de l’enfant et de la manière dont la famille utilisera le livre.",
+        "sections": [
+          {
+            "h2": "Utilisez l’âge comme un guide, pas comme une règle",
+            "p": "Deux enfants du même âge peuvent aimer des livres très différents. L’un sera prêt pour une lecture autonome plus longue, tandis que l’autre préférera encore une histoire richement illustrée lue avec un parent."
+          },
+          {
+            "h2": "Pensez au moment de lecture",
+            "p": "Une histoire du soir, un livre familial pour Ramadan, une première découverte d’un Prophète ou un livre de lecture autonome n’ont pas besoin du même rythme, du même vocabulaire ni de la même densité visuelle."
+          },
+          {
+            "h2": "Cherchez un pont entre le familier et la découverte",
+            "p": "Les enfants entrent souvent plus facilement dans un livre lorsqu’il leur offre à la fois quelque chose qu’ils connaissent et quelque chose de nouveau. Une valeur familiale connue peut ouvrir vers un nouveau concept islamique."
+          },
+          {
+            "h2": "Laissez l’intérêt guider le choix",
+            "p": "Si un enfant aime les animaux, les voyages, les relations familiales, le courage ou les fêtes, partez de cette curiosité. Le bon thème peut rendre la dimension éducative naturelle plutôt qu’imposée."
+          }
+        ]
+      },
+      "es": {
+        "title": "Cómo elegir libros islámicos según la edad de tu hijo",
+        "slug": "como-elegir-libros-islamicos-por-edad",
+        "excerpt": "Las edades recomendadas ayudan, pero la mejor elección también tiene en cuenta la atención, la confianza lectora, los intereses y cómo piensa usar el libro la familia.",
+        "sections": [
+          {
+            "h2": "Usa la edad como guía, no como regla",
+            "p": "Dos niños de la misma edad pueden disfrutar libros muy distintos. Uno puede estar preparado para una lectura independiente más larga mientras otro todavía disfruta más de una historia muy ilustrada leída con un adulto."
+          },
+          {
+            "h2": "Piensa en cómo se va a usar el libro",
+            "p": "Un cuento antes de dormir, un libro familiar para Ramadán, una primera historia sobre un Profeta y una lectura autónoma necesitan ritmos, lenguaje y densidad visual diferentes."
+          },
+          {
+            "h2": "Busca un puente entre lo familiar y lo nuevo",
+            "p": "Los niños suelen conectar mejor cuando un libro les ofrece algo reconocible y algo por descubrir. Un valor familiar conocido puede abrir la puerta a un concepto islámico nuevo."
+          },
+          {
+            "h2": "Deja que el interés guíe",
+            "p": "Si al niño le fascinan los animales, los viajes, la familia, el valor o las celebraciones, aprovecha esa curiosidad. El tema adecuado puede hacer que el valor educativo se sienta natural y no impuesto."
+          }
+        ]
+      },
+      "ar": {
+        "title": "كيف تختار كتاباً إسلامياً مناسباً لعمر طفلك؟",
+        "slug": "كيف-تختار-كتابا-إسلاميا-حسب-العمر",
+        "excerpt": "تفيد الفئات العمرية في التوجيه، لكن الاختيار الأفضل يراعي أيضاً مدة الانتباه والثقة في القراءة واهتمامات الطفل والطريقة التي ستستخدم بها الأسرة الكتاب.",
+        "sections": [
+          {
+            "h2": "استخدم العمر كدليل لا كقاعدة",
+            "p": "قد يستمتع طفلان في العمر نفسه بنوعين مختلفين تماماً من الكتب. قد يكون أحدهما مستعداً لقراءة أطول بمفرده، بينما ما زال الآخر يحب قصة مليئة بالصور يقرأها معه أحد الوالدين."
+          },
+          {
+            "h2": "فكر في طريقة استخدام الكتاب",
+            "p": "قصة قبل النوم وكتاب عائلي لرمضان وكتاب أول عن أحد الأنبياء وقراءة مستقلة كلها تحتاج إلى إيقاع ولغة وكثافة بصرية مختلفة. ابدأ من اللحظة التي تريد للكتاب أن يخدمها."
+          },
+          {
+            "h2": "ابحث عن جسر بين المألوف والجديد",
+            "p": "يتفاعل الطفل غالباً بشكل أفضل عندما يقدم له الكتاب شيئاً يعرفه وشيئاً جديداً يكتشفه. قيمة عائلية مألوفة قد تفتح الباب إلى مفهوم إسلامي أعمق."
+          },
+          {
+            "h2": "دع اهتمام الطفل يقود الاختيار",
+            "p": "إذا كان الطفل يحب الحيوانات أو الرحلات أو العلاقات العائلية أو الشجاعة أو الاحتفالات، فابدأ من هذا الفضول. الموضوع المناسب يجعل القيمة التعليمية تبدو طبيعية لا مفروضة."
+          }
+        ]
+      }
+    },
+    "ramadan-reading-tradition": {
+      "en": {
+        "title": "Creating a Ramadan reading tradition with children",
+        "slug": "ramadan-reading-tradition-children",
+        "excerpt": "A simple family reading routine can help Ramadan become more than a calendar event: it can become a season of stories, questions and shared memory.",
+        "sections": [
+          {
+            "h2": "Choose a rhythm your family can actually keep",
+            "p": "A short story after iftar, one picture book before bed or a weekly family reading session can be more meaningful than an ambitious plan that disappears after a few days."
+          },
+          {
+            "h2": "Let the book connect to what the child is already experiencing",
+            "p": "Moon sightings, fasting adults, special meals, prayer, charity and Eid preparations all give children concrete experiences. Stories can give language and meaning to those moments."
+          },
+          {
+            "h2": "Repeat favourite books",
+            "p": "Children often love repetition, and Ramadan traditions grow through repetition too. Returning to the same book each year can turn it into part of the season’s emotional memory."
+          },
+          {
+            "h2": "End with conversation, not a test",
+            "p": "Ask what the child noticed, liked or wondered about. A warm question often creates a deeper learning moment than checking whether every detail was remembered."
+          }
+        ]
+      },
+      "fr": {
+        "title": "Créer une tradition de lecture pendant Ramadan avec les enfants",
+        "slug": "tradition-lecture-ramadan-enfants",
+        "excerpt": "Une routine de lecture simple peut aider Ramadan à devenir plus qu’une date du calendrier : une saison d’histoires, de questions et de souvenirs partagés.",
+        "sections": [
+          {
+            "h2": "Choisissez un rythme que votre famille peut vraiment tenir",
+            "p": "Une courte histoire après l’iftar, un album avant de dormir ou un moment de lecture hebdomadaire peut avoir plus de sens qu’un programme ambitieux abandonné après quelques jours."
+          },
+          {
+            "h2": "Reliez le livre à ce que l’enfant vit déjà",
+            "p": "L’observation de la lune, les adultes qui jeûnent, les repas spéciaux, la prière, l’aumône et la préparation de l’Aïd sont des expériences concrètes. Les histoires peuvent leur donner des mots et du sens."
+          },
+          {
+            "h2": "Relisez les livres préférés",
+            "p": "Les enfants aiment souvent la répétition, et les traditions de Ramadan se construisent aussi ainsi. Relire le même livre chaque année peut l’inscrire dans la mémoire affective de la saison."
+          },
+          {
+            "h2": "Terminez par une conversation, pas par un test",
+            "p": "Demandez ce que l’enfant a remarqué, aimé ou voulu comprendre. Une question chaleureuse crée souvent un apprentissage plus profond qu’une vérification des détails."
+          }
+        ]
+      },
+      "es": {
+        "title": "Crear una tradición de lectura de Ramadán con los niños",
+        "slug": "tradicion-lectura-ramadan-ninos",
+        "excerpt": "Una rutina familiar sencilla puede hacer que Ramadán sea más que una fecha: puede convertirse en una temporada de historias, preguntas y recuerdos compartidos.",
+        "sections": [
+          {
+            "h2": "Elige un ritmo que vuestra familia pueda mantener",
+            "p": "Una historia corta después del iftar, un álbum antes de dormir o una sesión semanal en familia puede tener más sentido que un plan ambicioso que desaparece a los pocos días."
+          },
+          {
+            "h2": "Relaciona el libro con lo que el niño ya está viviendo",
+            "p": "La luna, los adultos que ayunan, las comidas especiales, la oración, la caridad y los preparativos de Eid son experiencias concretas. Las historias pueden dar palabras y significado a esos momentos."
+          },
+          {
+            "h2": "Repite los libros favoritos",
+            "p": "A los niños les gusta la repetición y las tradiciones de Ramadán también se construyen así. Volver al mismo libro cada año puede convertirlo en parte de la memoria emocional de la temporada."
+          },
+          {
+            "h2": "Termina con una conversación, no con un examen",
+            "p": "Pregunta qué ha notado, qué le ha gustado o qué le ha despertado curiosidad. Una pregunta cálida suele crear un aprendizaje más profundo que comprobar cada detalle."
+          }
+        ]
+      },
+      "ar": {
+        "title": "كيف تصنع تقليداً عائلياً للقراءة في رمضان؟",
+        "slug": "تقليد-القراءة-في-رمضان-للأطفال",
+        "excerpt": "يمكن لعادة قراءة بسيطة في الأسرة أن تجعل رمضان أكثر من مناسبة في التقويم، وأن تحوله إلى موسم للقصص والأسئلة والذكريات المشتركة.",
+        "sections": [
+          {
+            "h2": "اختر إيقاعاً تستطيع الأسرة الاستمرار عليه",
+            "p": "قصة قصيرة بعد الإفطار أو كتاب صور قبل النوم أو جلسة قراءة أسبوعية قد تكون أعمق أثراً من خطة كبيرة تختفي بعد أيام قليلة."
+          },
+          {
+            "h2": "اربط الكتاب بما يعيشه الطفل بالفعل",
+            "p": "رؤية الهلال وصيام الكبار والوجبات الخاصة والصلاة والصدقة والاستعداد للعيد كلها تجارب ملموسة. تستطيع القصص أن تمنح هذه اللحظات كلمات ومعنى."
+          },
+          {
+            "h2": "أعد قراءة الكتب المحبوبة",
+            "p": "يحب الأطفال التكرار، وتكبر تقاليد رمضان بالتكرار أيضاً. العودة إلى الكتاب نفسه كل سنة قد تجعله جزءاً من الذاكرة العاطفية للموسم."
+          },
+          {
+            "h2": "اختم بحوار لا باختبار",
+            "p": "اسأل الطفل ماذا لاحظ وماذا أحب وما الذي أثار فضوله. السؤال الدافئ يصنع أحياناً تعلماً أعمق من التأكد من حفظ كل التفاصيل."
+          }
+        ]
       }
     }
   }
