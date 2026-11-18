@@ -1,20 +1,7 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Little Muslim Books / Illuminated Path — WordPress Bookstore
 
-# Run and deploy your AI Studio app
+This branch contains the commercial storefront migration for **Little Muslim Books**. It is a lightweight WordPress + WooCommerce bookstore with no Firebase and no React/Vite runtime.
 
-This contains everything you need to run your app locally.
+The current product scope is deliberately commercial: multilingual book presentation, catalog discovery, SEO/content pages, offers, coupons, checkout and customer order management. Academy/family-learning features are deferred to a separate application.
 
-View your app in AI Studio: https://ai.studio/apps/42b6955e-d71d-4e82-9b67-b30e5a892c8f
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+See [`wordpress/README.md`](wordpress/README.md) for installation and configuration.

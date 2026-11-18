@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wpml-config>
+  <custom-types>
+    <custom-type translate="1">ip_creator</custom-type>
+  </custom-types>
+  <taxonomies>
+    <taxonomy translate="1">ip_book_author</taxonomy>
+    <taxonomy translate="1">ip_book_series</taxonomy>
+    <taxonomy translate="1">ip_book_language</taxonomy>
+    <taxonomy translate="1">ip_book_age</taxonomy>
+    <taxonomy translate="1">ip_book_format</taxonomy>
+    <taxonomy translate="1">ip_book_theme</taxonomy>
+  </taxonomies>
+  <custom-fields>
+    <custom-field action="translate">_ip_book_subtitle</custom-field>
+    <custom-field action="copy">_ip_isbn</custom-field>
+    <custom-field action="copy">_ip_illustrator</custom-field>
+    <custom-field action="copy">_ip_publisher</custom-field>
+    <custom-field action="copy">_ip_page_count</custom-field>
+    <custom-field action="translate">_ip_reading_level</custom-field>
+    <custom-field action="translate">_ip_binding</custom-field>
+    <custom-field action="copy">_ip_dimensions</custom-field>
+    <custom-field action="copy">_ip_publication_date</custom-field>
+    <custom-field action="translate">_ip_edition</custom-field>
+    <custom-field action="translate">_ip_learning_objectives</custom-field>
+    <custom-field action="copy">_ip_preview_url</custom-field>
+    <custom-field action="translate">_ip_marketing_badge</custom-field>
+    <custom-field action="translate">_ip_marketing_callout</custom-field>
+    <custom-field action="copy" type="post-ids" sub-type="page">_ip_product_landing_page_id</custom-field>
+    <custom-field action="translate">_ip_creator_role</custom-field>
+    <custom-field action="translate">_ip_creator_disciplines</custom-field>
+    <custom-field action="translate">_ip_creator_background</custom-field>
+    <custom-field action="translate">_ip_creator_perspective</custom-field>
+    <custom-field action="copy">_ip_creator_portfolio</custom-field>
+    <custom-field action="copy">_ip_creator_instagram</custom-field>
+    <custom-field action="copy">_ip_creator_linkedin</custom-field>
+  </custom-fields>
+  <custom-term-fields>
+    <custom-term-field action="copy" type="post-ids" sub-type="attachment">thumbnail_id</custom-term-field>
+  </custom-term-fields>
+</wpml-config>
