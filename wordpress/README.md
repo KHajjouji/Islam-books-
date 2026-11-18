@@ -9,7 +9,7 @@ It combines:
 - a lightweight custom PHP WordPress theme (`illuminated-path`)
 - WooCommerce as the only product/cart/checkout/order source of truth
 - a companion publishing/store plugin (`illuminated-path-core`)
-- EN / FR / AR-ready storefront copy with Arabic RTL support
+- EN / FR / ES / AR-ready storefront copy with Arabic RTL support
 - WPML / Polylang compatibility for real translated pages, products and menus
 - optional Elementor visual editing without making Elementor the commerce engine
 - native WordPress blocks/patterns as a complete fallback when Elementor is not used
@@ -29,15 +29,33 @@ It combines:
 4. Upload and activate the **Illuminated Path** theme.
 5. If you want drag-and-drop editing, install **Elementor** before running the production installer. Elementor is optional; Gutenberg remains the fallback.
 6. Install one complete multilingual-commerce stack before translating the catalogue: **Polylang + Polylang for WooCommerce** or **WPML with its WooCommerce integration**.
-7. Open **WooCommerce → Production Site Setup → Prepare Production Bookstore**. This creates the real page/navigation/catalog structure, assigns Home and Journal, creates order tracking, installs publishable editorial starter copy, and prepares native Elementor layouts when Elementor is active.
-8. Open **WooCommerce → Bookstore System Check** and resolve every Required item plus the Recommended integrations you intend to use.
-9. Complete WooCommerce store address, currency, taxes, shipping zones, transactional email and at least one production payment gateway.
-10. Install/configure a dedicated SEO plugin such as **Rank Math** or **Yoast**. It should own canonical URLs, hreflang coordination, XML sitemaps and social metadata.
-11. Install/configure **MailPoet** (or another marketing platform) and place its form in **Newsletter / Marketing** or **Footer Newsletter**. Marketing consent remains separate from transactional order email.
-12. Complete the merchant-specific drafts before launch: Shipping & Delivery, Returns & Refunds, Privacy, Terms and Cookie Policy.
-13. Add the real products/covers/prices/ISBNs, real creator profiles, business/contact details and reviewed translations. Never import the old prototype's fake orders/reviews/products as production commerce data.
+7. Open **WooCommerce → Production Site Setup → Prepare Production Bookstore** to create the structural shell, order tracking and merchant-specific draft pages.
+8. Make sure English, French, Spanish and Arabic are configured in Polylang/WPML. Then open **WooCommerce → Final Multilingual Content → Install / Refresh Final Multilingual Content**. This is the familiar “demo import” workflow, but the imported material is the real Little Muslim Books editorial content: 21 multilingual commercial/brand pages, translated catalog vocabulary and multilingual evergreen journal articles. Elementor-active sites receive native Elementor containers/widgets; Gutenberg keeps a branded HTML fallback.
+9. Open **WooCommerce → Bookstore System Check** and resolve every Required item plus the Recommended integrations you intend to use.
+10. Complete WooCommerce store address, currency, taxes, shipping zones, transactional email and at least one production payment gateway.
+11. Install/configure a dedicated SEO plugin such as **Rank Math** or **Yoast**. It should own canonical URLs, hreflang coordination, XML sitemaps and social metadata.
+12. Install/configure **MailPoet** (or another marketing platform) and place its form in **Newsletter / Marketing** or **Footer Newsletter**. Marketing consent remains separate from transactional order email.
+13. Complete the merchant-specific drafts before launch: Shipping & Delivery, Returns & Refunds, Privacy, Terms and Cookie Policy.
+14. Add the real products/covers/prices/ISBNs, real creator profiles and business/contact details. Never import the old prototype's fake orders/reviews/products as production commerce data.
 
 The older **WooCommerce → Bookstore Setup** screen remains available for granular page/menu operations, but **Production Site Setup** is the preferred first-install workflow.
+
+## Final multilingual content import
+
+The v0.8 package includes a JSON-driven **Final Multilingual Content Pack**. It is intentionally imported through a “demo content” style workflow, but the copy is production editorial content rather than fake demo material.
+
+The pack contains:
+
+- English, French, Spanish and Arabic versions of the main commercial/SEO/brand pages
+- Home, Islamic Children’s Books, Prophets, Quran, Ramadan & Eid, Bilingual, Bedtime, Akhlaq/Values, New Releases, Best Sellers, Offers, Age, Language, Gift Guide, About, Our Story, Our Philosophy, Creators, Schools/Wholesale, FAQ and Contact
+- translated core catalog categories, book-language labels, age ranges, formats and themes
+- multilingual evergreen journal articles so Latest Posts is populated immediately
+- live WooCommerce Book Slider / Book Grid / Collection Grid / Reviews / Search components
+- live WordPress latest-post sections and MailPoet/newsletter slots
+
+When Elementor is active, the importer stores each page as **native Elementor containers and widgets**: headings, text, buttons and Shortcode widgets. It does not flatten the complete page into one raw HTML widget. The Gutenberg/post-content version remains as a branded fallback, and the theme’s global brand CSS controls both renderers.
+
+The importer is two-pass: all translated pages/terms are created and linked first, then layouts are rendered. This ensures internal buttons point to the final translated permalinks. Generated pages/articles carry content hashes, so once you edit one manually, later refreshes skip it rather than overwriting your work.
 
 ## Brand architecture
 
@@ -158,7 +176,7 @@ The theme has editable WordPress menu locations for:
 
 The richer footer also supports a MailPoet/newsletter widget and editable social links.
 
-For a large catalog, edit a top-level item under **Appearance → Menus** and enable **Display this top-level item as a Little Muslim Books mega menu**. Child and grandchild menu items are then presented in the branded multi-column menu. Menus remain normal WordPress menus, so multilingual plugins can maintain separate EN/FR/AR menu structures.
+For a large catalog, edit a top-level item under **Appearance → Menus** and enable **Display this top-level item as a Little Muslim Books mega menu**. Child and grandchild menu items are then presented in the branded multi-column menu. Menus remain normal WordPress menus, so multilingual plugins can maintain separate EN/FR/ES/AR menu structures.
 
 ## Catalog model
 
@@ -243,15 +261,16 @@ Use WooCommerce sale prices and coupons as the source of truth. The promotion ba
 
 ## Multilingual production
 
-The theme's default storefront language is prepared for English, French and Arabic, with Arabic RTL CSS. Actual page/product translations are intentionally handled by the selected multilingual plugin so every translation can have its own title, slug, editorial content, product description, menus and SEO metadata.
+The theme and final content pack are prepared for English, French, Spanish and Arabic, with Arabic RTL CSS. Actual page/product translations are intentionally handled by the selected multilingual plugin so every translation can have its own title, slug, editorial content, product description, menus and SEO metadata.
 
 Recommended URL model:
 
 - `/en/...`
 - `/fr/...`
+- `/es/...`
 - `/ar/...`
 
-German, Dutch, Spanish or other markets can be introduced later as additional translations without rebuilding the store.
+German, Dutch or other markets can be introduced later as additional translations without rebuilding the store.
 
 ## Customer area
 
