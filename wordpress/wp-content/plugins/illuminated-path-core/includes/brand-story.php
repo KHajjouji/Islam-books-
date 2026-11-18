@@ -165,23 +165,23 @@ function ip_core_contact_cards(): array {
     return array_filter(
         array(
             array(
-                'label' => __( 'Orders & customer care', 'illuminated-path-core' ),
-                'body'  => __( 'Questions about an order, delivery, returns or a book you purchased.', 'illuminated-path-core' ),
+                'label' => ip_core_t( 'orders_care' ),
+                'body'  => ip_core_t( 'orders_care_body' ),
                 'email' => sanitize_email( (string) get_option( 'ip_brand_support_email', '' ) ),
             ),
             array(
-                'label' => __( 'Schools, libraries & bookshops', 'illuminated-path-core' ),
-                'body'  => __( 'Bulk orders, classroom/library enquiries and wholesale conversations.', 'illuminated-path-core' ),
+                'label' => ip_core_t( 'schools' ),
+                'body'  => ip_core_t( 'schools_body' ),
                 'email' => sanitize_email( (string) get_option( 'ip_brand_wholesale_email', '' ) ),
             ),
             array(
-                'label' => __( 'Creative collaborations', 'illuminated-path-core' ),
-                'body'  => __( 'Illustrators, writers, educators, designers and creative partners who want to work with us.', 'illuminated-path-core' ),
+                'label' => ip_core_t( 'creative' ),
+                'body'  => ip_core_t( 'creative_body' ),
                 'email' => sanitize_email( (string) get_option( 'ip_brand_collaboration_email', '' ) ),
             ),
             array(
-                'label' => __( 'Press & partnerships', 'illuminated-path-core' ),
-                'body'  => __( 'Media, cultural institutions, events, partnerships and publishing conversations.', 'illuminated-path-core' ),
+                'label' => ip_core_t( 'press' ),
+                'body'  => ip_core_t( 'press_body' ),
                 'email' => sanitize_email( (string) get_option( 'ip_brand_press_email', '' ) ),
             ),
         ),
@@ -214,8 +214,8 @@ function ip_core_contact_hub_shortcode(): string {
 
         <?php if ( $response || $location ) : ?>
             <div class="ip-contact-meta">
-                <?php if ( $response ) : ?><p><strong><?php esc_html_e( 'Response time', 'illuminated-path-core' ); ?>:</strong> <?php echo esc_html( $response ); ?></p><?php endif; ?>
-                <?php if ( $location ) : ?><p><strong><?php esc_html_e( 'Based in', 'illuminated-path-core' ); ?>:</strong> <?php echo esc_html( $location ); ?></p><?php endif; ?>
+                <?php if ( $response ) : ?><p><strong><?php echo esc_html( ip_core_t( 'response_time' ) ); ?>:</strong> <?php echo esc_html( $response ); ?></p><?php endif; ?>
+                <?php if ( $location ) : ?><p><strong><?php echo esc_html( ip_core_t( 'based_in' ) ); ?>:</strong> <?php echo esc_html( $location ); ?></p><?php endif; ?>
             </div>
         <?php endif; ?>
 
