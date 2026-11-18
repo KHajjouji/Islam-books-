@@ -246,8 +246,8 @@ function ip_core_shortcode_final_page( array $atts ): string {
 add_shortcode( 'ip_final_page', 'ip_core_shortcode_final_page' );
 
 function ip_core_shortcode_latest_posts( array $atts ): string {
-    $atts = shortcode_atts( array( 'title' => __( 'Latest from the journal', 'illuminated-path-core' ), 'limit' => 3 ), $atts, 'ip_latest_posts' );
-    $posts = get_posts( array( 'post_status' => 'publish', 'numberposts' => max( 1, min( 12, absint( $atts['limit'] ) ) ) ) );
+    $atts = shortcode_atts( array( 'title' => ip_core_t( 'read_article' ), 'limit' => 3 ), $atts, 'ip_latest_posts' );
+    $posts = get_posts( array( 'post_status' => 'publish', 'numberposts' => max( 1, min( 12, absint( $atts['limit'] ) ) ), 'suppress_filters' => false ) );
     if ( ! $posts ) {
         return '';
     }
@@ -257,7 +257,7 @@ function ip_core_shortcode_latest_posts( array $atts ): string {
         if ( has_post_thumbnail( $post ) ) {
             $html .= '<a class="home-post-image" href="' . esc_url( get_permalink( $post ) ) . '">' . get_the_post_thumbnail( $post, 'large', array( 'loading' => 'lazy' ) ) . '</a>';
         }
-        $html .= '<div><span>' . esc_html( get_the_date( '', $post ) ) . '</span><h3><a href="' . esc_url( get_permalink( $post ) ) . '">' . esc_html( get_the_title( $post ) ) . '</a></h3><p>' . esc_html( wp_trim_words( get_the_excerpt( $post ), 24 ) ) . '</p><a class="text-link" href="' . esc_url( get_permalink( $post ) ) . '">' . esc_html__( 'Read article', 'illuminated-path-core' ) . ' →</a></div></article>';
+        $html .= '<div><span>' . esc_html( get_the_date( '', $post ) ) . '</span><h3><a href="' . esc_url( get_permalink( $post ) ) . '">' . esc_html( get_the_title( $post ) ) . '</a></h3><p>' . esc_html( wp_trim_words( get_the_excerpt( $post ), 24 ) ) . '</p><a class="text-link" href="' . esc_url( get_permalink( $post ) ) . '">' . esc_html( ip_core_t( 'read_article' ) ) . ' →</a></div></article>';
     }
     return $html . '</div></section>';
 }
@@ -271,7 +271,7 @@ function ip_core_shortcode_newsletter_slot(): string {
     } elseif ( is_active_sidebar( 'footer-newsletter' ) ) {
         dynamic_sidebar( 'footer-newsletter' );
     } elseif ( current_user_can( 'edit_theme_options' ) ) {
-        echo '<p class="ip-editor-empty">' . esc_html__( 'Add a MailPoet form or newsletter widget to the Newsletter / Marketing widget area.', 'illuminated-path-core' ) . '</p>';
+        echo '<p class="ip-editor-empty">' . esc_html( ip_core_t( 'newsletter_admin' ) ) . '</p>';
     }
     echo '</section>';
     return (string) ob_get_clean();
