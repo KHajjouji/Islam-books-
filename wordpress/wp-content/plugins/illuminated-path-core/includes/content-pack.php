@@ -40,6 +40,52 @@ function ip_core_content_pack_pages(): array {
     return isset( $data['pages'] ) && is_array( $data['pages'] ) ? $data['pages'] : array();
 }
 
+function ip_core_content_pack_posts(): array {
+    $data = ip_core_content_pack_data();
+    return isset( $data['posts'] ) && is_array( $data['posts'] ) ? $data['posts'] : array();
+}
+
+function ip_core_content_pack_post_id( string $key, string $lang ): int {
+    $query = new WP_Query(
+        array(
+            'post_type'      => 'post',
+            'post_status'    => array( 'publish', 'draft', 'private', 'pending' ),
+            'posts_per_page' => 1,
+            'fields'         => 'ids',
+            'meta_query'     => array(
+                'relation' => 'AND',
+                array( 'key' => '_ip_content_pack_post_key', 'value' => sanitize_key( $key ) ),
+                array( 'key' => '_ip_content_pack_language', 'value' => sanitize_key( $lang ) ),
+            ),
+        )
+    );
+    return $query->posts ? absint( $query->posts[0] ) : 0;
+}
+
+function ip_core_content_pack_render_post( array $spec ): string {
+    $html = '<!-- ip-final-content-post-v1 -->';
+    foreach ( (array) ( $spec['sections'] ?? array() ) as $section ) {
+        if ( ! is_array( $section ) ) {
+            continue;
+        }
+        if ( ! empty( $section['h2'] ) ) {
+            $html .= '<!-- wp:heading --><h2>' . esc_html( (string) $section['h2'] ) . '</h2><!-- /wp:heading -->';
+        }
+        if ( ! empty( $section['p'] ) ) {
+            $html .= '<!-- wp:paragraph --><p>' . esc_html( (string) $section['p'] ) . '</p><!-- /wp:paragraph -->';
+        }
+    }
+    return $html;
+}
+
+function ip_core_content_pack_post_can_update( WP_Post $post ): bool {
+    $stored_hash = (string) get_post_meta( $post->ID, '_ip_content_pack_post_hash', true );
+    if ( ! $stored_hash ) {
+        return false;
+    }
+    return hash_equals( $stored_hash, hash( 'sha256', (string) $post->post_content ) );
+}
+
 function ip_core_content_pack_spec( string $key, string $lang ): array {
     $pages = ip_core_content_pack_pages();
     return isset( $pages[ $key ][ $lang ] ) && is_array( $pages[ $key ][ $lang ] ) ? $pages[ $key ][ $lang ] : array();
@@ -574,7 +620,7 @@ function ip_core_content_pack_assign_language( int $post_id, string $lang ): voi
     }
 }
 
-function ip_core_content_pack_link_translations( array $ids ): void {
+function ip_core_content_pack_link_post_translations( array $ids, string $post_type = 'page' ): void {
     $ids = array_filter( array_map( 'absint', $ids ) );
     if ( count( $ids ) < 2 ) {
         return;
@@ -589,33 +635,40 @@ function ip_core_content_pack_link_translations( array $ids ): void {
     if ( ! $source_id ) {
         return;
     }
+    $element_type = 'post_' . sanitize_key( $post_type );
     do_action(
         'wpml_set_element_language_details',
         array(
             'element_id'           => $source_id,
-            'element_type'         => 'post_page',
+            'element_type'         => $element_type,
             'trid'                 => false,
             'language_code'        => $source_lang,
             'source_language_code' => null,
         )
     );
-    $trid = apply_filters( 'wpml_element_trid', null, $source_id, 'post_page' );
+    $trid = apply_filters( 'wpml_element_trid', null, $source_id, $element_type );
     if ( ! $trid ) {
         return;
     }
     foreach ( $ids as $lang => $id ) {
-        if ( $lang === $source_lang ) { continue; }
+        if ( $lang === $source_lang ) {
+            continue;
+        }
         do_action(
             'wpml_set_element_language_details',
             array(
                 'element_id'           => absint( $id ),
-                'element_type'         => 'post_page',
+                'element_type'         => $element_type,
                 'trid'                 => $trid,
                 'language_code'        => sanitize_key( $lang ),
                 'source_language_code' => $source_lang,
             )
         );
     }
+}
+
+function ip_core_content_pack_link_translations( array $ids ): void {
+    ip_core_content_pack_link_post_translations( $ids, 'page' );
 }
 
 function ip_core_content_pack_terms(): array {
@@ -772,6 +825,89 @@ function ip_core_content_pack_missing_languages(): array {
     return array_values( array_diff( $wanted, $available ) );
 }
 
+function ip_core_install_content_pack_posts( array $languages ): array {
+    $result = array( 'created' => 0, 'updated' => 0, 'skipped' => 0, 'groups' => 0 );
+    foreach ( ip_core_content_pack_posts() as $key => $translations ) {
+        $ids = array();
+        $editable = array();
+
+        foreach ( $languages as $lang ) {
+            if ( empty( $translations[ $lang ] ) || ! is_array( $translations[ $lang ] ) ) {
+                continue;
+            }
+            $spec = $translations[ $lang ];
+            $post_id = ip_core_content_pack_post_id( $key, $lang );
+            $can_write = false;
+
+            if ( $post_id ) {
+                $post = get_post( $post_id );
+                if ( $post instanceof WP_Post && ip_core_content_pack_post_can_update( $post ) ) {
+                    $can_write = true;
+                } else {
+                    ++$result['skipped'];
+                }
+            } else {
+                $post_id = wp_insert_post(
+                    array(
+                        'post_type'    => 'post',
+                        'post_status'  => 'publish',
+                        'post_title'   => sanitize_text_field( (string) ( $spec['title'] ?? '' ) ),
+                        'post_name'    => sanitize_title( (string) ( $spec['slug'] ?? $key ) ),
+                        'post_excerpt' => sanitize_textarea_field( (string) ( $spec['excerpt'] ?? '' ) ),
+                        'post_content' => '',
+                        'meta_input'   => array(
+                            '_ip_content_pack_post_key' => sanitize_key( $key ),
+                            '_ip_content_pack_language' => sanitize_key( $lang ),
+                            '_ip_content_pack_version'  => (string) ( ip_core_content_pack_data()['version'] ?? '1' ),
+                            '_ip_content_pack_post_hash'=> hash( 'sha256', '' ),
+                        ),
+                    ),
+                    true
+                );
+                if ( is_wp_error( $post_id ) ) {
+                    continue;
+                }
+                $post_id = absint( $post_id );
+                ip_core_content_pack_assign_language( $post_id, $lang );
+                ++$result['created'];
+                $can_write = true;
+            }
+
+            $ids[ $lang ] = absint( $post_id );
+            $editable[ $lang ] = $can_write;
+        }
+
+        if ( $ids ) {
+            ip_core_content_pack_link_post_translations( $ids, 'post' );
+            ++$result['groups'];
+        }
+
+        foreach ( $ids as $lang => $post_id ) {
+            if ( empty( $editable[ $lang ] ) ) {
+                continue;
+            }
+            $spec = $translations[ $lang ];
+            $content = ip_core_content_pack_render_post( $spec );
+            $updated = wp_update_post(
+                array(
+                    'ID'           => $post_id,
+                    'post_title'   => sanitize_text_field( (string) ( $spec['title'] ?? '' ) ),
+                    'post_name'    => sanitize_title( (string) ( $spec['slug'] ?? $key ) ),
+                    'post_excerpt' => sanitize_textarea_field( (string) ( $spec['excerpt'] ?? '' ) ),
+                    'post_content' => $content,
+                ),
+                true
+            );
+            if ( is_wp_error( $updated ) ) {
+                continue;
+            }
+            update_post_meta( $post_id, '_ip_content_pack_post_hash', hash( 'sha256', $content ) );
+            ++$result['updated'];
+        }
+    }
+    return $result;
+}
+
 function ip_core_install_final_content_pack(): array {
     $result = array(
         'created'   => 0,
@@ -780,10 +916,12 @@ function ip_core_install_final_content_pack(): array {
         'languages' => array(),
         'pages'     => array(),
         'terms'     => array(),
+        'posts'     => array(),
     );
     $languages = ip_core_content_pack_available_languages();
     $result['languages'] = $languages;
     $result['terms'] = ip_core_install_content_pack_terms( $languages );
+    $result['posts'] = ip_core_install_content_pack_posts( $languages );
     $pages = ip_core_content_pack_pages();
     $editable = array();
 
@@ -959,6 +1097,7 @@ function ip_core_render_final_content_pack_page(): void {
                     <p><?php echo esc_html( sprintf( __( 'Created: %1$d · Updated: %2$d · Protected/skipped: %3$d', 'illuminated-path-core' ), $summary['created'], $summary['updated'], $summary['skipped'] ) ); ?></p>
                     <p><?php echo esc_html( sprintf( __( 'Installed languages detected on this site: %s', 'illuminated-path-core' ), implode( ', ', $summary['languages'] ) ) ); ?></p>
                     <p><?php echo esc_html( sprintf( __( 'Catalog terms created: %1$d · Existing/reused: %2$d · Translation groups: %3$d', 'illuminated-path-core' ), $summary['terms']['created'] ?? 0, $summary['terms']['existing'] ?? 0, $summary['terms']['groups'] ?? 0 ) ); ?></p>
+                    <p><?php echo esc_html( sprintf( __( 'Journal posts created: %1$d · Updated: %2$d · Protected/skipped: %3$d', 'illuminated-path-core' ), $summary['posts']['created'] ?? 0, $summary['posts']['updated'] ?? 0, $summary['posts']['skipped'] ?? 0 ) ); ?></p>
                 <?php endif; ?>
             </section>
             <aside style="display:grid;gap:16px">
