@@ -36,6 +36,7 @@ function ip_core_boot(): void {
         return;
     }
 
+    require_once IP_CORE_DIR . 'includes/frontend-i18n.php';
     require_once IP_CORE_DIR . 'includes/book-catalog.php';
     require_once IP_CORE_DIR . 'includes/multilingual-integration.php';
     require_once IP_CORE_DIR . 'includes/taxonomy-images.php';
