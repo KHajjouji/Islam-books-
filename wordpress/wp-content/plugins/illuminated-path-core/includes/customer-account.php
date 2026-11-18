@@ -19,7 +19,7 @@ function ip_core_commercial_account_menu( array $items ): array {
         foreach ( $items as $key => $label ) {
             $rebuilt[ $key ] = $label;
             if ( 'orders' === $key ) {
-                $rebuilt['order-updates'] = __( 'Order updates', 'illuminated-path-core' );
+                $rebuilt['order-updates'] = ip_core_t( 'order_updates' );
             }
         }
         $items = $rebuilt;
@@ -62,19 +62,19 @@ function ip_core_account_dashboard(): void {
     $spent       = wc_get_customer_total_spent( $user_id );
 
     echo '<section class="ip-account-overview">';
-    echo '<div class="ip-account-welcome"><span class="ip-account-kicker">' . esc_html__( 'Your bookstore account', 'illuminated-path-core' ) . '</span><h2>' . sprintf( esc_html__( 'Welcome, %s', 'illuminated-path-core' ), esc_html( $user->display_name ?: $user->user_login ) ) . '</h2><p>' . esc_html__( 'Track your orders, manage delivery addresses and keep your account information up to date.', 'illuminated-path-core' ) . '</p></div>';
-    echo '<div class="ip-account-stats"><article><strong>' . esc_html( (string) $order_count ) . '</strong><span>' . esc_html__( 'Orders', 'illuminated-path-core' ) . '</span></article><article><strong>' . wp_kses_post( wc_price( (float) $spent ) ) . '</strong><span>' . esc_html__( 'Total purchased', 'illuminated-path-core' ) . '</span></article></div>';
+    echo '<div class="ip-account-welcome"><span class="ip-account-kicker">' . esc_html( ip_core_t( 'account_kicker' ) ) . '</span><h2>' . esc_html( ip_core_t( 'welcome', $user->display_name ?: $user->user_login ) ) . '</h2><p>' . esc_html( ip_core_t( 'account_intro' ) ) . '</p></div>';
+    echo '<div class="ip-account-stats"><article><strong>' . esc_html( (string) $order_count ) . '</strong><span>' . esc_html( ip_core_t( 'orders' ) ) . '</span></article><article><strong>' . wp_kses_post( wc_price( (float) $spent ) ) . '</strong><span>' . esc_html( ip_core_t( 'total_purchased' ) ) . '</span></article></div>';
 
     if ( ! empty( $orders ) && $orders[0] instanceof WC_Order ) {
         $order = $orders[0];
-        echo '<div class="ip-latest-order"><div><span class="ip-account-kicker">' . esc_html__( 'Latest order', 'illuminated-path-core' ) . '</span><h3>#' . esc_html( $order->get_order_number() ) . '</h3><p>' . esc_html( wc_format_datetime( $order->get_date_created() ) ) . ' · ' . wp_kses_post( $order->get_formatted_order_total() ) . '</p></div><div><span class="ip-order-status">' . esc_html( wc_get_order_status_name( $order->get_status() ) ) . '</span><a class="button" href="' . esc_url( $order->get_view_order_url() ) . '">' . esc_html__( 'View order', 'illuminated-path-core' ) . '</a></div></div>';
+        echo '<div class="ip-latest-order"><div><span class="ip-account-kicker">' . esc_html( ip_core_t( 'latest_order' ) ) . '</span><h3>#' . esc_html( $order->get_order_number() ) . '</h3><p>' . esc_html( wc_format_datetime( $order->get_date_created() ) ) . ' · ' . wp_kses_post( $order->get_formatted_order_total() ) . '</p></div><div><span class="ip-order-status">' . esc_html( wc_get_order_status_name( $order->get_status() ) ) . '</span><a class="button" href="' . esc_url( $order->get_view_order_url() ) . '">' . esc_html( ip_core_t( 'view_order' ) ) . '</a></div></div>';
     }
 
     $cards = array(
-        'orders'        => array( __( 'Orders', 'illuminated-path-core' ), __( 'View order history and order details.', 'illuminated-path-core' ) ),
-        'order-updates' => array( __( 'Order updates', 'illuminated-path-core' ), __( 'Read customer-visible notes and delivery messages from your orders.', 'illuminated-path-core' ) ),
-        'edit-address'  => array( __( 'Addresses', 'illuminated-path-core' ), __( 'Manage billing and delivery addresses.', 'illuminated-path-core' ) ),
-        'edit-account' => array( __( 'Account details', 'illuminated-path-core' ), __( 'Update your name, email and password.', 'illuminated-path-core' ) ),
+        'orders'        => array( ip_core_t( 'orders' ), ip_core_t( 'orders_desc' ) ),
+        'order-updates' => array( __( 'Order updates', 'illuminated-path-core' ), ip_core_t( 'order_updates_desc' ) ),
+        'edit-address'  => array( ip_core_t( 'addresses' ), ip_core_t( 'addresses_desc' ) ),
+        'edit-account' => array( ip_core_t( 'account_details' ), ip_core_t( 'account_details_desc' ) ),
     );
     echo '<div class="ip-account-links">';
     foreach ( $cards as $endpoint => $copy ) {
@@ -94,9 +94,9 @@ function ip_core_my_orders_columns( array $columns ): array {
     $new = array();
     foreach ( $columns as $key => $label ) {
         if ( 'order-status' === $key ) {
-            $new['order-books']    = __( 'Books', 'illuminated-path-core' );
+            $new['order-books']    = ip_core_t( 'books' );
             $new['order-status']   = $label;
-            $new['order-delivery'] = __( 'Delivery', 'illuminated-path-core' );
+            $new['order-delivery'] = ip_core_t( 'delivery' );
             continue;
         }
         $new[ $key ] = $label;
@@ -130,7 +130,7 @@ function ip_core_my_orders_books_column( WC_Order $order ): void {
     }
     $remaining = max( 0, $order->get_item_count() - $shown );
     if ( $remaining ) {
-        echo '<small>' . sprintf( esc_html__( '+%d more item(s)', 'illuminated-path-core' ), $remaining ) . '</small>';
+        echo '<small>' . esc_html( ip_core_t( 'more_items', $remaining ) ) . '</small>';
     }
     echo '</div>';
 }
@@ -146,7 +146,7 @@ function ip_core_my_orders_delivery_column( WC_Order $order ): void {
     echo '<span class="ip-order-delivery-pill">' . esc_html( $statuses[ $status ] ?? $status ) . '</span>';
     $tracking = trim( (string) $order->get_meta( '_ip_fulfillment_tracking_url' ) );
     if ( $tracking ) {
-        echo '<a class="ip-order-track-link" target="_blank" rel="noopener" href="' . esc_url( $tracking ) . '">' . esc_html__( 'Track package', 'illuminated-path-core' ) . '</a>';
+        echo '<a class="ip-order-track-link" target="_blank" rel="noopener" href="' . esc_url( $tracking ) . '">' . esc_html( ip_core_t( 'track_package' ) ) . '</a>';
     }
 }
 add_action( 'woocommerce_my_account_my_orders_column_order-delivery', 'ip_core_my_orders_delivery_column' );
@@ -198,19 +198,19 @@ function ip_core_account_order_updates(): void {
     );
 
     echo '<section class="ip-order-updates">';
-    echo '<div class="ip-account-welcome"><span class="ip-account-kicker">' . esc_html__( 'Messages about your purchases', 'illuminated-path-core' ) . '</span><h2>' . esc_html__( 'Order updates', 'illuminated-path-core' ) . '</h2><p>' . esc_html__( 'Customer-visible notes sent by the bookstore are collected here and remain attached to the order they belong to.', 'illuminated-path-core' ) . '</p></div>';
+    echo '<div class="ip-account-welcome"><span class="ip-account-kicker">' . esc_html( ip_core_t( 'purchase_messages' ) ) . '</span><h2>' . esc_html__( 'Order updates', 'illuminated-path-core' ) . '</h2><p>' . esc_html( ip_core_t( 'updates_intro' ) ) . '</p></div>';
 
     if ( ! $updates ) {
-        echo '<div class="woocommerce-info">' . esc_html__( 'There are no order messages yet. Delivery and order-status information is still available in your Orders section.', 'illuminated-path-core' ) . '</div>';
+        echo '<div class="woocommerce-info">' . esc_html( ip_core_t( 'no_updates' ) ) . '</div>';
     } else {
         echo '<div class="ip-order-update-list">';
         foreach ( array_slice( $updates, 0, 30 ) as $update ) {
             /** @var WC_Order $order */
             $order = $update['order'];
             echo '<article class="ip-order-update-card">';
-            echo '<div class="ip-order-update-meta"><strong>' . sprintf( esc_html__( 'Order #%s', 'illuminated-path-core' ), esc_html( $order->get_order_number() ) ) . '</strong><span>' . esc_html( mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $update['date'] ) ) . '</span></div>';
+            echo '<div class="ip-order-update-meta"><strong>' . esc_html( ip_core_t( 'order_number', $order->get_order_number() ) ) . '</strong><span>' . esc_html( mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $update['date'] ) ) . '</span></div>';
             echo '<div class="ip-order-update-copy">' . wp_kses_post( wpautop( $update['content'] ) ) . '</div>';
-            echo '<a class="text-link" href="' . esc_url( $order->get_view_order_url() ) . '">' . esc_html__( 'View this order', 'illuminated-path-core' ) . ' →</a>';
+            echo '<a class="text-link" href="' . esc_url( $order->get_view_order_url() ) . '">' . esc_html( ip_core_t( 'view_this_order' ) ) . ' →</a>';
             echo '</article>';
         }
         echo '</div>';
@@ -218,7 +218,7 @@ function ip_core_account_order_updates(): void {
 
     $contact = get_page_by_path( 'contact', OBJECT, 'page' );
     if ( $contact instanceof WP_Post && 'publish' === $contact->post_status ) {
-        echo '<p class="ip-account-help"><a class="button" href="' . esc_url( get_permalink( $contact ) ) . '">' . esc_html__( 'Need help? Contact us', 'illuminated-path-core' ) . '</a></p>';
+        echo '<p class="ip-account-help"><a class="button" href="' . esc_url( get_permalink( $contact ) ) . '">' . esc_html( ip_core_t( 'need_help' ) ) . '</a></p>';
     }
     echo '</section>';
 }
