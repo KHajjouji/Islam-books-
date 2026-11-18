@@ -618,12 +618,173 @@ function ip_core_content_pack_link_translations( array $ids ): void {
     }
 }
 
+function ip_core_content_pack_terms(): array {
+    $data = ip_core_content_pack_data();
+    return isset( $data['terms'] ) && is_array( $data['terms'] ) ? $data['terms'] : array();
+}
+
+function ip_core_content_pack_assign_term_language( int $term_id, string $lang ): void {
+    if ( function_exists( 'pll_set_term_language' ) ) {
+        pll_set_term_language( $term_id, $lang );
+    }
+}
+
+function ip_core_content_pack_link_term_translations( string $taxonomy, array $ids ): void {
+    $ids = array_filter( array_map( 'absint', $ids ) );
+    if ( count( $ids ) < 2 ) {
+        return;
+    }
+
+    if ( function_exists( 'pll_save_term_translations' ) ) {
+        pll_save_term_translations( $ids );
+        return;
+    }
+
+    $source_lang = isset( $ids['en'] ) ? 'en' : array_key_first( $ids );
+    $source_term = get_term( absint( $ids[ $source_lang ] ), $taxonomy );
+    if ( ! $source_term instanceof WP_Term ) {
+        return;
+    }
+
+    $element_type = 'tax_' . $taxonomy;
+    $source_element_id = absint( $source_term->term_taxonomy_id );
+    do_action(
+        'wpml_set_element_language_details',
+        array(
+            'element_id'           => $source_element_id,
+            'element_type'         => $element_type,
+            'trid'                 => false,
+            'language_code'        => $source_lang,
+            'source_language_code' => null,
+        )
+    );
+    $trid = apply_filters( 'wpml_element_trid', null, $source_element_id, $element_type );
+    if ( ! $trid ) {
+        return;
+    }
+
+    foreach ( $ids as $lang => $term_id ) {
+        if ( $lang === $source_lang ) {
+            continue;
+        }
+        $term = get_term( absint( $term_id ), $taxonomy );
+        if ( ! $term instanceof WP_Term ) {
+            continue;
+        }
+        do_action(
+            'wpml_set_element_language_details',
+            array(
+                'element_id'           => absint( $term->term_taxonomy_id ),
+                'element_type'         => $element_type,
+                'trid'                 => $trid,
+                'language_code'        => sanitize_key( $lang ),
+                'source_language_code' => $source_lang,
+            )
+        );
+    }
+}
+
+function ip_core_install_content_pack_terms( array $languages ): array {
+    $result = array( 'created' => 0, 'existing' => 0, 'groups' => 0 );
+    foreach ( ip_core_content_pack_terms() as $taxonomy => $groups ) {
+        if ( ! taxonomy_exists( $taxonomy ) || ! is_array( $groups ) ) {
+            continue;
+        }
+        foreach ( $groups as $canonical => $translations ) {
+            $ids = array();
+            foreach ( $languages as $lang ) {
+                if ( empty( $translations[ $lang ] ) || ! is_array( $translations[ $lang ] ) ) {
+                    continue;
+                }
+                $spec = $translations[ $lang ];
+                $slug = sanitize_title( (string) ( $spec['slug'] ?? $canonical ) );
+                $existing = get_term_by( 'slug', $slug, $taxonomy );
+                if ( $existing instanceof WP_Term ) {
+                    $term_id = $existing->term_id;
+                    ++$result['existing'];
+                } else {
+                    $created = wp_insert_term(
+                        sanitize_text_field( (string) ( $spec['name'] ?? $canonical ) ),
+                        $taxonomy,
+                        array(
+                            'slug'        => $slug,
+                            'description' => sanitize_textarea_field( (string) ( $spec['description'] ?? '' ) ),
+                        )
+                    );
+                    if ( is_wp_error( $created ) ) {
+                        continue;
+                    }
+                    $term_id = absint( $created['term_id'] );
+                    ++$result['created'];
+                }
+                ip_core_content_pack_assign_term_language( $term_id, $lang );
+                $ids[ $lang ] = $term_id;
+            }
+            if ( $ids ) {
+                ip_core_content_pack_link_term_translations( $taxonomy, $ids );
+                ++$result['groups'];
+            }
+        }
+    }
+    return $result;
+}
+
+function ip_core_content_pack_translated_term_slug( string $taxonomy, string $canonical_slug ): string {
+    $canonical_slug = sanitize_title( $canonical_slug );
+    if ( ! $canonical_slug || ! taxonomy_exists( $taxonomy ) ) {
+        return $canonical_slug;
+    }
+
+    $source = get_term_by( 'slug', $canonical_slug, $taxonomy );
+    if ( ! $source instanceof WP_Term ) {
+        return $canonical_slug;
+    }
+
+    $lang = ip_core_front_language();
+    if ( 'en' === $lang ) {
+        return $canonical_slug;
+    }
+
+    if ( function_exists( 'pll_get_term' ) ) {
+        $translated_id = pll_get_term( $source->term_id, $lang );
+        if ( $translated_id ) {
+            $translated = get_term( absint( $translated_id ), $taxonomy );
+            if ( $translated instanceof WP_Term ) {
+                return $translated->slug;
+            }
+        }
+    }
+
+    $translated_id = apply_filters( 'wpml_object_id', $source->term_id, $taxonomy, true, $lang );
+    if ( $translated_id && absint( $translated_id ) !== $source->term_id ) {
+        $translated = get_term( absint( $translated_id ), $taxonomy );
+        if ( $translated instanceof WP_Term ) {
+            return $translated->slug;
+        }
+    }
+
+    return $canonical_slug;
+}
+
 function ip_core_install_final_content_pack(): array {
-    $result = array( 'created' => 0, 'updated' => 0, 'skipped' => 0, 'languages' => array(), 'pages' => array() );
+    $result = array(
+        'created'   => 0,
+        'updated'   => 0,
+        'skipped'   => 0,
+        'languages' => array(),
+        'pages'     => array(),
+        'terms'     => array(),
+    );
     $languages = ip_core_content_pack_available_languages();
     $result['languages'] = $languages;
+    $result['terms'] = ip_core_install_content_pack_terms( $languages );
     $pages = ip_core_content_pack_pages();
+    $editable = array();
 
+    /**
+     * Pass 1: ensure every language/page exists and translations are linked.
+     * No final layout is rendered yet, so every internal page URL can resolve.
+     */
     foreach ( $pages as $key => $translations ) {
         $translation_ids = array();
 
@@ -631,30 +792,17 @@ function ip_core_install_final_content_pack(): array {
             if ( empty( $translations[ $lang ] ) ) {
                 continue;
             }
+
             $spec = $translations[ $lang ];
-            $html = ip_core_content_pack_render( $key, $lang );
             $page_id = ip_core_content_pack_page_id( $key, $lang );
+            $can_write = false;
 
             if ( $page_id ) {
                 $page = get_post( $page_id );
-                if ( ! $page instanceof WP_Post || ! ip_core_content_pack_can_update( $page ) ) {
+                if ( $page instanceof WP_Post && ip_core_content_pack_can_update( $page ) ) {
+                    $can_write = true;
+                } else {
                     ++$result['skipped'];
-                    $translation_ids[ $lang ] = $page_id;
-                    continue;
-                }
-                $updated = wp_update_post(
-                    array(
-                        'ID'           => $page_id,
-                        'post_title'   => sanitize_text_field( (string) $spec['title'] ),
-                        'post_name'    => sanitize_title( (string) $spec['slug'] ),
-                        'post_content' => $html,
-                    ),
-                    true
-                );
-                if ( ! is_wp_error( $updated ) ) {
-                    ++$result['updated'];
-                    update_post_meta( $page_id, '_ip_content_pack_hash', hash( 'sha256', $html ) );
-                    ip_core_content_pack_seed_elementor( $page_id, $key, $lang );
                 }
             } else {
                 $page_id = wp_insert_post(
@@ -663,26 +811,29 @@ function ip_core_install_final_content_pack(): array {
                         'post_status'  => 'publish',
                         'post_title'   => sanitize_text_field( (string) $spec['title'] ),
                         'post_name'    => sanitize_title( (string) $spec['slug'] ),
-                        'post_content' => $html,
+                        'post_content' => '',
                         'meta_input'   => array(
-                            '_wp_page_template'          => 'templates/store-landing.php',
-                            '_ip_content_pack_key'       => sanitize_key( $key ),
-                            '_ip_content_pack_language'  => sanitize_key( $lang ),
-                            '_ip_content_pack_version'   => (string) ( ip_core_content_pack_data()['version'] ?? '1' ),
-                            '_ip_content_pack_hash'      => hash( 'sha256', $html ),
+                            '_wp_page_template'         => 'templates/store-landing.php',
+                            '_ip_content_pack_key'      => sanitize_key( $key ),
+                            '_ip_content_pack_language' => sanitize_key( $lang ),
+                            '_ip_content_pack_version'  => (string) ( ip_core_content_pack_data()['version'] ?? '1' ),
+                            '_ip_content_pack_hash'     => hash( 'sha256', '' ),
                         ),
                     ),
                     true
                 );
-                if ( ! is_wp_error( $page_id ) ) {
-                    ++$result['created'];
-                    ip_core_content_pack_assign_language( $page_id, $lang );
-                    ip_core_content_pack_seed_elementor( $page_id, $key, $lang );
+                if ( is_wp_error( $page_id ) ) {
+                    continue;
                 }
+                $page_id = absint( $page_id );
+                ip_core_content_pack_assign_language( $page_id, $lang );
+                ++$result['created'];
+                $can_write = true;
             }
 
-            if ( $page_id && ! is_wp_error( $page_id ) ) {
+            if ( $page_id ) {
                 $translation_ids[ $lang ] = absint( $page_id );
+                $editable[ $key ][ $lang ] = $can_write;
             }
         }
 
@@ -692,9 +843,51 @@ function ip_core_install_final_content_pack(): array {
         }
     }
 
+    /**
+     * Pass 2: render final copy/Elementor layouts after all translated URLs exist.
+     */
+    foreach ( $result['pages'] as $key => $translation_ids ) {
+        foreach ( $translation_ids as $lang => $page_id ) {
+            if ( empty( $editable[ $key ][ $lang ] ) ) {
+                continue;
+            }
+            $spec = ip_core_content_pack_spec( $key, $lang );
+            if ( ! $spec ) {
+                continue;
+            }
+
+            $html = ip_core_content_pack_render( $key, $lang );
+            $updated = wp_update_post(
+                array(
+                    'ID'           => $page_id,
+                    'post_title'   => sanitize_text_field( (string) $spec['title'] ),
+                    'post_name'    => sanitize_title( (string) $spec['slug'] ),
+                    'post_content' => $html,
+                    'meta_input'   => array(
+                        '_wp_page_template'         => 'templates/store-landing.php',
+                        '_ip_content_pack_version'  => (string) ( ip_core_content_pack_data()['version'] ?? '1' ),
+                    ),
+                ),
+                true
+            );
+
+            if ( is_wp_error( $updated ) ) {
+                continue;
+            }
+
+            update_post_meta( $page_id, '_ip_content_pack_hash', hash( 'sha256', $html ) );
+            ip_core_content_pack_seed_elementor( $page_id, $key, $lang );
+            ++$result['updated'];
+        }
+    }
+
     $home_ids = $result['pages']['home'] ?? array();
     if ( $home_ids ) {
-        $front_id = isset( $home_ids['en'] ) ? absint( $home_ids['en'] ) : absint( reset( $home_ids ) );
+        $default_lang = function_exists( 'pll_default_language' ) ? (string) pll_default_language( 'slug' ) : '';
+        $front_id = $default_lang && isset( $home_ids[ $default_lang ] )
+            ? absint( $home_ids[ $default_lang ] )
+            : ( isset( $home_ids['en'] ) ? absint( $home_ids['en'] ) : absint( reset( $home_ids ) ) );
+
         if ( $front_id ) {
             update_option( 'show_on_front', 'page' );
             update_option( 'page_on_front', $front_id );
@@ -731,11 +924,11 @@ function ip_core_render_final_content_pack_page(): void {
     ?>
     <div class="wrap">
         <h1><?php esc_html_e( 'Little Muslim Books — Final Multilingual Content', 'illuminated-path-core' ); ?></h1>
-        <p><?php esc_html_e( 'This is not fake demo commerce data. It installs the real editorial/marketing website copy as branded HTML canvases in English, French, Spanish and Arabic when those languages are configured.', 'illuminated-path-core' ); ?></p>
+        <p><?php esc_html_e( 'This uses a familiar demo-import workflow, but the imported material is the real editorial/marketing website content. It creates linked English, French, Spanish and Arabic pages when those languages are configured.', 'illuminated-path-core' ); ?></p>
         <div style="max-width:1100px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(300px,.7fr);gap:22px;align-items:start">
             <section style="background:#fff;border:1px solid #dcdcde;border-radius:12px;padding:24px">
                 <h2><?php esc_html_e( 'Content model', 'illuminated-path-core' ); ?></h2>
-                <p><?php esc_html_e( 'Each page is generated from JSON into one scoped HTML design canvas. Live WooCommerce sliders, collection grids, reviews, search and WordPress latest-post sections remain dynamic inside the page.', 'illuminated-path-core' ); ?></p>
+                <p><?php esc_html_e( 'JSON is the source of truth. Gutenberg receives a branded HTML fallback, while Elementor receives native containers, headings, text, buttons and Shortcode widgets. WooCommerce products, prices, reviews and WordPress posts remain live.', 'illuminated-path-core' ); ?></p>
                 <p><strong><?php esc_html_e( 'Configured content languages:', 'illuminated-path-core' ); ?></strong>
                     <?php echo esc_html( implode( ', ', array_map( static fn( $lang ) => (string) ( $languages[ $lang ]['label'] ?? strtoupper( $lang ) ), array_keys( $languages ) ) ) ); ?>
                 </p>
@@ -748,6 +941,7 @@ function ip_core_render_final_content_pack_page(): void {
                     <hr>
                     <p><?php echo esc_html( sprintf( __( 'Created: %1$d · Updated: %2$d · Protected/skipped: %3$d', 'illuminated-path-core' ), $summary['created'], $summary['updated'], $summary['skipped'] ) ); ?></p>
                     <p><?php echo esc_html( sprintf( __( 'Installed languages detected on this site: %s', 'illuminated-path-core' ), implode( ', ', $summary['languages'] ) ) ); ?></p>
+                    <p><?php echo esc_html( sprintf( __( 'Catalog terms created: %1$d · Existing/reused: %2$d · Translation groups: %3$d', 'illuminated-path-core' ), $summary['terms']['created'] ?? 0, $summary['terms']['existing'] ?? 0, $summary['terms']['groups'] ?? 0 ) ); ?></p>
                 <?php endif; ?>
             </section>
             <aside style="display:grid;gap:16px">
