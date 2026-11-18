@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "Little Muslim Books Final Multilingual Content Pack",
   "languages": {
     "en": {
@@ -3640,6 +3640,496 @@
             "attrs": {}
           }
         ]
+      }
+    }
+  },
+  "terms": {
+    "product_cat": {
+      "islamic-childrens-books": {
+        "en": {
+          "name": "Islamic Children’s Books",
+          "slug": "islamic-childrens-books",
+          "description": "Faith-centered children’s books for Muslim families."
+        },
+        "fr": {
+          "name": "Livres islamiques pour enfants",
+          "slug": "livres-islamiques-enfants",
+          "description": "Livres jeunesse centrés sur la foi pour les familles musulmanes."
+        },
+        "es": {
+          "name": "Libros islámicos infantiles",
+          "slug": "libros-islamicos-infantiles",
+          "description": "Libros infantiles centrados en la fe para familias musulmanas."
+        },
+        "ar": {
+          "name": "كتب إسلامية للأطفال",
+          "slug": "كتب-إسلامية-للأطفال",
+          "description": "كتب أطفال تتمحور حول الإيمان للعائلات المسلمة."
+        }
+      },
+      "stories-of-the-prophets": {
+        "en": {
+          "name": "Stories of the Prophets",
+          "slug": "stories-of-the-prophets",
+          "description": "Children’s books inspired by the stories and lessons of the Prophets."
+        },
+        "fr": {
+          "name": "Histoires des Prophètes",
+          "slug": "histoires-des-prophetes",
+          "description": "Livres jeunesse inspirés des récits et enseignements des Prophètes."
+        },
+        "es": {
+          "name": "Historias de los Profetas",
+          "slug": "historias-de-los-profetas",
+          "description": "Libros infantiles inspirados en las historias y enseñanzas de los Profetas."
+        },
+        "ar": {
+          "name": "قصص الأنبياء",
+          "slug": "قصص-الأنبياء",
+          "description": "كتب للأطفال مستوحاة من قصص الأنبياء ودروسها."
+        }
+      },
+      "quran-stories": {
+        "en": {
+          "name": "Quran Stories",
+          "slug": "quran-stories",
+          "description": "Children’s editions inspired by Quranic narratives."
+        },
+        "fr": {
+          "name": "Histoires du Coran",
+          "slug": "histoires-du-coran",
+          "description": "Éditions jeunesse inspirées des récits coraniques."
+        },
+        "es": {
+          "name": "Historias del Corán",
+          "slug": "historias-del-coran",
+          "description": "Ediciones infantiles inspiradas en relatos coránicos."
+        },
+        "ar": {
+          "name": "قصص القرآن",
+          "slug": "قصص-القرآن",
+          "description": "إصدارات للأطفال مستوحاة من القصص القرآنية."
+        }
+      },
+      "ramadan": {
+        "en": {
+          "name": "Ramadan & Eid",
+          "slug": "ramadan",
+          "description": "Books for Ramadan, Eid and family traditions."
+        },
+        "fr": {
+          "name": "Ramadan & Aïd",
+          "slug": "ramadan-aid",
+          "description": "Livres pour Ramadan, l’Aïd et les traditions familiales."
+        },
+        "es": {
+          "name": "Ramadán y Eid",
+          "slug": "ramadan-eid",
+          "description": "Libros para Ramadán, Eid y tradiciones familiares."
+        },
+        "ar": {
+          "name": "رمضان والعيد",
+          "slug": "رمضان-والعيد",
+          "description": "كتب عن رمضان والعيد والتقاليد العائلية."
+        }
+      },
+      "bilingual": {
+        "en": {
+          "name": "Bilingual Books",
+          "slug": "bilingual",
+          "description": "Bilingual and multilingual books for families living across languages."
+        },
+        "fr": {
+          "name": "Livres bilingues",
+          "slug": "livres-bilingues",
+          "description": "Livres bilingues et multilingues pour les familles vivant entre plusieurs langues."
+        },
+        "es": {
+          "name": "Libros bilingües",
+          "slug": "libros-bilingues",
+          "description": "Libros bilingües y multilingües para familias que viven entre varias lenguas."
+        },
+        "ar": {
+          "name": "كتب ثنائية اللغة",
+          "slug": "كتب-ثنائية-اللغة",
+          "description": "كتب ثنائية ومتعددة اللغة للأسر التي تعيش بين لغات مختلفة."
+        }
+      },
+      "bedtime": {
+        "en": {
+          "name": "Bedtime Stories",
+          "slug": "bedtime",
+          "description": "Gentle Islamic stories for calm family reading."
+        },
+        "fr": {
+          "name": "Histoires du soir",
+          "slug": "histoires-du-soir",
+          "description": "Histoires islamiques douces pour une lecture familiale apaisante."
+        },
+        "es": {
+          "name": "Cuentos para dormir",
+          "slug": "cuentos-para-dormir",
+          "description": "Historias islámicas suaves para terminar el día en familia."
+        },
+        "ar": {
+          "name": "قصص قبل النوم",
+          "slug": "قصص-قبل-النوم",
+          "description": "قصص إسلامية هادئة للقراءة العائلية."
+        }
+      },
+      "akhlaq-values": {
+        "en": {
+          "name": "Akhlaq & Values",
+          "slug": "akhlaq-values",
+          "description": "Books about Islamic character and everyday values."
+        },
+        "fr": {
+          "name": "Akhlaq & valeurs",
+          "slug": "akhlaq-valeurs",
+          "description": "Livres sur le caractère islamique et les valeurs du quotidien."
+        },
+        "es": {
+          "name": "Akhlaq y valores",
+          "slug": "akhlaq-valores",
+          "description": "Libros sobre carácter islámico y valores cotidianos."
+        },
+        "ar": {
+          "name": "الأخلاق والقيم",
+          "slug": "الأخلاق-والقيم",
+          "description": "كتب عن الأخلاق الإسلامية والقيم اليومية."
+        }
+      }
+    },
+    "ip_book_language": {
+      "english": {
+        "en": {
+          "name": "English",
+          "slug": "english"
+        },
+        "fr": {
+          "name": "Anglais",
+          "slug": "anglais"
+        },
+        "es": {
+          "name": "Inglés",
+          "slug": "ingles"
+        },
+        "ar": {
+          "name": "الإنجليزية",
+          "slug": "الإنجليزية"
+        }
+      },
+      "french": {
+        "en": {
+          "name": "French",
+          "slug": "french"
+        },
+        "fr": {
+          "name": "Français",
+          "slug": "francais"
+        },
+        "es": {
+          "name": "Francés",
+          "slug": "frances"
+        },
+        "ar": {
+          "name": "الفرنسية",
+          "slug": "الفرنسية"
+        }
+      },
+      "spanish": {
+        "en": {
+          "name": "Spanish",
+          "slug": "spanish"
+        },
+        "fr": {
+          "name": "Espagnol",
+          "slug": "espagnol"
+        },
+        "es": {
+          "name": "Español",
+          "slug": "espanol"
+        },
+        "ar": {
+          "name": "الإسبانية",
+          "slug": "الإسبانية"
+        }
+      },
+      "arabic": {
+        "en": {
+          "name": "Arabic",
+          "slug": "arabic"
+        },
+        "fr": {
+          "name": "Arabe",
+          "slug": "arabe"
+        },
+        "es": {
+          "name": "Árabe",
+          "slug": "arabe-es"
+        },
+        "ar": {
+          "name": "العربية",
+          "slug": "العربية"
+        }
+      }
+    },
+    "ip_book_age": {
+      "0-3-years": {
+        "en": {
+          "name": "0–3 years",
+          "slug": "0-3-years"
+        },
+        "fr": {
+          "name": "0–3 ans",
+          "slug": "0-3-ans"
+        },
+        "es": {
+          "name": "0–3 años",
+          "slug": "0-3-anos"
+        },
+        "ar": {
+          "name": "0–3 سنوات",
+          "slug": "0-3-سنوات"
+        }
+      },
+      "4-6-years": {
+        "en": {
+          "name": "4–6 years",
+          "slug": "4-6-years"
+        },
+        "fr": {
+          "name": "4–6 ans",
+          "slug": "4-6-ans"
+        },
+        "es": {
+          "name": "4–6 años",
+          "slug": "4-6-anos"
+        },
+        "ar": {
+          "name": "4–6 سنوات",
+          "slug": "4-6-سنوات"
+        }
+      },
+      "7-9-years": {
+        "en": {
+          "name": "7–9 years",
+          "slug": "7-9-years"
+        },
+        "fr": {
+          "name": "7–9 ans",
+          "slug": "7-9-ans"
+        },
+        "es": {
+          "name": "7–9 años",
+          "slug": "7-9-anos"
+        },
+        "ar": {
+          "name": "7–9 سنوات",
+          "slug": "7-9-سنوات"
+        }
+      },
+      "10-12-years": {
+        "en": {
+          "name": "10–12 years",
+          "slug": "10-12-years"
+        },
+        "fr": {
+          "name": "10–12 ans",
+          "slug": "10-12-ans"
+        },
+        "es": {
+          "name": "10–12 años",
+          "slug": "10-12-anos"
+        },
+        "ar": {
+          "name": "10–12 سنوات",
+          "slug": "10-12-سنوات"
+        }
+      }
+    },
+    "ip_book_format": {
+      "hardcover": {
+        "en": {
+          "name": "Hardcover",
+          "slug": "hardcover"
+        },
+        "fr": {
+          "name": "Relié",
+          "slug": "relie"
+        },
+        "es": {
+          "name": "Tapa dura",
+          "slug": "tapa-dura"
+        },
+        "ar": {
+          "name": "غلاف مقوى",
+          "slug": "غلاف-مقوى"
+        }
+      },
+      "paperback": {
+        "en": {
+          "name": "Paperback",
+          "slug": "paperback"
+        },
+        "fr": {
+          "name": "Broché",
+          "slug": "broche"
+        },
+        "es": {
+          "name": "Tapa blanda",
+          "slug": "tapa-blanda"
+        },
+        "ar": {
+          "name": "غلاف ورقي",
+          "slug": "غلاف-ورقي"
+        }
+      },
+      "board-book": {
+        "en": {
+          "name": "Board book",
+          "slug": "board-book"
+        },
+        "fr": {
+          "name": "Livre cartonné",
+          "slug": "livre-cartonne"
+        },
+        "es": {
+          "name": "Libro de cartón",
+          "slug": "libro-carton"
+        },
+        "ar": {
+          "name": "كتاب كرتوني",
+          "slug": "كتاب-كرتوني"
+        }
+      },
+      "digital": {
+        "en": {
+          "name": "Digital",
+          "slug": "digital"
+        },
+        "fr": {
+          "name": "Numérique",
+          "slug": "numerique"
+        },
+        "es": {
+          "name": "Digital",
+          "slug": "digital-es"
+        },
+        "ar": {
+          "name": "رقمي",
+          "slug": "رقمي"
+        }
+      }
+    },
+    "ip_book_theme": {
+      "quran": {
+        "en": {
+          "name": "Quran",
+          "slug": "quran"
+        },
+        "fr": {
+          "name": "Coran",
+          "slug": "coran"
+        },
+        "es": {
+          "name": "Corán",
+          "slug": "coran-es"
+        },
+        "ar": {
+          "name": "القرآن",
+          "slug": "القرآن"
+        }
+      },
+      "prophets": {
+        "en": {
+          "name": "Prophets",
+          "slug": "prophets"
+        },
+        "fr": {
+          "name": "Prophètes",
+          "slug": "prophetes"
+        },
+        "es": {
+          "name": "Profetas",
+          "slug": "profetas"
+        },
+        "ar": {
+          "name": "الأنبياء",
+          "slug": "الأنبياء"
+        }
+      },
+      "ramadan-eid": {
+        "en": {
+          "name": "Ramadan & Eid",
+          "slug": "ramadan-eid"
+        },
+        "fr": {
+          "name": "Ramadan & Aïd",
+          "slug": "ramadan-aid-theme"
+        },
+        "es": {
+          "name": "Ramadán y Eid",
+          "slug": "ramadan-eid-theme-es"
+        },
+        "ar": {
+          "name": "رمضان والعيد",
+          "slug": "رمضان-والعيد-موضوع"
+        }
+      },
+      "bedtime": {
+        "en": {
+          "name": "Bedtime",
+          "slug": "bedtime"
+        },
+        "fr": {
+          "name": "Coucher",
+          "slug": "coucher"
+        },
+        "es": {
+          "name": "Hora de dormir",
+          "slug": "hora-de-dormir"
+        },
+        "ar": {
+          "name": "قبل النوم",
+          "slug": "قبل-النوم"
+        }
+      },
+      "akhlaq-values": {
+        "en": {
+          "name": "Akhlaq & Values",
+          "slug": "akhlaq-values"
+        },
+        "fr": {
+          "name": "Akhlaq & valeurs",
+          "slug": "akhlaq-valeurs-theme"
+        },
+        "es": {
+          "name": "Akhlaq y valores",
+          "slug": "akhlaq-valores-theme"
+        },
+        "ar": {
+          "name": "الأخلاق والقيم",
+          "slug": "الأخلاق-والقيم-موضوع"
+        }
+      },
+      "bilingual": {
+        "en": {
+          "name": "Bilingual",
+          "slug": "bilingual"
+        },
+        "fr": {
+          "name": "Bilingue",
+          "slug": "bilingue"
+        },
+        "es": {
+          "name": "Bilingüe",
+          "slug": "bilingue-es"
+        },
+        "ar": {
+          "name": "ثنائي اللغة",
+          "slug": "ثنائي-اللغة"
+        }
       }
     }
   }
