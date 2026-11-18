@@ -766,6 +766,12 @@ function ip_core_content_pack_translated_term_slug( string $taxonomy, string $ca
     return $canonical_slug;
 }
 
+function ip_core_content_pack_missing_languages(): array {
+    $wanted = array_keys( ip_core_content_pack_languages() );
+    $available = ip_core_content_pack_available_languages();
+    return array_values( array_diff( $wanted, $available ) );
+}
+
 function ip_core_install_final_content_pack(): array {
     $result = array(
         'created'   => 0,
@@ -921,6 +927,8 @@ function ip_core_render_final_content_pack_page(): void {
     }
     settings_errors( 'ip_final_content' );
     $languages = ip_core_content_pack_languages();
+    $available_languages = ip_core_content_pack_available_languages();
+    $missing_languages = ip_core_content_pack_missing_languages();
     ?>
     <div class="wrap">
         <h1><?php esc_html_e( 'Little Muslim Books — Final Multilingual Content', 'illuminated-path-core' ); ?></h1>
@@ -929,9 +937,18 @@ function ip_core_render_final_content_pack_page(): void {
             <section style="background:#fff;border:1px solid #dcdcde;border-radius:12px;padding:24px">
                 <h2><?php esc_html_e( 'Content model', 'illuminated-path-core' ); ?></h2>
                 <p><?php esc_html_e( 'JSON is the source of truth. Gutenberg receives a branded HTML fallback, while Elementor receives native containers, headings, text, buttons and Shortcode widgets. WooCommerce products, prices, reviews and WordPress posts remain live.', 'illuminated-path-core' ); ?></p>
-                <p><strong><?php esc_html_e( 'Configured content languages:', 'illuminated-path-core' ); ?></strong>
+                <p><strong><?php esc_html_e( 'Final content languages:', 'illuminated-path-core' ); ?></strong>
                     <?php echo esc_html( implode( ', ', array_map( static fn( $lang ) => (string) ( $languages[ $lang ]['label'] ?? strtoupper( $lang ) ), array_keys( $languages ) ) ) ); ?>
                 </p>
+                <p><strong><?php esc_html_e( 'Languages currently configured in WordPress:', 'illuminated-path-core' ); ?></strong>
+                    <?php echo esc_html( implode( ', ', $available_languages ) ); ?>
+                </p>
+                <?php if ( $missing_languages ) : ?>
+                    <div class="notice notice-warning inline"><p>
+                        <strong><?php esc_html_e( 'Before the final four-language import:', 'illuminated-path-core' ); ?></strong>
+                        <?php echo esc_html( sprintf( __( 'Configure these missing languages in Polylang/WPML first: %s. The importer only creates translations for languages that the multilingual plugin already knows.', 'illuminated-path-core' ), implode( ', ', $missing_languages ) ) ); ?>
+                    </p></div>
+                <?php endif; ?>
                 <form method="post">
                     <?php wp_nonce_field( 'ip_install_final_content' ); ?>
                     <input type="hidden" name="ip_install_final_content" value="1">
