@@ -286,49 +286,275 @@ function ip_core_content_pack_can_update( WP_Post $page ): bool {
     return hash_equals( $stored_hash, hash( 'sha256', (string) $page->post_content ) );
 }
 
-function ip_core_content_pack_elementor_data( string $html, string $seed ): array {
-    $widget_id = substr( md5( 'lmb-widget-' . $seed ), 0, 8 );
-    $container_id = substr( md5( 'lmb-container-' . $seed ), 0, 8 );
+function ip_core_elementor_id( string $seed ): string {
+    return substr( md5( $seed ), 0, 8 );
+}
+
+function ip_core_elementor_widget( string $type, array $settings, string $seed ): array {
     return array(
-        array(
-            'id' => $container_id,
-            'elType' => 'container',
-            'isInner' => false,
-            'settings' => (object) array( 'content_width' => 'full', 'flex_direction' => 'column', 'padding' => array( 'unit' => 'px', 'top' => 0, 'right' => 0, 'bottom' => 0, 'left' => 0, 'isLinked' => true ) ),
-            'elements' => array(
-                array(
-                    'id' => $widget_id,
-                    'elType' => 'widget',
-                    'isInner' => false,
-                    'widgetType' => 'html',
-                    'settings' => (object) array( 'html' => $html ),
-                    'elements' => array(),
-                ),
-            ),
-        ),
+        'id'         => ip_core_elementor_id( 'widget-' . $seed ),
+        'elType'     => 'widget',
+        'isInner'    => false,
+        'widgetType' => $type,
+        'settings'   => (object) $settings,
+        'elements'   => array(),
     );
 }
 
-function ip_core_content_pack_seed_elementor( int $post_id, string $html, string $seed ): void {
+function ip_core_elementor_container( array $elements, string $seed, string $classes = '', array $settings = array() ): array {
+    $base = array(
+        'content_width'  => 'boxed',
+        'flex_direction' => 'column',
+        'css_classes'    => trim( $classes ),
+    );
+    return array(
+        'id'       => ip_core_elementor_id( 'container-' . $seed ),
+        'elType'   => 'container',
+        'isInner'  => false,
+        'settings' => (object) array_merge( $base, $settings ),
+        'elements' => $elements,
+    );
+}
+
+function ip_core_elementor_heading( string $text, string $tag, string $seed, string $classes = '' ): array {
+    return ip_core_elementor_widget(
+        'heading',
+        array(
+            'title'       => $text,
+            'header_size' => in_array( $tag, array( 'h1', 'h2', 'h3', 'h4' ), true ) ? $tag : 'h2',
+            'css_classes' => $classes,
+        ),
+        $seed
+    );
+}
+
+function ip_core_elementor_text( string $text, string $seed, string $classes = '' ): array {
+    return ip_core_elementor_widget(
+        'text-editor',
+        array(
+            'editor'      => '<p>' . esc_html( $text ) . '</p>',
+            'css_classes' => $classes,
+        ),
+        $seed
+    );
+}
+
+function ip_core_elementor_button( string $label, string $url, string $seed, bool $outline = false ): array {
+    return ip_core_elementor_widget(
+        'button',
+        array(
+            'text'        => $label,
+            'link'        => array( 'url' => $url, 'is_external' => '', 'nofollow' => '' ),
+            'css_classes' => $outline ? 'lmb-canvas-button is-outline' : 'lmb-canvas-button',
+        ),
+        $seed
+    );
+}
+
+function ip_core_elementor_shortcode_widget( string $shortcode, string $seed ): array {
+    return ip_core_elementor_widget(
+        'shortcode',
+        array(
+            'shortcode'   => $shortcode,
+            'css_classes' => 'lmb-canvas-dynamic',
+        ),
+        $seed
+    );
+}
+
+function ip_core_content_pack_elementor_section( array $section, string $lang, string $seed ): array {
+    $type = sanitize_key( (string) ( $section['type'] ?? 'text' ) );
+    $elements = array();
+
+    if ( 'dynamic' === $type ) {
+        $shortcode = ip_core_content_pack_shortcodes( $section );
+        return $shortcode ? ip_core_elementor_container(
+            array( ip_core_elementor_shortcode_widget( $shortcode, $seed . '-shortcode' ) ),
+            $seed,
+            'lmb-canvas-section lmb-canvas-dynamic'
+        ) : array();
+    }
+
+    if ( 'cards' === $type ) {
+        if ( ! empty( $section['eyebrow'] ) ) {
+            $elements[] = ip_core_elementor_text( (string) $section['eyebrow'], $seed . '-eyebrow', 'lmb-canvas-kicker' );
+        }
+        if ( ! empty( $section['heading'] ) ) {
+            $elements[] = ip_core_elementor_heading( (string) $section['heading'], 'h2', $seed . '-heading' );
+        }
+        if ( ! empty( $section['body'] ) ) {
+            $elements[] = ip_core_elementor_text( (string) $section['body'], $seed . '-intro', 'lmb-canvas-intro' );
+        }
+        $cards = array();
+        foreach ( (array) ( $section['items'] ?? array() ) as $index => $item ) {
+            $card_elements = array();
+            if ( ! empty( $item['icon'] ) ) {
+                $card_elements[] = ip_core_elementor_heading( (string) $item['icon'], 'h4', $seed . '-icon-' . $index, 'lmb-canvas-icon' );
+            }
+            if ( ! empty( $item['title'] ) ) {
+                $card_elements[] = ip_core_elementor_heading( (string) $item['title'], 'h3', $seed . '-title-' . $index );
+            }
+            if ( ! empty( $item['body'] ) ) {
+                $card_elements[] = ip_core_elementor_text( (string) $item['body'], $seed . '-body-' . $index );
+            }
+            $cards[] = ip_core_elementor_container( $card_elements, $seed . '-card-' . $index, 'lmb-canvas-card' );
+        }
+        if ( $cards ) {
+            $elements[] = ip_core_elementor_container(
+                $cards,
+                $seed . '-grid',
+                'lmb-canvas-card-grid',
+                array( 'flex_direction' => 'row', 'flex_wrap' => 'wrap' )
+            );
+        }
+        return ip_core_elementor_container( $elements, $seed, 'lmb-canvas-section lmb-canvas-cards' );
+    }
+
+    if ( 'split' === $type ) {
+        $columns = array();
+        foreach ( array( 'left', 'right' ) as $side ) {
+            $column = isset( $section[ $side ] ) && is_array( $section[ $side ] ) ? $section[ $side ] : array();
+            $column_elements = array();
+            if ( ! empty( $column['eyebrow'] ) ) {
+                $column_elements[] = ip_core_elementor_text( (string) $column['eyebrow'], $seed . '-' . $side . '-eyebrow', 'lmb-canvas-kicker' );
+            }
+            if ( ! empty( $column['heading'] ) ) {
+                $column_elements[] = ip_core_elementor_heading( (string) $column['heading'], 'h2', $seed . '-' . $side . '-heading' );
+            }
+            if ( ! empty( $column['body'] ) ) {
+                $column_elements[] = ip_core_elementor_text( (string) $column['body'], $seed . '-' . $side . '-body' );
+            }
+            $columns[] = ip_core_elementor_container( $column_elements, $seed . '-' . $side, 'lmb-canvas-split-column' );
+        }
+        return ip_core_elementor_container(
+            $columns,
+            $seed,
+            'lmb-canvas-section lmb-canvas-split',
+            array( 'flex_direction' => 'row', 'flex_wrap' => 'wrap' )
+        );
+    }
+
+    if ( 'quote' === $type ) {
+        return ip_core_elementor_container(
+            array( ip_core_elementor_text( (string) ( $section['text'] ?? '' ), $seed . '-quote', 'lmb-canvas-quote-text' ) ),
+            $seed,
+            'lmb-canvas-section lmb-canvas-quote'
+        );
+    }
+
+    if ( 'faq' === $type ) {
+        $faq_html = ip_core_content_pack_render_section( $section, $lang );
+        return ip_core_elementor_container(
+            array(
+                ip_core_elementor_widget(
+                    'html',
+                    array( 'html' => $faq_html, 'css_classes' => 'lmb-canvas-faq-html' ),
+                    $seed . '-faq'
+                )
+            ),
+            $seed,
+            'lmb-canvas-section lmb-canvas-faq'
+        );
+    }
+
+    if ( 'cta' === $type ) {
+        if ( ! empty( $section['heading'] ) ) {
+            $elements[] = ip_core_elementor_heading( (string) $section['heading'], 'h2', $seed . '-heading' );
+        }
+        if ( ! empty( $section['body'] ) ) {
+            $elements[] = ip_core_elementor_text( (string) $section['body'], $seed . '-body' );
+        }
+        if ( ! empty( $section['button'] ) ) {
+            $elements[] = ip_core_elementor_button(
+                (string) $section['button'],
+                ip_core_content_pack_resolve_url( (string) ( $section['target'] ?? '@shop' ), $lang ),
+                $seed . '-button'
+            );
+        }
+        return ip_core_elementor_container( $elements, $seed, 'lmb-canvas-section lmb-canvas-cta' );
+    }
+
+    if ( ! empty( $section['eyebrow'] ) ) {
+        $elements[] = ip_core_elementor_text( (string) $section['eyebrow'], $seed . '-eyebrow', 'lmb-canvas-kicker' );
+    }
+    if ( ! empty( $section['heading'] ) ) {
+        $elements[] = ip_core_elementor_heading( (string) $section['heading'], 'h2', $seed . '-heading' );
+    }
+    if ( ! empty( $section['body'] ) ) {
+        $elements[] = ip_core_elementor_text( (string) $section['body'], $seed . '-body', 'lmb-canvas-intro' );
+    }
+    if ( ! empty( $section['body2'] ) ) {
+        $elements[] = ip_core_elementor_text( (string) $section['body2'], $seed . '-body2' );
+    }
+    return ip_core_elementor_container( $elements, $seed, 'lmb-canvas-section lmb-canvas-text' );
+}
+
+function ip_core_content_pack_elementor_data( string $key, string $lang ): array {
+    $spec = ip_core_content_pack_spec( $key, $lang );
+    if ( ! $spec ) {
+        return array();
+    }
+
+    $hero = array();
+    if ( ! empty( $spec['eyebrow'] ) ) {
+        $hero[] = ip_core_elementor_text( (string) $spec['eyebrow'], $key . '-' . $lang . '-hero-eyebrow', 'lmb-canvas-kicker' );
+    }
+    $hero[] = ip_core_elementor_heading( (string) ( $spec['h1'] ?? $spec['title'] ?? '' ), 'h1', $key . '-' . $lang . '-hero-h1' );
+    if ( ! empty( $spec['lead'] ) ) {
+        $hero[] = ip_core_elementor_text( (string) $spec['lead'], $key . '-' . $lang . '-hero-lead', 'lmb-canvas-lead' );
+    }
+    if ( ! empty( $spec['actions'] ) && is_array( $spec['actions'] ) ) {
+        $buttons = array();
+        foreach ( $spec['actions'] as $index => $action ) {
+            $buttons[] = ip_core_elementor_button(
+                (string) ( $action['label'] ?? '' ),
+                ip_core_content_pack_resolve_url( (string) ( $action['target'] ?? '@shop' ), $lang ),
+                $key . '-' . $lang . '-hero-button-' . $index,
+                $index > 0
+            );
+        }
+        $hero[] = ip_core_elementor_container(
+            $buttons,
+            $key . '-' . $lang . '-hero-actions',
+            'lmb-canvas-actions',
+            array( 'flex_direction' => 'row', 'flex_wrap' => 'wrap' )
+        );
+    }
+
+    $elements = array(
+        ip_core_elementor_container(
+            $hero,
+            $key . '-' . $lang . '-hero',
+            'lmb-canvas-hero',
+            array( 'content_width' => 'boxed' )
+        )
+    );
+
+    foreach ( (array) ( $spec['sections'] ?? array() ) as $index => $section ) {
+        if ( ! is_array( $section ) ) {
+            continue;
+        }
+        $element = ip_core_content_pack_elementor_section( $section, $lang, $key . '-' . $lang . '-section-' . $index );
+        if ( $element ) {
+            $elements[] = $element;
+        }
+    }
+
+    return $elements;
+}
+
+function ip_core_content_pack_seed_elementor( int $post_id, string $key, string $lang ): void {
     if ( ! did_action( 'elementor/loaded' ) || ! class_exists( '\Elementor\Plugin' ) ) {
         return;
     }
     update_post_meta( $post_id, '_elementor_edit_mode', 'builder' );
     update_post_meta( $post_id, '_elementor_template_type', 'wp-page' );
-    update_post_meta( $post_id, '_elementor_data', wp_slash( wp_json_encode( ip_core_content_pack_elementor_data( $html, $seed ) ) ) );
+    update_post_meta( $post_id, '_elementor_data', wp_slash( wp_json_encode( ip_core_content_pack_elementor_data( $key, $lang ) ) ) );
     update_post_meta( $post_id, '_wp_page_template', 'templates/elementor-full-width.php' );
     if ( defined( 'ELEMENTOR_VERSION' ) ) {
         update_post_meta( $post_id, '_elementor_version', ELEMENTOR_VERSION );
     }
 }
-
-function ip_core_content_pack_process_elementor_html( string $content, $widget ): string {
-    if ( is_object( $widget ) && method_exists( $widget, 'get_name' ) && 'html' === $widget->get_name() && str_contains( $content, 'lmb-final-page' ) ) {
-        return do_shortcode( $content );
-    }
-    return $content;
-}
-add_filter( 'elementor/widget/render_content', 'ip_core_content_pack_process_elementor_html', 10, 2 );
 
 function ip_core_content_pack_available_languages(): array {
     $wanted = array_keys( ip_core_content_pack_languages() );
@@ -428,7 +654,7 @@ function ip_core_install_final_content_pack(): array {
                 if ( ! is_wp_error( $updated ) ) {
                     ++$result['updated'];
                     update_post_meta( $page_id, '_ip_content_pack_hash', hash( 'sha256', $html ) );
-                    ip_core_content_pack_seed_elementor( $page_id, $html, $key . '-' . $lang );
+                    ip_core_content_pack_seed_elementor( $page_id, $key, $lang );
                 }
             } else {
                 $page_id = wp_insert_post(
@@ -451,7 +677,7 @@ function ip_core_install_final_content_pack(): array {
                 if ( ! is_wp_error( $page_id ) ) {
                     ++$result['created'];
                     ip_core_content_pack_assign_language( $page_id, $lang );
-                    ip_core_content_pack_seed_elementor( $page_id, $html, $key . '-' . $lang );
+                    ip_core_content_pack_seed_elementor( $page_id, $key, $lang );
                 }
             }
 
@@ -527,7 +753,7 @@ function ip_core_render_final_content_pack_page(): void {
             <aside style="display:grid;gap:16px">
                 <section style="background:#fff;border:1px solid #dcdcde;border-radius:12px;padding:22px">
                     <h2><?php esc_html_e( 'Elementor', 'illuminated-path-core' ); ?></h2>
-                    <p><?php esc_html_e( 'When Elementor is active, every generated page is seeded as one native Elementor HTML widget containing the complete scoped layout. Shortcodes inside it continue rendering live WooCommerce/WordPress data.', 'illuminated-path-core' ); ?></p>
+                    <p><?php esc_html_e( 'When Elementor is active, every generated page is seeded as native Elementor containers and widgets. Headings, paragraphs and buttons are directly editable; live WooCommerce/WordPress sections use Elementor Shortcode widgets.', 'illuminated-path-core' ); ?></p>
                 </section>
                 <section style="background:#fff;border:1px solid #dcdcde;border-radius:12px;padding:22px">
                     <h2><?php esc_html_e( 'Safe updates', 'illuminated-path-core' ); ?></h2>
