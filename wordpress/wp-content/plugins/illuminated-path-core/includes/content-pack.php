@@ -109,6 +109,9 @@ function ip_core_content_pack_page_id( string $key, string $lang ): int {
 }
 
 function ip_core_content_pack_page_url( string $key, string $lang ): string {
+    if ( function_exists( 'ip_core_internal_page_url' ) ) {
+        return ip_core_internal_page_url( $key, $lang );
+    }
     $id = ip_core_content_pack_page_id( $key, $lang );
     if ( $id ) {
         return (string) get_permalink( $id );
@@ -288,7 +291,7 @@ function ip_core_shortcode_final_page( array $atts ): string {
     $key = sanitize_key( (string) $atts['key'] );
     $lang = sanitize_key( (string) $atts['lang'] );
     if ( ! $lang ) {
-        $lang = function_exists( 'ip_language_code' ) ? ip_language_code() : substr( determine_locale(), 0, 2 );
+        $lang = function_exists( 'ip_core_internal_language' ) ? ip_core_internal_language() : ( function_exists( 'ip_language_code' ) ? ip_language_code() : substr( determine_locale(), 0, 2 ) );
     }
     return do_shortcode( ip_core_content_pack_render( $key, $lang ) );
 }
@@ -655,6 +658,9 @@ function ip_core_content_pack_seed_elementor( int $post_id, string $key, string 
 
 function ip_core_content_pack_available_languages(): array {
     $wanted = array_keys( ip_core_content_pack_languages() );
+    if ( function_exists( 'ip_core_languages' ) ) {
+        return array_values( array_intersect( $wanted, array_keys( ip_core_languages() ) ) );
+    }
     if ( function_exists( 'pll_languages_list' ) ) {
         return array_values( array_intersect( $wanted, array_map( 'sanitize_key', (array) pll_languages_list( array( 'fields' => 'slug' ) ) ) ) );
     }
@@ -960,6 +966,9 @@ function ip_core_install_content_pack_posts( array $languages ): array {
 }
 
 function ip_core_install_final_content_pack(): array {
+    if ( function_exists( 'ip_core_install_internal_content_pack' ) ) {
+        return ip_core_install_internal_content_pack();
+    }
     $result = array(
         'created'   => 0,
         'updated'   => 0,
@@ -1131,11 +1140,11 @@ function ip_core_render_final_content_pack_page(): void {
     ?>
     <div class="wrap">
         <h1><?php esc_html_e( 'Little Muslim Books — Final Multilingual Content', 'illuminated-path-core' ); ?></h1>
-        <p><?php esc_html_e( 'This uses a familiar demo-import workflow, but the imported material is the real editorial/marketing website content. It creates linked English, French, Spanish and Arabic pages when those languages are configured.', 'illuminated-path-core' ); ?></p>
+        <p><?php esc_html_e( 'This uses a familiar demo-import workflow, but the imported material is the real editorial/marketing website content. One canonical WordPress page stores English, French, Spanish and Arabic together and the internal Little Muslim Books language engine chooses the active version.', 'illuminated-path-core' ); ?></p>
         <div style="max-width:1100px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(300px,.7fr);gap:22px;align-items:start">
             <section style="background:#fff;border:1px solid #dcdcde;border-radius:12px;padding:24px">
                 <h2><?php esc_html_e( 'Content model', 'illuminated-path-core' ); ?></h2>
-                <p><?php esc_html_e( 'JSON is the source of truth. Gutenberg receives a branded HTML fallback, while Elementor receives native containers, headings, text, buttons and Shortcode widgets. WooCommerce products, prices, reviews and WordPress posts remain live.', 'illuminated-path-core' ); ?></p>
+                <p><?php esc_html_e( 'JSON is the source of truth. Elementor receives one self-contained HTML widget per page with EN / FR / ES / AR inside it. The widget is rendered server-side in the active language, while WooCommerce products, prices, reviews and WordPress posts remain live.', 'illuminated-path-core' ); ?></p>
                 <p><strong><?php esc_html_e( 'Final content languages:', 'illuminated-path-core' ); ?></strong>
                     <?php echo esc_html( implode( ', ', array_map( static fn( $lang ) => (string) ( $languages[ $lang ]['label'] ?? strtoupper( $lang ) ), array_keys( $languages ) ) ) ); ?>
                 </p>
@@ -1164,7 +1173,7 @@ function ip_core_render_final_content_pack_page(): void {
             <aside style="display:grid;gap:16px">
                 <section style="background:#fff;border:1px solid #dcdcde;border-radius:12px;padding:22px">
                     <h2><?php esc_html_e( 'Elementor', 'illuminated-path-core' ); ?></h2>
-                    <p><?php esc_html_e( 'When Elementor is active, every generated page is seeded as native Elementor containers and widgets. Headings, paragraphs and buttons are directly editable; live WooCommerce/WordPress sections use Elementor Shortcode widgets.', 'illuminated-path-core' ); ?></p>
+                    <p><?php esc_html_e( 'When Elementor is active, every generated page is seeded as one multilingual Elementor HTML widget, following the same practical pattern used for Aprenidiom landing pages. Its translation payload stays inside the widget and dynamic WooCommerce/WordPress sections are rendered by the internal server-side engine.', 'illuminated-path-core' ); ?></p>
                 </section>
                 <section style="background:#fff;border:1px solid #dcdcde;border-radius:12px;padding:22px">
                     <h2><?php esc_html_e( 'Safe updates', 'illuminated-path-core' ); ?></h2>
