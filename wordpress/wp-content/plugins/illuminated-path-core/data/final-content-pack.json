@@ -1,0 +1,4420 @@
+{
+  "version": "1.2.0",
+  "name": "Little Muslim Books Final Multilingual Content Pack",
+  "languages": {
+    "en": {
+      "label": "English",
+      "locale": "en_US",
+      "direction": "ltr"
+    },
+    "fr": {
+      "label": "Français",
+      "locale": "fr_FR",
+      "direction": "ltr"
+    },
+    "es": {
+      "label": "Español",
+      "locale": "es_ES",
+      "direction": "ltr"
+    },
+    "ar": {
+      "label": "العربية",
+      "locale": "ar",
+      "direction": "rtl"
+    }
+  },
+  "pages": {
+    "home": {
+      "en": {
+        "title": "Home",
+        "slug": "home",
+        "eyebrow": "Stories that nurture faith, identity and imagination",
+        "h1": "Beautiful Islamic books for growing Muslim hearts.",
+        "lead": "Little Muslim Books creates thoughtful, visually engaging books that help Muslim children encounter faith, Prophetic stories, Quranic narratives, values and cultural memory with warmth and confidence.",
+        "actions": [
+          {
+            "label": "Explore the books",
+            "target": "@shop"
+          },
+          {
+            "label": "Our story",
+            "target": "@page:our-story"
+          }
+        ],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_search",
+            "attrs": {
+              "placeholder": "Search books, authors or series…"
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "product_cat",
+              "limit": 8
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "New releases",
+              "subtitle": "Fresh stories and new editions for your family library.",
+              "source": "newest",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "Books children want to open. Values parents want to pass on.",
+            "body": "We believe Muslim families should not have to choose between meaningful religious content and beautiful contemporary publishing.",
+            "eyebrow": "Why we publish",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "Faith with care",
+                "body": "Islamic meaning is part of the foundation of the story, treated with respect and clarity."
+              },
+              {
+                "icon": "◌",
+                "title": "Creative quality",
+                "body": "Illustration, design and storytelling are crafted to deserve a child’s attention."
+              },
+              {
+                "icon": "Aa",
+                "title": "Multilingual families",
+                "body": "Books are designed for children growing up across languages, countries and cultural references."
+              }
+            ]
+          },
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Family favourites",
+              "subtitle": "Books families are choosing most often.",
+              "source": "best_selling",
+              "limit": 8
+            }
+          },
+          {
+            "type": "quote",
+            "text": "When a Muslim child looks at the shelf, we want the books that carry their faith and heritage to be among the books they are most excited to choose."
+          },
+          {
+            "type": "dynamic",
+            "component": "reviews",
+            "attrs": {
+              "title": "What families are saying",
+              "limit": 3
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "latest_posts",
+            "attrs": {
+              "title": "Reading ideas & resources",
+              "limit": 3
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "newsletter",
+            "attrs": {}
+          },
+          {
+            "type": "cta",
+            "heading": "Build a library that feels like home.",
+            "body": "Browse stories by age, language, theme and series, and choose the books that fit your family.",
+            "button": "Shop all books",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Accueil",
+        "slug": "accueil",
+        "eyebrow": "Des histoires qui nourrissent la foi, l’identité et l’imaginaire",
+        "h1": "De beaux livres islamiques pour faire grandir le cœur des enfants musulmans.",
+        "lead": "Little Muslim Books crée des livres soignés et visuellement captivants qui aident les enfants musulmans à découvrir la foi, les récits des Prophètes, les histoires du Coran, les valeurs et la mémoire culturelle avec chaleur et confiance.",
+        "actions": [
+          {
+            "label": "Découvrir les livres",
+            "target": "@shop"
+          },
+          {
+            "label": "Notre histoire",
+            "target": "@page:our-story"
+          }
+        ],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_search",
+            "attrs": {
+              "placeholder": "Rechercher un livre, un auteur ou une série…"
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "product_cat",
+              "limit": 8
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Nouveautés",
+              "subtitle": "De nouvelles histoires et éditions pour la bibliothèque familiale.",
+              "source": "newest",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "Des livres que les enfants ont envie d’ouvrir. Des valeurs que les parents veulent transmettre.",
+            "body": "Nous pensons que les familles musulmanes ne devraient pas avoir à choisir entre un contenu religieux porteur de sens et une édition contemporaine de grande qualité.",
+            "eyebrow": "Pourquoi nous publions",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "Une foi traitée avec soin",
+                "body": "Le sens islamique est au cœur de l’histoire et est présenté avec respect et clarté."
+              },
+              {
+                "icon": "◌",
+                "title": "Une vraie qualité créative",
+                "body": "Illustration, design et narration sont pensés pour mériter l’attention de l’enfant."
+              },
+              {
+                "icon": "Aa",
+                "title": "Pour les familles multilingues",
+                "body": "Des livres conçus pour les enfants qui grandissent entre plusieurs langues, pays et repères culturels."
+              }
+            ]
+          },
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Les préférés des familles",
+              "subtitle": "Les livres que les familles choisissent le plus souvent.",
+              "source": "best_selling",
+              "limit": 8
+            }
+          },
+          {
+            "type": "quote",
+            "text": "Quand un enfant musulman regarde sa bibliothèque, nous voulons que les livres qui portent sa foi et son héritage soient parmi ceux qu’il a le plus envie de choisir."
+          },
+          {
+            "type": "dynamic",
+            "component": "reviews",
+            "attrs": {
+              "title": "Ce que disent les familles",
+              "limit": 3
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "latest_posts",
+            "attrs": {
+              "title": "Idées de lecture & ressources",
+              "limit": 3
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "newsletter",
+            "attrs": {}
+          },
+          {
+            "type": "cta",
+            "heading": "Construisez une bibliothèque qui lui ressemble.",
+            "body": "Parcourez les histoires par âge, langue, thème et série, puis choisissez les livres qui correspondent à votre famille.",
+            "button": "Voir tous les livres",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Inicio",
+        "slug": "inicio",
+        "eyebrow": "Historias que alimentan la fe, la identidad y la imaginación",
+        "h1": "Libros islámicos bellos para hacer crecer el corazón de los niños musulmanes.",
+        "lead": "Little Muslim Books crea libros cuidados y visualmente atractivos que ayudan a los niños musulmanes a acercarse a la fe, las historias de los Profetas, los relatos coránicos, los valores y la memoria cultural con cercanía y confianza.",
+        "actions": [
+          {
+            "label": "Explorar los libros",
+            "target": "@shop"
+          },
+          {
+            "label": "Nuestra historia",
+            "target": "@page:our-story"
+          }
+        ],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_search",
+            "attrs": {
+              "placeholder": "Buscar libros, autores o series…"
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "product_cat",
+              "limit": 8
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Novedades",
+              "subtitle": "Nuevas historias y ediciones para la biblioteca familiar.",
+              "source": "newest",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "Libros que los niños quieren abrir. Valores que los padres quieren transmitir.",
+            "body": "Creemos que las familias musulmanas no deberían tener que elegir entre contenido religioso con sentido y una edición contemporánea de gran calidad.",
+            "eyebrow": "Por qué publicamos",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "Fe tratada con cuidado",
+                "body": "El significado islámico forma parte del corazón de la historia y se presenta con respeto y claridad."
+              },
+              {
+                "icon": "◌",
+                "title": "Calidad creativa",
+                "body": "Ilustración, diseño y narración se trabajan para merecer la atención del niño."
+              },
+              {
+                "icon": "Aa",
+                "title": "Familias multilingües",
+                "body": "Libros pensados para niños que crecen entre varias lenguas, países y referencias culturales."
+              }
+            ]
+          },
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Favoritos de las familias",
+              "subtitle": "Los libros que las familias eligen con más frecuencia.",
+              "source": "best_selling",
+              "limit": 8
+            }
+          },
+          {
+            "type": "quote",
+            "text": "Cuando un niño musulmán mira su estantería, queremos que los libros que llevan su fe y su herencia estén entre los que más ilusión le hace elegir."
+          },
+          {
+            "type": "dynamic",
+            "component": "reviews",
+            "attrs": {
+              "title": "Lo que dicen las familias",
+              "limit": 3
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "latest_posts",
+            "attrs": {
+              "title": "Ideas de lectura y recursos",
+              "limit": 3
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "newsletter",
+            "attrs": {}
+          },
+          {
+            "type": "cta",
+            "heading": "Crea una biblioteca que se sienta como hogar.",
+            "body": "Explora historias por edad, idioma, tema y serie, y elige los libros que encajan con tu familia.",
+            "button": "Ver todos los libros",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "الرئيسية",
+        "slug": "الرئيسية",
+        "eyebrow": "قصص تغذّي الإيمان والهوية والخيال",
+        "h1": "كتب إسلامية جميلة تنمّي قلوب الأطفال المسلمين.",
+        "lead": "تقدّم Little Muslim Books كتباً مدروسة وجذابة بصرياً تساعد الطفل المسلم على الاقتراب من الإيمان وقصص الأنبياء والحكايات القرآنية والقيم والذاكرة الثقافية بمحبة وثقة.",
+        "actions": [
+          {
+            "label": "استكشف الكتب",
+            "target": "@shop"
+          },
+          {
+            "label": "قصتنا",
+            "target": "@page:our-story"
+          }
+        ],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_search",
+            "attrs": {
+              "placeholder": "ابحث عن كتاب أو مؤلف أو سلسلة…"
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "product_cat",
+              "limit": 8
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "إصدارات جديدة",
+              "subtitle": "قصص وإصدارات جديدة لمكتبة الأسرة.",
+              "source": "newest",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "كتب يحب الأطفال فتحها. وقيم يريد الآباء نقلها.",
+            "body": "نؤمن أن الأسرة المسلمة لا ينبغي أن تختار بين مضمون ديني ذي معنى وبين كتاب معاصر جميل الصنع.",
+            "eyebrow": "لماذا ننشر",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "إيمان يُقدَّم بعناية",
+                "body": "المعنى الإسلامي جزء من أساس القصة ويُقدَّم باحترام ووضوح."
+              },
+              {
+                "icon": "◌",
+                "title": "جودة إبداعية",
+                "body": "نعتني بالرسم والتصميم والسرد حتى تستحق الكتب انتباه الطفل."
+              },
+              {
+                "icon": "Aa",
+                "title": "للأسر متعددة اللغات",
+                "body": "كتب للأطفال الذين يكبرون بين لغات وبلدان ومرجعيات ثقافية متعددة."
+              }
+            ]
+          },
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "اختيارات العائلات",
+              "subtitle": "الكتب التي تختارها العائلات أكثر.",
+              "source": "best_selling",
+              "limit": 8
+            }
+          },
+          {
+            "type": "quote",
+            "text": "عندما ينظر الطفل المسلم إلى رف كتبه، نريد أن تكون الكتب التي تحمل إيمانه وتراثه من أكثر الكتب التي يتحمس لاختيارها."
+          },
+          {
+            "type": "dynamic",
+            "component": "reviews",
+            "attrs": {
+              "title": "ماذا تقول العائلات",
+              "limit": 3
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "latest_posts",
+            "attrs": {
+              "title": "أفكار للقراءة وموارد",
+              "limit": 3
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "newsletter",
+            "attrs": {}
+          },
+          {
+            "type": "cta",
+            "heading": "ابنِ مكتبة يشعر معها طفلك أنه في بيته.",
+            "body": "تصفّح القصص حسب العمر واللغة والموضوع والسلسلة واختر ما يناسب أسرتك.",
+            "button": "تصفّح كل الكتب",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "islamic-childrens-books": {
+      "en": {
+        "title": "Islamic Children’s Books",
+        "slug": "islamic-childrens-books",
+        "eyebrow": "Books for growing Muslim hearts",
+        "h1": "Islamic children’s books made to be loved, shared and remembered.",
+        "lead": "Discover beautifully presented books that bring faith, Islamic values, Prophetic stories and Muslim cultural memory into everyday family reading.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Featured books",
+              "source": "featured",
+              "limit": 10
+            }
+          },
+          {
+            "type": "text",
+            "heading": "Find the right book for your family",
+            "body": "Some families are looking for a first introduction to the Prophets. Others want Ramadan stories, bedtime reading, bilingual editions or books that make patience, gratitude and kindness easier to discuss. Our catalogue is organised to make those choices simple.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_theme",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "What guides our publishing",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "Respect for faith",
+                "body": "Islamic themes are treated as the heart of the book, not as decoration."
+              },
+              {
+                "icon": "◌",
+                "title": "Beautiful storytelling",
+                "body": "Visual quality and clear storytelling help children return to the book willingly."
+              },
+              {
+                "icon": "Aa",
+                "title": "Access across languages",
+                "body": "Multilingual and bilingual editions help families read through the languages that already belong to home life."
+              }
+            ]
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Find their next book.",
+            "body": "Browse the complete catalogue by age, language, theme, series and format.",
+            "button": "Shop all books",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Livres islamiques pour enfants",
+        "slug": "livres-islamiques-enfants",
+        "eyebrow": "Des livres pour faire grandir le cœur des enfants musulmans",
+        "h1": "Des livres islamiques faits pour être aimés, partagés et gardés en mémoire.",
+        "lead": "Découvrez des livres magnifiquement présentés qui font entrer la foi, les valeurs islamiques, les récits des Prophètes et la mémoire culturelle musulmane dans la lecture familiale du quotidien.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Livres à la une",
+              "source": "featured",
+              "limit": 10
+            }
+          },
+          {
+            "type": "text",
+            "heading": "Trouvez le bon livre pour votre famille",
+            "body": "Certaines familles cherchent une première introduction aux Prophètes. D’autres veulent des histoires de Ramadan, des lectures du soir, des éditions bilingues ou des livres qui facilitent les conversations sur la patience, la gratitude et la bonté. Notre catalogue est organisé pour rendre ces choix simples.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_theme",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "Ce qui guide notre édition",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "Le respect de la foi",
+                "body": "Les thèmes islamiques sont le cœur du livre, pas un simple décor."
+              },
+              {
+                "icon": "◌",
+                "title": "Une belle narration",
+                "body": "La qualité visuelle et la clarté du récit donnent envie à l’enfant de revenir au livre."
+              },
+              {
+                "icon": "Aa",
+                "title": "Un accès dans plusieurs langues",
+                "body": "Les éditions multilingues et bilingues permettent aux familles de lire dans les langues déjà présentes à la maison."
+              }
+            ]
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Trouvez son prochain livre.",
+            "body": "Parcourez tout le catalogue par âge, langue, thème, série et format.",
+            "button": "Voir tous les livres",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Libros islámicos infantiles",
+        "slug": "libros-islamicos-infantiles",
+        "eyebrow": "Libros para hacer crecer el corazón de los niños musulmanes",
+        "h1": "Libros islámicos hechos para ser queridos, compartidos y recordados.",
+        "lead": "Descubre libros bellamente presentados que llevan la fe, los valores islámicos, las historias de los Profetas y la memoria cultural musulmana a la lectura familiar cotidiana.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Libros destacados",
+              "source": "featured",
+              "limit": 10
+            }
+          },
+          {
+            "type": "text",
+            "heading": "Encuentra el libro adecuado para tu familia",
+            "body": "Algunas familias buscan una primera introducción a los Profetas. Otras quieren historias de Ramadán, lecturas para dormir, ediciones bilingües o libros que faciliten hablar sobre paciencia, gratitud y bondad. Nuestro catálogo está organizado para que elegir resulte sencillo.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_theme",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "Lo que guía nuestra edición",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "Respeto por la fe",
+                "body": "Los temas islámicos son el corazón del libro, no un adorno añadido."
+              },
+              {
+                "icon": "◌",
+                "title": "Narración bella",
+                "body": "La calidad visual y una historia clara invitan al niño a volver al libro."
+              },
+              {
+                "icon": "Aa",
+                "title": "Acceso en varias lenguas",
+                "body": "Las ediciones multilingües y bilingües ayudan a leer en las lenguas que ya forman parte del hogar."
+              }
+            ]
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Encuentra su próximo libro.",
+            "body": "Explora todo el catálogo por edad, idioma, tema, serie y formato.",
+            "button": "Ver todos los libros",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "كتب إسلامية للأطفال",
+        "slug": "كتب-إسلامية-للأطفال",
+        "eyebrow": "كتب تنمّي قلوب الأطفال المسلمين",
+        "h1": "كتب إسلامية تُصنع لتُحب وتُقرأ معاً وتبقى في الذاكرة.",
+        "lead": "اكتشف كتباً جميلة التقديم تجعل الإيمان والقيم الإسلامية وقصص الأنبياء والذاكرة الثقافية المسلمة جزءاً من القراءة العائلية اليومية.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "كتب مختارة",
+              "source": "featured",
+              "limit": 10
+            }
+          },
+          {
+            "type": "text",
+            "heading": "اعثر على الكتاب المناسب لأسرتك",
+            "body": "بعض الأسر تبحث عن مدخل أول إلى قصص الأنبياء، وأخرى تريد قصص رمضان أو القراءة قبل النوم أو الكتب ثنائية اللغة أو كتباً تساعد على الحديث عن الصبر والامتنان واللطف. نظمنا المتجر لتصبح هذه الاختيارات أسهل.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_theme",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "ما الذي يوجّه عملنا",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "احترام الإيمان",
+                "body": "الموضوع الإسلامي هو قلب الكتاب وليس مجرد زينة."
+              },
+              {
+                "icon": "◌",
+                "title": "سرد جميل",
+                "body": "الجودة البصرية ووضوح القصة يشجعان الطفل على العودة إلى الكتاب."
+              },
+              {
+                "icon": "Aa",
+                "title": "وصول عبر لغات متعددة",
+                "body": "الإصدارات متعددة وثنائية اللغة تساعد الأسر على القراءة باللغات الموجودة فعلاً في البيت."
+              }
+            ]
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "اعثر على كتابه القادم.",
+            "body": "تصفّح المتجر حسب العمر واللغة والموضوع والسلسلة والصيغة.",
+            "button": "تصفّح كل الكتب",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "stories-of-the-prophets-for-kids": {
+      "en": {
+        "title": "Stories of the Prophets for Kids",
+        "slug": "stories-of-the-prophets-for-kids",
+        "eyebrow": "Stories of faith, courage and trust",
+        "h1": "Stories of the Prophets for children",
+        "lead": "The Prophets offer children some of the most powerful examples in the Islamic tradition: patience, courage, repentance, mercy, trust in Allah and hope. Our books turn those meanings into family stories children can remember and revisit.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Stories of the Prophets",
+              "category": "stories-of-the-prophets",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "split",
+            "left": {
+              "heading": "A story first",
+              "body": "Children remember scenes, choices, emotions and characters. We use clear language and thoughtful illustration to make meaning memorable without turning the book into a lecture."
+            },
+            "right": {
+              "heading": "A conversation that continues",
+              "body": "The book can become a starting point for questions about faith, character and the choices children recognise in their own lives."
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Explore the Prophet stories.",
+            "body": "Choose a story that fits your child’s age and reading stage.",
+            "button": "Shop Prophet stories",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Histoires des Prophètes pour enfants",
+        "slug": "histoires-prophetes-enfants",
+        "eyebrow": "Des histoires de foi, de courage et de confiance",
+        "h1": "Les histoires des Prophètes pour les enfants",
+        "lead": "Les Prophètes offrent aux enfants certains des exemples les plus puissants de la tradition islamique : patience, courage, repentir, miséricorde, confiance en Allah et espérance. Nos livres transforment ces significations en histoires familiales que les enfants peuvent retenir et relire.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Histoires des Prophètes",
+              "category": "stories-of-the-prophets",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "split",
+            "left": {
+              "heading": "D’abord une histoire",
+              "body": "Les enfants retiennent des scènes, des choix, des émotions et des personnages. Nous utilisons un langage clair et une illustration réfléchie pour rendre le sens mémorable sans transformer le livre en leçon."
+            },
+            "right": {
+              "heading": "Une conversation qui continue",
+              "body": "Le livre peut devenir un point de départ pour parler de foi, de caractère et des choix que l’enfant reconnaît dans sa propre vie."
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Découvrez les récits des Prophètes.",
+            "body": "Choisissez une histoire adaptée à l’âge et au niveau de lecture de votre enfant.",
+            "button": "Voir les histoires des Prophètes",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Historias de los Profetas para niños",
+        "slug": "historias-profetas-ninos",
+        "eyebrow": "Historias de fe, valor y confianza",
+        "h1": "Historias de los Profetas para niños",
+        "lead": "Los Profetas ofrecen a los niños algunos de los ejemplos más poderosos de la tradición islámica: paciencia, valor, arrepentimiento, misericordia, confianza en Allah y esperanza. Nuestros libros convierten esos significados en historias familiares que los niños pueden recordar y volver a leer.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Historias de los Profetas",
+              "category": "stories-of-the-prophets",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "split",
+            "left": {
+              "heading": "Primero, una historia",
+              "body": "Los niños recuerdan escenas, decisiones, emociones y personajes. Usamos un lenguaje claro y una ilustración cuidada para hacer memorable el significado sin convertir el libro en una lección."
+            },
+            "right": {
+              "heading": "Una conversación que continúa",
+              "body": "El libro puede ser el punto de partida para hablar de fe, carácter y de las decisiones que los niños reconocen en su propia vida."
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Descubre las historias de los Profetas.",
+            "body": "Elige una historia adecuada a la edad y etapa lectora de tu hijo.",
+            "button": "Ver historias de los Profetas",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "قصص الأنبياء للأطفال",
+        "slug": "قصص-الأنبياء-للأطفال",
+        "eyebrow": "قصص عن الإيمان والشجاعة والتوكل",
+        "h1": "قصص الأنبياء للأطفال",
+        "lead": "تقدم قصص الأنبياء للأطفال نماذج عظيمة من التراث الإسلامي: الصبر والشجاعة والتوبة والرحمة والتوكل على الله والأمل. نحول هذه المعاني إلى قصص عائلية يمكن للطفل أن يتذكرها ويعود إليها.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "قصص الأنبياء",
+              "category": "stories-of-the-prophets",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "split",
+            "left": {
+              "heading": "القصة أولاً",
+              "body": "يتذكر الأطفال المشاهد والاختيارات والمشاعر والشخصيات. نستخدم لغة واضحة ورسماً مدروساً حتى يبقى المعنى في الذاكرة من دون أن يتحول الكتاب إلى درس مباشر."
+            },
+            "right": {
+              "heading": "وحوار يستمر بعدها",
+              "body": "يمكن للكتاب أن يفتح حديثاً عن الإيمان والخلق والاختيارات التي يراها الطفل في حياته اليومية."
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "اكتشف قصص الأنبياء.",
+            "body": "اختر قصة تناسب عمر طفلك ومرحلة قراءته.",
+            "button": "تصفّح قصص الأنبياء",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "quran-stories-for-kids": {
+      "en": {
+        "title": "Quran Stories for Kids",
+        "slug": "quran-stories-for-kids",
+        "eyebrow": "Quranic stories for family reading",
+        "h1": "Quran stories children can approach with wonder and respect.",
+        "lead": "Quranic narratives invite reflection on faith, character, consequence, mercy and our relationship with Allah. Our children’s editions aim to make these stories approachable through age-conscious language and engaging visual presentation while respecting their source and meaning.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Quran stories",
+              "category": "quran-stories",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "text",
+            "heading": "Read, pause and talk together",
+            "body": "These books are designed to support the moment around the story as much as the story itself: children’s questions, family explanations and the warm repetition through which a story becomes part of memory.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "cta",
+            "heading": "Explore Quran stories for children.",
+            "body": "Find editions suited to your family’s reading stage and language.",
+            "button": "Browse Quran stories",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Histoires du Coran pour enfants",
+        "slug": "histoires-coran-enfants",
+        "eyebrow": "Des récits coraniques pour la lecture en famille",
+        "h1": "Des histoires du Coran que les enfants peuvent approcher avec émerveillement et respect.",
+        "lead": "Les récits coraniques invitent à réfléchir à la foi, au caractère, aux conséquences, à la miséricorde et à notre relation avec Allah. Nos éditions jeunesse cherchent à rendre ces histoires accessibles par un langage adapté à l’âge et une présentation visuelle engageante, tout en respectant leur source et leur sens.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Histoires du Coran",
+              "category": "quran-stories",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "text",
+            "heading": "Lire, faire une pause et parler ensemble",
+            "body": "Ces livres sont conçus pour accompagner tout ce qui entoure l’histoire : les questions des enfants, les explications en famille et cette répétition chaleureuse grâce à laquelle une histoire devient un souvenir.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "cta",
+            "heading": "Découvrez les histoires du Coran pour enfants.",
+            "body": "Trouvez des éditions adaptées à l’âge et à la langue de votre famille.",
+            "button": "Voir les histoires du Coran",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Historias del Corán para niños",
+        "slug": "historias-coran-ninos",
+        "eyebrow": "Relatos coránicos para leer en familia",
+        "h1": "Historias del Corán que los niños pueden descubrir con asombro y respeto.",
+        "lead": "Los relatos coránicos invitan a reflexionar sobre la fe, el carácter, las consecuencias, la misericordia y nuestra relación con Allah. Nuestras ediciones infantiles buscan acercar estas historias con un lenguaje adecuado a la edad y una presentación visual atractiva, respetando su origen y significado.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Historias del Corán",
+              "category": "quran-stories",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "text",
+            "heading": "Leer, detenerse y hablar juntos",
+            "body": "Estos libros están pensados para acompañar tanto la historia como lo que ocurre alrededor de ella: las preguntas de los niños, las explicaciones en familia y esa repetición afectuosa con la que un relato entra en la memoria.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "cta",
+            "heading": "Descubre historias del Corán para niños.",
+            "body": "Encuentra ediciones adecuadas a la edad y al idioma de tu familia.",
+            "button": "Ver historias del Corán",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "قصص القرآن للأطفال",
+        "slug": "قصص-القرآن-للأطفال",
+        "eyebrow": "حكايات قرآنية للقراءة العائلية",
+        "h1": "قصص من القرآن يقترب منها الطفل بدهشة واحترام.",
+        "lead": "تدعو القصص القرآنية إلى التأمل في الإيمان والخلق والنتائج والرحمة وعلاقتنا بالله. وتهدف إصداراتنا للأطفال إلى تقديم هذه القصص بلغة مناسبة للعمر وتصميم بصري جذاب مع احترام مصدرها ومعناها.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "قصص القرآن",
+              "category": "quran-stories",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "text",
+            "heading": "اقرأ وتوقف وتحدثوا معاً",
+            "body": "صُممت هذه الكتب لدعم اللحظة المحيطة بالقصة أيضاً: أسئلة الطفل، وشرح الأسرة، والتكرار الحميم الذي يجعل القصة جزءاً من الذاكرة.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "cta",
+            "heading": "اكتشف قصص القرآن للأطفال.",
+            "body": "اختر الإصدارات التي تناسب عمر طفلك ولغة أسرتك.",
+            "button": "تصفّح قصص القرآن",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "ramadan-eid-books": {
+      "en": {
+        "title": "Ramadan & Eid Books for Children",
+        "slug": "ramadan-eid-books",
+        "eyebrow": "Make the season part of their childhood memories",
+        "h1": "Ramadan and Eid books for Muslim children",
+        "lead": "For children, Ramadan and Eid are experienced through family routines, moon sightings, meals, prayer, generosity, anticipation and celebration. Our seasonal books help parents turn those moments into stories children can understand, enjoy and remember.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Ramadan & Eid",
+              "category": "ramadan",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "text",
+            "heading": "For reading, gifting and family traditions",
+            "body": "Choose a book for a Ramadan reading basket, an Eid gift, bedtime during the holy month or a family conversation about fasting, gratitude, generosity and worship.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Popular seasonal gifts",
+              "category": "ramadan",
+              "source": "best_selling",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Bring Ramadan and Eid onto the bookshelf.",
+            "body": "Discover stories that can become part of your family’s seasonal traditions.",
+            "button": "Shop Ramadan & Eid books",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Livres de Ramadan & Aïd pour enfants",
+        "slug": "livres-ramadan-aid-enfants",
+        "eyebrow": "Faites de la saison un souvenir d’enfance",
+        "h1": "Des livres de Ramadan et d’Aïd pour les enfants musulmans",
+        "lead": "Pour les enfants, Ramadan et l’Aïd passent par les habitudes familiales, l’observation de la lune, les repas, la prière, la générosité, l’attente et la fête. Nos livres saisonniers aident les parents à transformer ces moments en histoires que les enfants peuvent comprendre, aimer et retenir.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Ramadan & Aïd",
+              "category": "ramadan",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "text",
+            "heading": "Pour lire, offrir et créer des traditions",
+            "body": "Choisissez un livre pour un panier de lecture de Ramadan, un cadeau d’Aïd, une histoire du soir pendant le mois béni ou une conversation familiale sur le jeûne, la gratitude, la générosité et l’adoration.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Cadeaux saisonniers populaires",
+              "category": "ramadan",
+              "source": "best_selling",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Faites entrer Ramadan et l’Aïd dans la bibliothèque.",
+            "body": "Découvrez des histoires qui peuvent devenir une tradition familiale.",
+            "button": "Voir les livres Ramadan & Aïd",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Libros de Ramadán y Eid para niños",
+        "slug": "libros-ramadan-eid-ninos",
+        "eyebrow": "Haz que la temporada forme parte de sus recuerdos de infancia",
+        "h1": "Libros de Ramadán y Eid para niños musulmanes",
+        "lead": "Para los niños, Ramadán y Eid se viven a través de las rutinas familiares, la observación de la luna, las comidas, la oración, la generosidad, la espera y la celebración. Nuestros libros ayudan a convertir esos momentos en historias que los niños pueden comprender, disfrutar y recordar.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Ramadán y Eid",
+              "category": "ramadan",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "text",
+            "heading": "Para leer, regalar y crear tradiciones familiares",
+            "body": "Elige un libro para una cesta de lectura de Ramadán, un regalo de Eid, una historia antes de dormir durante el mes bendito o una conversación familiar sobre el ayuno, la gratitud, la generosidad y la adoración.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Regalos de temporada populares",
+              "category": "ramadan",
+              "source": "best_selling",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Lleva Ramadán y Eid a su estantería.",
+            "body": "Descubre historias que pueden convertirse en parte de las tradiciones de tu familia.",
+            "button": "Ver libros de Ramadán y Eid",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "كتب رمضان والعيد للأطفال",
+        "slug": "كتب-رمضان-والعيد-للأطفال",
+        "eyebrow": "اجعل الموسم جزءاً من ذكريات طفولتهم",
+        "h1": "كتب رمضان والعيد للأطفال المسلمين",
+        "lead": "يعيش الطفل رمضان والعيد من خلال عادات الأسرة ورؤية الهلال والوجبات والصلاة والكرم والانتظار والفرح. تساعد كتبنا الموسمية الآباء على تحويل هذه اللحظات إلى قصص يفهمها الطفل ويستمتع بها ويتذكرها.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "رمضان والعيد",
+              "category": "ramadan",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "text",
+            "heading": "للقراءة والهدايا والتقاليد العائلية",
+            "body": "اختر كتاباً لسلة قراءة رمضان، أو هدية للعيد، أو قصة قبل النوم في الشهر المبارك، أو حواراً عائلياً عن الصيام والامتنان والكرم والعبادة.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "هدايا موسمية محبوبة",
+              "category": "ramadan",
+              "source": "best_selling",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "ضع رمضان والعيد على رف الكتب.",
+            "body": "اكتشف قصصاً يمكن أن تصبح جزءاً من تقاليد أسرتك.",
+            "button": "تصفّح كتب رمضان والعيد",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "bilingual-islamic-books": {
+      "en": {
+        "title": "Bilingual Islamic Books",
+        "slug": "bilingual-islamic-books",
+        "eyebrow": "For children growing up between languages",
+        "h1": "Bilingual Islamic books for multilingual Muslim families",
+        "lead": "A child may speak one language at school, another with grandparents and encounter Arabic through prayer or religious learning. Bilingual books help those worlds meet on the same page, keeping heritage language and Islamic vocabulary visible and familiar.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Bilingual books",
+              "category": "bilingual",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_language",
+              "limit": 12
+            }
+          },
+          {
+            "type": "text",
+            "heading": "Language as a bridge, not a barrier",
+            "body": "Children should be able to enter Islamic stories through a language they understand confidently, while gradually building familiarity with the other languages that form part of their identity.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "cta",
+            "heading": "Choose the language that opens the story.",
+            "body": "Browse current editions and bilingual combinations.",
+            "button": "Shop by language",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Livres islamiques bilingues",
+        "slug": "livres-islamiques-bilingues",
+        "eyebrow": "Pour les enfants qui grandissent entre plusieurs langues",
+        "h1": "Des livres islamiques bilingues pour les familles musulmanes multilingues",
+        "lead": "Un enfant peut parler une langue à l’école, une autre avec ses grands-parents et rencontrer l’arabe dans la prière ou l’apprentissage religieux. Les livres bilingues réunissent ces mondes sur une même page et gardent visibles la langue d’héritage et le vocabulaire islamique.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Livres bilingues",
+              "category": "bilingual",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_language",
+              "limit": 12
+            }
+          },
+          {
+            "type": "text",
+            "heading": "La langue comme pont, pas comme barrière",
+            "body": "Un enfant doit pouvoir entrer dans une histoire islamique par une langue qu’il comprend avec assurance, tout en se familiarisant progressivement avec les autres langues qui font partie de son identité.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "cta",
+            "heading": "Choisissez la langue qui ouvre l’histoire.",
+            "body": "Parcourez les éditions et combinaisons bilingues disponibles.",
+            "button": "Voir par langue",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Libros islámicos bilingües",
+        "slug": "libros-islamicos-bilingues",
+        "eyebrow": "Para niños que crecen entre varias lenguas",
+        "h1": "Libros islámicos bilingües para familias musulmanas multilingües",
+        "lead": "Un niño puede hablar una lengua en el colegio, otra con sus abuelos y encontrarse con el árabe en la oración o el aprendizaje religioso. Los libros bilingües hacen que esos mundos se encuentren en la misma página y mantienen visible la lengua de herencia y el vocabulario islámico.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Libros bilingües",
+              "category": "bilingual",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_language",
+              "limit": 12
+            }
+          },
+          {
+            "type": "text",
+            "heading": "El idioma como puente, no como barrera",
+            "body": "Un niño debería poder entrar en una historia islámica a través de una lengua que comprende con seguridad, mientras se familiariza poco a poco con las otras lenguas que forman parte de su identidad.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "cta",
+            "heading": "Elige el idioma que abre la historia.",
+            "body": "Explora las ediciones y combinaciones bilingües disponibles.",
+            "button": "Ver por idioma",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "كتب إسلامية ثنائية اللغة",
+        "slug": "كتب-إسلامية-ثنائية-اللغة",
+        "eyebrow": "للأطفال الذين يكبرون بين لغات متعددة",
+        "h1": "كتب إسلامية ثنائية اللغة للأسر المسلمة متعددة اللغات",
+        "lead": "قد يتحدث الطفل لغة في المدرسة وأخرى مع الأجداد ويلتقي بالعربية في الصلاة أو التعلم الديني. تساعد الكتب ثنائية اللغة على جمع هذه العوالم في صفحة واحدة، وتبقي لغة التراث والمفردات الإسلامية حاضرة ومألوفة.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "كتب ثنائية اللغة",
+              "category": "bilingual",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_language",
+              "limit": 12
+            }
+          },
+          {
+            "type": "text",
+            "heading": "اللغة جسر وليست حاجزاً",
+            "body": "ينبغي أن يتمكن الطفل من دخول القصة الإسلامية عبر لغة يفهمها بثقة، مع بناء الألفة تدريجياً مع اللغات الأخرى التي تشكل جزءاً من هويته.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "cta",
+            "heading": "اختر اللغة التي تفتح باب القصة.",
+            "body": "تصفّح الإصدارات الحالية والخيارات ثنائية اللغة.",
+            "button": "تصفّح حسب اللغة",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "islamic-bedtime-stories": {
+      "en": {
+        "title": "Islamic Bedtime Stories",
+        "slug": "islamic-bedtime-stories",
+        "eyebrow": "Quiet stories for the end of the day",
+        "h1": "Islamic bedtime stories for calm, meaningful family reading",
+        "lead": "Bedtime is one of the simplest moments to make reading part of a child’s relationship with faith and family. Discover gentle stories that create space for gratitude, dua, reflection, kindness and the reassuring rhythms of Muslim home life.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Bedtime reading",
+              "category": "bedtime",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "A gentle end to the day",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "☾",
+                "title": "Read together",
+                "body": "Create a calm shared ritual around story and conversation."
+              },
+              {
+                "icon": "✦",
+                "title": "Remember Allah",
+                "body": "Make gratitude, dua and reflection feel natural in family life."
+              },
+              {
+                "icon": "♡",
+                "title": "Build warm memories",
+                "body": "Let faith appear in the ordinary, comforting moments children remember."
+              }
+            ]
+          },
+          {
+            "type": "cta",
+            "heading": "Choose tonight’s story.",
+            "body": "Find gentle Islamic reading for the end of the day.",
+            "button": "Shop bedtime stories",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Histoires islamiques du soir",
+        "slug": "histoires-islamiques-du-soir",
+        "eyebrow": "Des histoires douces pour terminer la journée",
+        "h1": "Des histoires islamiques du soir pour une lecture familiale calme et pleine de sens",
+        "lead": "Le coucher est l’un des moments les plus simples pour faire de la lecture une partie de la relation de l’enfant avec la foi et la famille. Découvrez des histoires douces qui ouvrent un espace pour la gratitude, les douas, la réflexion, la bonté et les rythmes rassurants de la vie familiale musulmane.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Lectures du soir",
+              "category": "bedtime",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "Une fin de journée paisible",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "☾",
+                "title": "Lire ensemble",
+                "body": "Créer un rituel calme autour d’une histoire et d’une conversation."
+              },
+              {
+                "icon": "✦",
+                "title": "Se souvenir d’Allah",
+                "body": "Faire de la gratitude, de la doua et de la réflexion une présence naturelle dans la vie familiale."
+              },
+              {
+                "icon": "♡",
+                "title": "Créer de beaux souvenirs",
+                "body": "Laisser la foi apparaître dans les moments ordinaires et rassurants dont les enfants se souviennent."
+              }
+            ]
+          },
+          {
+            "type": "cta",
+            "heading": "Choisissez l’histoire de ce soir.",
+            "body": "Trouvez une lecture islamique douce pour la fin de la journée.",
+            "button": "Voir les histoires du soir",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Cuentos islámicos para dormir",
+        "slug": "cuentos-islamicos-para-dormir",
+        "eyebrow": "Historias tranquilas para terminar el día",
+        "h1": "Cuentos islámicos para dormir y compartir en familia",
+        "lead": "La hora de dormir es uno de los momentos más sencillos para hacer de la lectura parte de la relación del niño con la fe y la familia. Descubre historias suaves que abren espacio para la gratitud, la dua, la reflexión, la bondad y los ritmos reconfortantes de la vida familiar musulmana.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Lecturas para dormir",
+              "category": "bedtime",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "Un final de día tranquilo",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "☾",
+                "title": "Leer juntos",
+                "body": "Crear un ritual calmado alrededor de una historia y una conversación."
+              },
+              {
+                "icon": "✦",
+                "title": "Recordar a Allah",
+                "body": "Hacer que la gratitud, la dua y la reflexión formen parte natural de la vida familiar."
+              },
+              {
+                "icon": "♡",
+                "title": "Crear buenos recuerdos",
+                "body": "Dejar que la fe aparezca en esos momentos cotidianos y reconfortantes que los niños recuerdan."
+              }
+            ]
+          },
+          {
+            "type": "cta",
+            "heading": "Elige la historia de esta noche.",
+            "body": "Encuentra una lectura islámica suave para terminar el día.",
+            "button": "Ver cuentos para dormir",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "قصص إسلامية قبل النوم",
+        "slug": "قصص-إسلامية-قبل-النوم",
+        "eyebrow": "قصص هادئة لنهاية اليوم",
+        "h1": "قصص إسلامية قبل النوم لقراءة عائلية هادئة وذات معنى",
+        "lead": "وقت النوم من أبسط اللحظات التي يمكن أن تصبح فيها القراءة جزءاً من علاقة الطفل بالإيمان والأسرة. اكتشف قصصاً لطيفة تفتح مساحة للامتنان والدعاء والتأمل والرحمة وإيقاع الحياة المسلمة المطمئن.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "قراءة قبل النوم",
+              "category": "bedtime",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "نهاية هادئة لليوم",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "☾",
+                "title": "اقرؤوا معاً",
+                "body": "اصنعوا طقساً هادئاً يجمع القصة والحوار."
+              },
+              {
+                "icon": "✦",
+                "title": "اذكروا الله",
+                "body": "اجعلوا الامتنان والدعاء والتأمل جزءاً طبيعياً من حياة الأسرة."
+              },
+              {
+                "icon": "♡",
+                "title": "اصنعوا ذكريات دافئة",
+                "body": "دعوا الإيمان يظهر في اللحظات اليومية المطمئنة التي يتذكرها الطفل."
+              }
+            ]
+          },
+          {
+            "type": "cta",
+            "heading": "اختر قصة هذه الليلة.",
+            "body": "اعثر على قراءة إسلامية هادئة لنهاية اليوم.",
+            "button": "تصفّح قصص قبل النوم",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "islamic-values-books-for-kids": {
+      "en": {
+        "title": "Islamic Values & Akhlaq Books for Kids",
+        "slug": "islamic-values-books-for-kids",
+        "eyebrow": "Values children can recognise in everyday life",
+        "h1": "Islamic values and akhlaq books for children",
+        "lead": "Patience, honesty, gratitude, generosity, mercy, responsibility and good manners become easier to discuss when children can see them lived through a story. This collection connects Islamic character with choices children recognise at home, at school and with friends.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Akhlaq & values",
+              "category": "akhlaq-values",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "From values to everyday choices",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "Character through story",
+                "body": "Stories give values a situation, a feeling and a choice children can understand."
+              },
+              {
+                "icon": "♡",
+                "title": "Family conversation",
+                "body": "Use the book to ask what happened, why it mattered and what your child might do."
+              },
+              {
+                "icon": "→",
+                "title": "Small habits",
+                "body": "Connect big ideas such as gratitude and responsibility with ordinary daily behaviour."
+              }
+            ]
+          },
+          {
+            "type": "cta",
+            "heading": "Choose a value to explore together.",
+            "body": "Find stories that make Islamic character easier to talk about.",
+            "button": "Shop values books",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Livres sur les valeurs islamiques et l’akhlaq",
+        "slug": "livres-valeurs-islamiques-enfants",
+        "eyebrow": "Des valeurs que les enfants reconnaissent dans la vie quotidienne",
+        "h1": "Des livres sur les valeurs islamiques et l’akhlaq pour les enfants",
+        "lead": "Patience, honnêteté, gratitude, générosité, miséricorde, responsabilité et bonnes manières deviennent plus faciles à aborder lorsque l’enfant les voit vivre dans une histoire. Cette collection relie le caractère islamique aux choix qu’il reconnaît à la maison, à l’école et avec ses amis.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Akhlaq & valeurs",
+              "category": "akhlaq-values",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "Des valeurs aux choix du quotidien",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "Le caractère par l’histoire",
+                "body": "Une histoire donne à une valeur une situation, une émotion et un choix compréhensible."
+              },
+              {
+                "icon": "♡",
+                "title": "Conversation en famille",
+                "body": "Le livre permet de demander ce qui s’est passé, pourquoi cela compte et ce que l’enfant ferait."
+              },
+              {
+                "icon": "→",
+                "title": "De petites habitudes",
+                "body": "Relier de grandes idées comme la gratitude et la responsabilité à des gestes ordinaires."
+              }
+            ]
+          },
+          {
+            "type": "cta",
+            "heading": "Choisissez une valeur à explorer ensemble.",
+            "body": "Trouvez des histoires qui facilitent les conversations sur le caractère islamique.",
+            "button": "Voir les livres sur les valeurs",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Libros sobre valores islámicos y akhlaq",
+        "slug": "libros-valores-islamicos-ninos",
+        "eyebrow": "Valores que los niños reconocen en la vida cotidiana",
+        "h1": "Libros sobre valores islámicos y akhlaq para niños",
+        "lead": "Paciencia, honestidad, gratitud, generosidad, misericordia, responsabilidad y buenos modales se vuelven más fáciles de hablar cuando los niños pueden verlos vividos dentro de una historia. Esta colección conecta el carácter islámico con decisiones que reconocen en casa, en el colegio y con sus amigos.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Akhlaq y valores",
+              "category": "akhlaq-values",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "De los valores a las decisiones diarias",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "Carácter a través de la historia",
+                "body": "Una historia da a cada valor una situación, una emoción y una decisión que el niño puede comprender."
+              },
+              {
+                "icon": "♡",
+                "title": "Conversación en familia",
+                "body": "Usa el libro para hablar de lo que ocurrió, por qué importa y qué haría tu hijo."
+              },
+              {
+                "icon": "→",
+                "title": "Pequeños hábitos",
+                "body": "Relaciona ideas grandes como la gratitud y la responsabilidad con comportamientos cotidianos."
+              }
+            ]
+          },
+          {
+            "type": "cta",
+            "heading": "Elige un valor para explorar juntos.",
+            "body": "Encuentra historias que faciliten hablar sobre el carácter islámico.",
+            "button": "Ver libros sobre valores",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "كتب القيم والأخلاق الإسلامية للأطفال",
+        "slug": "كتب-القيم-والأخلاق-للأطفال",
+        "eyebrow": "قيم يراها الطفل في حياته اليومية",
+        "h1": "كتب القيم والأخلاق الإسلامية للأطفال",
+        "lead": "يصبح الحديث عن الصبر والصدق والامتنان والكرم والرحمة والمسؤولية وحسن الخلق أسهل عندما يراها الطفل مجسدة في قصة. تربط هذه المجموعة الأخلاق الإسلامية بالاختيارات التي يعرفها الطفل في البيت والمدرسة ومع الأصدقاء.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "الأخلاق والقيم",
+              "category": "akhlaq-values",
+              "source": "newest",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "من القيمة إلى الاختيار اليومي",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "الخلق عبر القصة",
+                "body": "تمنح القصة للقيمة موقفاً وشعوراً واختياراً يستطيع الطفل فهمه."
+              },
+              {
+                "icon": "♡",
+                "title": "حوار عائلي",
+                "body": "استخدم الكتاب للسؤال عما حدث ولماذا كان مهماً وماذا يمكن أن يفعل الطفل."
+              },
+              {
+                "icon": "→",
+                "title": "عادات صغيرة",
+                "body": "اربط الأفكار الكبيرة مثل الامتنان والمسؤولية بسلوك يومي بسيط."
+              }
+            ]
+          },
+          {
+            "type": "cta",
+            "heading": "اختر قيمة تستكشفونها معاً.",
+            "body": "اعثر على قصص تجعل الحديث عن الأخلاق الإسلامية أكثر سهولة.",
+            "button": "تصفّح كتب القيم",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "new-releases": {
+      "en": {
+        "title": "New Releases",
+        "slug": "new-releases",
+        "eyebrow": "Fresh from Little Muslim Books",
+        "h1": "New Islamic children’s books and editions",
+        "lead": "Explore the newest titles and editions added to our growing family bookstore.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_grid",
+            "attrs": {
+              "source": "newest",
+              "limit": 24
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Keep discovering",
+            "body": "New books are added as the collection grows.",
+            "button": "Shop all books",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Nouveautés",
+        "slug": "nouveautes",
+        "eyebrow": "Tout juste arrivés chez Little Muslim Books",
+        "h1": "Nouveaux livres et éditions islamiques pour enfants",
+        "lead": "Découvrez les nouveaux titres et éditions qui rejoignent notre librairie familiale.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_grid",
+            "attrs": {
+              "source": "newest",
+              "limit": 24
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Continuez à découvrir",
+            "body": "De nouveaux livres s’ajoutent à mesure que la collection grandit.",
+            "button": "Voir tous les livres",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Novedades",
+        "slug": "novedades",
+        "eyebrow": "Recién llegados a Little Muslim Books",
+        "h1": "Nuevos libros y ediciones islámicas infantiles",
+        "lead": "Descubre los títulos y ediciones más recientes de nuestra librería familiar.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_grid",
+            "attrs": {
+              "source": "newest",
+              "limit": 24
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Sigue descubriendo",
+            "body": "Añadimos nuevos libros a medida que crece la colección.",
+            "button": "Ver todos los libros",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "إصدارات جديدة",
+        "slug": "إصدارات-جديدة",
+        "eyebrow": "الجديد من Little Muslim Books",
+        "h1": "كتب وإصدارات إسلامية جديدة للأطفال",
+        "lead": "اكتشف أحدث العناوين والإصدارات التي تنضم إلى متجرنا العائلي.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_grid",
+            "attrs": {
+              "source": "newest",
+              "limit": 24
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "واصل الاكتشاف",
+            "body": "نضيف كتباً جديدة مع نمو المجموعة.",
+            "button": "تصفّح كل الكتب",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "best-sellers": {
+      "en": {
+        "title": "Best Sellers",
+        "slug": "best-sellers",
+        "eyebrow": "Family favourites",
+        "h1": "Best-selling Islamic children’s books",
+        "lead": "These rankings come from real WooCommerce sales, so the collection changes naturally as families discover different books.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_grid",
+            "attrs": {
+              "source": "best_selling",
+              "limit": 24
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "See what families are choosing",
+            "body": "Popular books can be a useful place to start when you are discovering the collection.",
+            "button": "Browse the catalogue",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Meilleures ventes",
+        "slug": "meilleures-ventes",
+        "eyebrow": "Les préférés des familles",
+        "h1": "Les livres islamiques pour enfants les plus vendus",
+        "lead": "Ce classement repose sur les ventes réelles de WooCommerce et évolue naturellement au fil des choix des familles.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_grid",
+            "attrs": {
+              "source": "best_selling",
+              "limit": 24
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Voyez ce que choisissent les familles",
+            "body": "Les livres populaires sont un bon point de départ pour découvrir la collection.",
+            "button": "Parcourir le catalogue",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Más vendidos",
+        "slug": "mas-vendidos",
+        "eyebrow": "Favoritos de las familias",
+        "h1": "Los libros islámicos infantiles más vendidos",
+        "lead": "Esta selección se basa en ventas reales de WooCommerce y cambia de forma natural según lo que eligen las familias.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_grid",
+            "attrs": {
+              "source": "best_selling",
+              "limit": 24
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Mira qué eligen las familias",
+            "body": "Los libros populares son un buen punto de partida para conocer la colección.",
+            "button": "Explorar el catálogo",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "الأكثر مبيعاً",
+        "slug": "الأكثر-مبيعا",
+        "eyebrow": "اختيارات العائلات",
+        "h1": "كتب الأطفال الإسلامية الأكثر مبيعاً",
+        "lead": "يعتمد هذا الترتيب على مبيعات WooCommerce الحقيقية ويتغير تلقائياً بحسب اختيارات العائلات.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_grid",
+            "attrs": {
+              "source": "best_selling",
+              "limit": 24
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "اكتشف ما تختاره العائلات",
+            "body": "يمكن أن تكون الكتب الأكثر رواجاً نقطة بداية جيدة للتعرف على المجموعة.",
+            "button": "تصفّح المتجر",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "special-offers": {
+      "en": {
+        "title": "Special Offers",
+        "slug": "special-offers",
+        "eyebrow": "Current bookstore promotions",
+        "h1": "Book offers and seasonal promotions",
+        "lead": "Only genuine WooCommerce sale prices appear here. Public coupon campaigns can also be promoted across the site.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_grid",
+            "attrs": {
+              "source": "sale",
+              "limit": 24
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Build their library for less",
+            "body": "Offers update automatically from the store’s real sale settings.",
+            "button": "Shop all books",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Offres spéciales",
+        "slug": "offres-speciales",
+        "eyebrow": "Promotions actuelles de la librairie",
+        "h1": "Offres sur les livres et promotions saisonnières",
+        "lead": "Seuls les vrais prix promotionnels WooCommerce apparaissent ici. Les campagnes de coupons publics peuvent également être mises en avant sur le site.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_grid",
+            "attrs": {
+              "source": "sale",
+              "limit": 24
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Construisez leur bibliothèque à meilleur prix",
+            "body": "Les offres se mettent à jour automatiquement selon les vrais prix promotionnels du magasin.",
+            "button": "Voir tous les livres",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Ofertas especiales",
+        "slug": "ofertas-especiales",
+        "eyebrow": "Promociones actuales de la tienda",
+        "h1": "Ofertas de libros y promociones de temporada",
+        "lead": "Aquí solo aparecen precios de oferta reales de WooCommerce. También se pueden promocionar campañas públicas de cupones en todo el sitio.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_grid",
+            "attrs": {
+              "source": "sale",
+              "limit": 24
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Amplía su biblioteca por menos",
+            "body": "Las ofertas se actualizan automáticamente según los descuentos reales de la tienda.",
+            "button": "Ver todos los libros",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "عروض خاصة",
+        "slug": "عروض-خاصة",
+        "eyebrow": "العروض الحالية في المتجر",
+        "h1": "عروض الكتب والتخفيضات الموسمية",
+        "lead": "لا تظهر هنا إلا أسعار التخفيض الحقيقية من WooCommerce، ويمكن كذلك إبراز حملات القسائم العامة في الموقع.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_grid",
+            "attrs": {
+              "source": "sale",
+              "limit": 24
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "وسّع مكتبتهم بتكلفة أقل",
+            "body": "تتحدث العروض تلقائياً وفق التخفيضات الحقيقية في المتجر.",
+            "button": "تصفّح كل الكتب",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "books-by-age": {
+      "en": {
+        "title": "Books by Age",
+        "slug": "books-by-age",
+        "eyebrow": "Find the right reading stage",
+        "h1": "Islamic children’s books by age",
+        "lead": "Browse age guidance to find books whose language, length and presentation suit the reading stage you are shopping for. Every child develops differently, so age ranges are a practical guide rather than a limit.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Start with their reading stage.",
+            "body": "Then refine by theme, language, series or format.",
+            "button": "Shop all books",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Livres par âge",
+        "slug": "livres-par-age",
+        "eyebrow": "Trouvez le bon niveau de lecture",
+        "h1": "Livres islamiques pour enfants par âge",
+        "lead": "Parcourez les tranches d’âge pour trouver des livres dont le langage, la longueur et la présentation correspondent au niveau de lecture recherché. Chaque enfant évolue différemment : l’âge reste un guide pratique, pas une limite.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Commencez par son niveau de lecture.",
+            "body": "Puis affinez par thème, langue, série ou format.",
+            "button": "Voir tous les livres",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Libros por edad",
+        "slug": "libros-por-edad",
+        "eyebrow": "Encuentra la etapa de lectura adecuada",
+        "h1": "Libros islámicos infantiles por edad",
+        "lead": "Explora las edades recomendadas para encontrar libros cuyo lenguaje, extensión y presentación encajan con la etapa lectora que buscas. Cada niño evoluciona de forma distinta, por eso la edad es una guía práctica y no un límite.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Empieza por su etapa de lectura.",
+            "body": "Después filtra por tema, idioma, serie o formato.",
+            "button": "Ver todos los libros",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "كتب حسب العمر",
+        "slug": "كتب-حسب-العمر",
+        "eyebrow": "اعثر على مرحلة القراءة المناسبة",
+        "h1": "كتب إسلامية للأطفال حسب العمر",
+        "lead": "تصفّح الفئات العمرية للعثور على كتب تناسب لغة الطفل وطول القراءة وطريقة العرض. يختلف تطور الأطفال، لذلك نستخدم العمر كدليل عملي لا كحد ثابت.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "ابدأ بمرحلة القراءة.",
+            "body": "ثم صفِّ حسب الموضوع أو اللغة أو السلسلة أو الصيغة.",
+            "button": "تصفّح كل الكتب",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "books-by-language": {
+      "en": {
+        "title": "Books by Language",
+        "slug": "books-by-language",
+        "eyebrow": "Multilingual publishing",
+        "h1": "Islamic children’s books by language",
+        "lead": "Choose the edition that opens the story most naturally for your family, including multilingual and bilingual options as the catalogue grows.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_language",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Choose the language that feels natural at home.",
+            "body": "Language can be the doorway into a deeper relationship with story, faith and heritage.",
+            "button": "Shop all books",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Livres par langue",
+        "slug": "livres-par-langue",
+        "eyebrow": "Édition multilingue",
+        "h1": "Livres islamiques pour enfants par langue",
+        "lead": "Choisissez l’édition qui ouvre l’histoire le plus naturellement pour votre famille, avec des options multilingues et bilingues à mesure que le catalogue grandit.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_language",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Choisissez la langue qui semble naturelle à la maison.",
+            "body": "La langue peut devenir la porte vers une relation plus profonde à l’histoire, à la foi et à l’héritage.",
+            "button": "Voir tous les livres",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Libros por idioma",
+        "slug": "libros-por-idioma",
+        "eyebrow": "Edición multilingüe",
+        "h1": "Libros islámicos infantiles por idioma",
+        "lead": "Elige la edición que abra la historia de la forma más natural para tu familia, incluyendo opciones multilingües y bilingües a medida que crece el catálogo.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_language",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Elige el idioma que resulte natural en casa.",
+            "body": "El idioma puede ser la puerta hacia una relación más profunda con la historia, la fe y la herencia.",
+            "button": "Ver todos los libros",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "كتب حسب اللغة",
+        "slug": "كتب-حسب-اللغة",
+        "eyebrow": "نشر متعدد اللغات",
+        "h1": "كتب إسلامية للأطفال حسب اللغة",
+        "lead": "اختر الإصدار الذي يفتح القصة لأسرتك بالطريقة الأكثر طبيعية، مع خيارات متعددة وثنائية اللغة كلما اتسعت المجموعة.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_language",
+              "limit": 12
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "اختر اللغة الأقرب إلى البيت.",
+            "body": "يمكن للغة أن تكون باباً إلى علاقة أعمق بالقصة والإيمان والتراث.",
+            "button": "تصفّح كل الكتب",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "gift-guide": {
+      "en": {
+        "title": "Islamic Book Gift Guide",
+        "slug": "islamic-book-gift-guide",
+        "eyebrow": "A meaningful gift they can keep",
+        "h1": "Islamic book gifts for children",
+        "lead": "Choose a book for Eid, Ramadan, a birthday, a new baby, a family visit or simply as a thoughtful addition to a child’s shelf. Books can become gifts that are opened more than once and remembered long after the occasion.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Popular gifts",
+              "source": "best_selling",
+              "limit": 10
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Choose a gift with meaning.",
+            "body": "Browse by age, language and theme to find a book that feels personal.",
+            "button": "Shop gift ideas",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Guide cadeaux de livres islamiques",
+        "slug": "guide-cadeaux-livres-islamiques",
+        "eyebrow": "Un cadeau qui reste",
+        "h1": "Des livres islamiques à offrir aux enfants",
+        "lead": "Choisissez un livre pour l’Aïd, Ramadan, un anniversaire, une naissance, une visite familiale ou simplement pour enrichir la bibliothèque d’un enfant. Un livre est un cadeau que l’on peut ouvrir plusieurs fois et garder longtemps après l’occasion.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Cadeaux populaires",
+              "source": "best_selling",
+              "limit": 10
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Offrez un cadeau qui a du sens.",
+            "body": "Parcourez par âge, langue et thème pour trouver un livre vraiment personnel.",
+            "button": "Voir les idées cadeaux",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Guía de regalos de libros islámicos",
+        "slug": "guia-regalos-libros-islamicos",
+        "eyebrow": "Un regalo con significado que puede conservar",
+        "h1": "Libros islámicos para regalar a los niños",
+        "lead": "Elige un libro para Eid, Ramadán, un cumpleaños, un nuevo bebé, una visita familiar o simplemente para enriquecer la estantería de un niño. Un libro puede ser un regalo que se abre más de una vez y se recuerda mucho después de la ocasión.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "Regalos populares",
+              "source": "best_selling",
+              "limit": 10
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Elige un regalo con significado.",
+            "body": "Explora por edad, idioma y tema para encontrar un libro que se sienta personal.",
+            "button": "Ver ideas de regalo",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "دليل هدايا الكتب الإسلامية",
+        "slug": "دليل-هدايا-الكتب-الإسلامية",
+        "eyebrow": "هدية ذات معنى تبقى معه",
+        "h1": "كتب إسلامية جميلة كهدية للأطفال",
+        "lead": "اختر كتاباً للعيد أو رمضان أو عيد ميلاد أو مولود جديد أو زيارة عائلية، أو ببساطة لإضافة شيء جميل إلى رف الطفل. الكتاب هدية يمكن فتحها مرات كثيرة وتبقى في الذاكرة بعد المناسبة.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "book_slider",
+            "attrs": {
+              "title": "هدايا محبوبة",
+              "source": "best_selling",
+              "limit": 10
+            }
+          },
+          {
+            "type": "dynamic",
+            "component": "collection_grid",
+            "attrs": {
+              "taxonomy": "ip_book_age",
+              "limit": 8
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "اختر هدية ذات معنى.",
+            "body": "تصفّح حسب العمر واللغة والموضوع لتجد كتاباً يشعر الطفل أنه اختير له.",
+            "button": "تصفّح أفكار الهدايا",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "about": {
+      "en": {
+        "title": "About Little Muslim Books",
+        "slug": "about",
+        "eyebrow": "Why we publish",
+        "h1": "A creative publishing project for Muslim families.",
+        "lead": "Little Muslim Books was created for families who want faith, culture and beautiful storytelling to have a confident place in their children’s world—especially when children are growing up surrounded by powerful global media and across more than one language or culture.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "split",
+            "left": {
+              "eyebrow": "The question behind the project",
+              "heading": "How do we help our children love what we want to teach them—not only know it?",
+              "body": "Children learn through images, characters, games, films and books long before they can explain how those stories shape them. We wanted Islamic stories, values and cultural memory to speak with equal creative confidence."
+            },
+            "right": {
+              "eyebrow": "Our creative background",
+              "heading": "We know the language of image and interactive media.",
+              "body": "Our experience spans illustration, game design, digital media and educational storytelling. We use that craft to make Muslim children’s publishing feel contemporary, thoughtful and worth choosing."
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "What families should expect from us",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "Faith treated with respect",
+                "body": "Islamic meaning is not decoration added after the story; it is part of the foundation."
+              },
+              {
+                "icon": "◌",
+                "title": "Creative quality",
+                "body": "Children deserve beautiful illustration, strong visual communication and books that feel professionally made."
+              },
+              {
+                "icon": "♡",
+                "title": "Belonging",
+                "body": "We want children growing up between cultures to encounter their own faith and heritage with familiarity and confidence."
+              }
+            ]
+          },
+          {
+            "type": "quote",
+            "text": "We do not want Muslim parents to have to choose between religious value and creative quality."
+          },
+          {
+            "type": "dynamic",
+            "component": "creators",
+            "attrs": {
+              "limit": 12
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Explore the books we are building.",
+            "body": "See how this publishing philosophy becomes stories for children.",
+            "button": "Shop the collection",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "À propos de Little Muslim Books",
+        "slug": "a-propos",
+        "eyebrow": "Pourquoi nous publions",
+        "h1": "Un projet d’édition créative pour les familles musulmanes.",
+        "lead": "Little Muslim Books a été créé pour les familles qui veulent que la foi, la culture et de belles histoires aient une place forte dans l’univers de leurs enfants—en particulier lorsque ceux-ci grandissent au milieu de médias mondialisés et entre plusieurs langues ou cultures.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "split",
+            "left": {
+              "eyebrow": "La question à l’origine du projet",
+              "heading": "Comment aider nos enfants à aimer ce que nous voulons leur transmettre, et pas seulement à le connaître ?",
+              "body": "Les enfants apprennent par les images, les personnages, les jeux, les films et les livres bien avant de pouvoir expliquer l’influence de ces récits. Nous voulions que les histoires islamiques, les valeurs et la mémoire culturelle puissent parler avec la même confiance créative."
+            },
+            "right": {
+              "eyebrow": "Notre parcours créatif",
+              "heading": "Nous connaissons le langage de l’image et des médias interactifs.",
+              "body": "Notre expérience couvre l’illustration, le game design, les médias numériques et le récit éducatif. Nous utilisons ce savoir-faire pour créer une édition jeunesse musulmane contemporaine, réfléchie et réellement désirable."
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "Ce que les familles doivent pouvoir attendre de nous",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "Une foi traitée avec respect",
+                "body": "Le sens islamique n’est pas ajouté après coup : il fait partie de la fondation."
+              },
+              {
+                "icon": "◌",
+                "title": "Une vraie qualité créative",
+                "body": "Les enfants méritent de belles illustrations, une communication visuelle forte et des livres conçus avec professionnalisme."
+              },
+              {
+                "icon": "♡",
+                "title": "Le sentiment d’appartenance",
+                "body": "Nous voulons que les enfants qui grandissent entre plusieurs cultures rencontrent leur foi et leur héritage avec familiarité et confiance."
+              }
+            ]
+          },
+          {
+            "type": "quote",
+            "text": "Nous ne voulons pas que les parents musulmans aient à choisir entre valeur religieuse et qualité créative."
+          },
+          {
+            "type": "dynamic",
+            "component": "creators",
+            "attrs": {
+              "limit": 12
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Découvrez les livres que nous construisons.",
+            "body": "Voyez comment cette philosophie d’édition devient des histoires pour enfants.",
+            "button": "Voir la collection",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Sobre Little Muslim Books",
+        "slug": "sobre-nosotros",
+        "eyebrow": "Por qué publicamos",
+        "h1": "Un proyecto editorial creativo para familias musulmanas.",
+        "lead": "Little Muslim Books nació para familias que quieren que la fe, la cultura y una narración bella tengan un lugar fuerte en el mundo de sus hijos, especialmente cuando crecen rodeados de medios globales y entre más de un idioma o cultura.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "split",
+            "left": {
+              "eyebrow": "La pregunta detrás del proyecto",
+              "heading": "¿Cómo ayudamos a nuestros hijos a amar lo que queremos enseñarles y no solo a conocerlo?",
+              "body": "Los niños aprenden a través de imágenes, personajes, juegos, películas y libros mucho antes de poder explicar cómo esas historias les influyen. Queríamos que las historias islámicas, los valores y la memoria cultural hablaran con la misma confianza creativa."
+            },
+            "right": {
+              "eyebrow": "Nuestro recorrido creativo",
+              "heading": "Conocemos el lenguaje de la imagen y de los medios interactivos.",
+              "body": "Nuestra experiencia abarca ilustración, diseño de videojuegos, medios digitales y narración educativa. Usamos ese oficio para que la edición infantil musulmana sea contemporánea, cuidada y realmente atractiva."
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "Lo que las familias deberían esperar de nosotros",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "Fe tratada con respeto",
+                "body": "El significado islámico no se añade al final: forma parte de la base de la historia."
+              },
+              {
+                "icon": "◌",
+                "title": "Calidad creativa",
+                "body": "Los niños merecen buenas ilustraciones, comunicación visual sólida y libros hechos con profesionalidad."
+              },
+              {
+                "icon": "♡",
+                "title": "Sentido de pertenencia",
+                "body": "Queremos que los niños que crecen entre culturas encuentren su fe y su herencia con familiaridad y confianza."
+              }
+            ]
+          },
+          {
+            "type": "quote",
+            "text": "No queremos que los padres musulmanes tengan que elegir entre valor religioso y calidad creativa."
+          },
+          {
+            "type": "dynamic",
+            "component": "creators",
+            "attrs": {
+              "limit": 12
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "Descubre los libros que estamos construyendo.",
+            "body": "Mira cómo esta filosofía editorial se convierte en historias para niños.",
+            "button": "Ver la colección",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "عن Little Muslim Books",
+        "slug": "من-نحن",
+        "eyebrow": "لماذا ننشر",
+        "h1": "مشروع نشر إبداعي للعائلات المسلمة.",
+        "lead": "وُلد مشروع Little Muslim Books للعائلات التي تريد أن يكون للإيمان والثقافة والسرد الجميل مكان واثق في عالم أطفالها، خصوصاً عندما يكبر الأطفال وسط إعلام عالمي وبين أكثر من لغة أو ثقافة.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "split",
+            "left": {
+              "eyebrow": "السؤال وراء المشروع",
+              "heading": "كيف نساعد أطفالنا على أن يحبوا ما نريد تعليمهم إياه، لا أن يعرفوه فقط؟",
+              "body": "يتعلم الأطفال من الصور والشخصيات والألعاب والأفلام والكتب قبل أن يستطيعوا شرح أثر هذه القصص فيهم. أردنا للقصص الإسلامية والقيم والذاكرة الثقافية أن تتحدث بالثقة الإبداعية نفسها."
+            },
+            "right": {
+              "eyebrow": "خلفيتنا الإبداعية",
+              "heading": "نحن نعرف لغة الصورة والوسائط التفاعلية.",
+              "body": "تمتد خبرتنا إلى الرسم وتصميم الألعاب والإعلام الرقمي والسرد التعليمي. نستخدم هذه الخبرة لتكون كتب الأطفال المسلمين معاصرة ومدروسة وجديرة بالاختيار."
+            }
+          },
+          {
+            "type": "cards",
+            "heading": "ما الذي ينبغي أن تتوقعه الأسرة منا",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "✦",
+                "title": "احترام الإيمان",
+                "body": "المعنى الإسلامي ليس إضافة متأخرة، بل جزء من أساس القصة."
+              },
+              {
+                "icon": "◌",
+                "title": "جودة إبداعية",
+                "body": "يستحق الأطفال رسوماً جميلة وتواصلاً بصرياً قوياً وكتباً مصنوعة باحتراف."
+              },
+              {
+                "icon": "♡",
+                "title": "الانتماء",
+                "body": "نريد للأطفال الذين يكبرون بين ثقافات متعددة أن يلتقوا بإيمانهم وتراثهم بألفة وثقة."
+              }
+            ]
+          },
+          {
+            "type": "quote",
+            "text": "لا نريد للآباء المسلمين أن يضطروا إلى الاختيار بين القيمة الدينية والجودة الإبداعية."
+          },
+          {
+            "type": "dynamic",
+            "component": "creators",
+            "attrs": {
+              "limit": 12
+            }
+          },
+          {
+            "type": "cta",
+            "heading": "اكتشف الكتب التي نبنيها.",
+            "body": "شاهد كيف تتحول هذه الفلسفة إلى قصص للأطفال.",
+            "button": "تصفّح المجموعة",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "our-story": {
+      "en": {
+        "title": "Our Story",
+        "slug": "our-story",
+        "eyebrow": "Our story",
+        "h1": "Our children are surrounded by stories. Their own story should be among the most beautiful.",
+        "lead": "Little Muslim Books exists to help Muslim families bring faith, values, history and cultural memory into a child’s imagination through contemporary visual storytelling.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "text",
+            "heading": "It began with something many Muslim parents recognise",
+            "body": "A child may know superheroes, animated worlds and game characters in extraordinary detail, yet meet the stories of their own faith only in a lesson or a text that feels distant. We did not want to complain about that gap; we wanted to create into it.",
+            "body2": "Our aim is to make the stories and values Muslim parents care about visible in the visual language children already understand.",
+            "eyebrow": ""
+          },
+          {
+            "type": "split",
+            "left": {
+              "heading": "Rooted in Muslim experience",
+              "body": "The project comes from Muslims who grew up in a media-shaped world and understand both the attraction of modern visual culture and the importance of keeping faith and heritage close."
+            },
+            "right": {
+              "heading": "Built with creative craft",
+              "body": "Illustration, game design, digital media and education taught us that attention is earned. A good book must carry meaning, but it also has to invite the child in."
+            }
+          },
+          {
+            "type": "text",
+            "heading": "Especially for families raising children in the West",
+            "body": "Many Muslim children in Europe and other Western societies grow up between languages, school cultures, family histories and media references. We want books to help those parts of life meet naturally rather than compete.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "quote",
+            "text": "Our goal is simple: make the books that carry faith and heritage among the books children are genuinely excited to choose."
+          },
+          {
+            "type": "cta",
+            "heading": "See the publishing philosophy behind the project.",
+            "body": "Read the principles that guide how we create.",
+            "button": "Our philosophy",
+            "target": "@page:our-philosophy"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Notre histoire",
+        "slug": "notre-histoire",
+        "eyebrow": "Notre histoire",
+        "h1": "Nos enfants sont entourés d’histoires. La leur devrait être parmi les plus belles.",
+        "lead": "Little Muslim Books existe pour aider les familles musulmanes à faire entrer la foi, les valeurs, l’histoire et la mémoire culturelle dans l’imaginaire de l’enfant grâce à une narration visuelle contemporaine.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "text",
+            "heading": "Tout est parti d’une réalité que beaucoup de parents musulmans connaissent",
+            "body": "Un enfant peut connaître dans le moindre détail des super-héros, des mondes animés et des personnages de jeux, tout en rencontrant les récits de sa propre foi uniquement dans une leçon ou un texte qui lui paraît lointain. Nous ne voulions pas seulement constater ce manque : nous voulions créer pour le combler.",
+            "body2": "Notre ambition est de rendre visibles les histoires et les valeurs qui comptent pour les parents musulmans dans le langage visuel que les enfants comprennent déjà.",
+            "eyebrow": ""
+          },
+          {
+            "type": "split",
+            "left": {
+              "heading": "Enraciné dans une expérience musulmane",
+              "body": "Le projet vient de musulmans qui ont grandi dans un monde façonné par les médias et qui comprennent à la fois l’attrait de la culture visuelle moderne et l’importance de garder la foi et l’héritage proches."
+            },
+            "right": {
+              "heading": "Construit avec un vrai savoir-faire créatif",
+              "body": "L’illustration, le game design, les médias numériques et l’éducation nous ont appris que l’attention se mérite. Un bon livre doit porter du sens, mais aussi inviter l’enfant à entrer."
+            }
+          },
+          {
+            "type": "text",
+            "heading": "Tout particulièrement pour les familles qui élèvent leurs enfants en Occident",
+            "body": "De nombreux enfants musulmans en Europe et ailleurs grandissent entre plusieurs langues, cultures scolaires, histoires familiales et références médiatiques. Nous voulons que les livres aident ces mondes à se rencontrer naturellement plutôt qu’à s’opposer.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "quote",
+            "text": "Notre objectif est simple : faire des livres qui portent la foi et l’héritage des livres que les enfants choisissent avec une vraie envie."
+          },
+          {
+            "type": "cta",
+            "heading": "Découvrez la philosophie d’édition du projet.",
+            "body": "Lisez les principes qui guident notre manière de créer.",
+            "button": "Notre philosophie",
+            "target": "@page:our-philosophy"
+          }
+        ]
+      },
+      "es": {
+        "title": "Nuestra historia",
+        "slug": "nuestra-historia",
+        "eyebrow": "Nuestra historia",
+        "h1": "Nuestros hijos están rodeados de historias. La suya debería estar entre las más bellas.",
+        "lead": "Little Muslim Books existe para ayudar a las familias musulmanas a llevar la fe, los valores, la historia y la memoria cultural a la imaginación del niño mediante una narración visual contemporánea.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "text",
+            "heading": "Todo empezó con algo que muchos padres musulmanes reconocen",
+            "body": "Un niño puede conocer con enorme detalle a superhéroes, mundos animados y personajes de videojuegos, y sin embargo encontrarse con las historias de su propia fe solo en una lección o en un texto que siente lejano. No queríamos limitarnos a lamentar ese vacío; queríamos crear dentro de él.",
+            "body2": "Nuestro objetivo es hacer visibles las historias y los valores que importan a los padres musulmanes usando el lenguaje visual que los niños ya comprenden.",
+            "eyebrow": ""
+          },
+          {
+            "type": "split",
+            "left": {
+              "heading": "Enraizado en una experiencia musulmana",
+              "body": "El proyecto nace de musulmanes que crecieron en un mundo marcado por los medios y que comprenden tanto el atractivo de la cultura visual moderna como la importancia de mantener cerca la fe y la herencia."
+            },
+            "right": {
+              "heading": "Construido con oficio creativo",
+              "body": "La ilustración, el diseño de videojuegos, los medios digitales y la educación nos enseñaron que la atención se gana. Un buen libro debe tener significado, pero también invitar al niño a entrar."
+            }
+          },
+          {
+            "type": "text",
+            "heading": "Especialmente para familias que crían a sus hijos en Occidente",
+            "body": "Muchos niños musulmanes en Europa y otras sociedades occidentales crecen entre idiomas, culturas escolares, historias familiares y referencias mediáticas. Queremos que los libros ayuden a que esas partes de su vida se encuentren de forma natural en lugar de competir.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "quote",
+            "text": "Nuestro objetivo es sencillo: hacer que los libros que llevan la fe y la herencia estén entre los que los niños eligen con verdadera ilusión."
+          },
+          {
+            "type": "cta",
+            "heading": "Descubre la filosofía editorial del proyecto.",
+            "body": "Lee los principios que guían nuestra forma de crear.",
+            "button": "Nuestra filosofía",
+            "target": "@page:our-philosophy"
+          }
+        ]
+      },
+      "ar": {
+        "title": "قصتنا",
+        "slug": "قصتنا",
+        "eyebrow": "قصتنا",
+        "h1": "أطفالنا محاطون بالقصص. وينبغي أن تكون قصتهم هم من أجملها.",
+        "lead": "يوجد Little Muslim Books لمساعدة الأسر المسلمة على إدخال الإيمان والقيم والتاريخ والذاكرة الثقافية إلى خيال الطفل عبر سرد بصري معاصر.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "text",
+            "heading": "بدأ الأمر من واقع يعرفه كثير من الآباء المسلمين",
+            "body": "قد يعرف الطفل أبطالاً خارقين وعوالم كرتونية وشخصيات ألعاب بتفاصيل مذهلة، بينما يلتقي بقصص إيمانه فقط في درس أو نص يشعر أنه بعيد عنه. لم نرد الاكتفاء بالشكوى من هذا الفراغ؛ أردنا أن نخلق داخله.",
+            "body2": "هدفنا أن نجعل القصص والقيم التي تهم الآباء المسلمين مرئية بلغة بصرية يفهمها الأطفال بالفعل.",
+            "eyebrow": ""
+          },
+          {
+            "type": "split",
+            "left": {
+              "heading": "من تجربة مسلمة حقيقية",
+              "body": "المشروع يأتي من مسلمين كبروا في عالم تصنعه وسائل الإعلام ويفهمون جاذبية الثقافة البصرية الحديثة وأهمية إبقاء الإيمان والتراث قريبين."
+            },
+            "right": {
+              "heading": "وبحرفة إبداعية",
+              "body": "علمنا الرسم وتصميم الألعاب والإعلام الرقمي والتعليم أن الانتباه يُكتسب. الكتاب الجيد يحمل معنى، لكنه يحتاج أيضاً إلى أن يدعو الطفل للدخول إليه."
+            }
+          },
+          {
+            "type": "text",
+            "heading": "وخاصة للأسر التي تربي أطفالها في الغرب",
+            "body": "يكبر كثير من الأطفال المسلمين في أوروبا وغيرها بين لغات وثقافات مدرسية وتواريخ عائلية ومرجعيات إعلامية متعددة. نريد للكتب أن تساعد هذه الأجزاء على الالتقاء بشكل طبيعي بدلاً من أن تتنافس.",
+            "body2": "",
+            "eyebrow": ""
+          },
+          {
+            "type": "quote",
+            "text": "هدفنا بسيط: أن تصبح الكتب التي تحمل الإيمان والتراث من الكتب التي يختارها الطفل بحماس حقيقي."
+          },
+          {
+            "type": "cta",
+            "heading": "اكتشف فلسفة النشر وراء المشروع.",
+            "body": "اقرأ المبادئ التي توجه طريقتنا في الإبداع.",
+            "button": "فلسفتنا",
+            "target": "@page:our-philosophy"
+          }
+        ]
+      }
+    },
+    "our-philosophy": {
+      "en": {
+        "title": "Our Philosophy",
+        "slug": "our-philosophy",
+        "eyebrow": "Our publishing philosophy",
+        "h1": "Education begins before the lesson: it begins with what a child learns to love.",
+        "lead": "We create books to help Muslim parents cultivate more than information. We want children to develop familiarity, affection and confidence toward faith, Islamic values and cultural inheritance.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "cards",
+            "heading": "Six principles guide our work",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "1",
+                "title": "Meaning before memorisation",
+                "body": "Stories help knowledge connect to emotion, character, place and family conversation."
+              },
+              {
+                "icon": "2",
+                "title": "Beauty is part of the invitation",
+                "body": "Good illustration and design help children pause, imagine and want to return."
+              },
+              {
+                "icon": "3",
+                "title": "Parents remain central",
+                "body": "Books should open conversations and support families, not replace them."
+              },
+              {
+                "icon": "4",
+                "title": "Islamic culture is lived",
+                "body": "Faith is experienced through worship, but also through language, family, hospitality, celebrations, manners and memory."
+              },
+              {
+                "icon": "5",
+                "title": "Multilingual access matters",
+                "body": "A child should not have to master a heritage language before discovering the beauty of that heritage."
+              },
+              {
+                "icon": "6",
+                "title": "Technology should serve the story",
+                "body": "Audio, animation and interactive media should deepen engagement without taking control away from meaning."
+              }
+            ]
+          },
+          {
+            "type": "quote",
+            "text": "A book can teach. A beautiful book can also create affection."
+          },
+          {
+            "type": "cta",
+            "heading": "See the books shaped by these principles.",
+            "body": "Browse the collection and discover the stories already available.",
+            "button": "Explore the books",
+            "target": "@shop"
+          }
+        ]
+      },
+      "fr": {
+        "title": "Notre philosophie",
+        "slug": "notre-philosophie",
+        "eyebrow": "Notre philosophie d’édition",
+        "h1": "L’éducation commence avant la leçon : elle commence par ce que l’enfant apprend à aimer.",
+        "lead": "Nous créons des livres pour aider les parents musulmans à transmettre plus que des informations. Nous voulons que les enfants développent familiarité, affection et confiance envers la foi, les valeurs islamiques et leur héritage culturel.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "cards",
+            "heading": "Six principes guident notre travail",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "1",
+                "title": "Le sens avant la mémorisation",
+                "body": "Les histoires relient le savoir à l’émotion, au caractère, aux lieux et à la conversation familiale."
+              },
+              {
+                "icon": "2",
+                "title": "La beauté fait partie de l’invitation",
+                "body": "Une bonne illustration et un bon design aident l’enfant à s’arrêter, imaginer et revenir."
+              },
+              {
+                "icon": "3",
+                "title": "Les parents restent au centre",
+                "body": "Les livres doivent ouvrir des conversations et soutenir les familles, pas les remplacer."
+              },
+              {
+                "icon": "4",
+                "title": "La culture islamique se vit",
+                "body": "La foi passe par le culte, mais aussi par la langue, la famille, l’hospitalité, les fêtes, les manières et la mémoire."
+              },
+              {
+                "icon": "5",
+                "title": "L’accès multilingue compte",
+                "body": "Un enfant ne devrait pas devoir maîtriser une langue d’héritage avant d’en découvrir la beauté."
+              },
+              {
+                "icon": "6",
+                "title": "La technologie doit servir l’histoire",
+                "body": "Audio, animation et médias interactifs doivent approfondir l’engagement sans prendre le dessus sur le sens."
+              }
+            ]
+          },
+          {
+            "type": "quote",
+            "text": "Un livre peut enseigner. Un beau livre peut aussi créer de l’attachement."
+          },
+          {
+            "type": "cta",
+            "heading": "Découvrez les livres façonnés par ces principes.",
+            "body": "Parcourez la collection et voyez les histoires déjà disponibles.",
+            "button": "Découvrir les livres",
+            "target": "@shop"
+          }
+        ]
+      },
+      "es": {
+        "title": "Nuestra filosofía",
+        "slug": "nuestra-filosofia",
+        "eyebrow": "Nuestra filosofía editorial",
+        "h1": "La educación empieza antes de la lección: empieza con aquello que un niño aprende a amar.",
+        "lead": "Creamos libros para ayudar a los padres musulmanes a cultivar algo más que información. Queremos que los niños desarrollen familiaridad, afecto y confianza hacia la fe, los valores islámicos y su herencia cultural.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "cards",
+            "heading": "Seis principios guían nuestro trabajo",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "1",
+                "title": "Sentido antes que memorización",
+                "body": "Las historias conectan el conocimiento con la emoción, el carácter, el lugar y la conversación familiar."
+              },
+              {
+                "icon": "2",
+                "title": "La belleza forma parte de la invitación",
+                "body": "Una buena ilustración y diseño ayudan al niño a detenerse, imaginar y querer volver."
+              },
+              {
+                "icon": "3",
+                "title": "Los padres siguen en el centro",
+                "body": "Los libros deben abrir conversaciones y apoyar a las familias, no sustituirlas."
+              },
+              {
+                "icon": "4",
+                "title": "La cultura islámica se vive",
+                "body": "La fe se vive en la adoración, pero también en el idioma, la familia, la hospitalidad, las celebraciones, los modales y la memoria."
+              },
+              {
+                "icon": "5",
+                "title": "El acceso multilingüe importa",
+                "body": "Un niño no debería tener que dominar primero una lengua de herencia para descubrir la belleza de esa herencia."
+              },
+              {
+                "icon": "6",
+                "title": "La tecnología debe servir a la historia",
+                "body": "El audio, la animación y los medios interactivos deben profundizar la experiencia sin quitar el protagonismo al significado."
+              }
+            ]
+          },
+          {
+            "type": "quote",
+            "text": "Un libro puede enseñar. Un libro bello también puede crear afecto."
+          },
+          {
+            "type": "cta",
+            "heading": "Descubre los libros creados con estos principios.",
+            "body": "Explora la colección y las historias ya disponibles.",
+            "button": "Explorar los libros",
+            "target": "@shop"
+          }
+        ]
+      },
+      "ar": {
+        "title": "فلسفتنا",
+        "slug": "فلسفتنا",
+        "eyebrow": "فلسفة النشر لدينا",
+        "h1": "يبدأ التعليم قبل الدرس: يبدأ بما يتعلم الطفل أن يحبه.",
+        "lead": "نصنع الكتب لمساعدة الآباء المسلمين على غرس أكثر من المعلومات. نريد للأطفال أن يبنوا ألفة ومحبة وثقة تجاه الإيمان والقيم الإسلامية وتراثهم الثقافي.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "cards",
+            "heading": "ستة مبادئ توجه عملنا",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "1",
+                "title": "المعنى قبل الحفظ",
+                "body": "تربط القصص المعرفة بالمشاعر والشخصية والمكان والحوار العائلي."
+              },
+              {
+                "icon": "2",
+                "title": "الجمال جزء من الدعوة",
+                "body": "يساعد الرسم والتصميم الجيدان الطفل على التوقف والتخيل والرغبة في العودة."
+              },
+              {
+                "icon": "3",
+                "title": "الآباء في المركز",
+                "body": "يفترض بالكتاب أن يفتح الحوار ويدعم الأسرة، لا أن يحل محلها."
+              },
+              {
+                "icon": "4",
+                "title": "الثقافة الإسلامية تُعاش",
+                "body": "يُعاش الإيمان في العبادة، لكنه يظهر أيضاً في اللغة والأسرة والضيافة والأعياد والآداب والذاكرة."
+              },
+              {
+                "icon": "5",
+                "title": "الوصول متعدد اللغات مهم",
+                "body": "لا ينبغي للطفل أن ينتظر إتقان لغة التراث حتى يكتشف جمال ذلك التراث."
+              },
+              {
+                "icon": "6",
+                "title": "التكنولوجيا في خدمة القصة",
+                "body": "الصوت والرسوم المتحركة والوسائط التفاعلية يجب أن تعمّق التفاعل من دون أن تطغى على المعنى."
+              }
+            ]
+          },
+          {
+            "type": "quote",
+            "text": "يمكن للكتاب أن يعلّم. ويمكن للكتاب الجميل أن يصنع محبة أيضاً."
+          },
+          {
+            "type": "cta",
+            "heading": "اكتشف الكتب التي تصنعها هذه المبادئ.",
+            "body": "تصفّح المجموعة والقصص المتاحة حالياً.",
+            "button": "استكشف الكتب",
+            "target": "@shop"
+          }
+        ]
+      }
+    },
+    "creators": {
+      "en": {
+        "title": "Our Creators",
+        "slug": "creators",
+        "eyebrow": "The people behind the books",
+        "h1": "Meet the creators",
+        "lead": "Little Muslim Books brings together creative experience from illustration, game design, digital media, writing and education. We believe professional creative craft and a lived understanding of Muslim identity can reinforce one another.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "creators",
+            "attrs": {
+              "limit": 24
+            }
+          },
+          {
+            "type": "text",
+            "heading": "Real people, real careers",
+            "body": "Creator profiles include real biographies, disciplines, portfolios and the perspective each person brings to the project. We do not publish invented team profiles.",
+            "body2": "",
+            "eyebrow": ""
+          }
+        ]
+      },
+      "fr": {
+        "title": "Nos créateurs",
+        "slug": "createurs",
+        "eyebrow": "Les personnes derrière les livres",
+        "h1": "Rencontrez nos créateurs",
+        "lead": "Little Muslim Books réunit des expériences en illustration, game design, médias numériques, écriture et éducation. Nous pensons que le savoir-faire créatif professionnel et une compréhension vécue de l’identité musulmane peuvent se renforcer mutuellement.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "creators",
+            "attrs": {
+              "limit": 24
+            }
+          },
+          {
+            "type": "text",
+            "heading": "De vraies personnes, de vrais parcours",
+            "body": "Les profils présentent de vraies biographies, disciplines, portfolios et la perspective que chaque personne apporte au projet. Nous ne publions pas de faux profils d’équipe.",
+            "body2": "",
+            "eyebrow": ""
+          }
+        ]
+      },
+      "es": {
+        "title": "Nuestros creadores",
+        "slug": "creadores",
+        "eyebrow": "Las personas detrás de los libros",
+        "h1": "Conoce a nuestros creadores",
+        "lead": "Little Muslim Books reúne experiencia en ilustración, diseño de videojuegos, medios digitales, escritura y educación. Creemos que el oficio creativo profesional y una comprensión vivida de la identidad musulmana pueden reforzarse mutuamente.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "creators",
+            "attrs": {
+              "limit": 24
+            }
+          },
+          {
+            "type": "text",
+            "heading": "Personas reales, trayectorias reales",
+            "body": "Los perfiles incluyen biografías reales, disciplinas, portafolios y la perspectiva que cada persona aporta al proyecto. No publicamos perfiles de equipo inventados.",
+            "body2": "",
+            "eyebrow": ""
+          }
+        ]
+      },
+      "ar": {
+        "title": "المبدعون",
+        "slug": "المبدعون",
+        "eyebrow": "الأشخاص وراء الكتب",
+        "h1": "تعرّف على مبدعينا",
+        "lead": "يجمع Little Muslim Books خبرات في الرسم وتصميم الألعاب والإعلام الرقمي والكتابة والتعليم. نؤمن أن الحرفة الإبداعية الاحترافية والفهم المعيش للهوية المسلمة يمكن أن يعزز أحدهما الآخر.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "creators",
+            "attrs": {
+              "limit": 24
+            }
+          },
+          {
+            "type": "text",
+            "heading": "أشخاص حقيقيون ومسارات حقيقية",
+            "body": "تتضمن الملفات التعريفية سيراً مهنية حقيقية وتخصصات وأعمالاً سابقة والمنظور الذي يضيفه كل شخص إلى المشروع. لا ننشر ملفات وهمية للفريق.",
+            "body2": "",
+            "eyebrow": ""
+          }
+        ]
+      }
+    },
+    "schools-wholesale": {
+      "en": {
+        "title": "Schools, Libraries, Bookshops & Wholesale",
+        "slug": "schools-wholesale",
+        "eyebrow": "Build better Muslim children’s shelves",
+        "h1": "For schools, libraries, bookshops and community organisations",
+        "lead": "If you are selecting books for a classroom, library, Islamic centre, bookshop or community programme, contact us about larger orders, age ranges, language combinations and current availability.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "cards",
+            "heading": "How we can help",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "▣",
+                "title": "Schools & classrooms",
+                "body": "Build age-appropriate reading selections for lessons, libraries and family programmes."
+              },
+              {
+                "icon": "▤",
+                "title": "Libraries & community spaces",
+                "body": "Create accessible Muslim children’s shelves across languages and reading stages."
+              },
+              {
+                "icon": "◫",
+                "title": "Bookshops & wholesale",
+                "body": "Discuss larger quantities, current titles, editions and supply arrangements."
+              }
+            ]
+          },
+          {
+            "type": "dynamic",
+            "component": "contact",
+            "attrs": {}
+          }
+        ]
+      },
+      "fr": {
+        "title": "Écoles, bibliothèques, librairies & vente en gros",
+        "slug": "ecoles-bibliotheques-librairies",
+        "eyebrow": "Construire de meilleures bibliothèques pour enfants musulmans",
+        "h1": "Pour les écoles, bibliothèques, librairies et organisations communautaires",
+        "lead": "Si vous sélectionnez des livres pour une classe, une bibliothèque, un centre islamique, une librairie ou un programme communautaire, contactez-nous pour les commandes importantes, les tranches d’âge, les combinaisons de langues et la disponibilité.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "cards",
+            "heading": "Comment nous pouvons aider",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "▣",
+                "title": "Écoles & classes",
+                "body": "Construire des sélections de lecture adaptées aux âges pour les cours, bibliothèques et programmes familiaux."
+              },
+              {
+                "icon": "▤",
+                "title": "Bibliothèques & espaces communautaires",
+                "body": "Créer des rayons jeunesse musulmans accessibles dans plusieurs langues et niveaux de lecture."
+              },
+              {
+                "icon": "◫",
+                "title": "Librairies & grossistes",
+                "body": "Discuter volumes, titres, éditions disponibles et conditions d’approvisionnement."
+              }
+            ]
+          },
+          {
+            "type": "dynamic",
+            "component": "contact",
+            "attrs": {}
+          }
+        ]
+      },
+      "es": {
+        "title": "Colegios, bibliotecas, librerías y venta al por mayor",
+        "slug": "colegios-bibliotecas-librerias",
+        "eyebrow": "Crea mejores estanterías para niños musulmanes",
+        "h1": "Para colegios, bibliotecas, librerías y organizaciones comunitarias",
+        "lead": "Si estás seleccionando libros para un aula, biblioteca, centro islámico, librería o programa comunitario, contacta con nosotros para hablar de pedidos grandes, edades, combinaciones de idiomas y disponibilidad.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "cards",
+            "heading": "Cómo podemos ayudar",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "▣",
+                "title": "Colegios y aulas",
+                "body": "Crear selecciones de lectura adecuadas por edad para clases, bibliotecas y programas familiares."
+              },
+              {
+                "icon": "▤",
+                "title": "Bibliotecas y espacios comunitarios",
+                "body": "Construir estanterías infantiles musulmanas accesibles en varias lenguas y etapas lectoras."
+              },
+              {
+                "icon": "◫",
+                "title": "Librerías y mayoristas",
+                "body": "Hablar de cantidades, títulos disponibles, ediciones y condiciones de suministro."
+              }
+            ]
+          },
+          {
+            "type": "dynamic",
+            "component": "contact",
+            "attrs": {}
+          }
+        ]
+      },
+      "ar": {
+        "title": "للمدارس والمكتبات وبائعي الكتب والجملة",
+        "slug": "للمدارس-والمكتبات-وبائعي-الكتب",
+        "eyebrow": "لنصنع رفوفاً أفضل لكتب الأطفال المسلمين",
+        "h1": "للمدارس والمكتبات ومحلات الكتب والمؤسسات المجتمعية",
+        "lead": "إذا كنت تختار كتباً لفصل دراسي أو مكتبة أو مركز إسلامي أو متجر كتب أو برنامج مجتمعي، تواصل معنا بشأن الطلبات الكبيرة والفئات العمرية واللغات المتاحة والتوفر الحالي.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "cards",
+            "heading": "كيف يمكننا المساعدة",
+            "body": "",
+            "eyebrow": "",
+            "items": [
+              {
+                "icon": "▣",
+                "title": "المدارس والفصول",
+                "body": "اختيار مجموعات قراءة مناسبة للعمر للدروس والمكتبات والبرامج العائلية."
+              },
+              {
+                "icon": "▤",
+                "title": "المكتبات والمساحات المجتمعية",
+                "body": "بناء رفوف لكتب الأطفال المسلمين عبر لغات ومراحل قراءة مختلفة."
+              },
+              {
+                "icon": "◫",
+                "title": "محلات الكتب والجملة",
+                "body": "مناقشة الكميات والعناوين والإصدارات المتاحة وترتيبات التوريد."
+              }
+            ]
+          },
+          {
+            "type": "dynamic",
+            "component": "contact",
+            "attrs": {}
+          }
+        ]
+      }
+    },
+    "faq": {
+      "en": {
+        "title": "Frequently Asked Questions",
+        "slug": "faq",
+        "eyebrow": "Helpful answers",
+        "h1": "Frequently Asked Questions",
+        "lead": "Find quick answers about choosing books, languages, orders and institutional purchasing.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "faq",
+            "heading": "Shopping & orders",
+            "items": [
+              {
+                "q": "How do I choose the right book for my child?",
+                "a": "Use the age, language, theme, series and format filters. Product pages also show page count, reading guidance and format when available."
+              },
+              {
+                "q": "Which languages are available?",
+                "a": "Availability depends on the title. Use the language filter or Books by Language page to see editions currently published."
+              },
+              {
+                "q": "How do I follow my order?",
+                "a": "Signed-in customers can use My Account for order status, public order updates and tracking when available. Guest customers can use the Track Your Order page."
+              },
+              {
+                "q": "Can schools, libraries and bookshops order from you?",
+                "a": "Yes. Use the Schools, Libraries, Bookshops & Wholesale page to contact us about larger orders and current availability."
+              },
+              {
+                "q": "Can I leave a review?",
+                "a": "When reviews are enabled, eligible WooCommerce customers can review products. Verified-owner reviews help other families choose with more confidence."
+              }
+            ],
+            "eyebrow": ""
+          },
+          {
+            "type": "dynamic",
+            "component": "contact",
+            "attrs": {}
+          }
+        ]
+      },
+      "fr": {
+        "title": "Questions fréquentes",
+        "slug": "faq",
+        "eyebrow": "Des réponses utiles",
+        "h1": "Questions fréquentes",
+        "lead": "Trouvez rapidement des réponses sur le choix des livres, les langues, les commandes et les achats institutionnels.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "faq",
+            "heading": "Boutique & commandes",
+            "items": [
+              {
+                "q": "Comment choisir le bon livre pour mon enfant ?",
+                "a": "Utilisez les filtres d’âge, langue, thème, série et format. Les pages produit affichent aussi le nombre de pages, le niveau de lecture et le format lorsque ces informations sont disponibles."
+              },
+              {
+                "q": "Quelles langues sont disponibles ?",
+                "a": "Cela dépend du titre. Utilisez le filtre de langue ou la page Livres par langue pour voir les éditions actuellement publiées."
+              },
+              {
+                "q": "Comment suivre ma commande ?",
+                "a": "Les clients connectés peuvent utiliser Mon compte pour suivre le statut, les messages de commande et le suivi lorsqu’il est disponible. Les clients invités peuvent utiliser la page Suivre ma commande."
+              },
+              {
+                "q": "Les écoles, bibliothèques et librairies peuvent-elles commander ?",
+                "a": "Oui. Utilisez la page Écoles, bibliothèques, librairies & vente en gros pour nous contacter au sujet des commandes importantes."
+              },
+              {
+                "q": "Puis-je laisser un avis ?",
+                "a": "Lorsque les avis sont activés, les clients éligibles peuvent commenter les produits WooCommerce. Les avis de propriétaires vérifiés aident les autres familles à choisir."
+              }
+            ],
+            "eyebrow": ""
+          },
+          {
+            "type": "dynamic",
+            "component": "contact",
+            "attrs": {}
+          }
+        ]
+      },
+      "es": {
+        "title": "Preguntas frecuentes",
+        "slug": "preguntas-frecuentes",
+        "eyebrow": "Respuestas útiles",
+        "h1": "Preguntas frecuentes",
+        "lead": "Encuentra respuestas rápidas sobre cómo elegir libros, idiomas, pedidos y compras institucionales.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "faq",
+            "heading": "Tienda y pedidos",
+            "items": [
+              {
+                "q": "¿Cómo elijo el libro adecuado para mi hijo?",
+                "a": "Usa los filtros de edad, idioma, tema, serie y formato. Las páginas de producto también muestran número de páginas, nivel de lectura y formato cuando están disponibles."
+              },
+              {
+                "q": "¿Qué idiomas están disponibles?",
+                "a": "Depende de cada título. Usa el filtro de idioma o la página Libros por idioma para ver las ediciones publicadas actualmente."
+              },
+              {
+                "q": "¿Cómo sigo mi pedido?",
+                "a": "Los clientes registrados pueden usar Mi cuenta para ver el estado, los mensajes del pedido y el seguimiento cuando esté disponible. Los invitados pueden usar la página Seguir pedido."
+              },
+              {
+                "q": "¿Pueden comprar colegios, bibliotecas y librerías?",
+                "a": "Sí. Usa la página Colegios, bibliotecas, librerías y venta al por mayor para consultarnos sobre pedidos grandes y disponibilidad."
+              },
+              {
+                "q": "¿Puedo dejar una reseña?",
+                "a": "Cuando las reseñas están activadas, los clientes elegibles de WooCommerce pueden valorar los productos. Las reseñas de compradores verificados ayudan a otras familias a decidir."
+              }
+            ],
+            "eyebrow": ""
+          },
+          {
+            "type": "dynamic",
+            "component": "contact",
+            "attrs": {}
+          }
+        ]
+      },
+      "ar": {
+        "title": "الأسئلة الشائعة",
+        "slug": "الأسئلة-الشائعة",
+        "eyebrow": "إجابات مفيدة",
+        "h1": "الأسئلة الشائعة",
+        "lead": "اعثر بسرعة على إجابات حول اختيار الكتب واللغات والطلبات والشراء للمؤسسات.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "faq",
+            "heading": "المتجر والطلبات",
+            "items": [
+              {
+                "q": "كيف أختار الكتاب المناسب لطفلي؟",
+                "a": "استخدم فلاتر العمر واللغة والموضوع والسلسلة والصيغة. وتعرض صفحات المنتجات أيضاً عدد الصفحات وإرشادات القراءة والصيغة عندما تكون متاحة."
+              },
+              {
+                "q": "ما اللغات المتاحة؟",
+                "a": "يختلف ذلك حسب العنوان. استخدم فلتر اللغة أو صفحة الكتب حسب اللغة لرؤية الإصدارات المنشورة حالياً."
+              },
+              {
+                "q": "كيف أتابع طلبي؟",
+                "a": "يمكن للعملاء المسجلين استخدام حسابي لمتابعة حالة الطلب ورسائل المتجر والتتبع عندما يكون متاحاً. ويمكن للضيف استخدام صفحة تتبع الطلب."
+              },
+              {
+                "q": "هل يمكن للمدارس والمكتبات ومحلات الكتب الطلب منكم؟",
+                "a": "نعم. استخدم صفحة المدارس والمكتبات وبائعي الكتب والجملة للتواصل معنا بشأن الطلبات الكبيرة والتوفر."
+              },
+              {
+                "q": "هل يمكنني كتابة مراجعة؟",
+                "a": "عندما تكون المراجعات مفعلة يمكن لعملاء WooCommerce المؤهلين تقييم المنتجات، وتساعد مراجعات المشترين الموثقين العائلات الأخرى على الاختيار."
+              }
+            ],
+            "eyebrow": ""
+          },
+          {
+            "type": "dynamic",
+            "component": "contact",
+            "attrs": {}
+          }
+        ]
+      }
+    },
+    "contact": {
+      "en": {
+        "title": "Contact",
+        "slug": "contact",
+        "eyebrow": "Talk to us",
+        "h1": "Contact Little Muslim Books",
+        "lead": "Whether you are a parent following an order, a school building a library, a bookshop interested in our titles or a creative professional who wants to collaborate, your message should reach the right part of the project.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "contact",
+            "attrs": {}
+          }
+        ]
+      },
+      "fr": {
+        "title": "Contact",
+        "slug": "contact",
+        "eyebrow": "Parlons-nous",
+        "h1": "Contactez Little Muslim Books",
+        "lead": "Que vous soyez un parent qui suit une commande, une école qui construit une bibliothèque, une librairie intéressée par nos titres ou un professionnel créatif qui souhaite collaborer, votre message doit arriver au bon endroit.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "contact",
+            "attrs": {}
+          }
+        ]
+      },
+      "es": {
+        "title": "Contacto",
+        "slug": "contacto",
+        "eyebrow": "Hablemos",
+        "h1": "Contacta con Little Muslim Books",
+        "lead": "Tanto si eres un padre que sigue un pedido, un colegio que está creando una biblioteca, una librería interesada en nuestros títulos o un profesional creativo que quiere colaborar, tu mensaje debe llegar a la parte adecuada del proyecto.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "contact",
+            "attrs": {}
+          }
+        ]
+      },
+      "ar": {
+        "title": "اتصل بنا",
+        "slug": "اتصل-بنا",
+        "eyebrow": "تواصل معنا",
+        "h1": "تواصل مع Little Muslim Books",
+        "lead": "سواء كنت أباً أو أماً تتابع طلباً، أو مدرسة تبني مكتبة، أو متجر كتب مهتماً بعناويننا، أو مبدعاً يريد التعاون معنا، نريد أن تصل رسالتك إلى الجهة المناسبة في المشروع.",
+        "actions": [],
+        "sections": [
+          {
+            "type": "dynamic",
+            "component": "contact",
+            "attrs": {}
+          }
+        ]
+      }
+    }
+  },
+  "terms": {
+    "product_cat": {
+      "islamic-childrens-books": {
+        "en": {
+          "name": "Islamic Children’s Books",
+          "slug": "islamic-childrens-books",
+          "description": "Faith-centered children’s books for Muslim families."
+        },
+        "fr": {
+          "name": "Livres islamiques pour enfants",
+          "slug": "livres-islamiques-enfants",
+          "description": "Livres jeunesse centrés sur la foi pour les familles musulmanes."
+        },
+        "es": {
+          "name": "Libros islámicos infantiles",
+          "slug": "libros-islamicos-infantiles",
+          "description": "Libros infantiles centrados en la fe para familias musulmanas."
+        },
+        "ar": {
+          "name": "كتب إسلامية للأطفال",
+          "slug": "كتب-إسلامية-للأطفال",
+          "description": "كتب أطفال تتمحور حول الإيمان للعائلات المسلمة."
+        }
+      },
+      "stories-of-the-prophets": {
+        "en": {
+          "name": "Stories of the Prophets",
+          "slug": "stories-of-the-prophets",
+          "description": "Children’s books inspired by the stories and lessons of the Prophets."
+        },
+        "fr": {
+          "name": "Histoires des Prophètes",
+          "slug": "histoires-des-prophetes",
+          "description": "Livres jeunesse inspirés des récits et enseignements des Prophètes."
+        },
+        "es": {
+          "name": "Historias de los Profetas",
+          "slug": "historias-de-los-profetas",
+          "description": "Libros infantiles inspirados en las historias y enseñanzas de los Profetas."
+        },
+        "ar": {
+          "name": "قصص الأنبياء",
+          "slug": "قصص-الأنبياء",
+          "description": "كتب للأطفال مستوحاة من قصص الأنبياء ودروسها."
+        }
+      },
+      "quran-stories": {
+        "en": {
+          "name": "Quran Stories",
+          "slug": "quran-stories",
+          "description": "Children’s editions inspired by Quranic narratives."
+        },
+        "fr": {
+          "name": "Histoires du Coran",
+          "slug": "histoires-du-coran",
+          "description": "Éditions jeunesse inspirées des récits coraniques."
+        },
+        "es": {
+          "name": "Historias del Corán",
+          "slug": "historias-del-coran",
+          "description": "Ediciones infantiles inspiradas en relatos coránicos."
+        },
+        "ar": {
+          "name": "قصص القرآن",
+          "slug": "قصص-القرآن",
+          "description": "إصدارات للأطفال مستوحاة من القصص القرآنية."
+        }
+      },
+      "ramadan": {
+        "en": {
+          "name": "Ramadan & Eid",
+          "slug": "ramadan",
+          "description": "Books for Ramadan, Eid and family traditions."
+        },
+        "fr": {
+          "name": "Ramadan & Aïd",
+          "slug": "ramadan-aid",
+          "description": "Livres pour Ramadan, l’Aïd et les traditions familiales."
+        },
+        "es": {
+          "name": "Ramadán y Eid",
+          "slug": "ramadan-eid",
+          "description": "Libros para Ramadán, Eid y tradiciones familiares."
+        },
+        "ar": {
+          "name": "رمضان والعيد",
+          "slug": "رمضان-والعيد",
+          "description": "كتب عن رمضان والعيد والتقاليد العائلية."
+        }
+      },
+      "bilingual": {
+        "en": {
+          "name": "Bilingual Books",
+          "slug": "bilingual",
+          "description": "Bilingual and multilingual books for families living across languages."
+        },
+        "fr": {
+          "name": "Livres bilingues",
+          "slug": "livres-bilingues",
+          "description": "Livres bilingues et multilingues pour les familles vivant entre plusieurs langues."
+        },
+        "es": {
+          "name": "Libros bilingües",
+          "slug": "libros-bilingues",
+          "description": "Libros bilingües y multilingües para familias que viven entre varias lenguas."
+        },
+        "ar": {
+          "name": "كتب ثنائية اللغة",
+          "slug": "كتب-ثنائية-اللغة",
+          "description": "كتب ثنائية ومتعددة اللغة للأسر التي تعيش بين لغات مختلفة."
+        }
+      },
+      "bedtime": {
+        "en": {
+          "name": "Bedtime Stories",
+          "slug": "bedtime",
+          "description": "Gentle Islamic stories for calm family reading."
+        },
+        "fr": {
+          "name": "Histoires du soir",
+          "slug": "histoires-du-soir",
+          "description": "Histoires islamiques douces pour une lecture familiale apaisante."
+        },
+        "es": {
+          "name": "Cuentos para dormir",
+          "slug": "cuentos-para-dormir",
+          "description": "Historias islámicas suaves para terminar el día en familia."
+        },
+        "ar": {
+          "name": "قصص قبل النوم",
+          "slug": "قصص-قبل-النوم",
+          "description": "قصص إسلامية هادئة للقراءة العائلية."
+        }
+      },
+      "akhlaq-values": {
+        "en": {
+          "name": "Akhlaq & Values",
+          "slug": "akhlaq-values",
+          "description": "Books about Islamic character and everyday values."
+        },
+        "fr": {
+          "name": "Akhlaq & valeurs",
+          "slug": "akhlaq-valeurs",
+          "description": "Livres sur le caractère islamique et les valeurs du quotidien."
+        },
+        "es": {
+          "name": "Akhlaq y valores",
+          "slug": "akhlaq-valores",
+          "description": "Libros sobre carácter islámico y valores cotidianos."
+        },
+        "ar": {
+          "name": "الأخلاق والقيم",
+          "slug": "الأخلاق-والقيم",
+          "description": "كتب عن الأخلاق الإسلامية والقيم اليومية."
+        }
+      }
+    },
+    "ip_book_language": {
+      "english": {
+        "en": {
+          "name": "English",
+          "slug": "english"
+        },
+        "fr": {
+          "name": "Anglais",
+          "slug": "anglais"
+        },
+        "es": {
+          "name": "Inglés",
+          "slug": "ingles"
+        },
+        "ar": {
+          "name": "الإنجليزية",
+          "slug": "الإنجليزية"
+        }
+      },
+      "french": {
+        "en": {
+          "name": "French",
+          "slug": "french"
+        },
+        "fr": {
+          "name": "Français",
+          "slug": "francais"
+        },
+        "es": {
+          "name": "Francés",
+          "slug": "frances"
+        },
+        "ar": {
+          "name": "الفرنسية",
+          "slug": "الفرنسية"
+        }
+      },
+      "spanish": {
+        "en": {
+          "name": "Spanish",
+          "slug": "spanish"
+        },
+        "fr": {
+          "name": "Espagnol",
+          "slug": "espagnol"
+        },
+        "es": {
+          "name": "Español",
+          "slug": "espanol"
+        },
+        "ar": {
+          "name": "الإسبانية",
+          "slug": "الإسبانية"
+        }
+      },
+      "arabic": {
+        "en": {
+          "name": "Arabic",
+          "slug": "arabic"
+        },
+        "fr": {
+          "name": "Arabe",
+          "slug": "arabe"
+        },
+        "es": {
+          "name": "Árabe",
+          "slug": "arabe-es"
+        },
+        "ar": {
+          "name": "العربية",
+          "slug": "العربية"
+        }
+      }
+    },
+    "ip_book_age": {
+      "0-3-years": {
+        "en": {
+          "name": "0–3 years",
+          "slug": "0-3-years"
+        },
+        "fr": {
+          "name": "0–3 ans",
+          "slug": "0-3-ans"
+        },
+        "es": {
+          "name": "0–3 años",
+          "slug": "0-3-anos"
+        },
+        "ar": {
+          "name": "0–3 سنوات",
+          "slug": "0-3-سنوات"
+        }
+      },
+      "4-6-years": {
+        "en": {
+          "name": "4–6 years",
+          "slug": "4-6-years"
+        },
+        "fr": {
+          "name": "4–6 ans",
+          "slug": "4-6-ans"
+        },
+        "es": {
+          "name": "4–6 años",
+          "slug": "4-6-anos"
+        },
+        "ar": {
+          "name": "4–6 سنوات",
+          "slug": "4-6-سنوات"
+        }
+      },
+      "7-9-years": {
+        "en": {
+          "name": "7–9 years",
+          "slug": "7-9-years"
+        },
+        "fr": {
+          "name": "7–9 ans",
+          "slug": "7-9-ans"
+        },
+        "es": {
+          "name": "7–9 años",
+          "slug": "7-9-anos"
+        },
+        "ar": {
+          "name": "7–9 سنوات",
+          "slug": "7-9-سنوات"
+        }
+      },
+      "10-12-years": {
+        "en": {
+          "name": "10–12 years",
+          "slug": "10-12-years"
+        },
+        "fr": {
+          "name": "10–12 ans",
+          "slug": "10-12-ans"
+        },
+        "es": {
+          "name": "10–12 años",
+          "slug": "10-12-anos"
+        },
+        "ar": {
+          "name": "10–12 سنوات",
+          "slug": "10-12-سنوات"
+        }
+      }
+    },
+    "ip_book_format": {
+      "hardcover": {
+        "en": {
+          "name": "Hardcover",
+          "slug": "hardcover"
+        },
+        "fr": {
+          "name": "Relié",
+          "slug": "relie"
+        },
+        "es": {
+          "name": "Tapa dura",
+          "slug": "tapa-dura"
+        },
+        "ar": {
+          "name": "غلاف مقوى",
+          "slug": "غلاف-مقوى"
+        }
+      },
+      "paperback": {
+        "en": {
+          "name": "Paperback",
+          "slug": "paperback"
+        },
+        "fr": {
+          "name": "Broché",
+          "slug": "broche"
+        },
+        "es": {
+          "name": "Tapa blanda",
+          "slug": "tapa-blanda"
+        },
+        "ar": {
+          "name": "غلاف ورقي",
+          "slug": "غلاف-ورقي"
+        }
+      },
+      "board-book": {
+        "en": {
+          "name": "Board book",
+          "slug": "board-book"
+        },
+        "fr": {
+          "name": "Livre cartonné",
+          "slug": "livre-cartonne"
+        },
+        "es": {
+          "name": "Libro de cartón",
+          "slug": "libro-carton"
+        },
+        "ar": {
+          "name": "كتاب كرتوني",
+          "slug": "كتاب-كرتوني"
+        }
+      },
+      "digital": {
+        "en": {
+          "name": "Digital",
+          "slug": "digital"
+        },
+        "fr": {
+          "name": "Numérique",
+          "slug": "numerique"
+        },
+        "es": {
+          "name": "Digital",
+          "slug": "digital-es"
+        },
+        "ar": {
+          "name": "رقمي",
+          "slug": "رقمي"
+        }
+      }
+    },
+    "ip_book_theme": {
+      "quran": {
+        "en": {
+          "name": "Quran",
+          "slug": "quran"
+        },
+        "fr": {
+          "name": "Coran",
+          "slug": "coran"
+        },
+        "es": {
+          "name": "Corán",
+          "slug": "coran-es"
+        },
+        "ar": {
+          "name": "القرآن",
+          "slug": "القرآن"
+        }
+      },
+      "prophets": {
+        "en": {
+          "name": "Prophets",
+          "slug": "prophets"
+        },
+        "fr": {
+          "name": "Prophètes",
+          "slug": "prophetes"
+        },
+        "es": {
+          "name": "Profetas",
+          "slug": "profetas"
+        },
+        "ar": {
+          "name": "الأنبياء",
+          "slug": "الأنبياء"
+        }
+      },
+      "ramadan-eid": {
+        "en": {
+          "name": "Ramadan & Eid",
+          "slug": "ramadan-eid"
+        },
+        "fr": {
+          "name": "Ramadan & Aïd",
+          "slug": "ramadan-aid-theme"
+        },
+        "es": {
+          "name": "Ramadán y Eid",
+          "slug": "ramadan-eid-theme-es"
+        },
+        "ar": {
+          "name": "رمضان والعيد",
+          "slug": "رمضان-والعيد-موضوع"
+        }
+      },
+      "bedtime": {
+        "en": {
+          "name": "Bedtime",
+          "slug": "bedtime"
+        },
+        "fr": {
+          "name": "Coucher",
+          "slug": "coucher"
+        },
+        "es": {
+          "name": "Hora de dormir",
+          "slug": "hora-de-dormir"
+        },
+        "ar": {
+          "name": "قبل النوم",
+          "slug": "قبل-النوم"
+        }
+      },
+      "akhlaq-values": {
+        "en": {
+          "name": "Akhlaq & Values",
+          "slug": "akhlaq-values"
+        },
+        "fr": {
+          "name": "Akhlaq & valeurs",
+          "slug": "akhlaq-valeurs-theme"
+        },
+        "es": {
+          "name": "Akhlaq y valores",
+          "slug": "akhlaq-valores-theme"
+        },
+        "ar": {
+          "name": "الأخلاق والقيم",
+          "slug": "الأخلاق-والقيم-موضوع"
+        }
+      },
+      "bilingual": {
+        "en": {
+          "name": "Bilingual",
+          "slug": "bilingual"
+        },
+        "fr": {
+          "name": "Bilingue",
+          "slug": "bilingue"
+        },
+        "es": {
+          "name": "Bilingüe",
+          "slug": "bilingue-es"
+        },
+        "ar": {
+          "name": "ثنائي اللغة",
+          "slug": "ثنائي-اللغة"
+        }
+      }
+    }
+  },
+  "posts": {
+    "visual-storytelling": {
+      "en": {
+        "title": "Why visual storytelling matters for Muslim children",
+        "slug": "why-visual-storytelling-matters-muslim-children",
+        "excerpt": "Children remember images, characters and emotional moments. Thoughtful visual storytelling can help faith and heritage become part of that memory.",
+        "sections": [
+          {
+            "h2": "Children already live in a visual world",
+            "p": "From animation and games to picture books and digital media, children learn through visual language every day. Images help them understand characters, places, emotions and relationships before they can explain all of those ideas in words."
+          },
+          {
+            "h2": "Representation is more than seeing a familiar face",
+            "p": "For Muslim children, representation also means encountering family rhythms, Islamic values, Prophetic stories and cultural references with dignity. The goal is not to decorate a generic story with Muslim symbols, but to let faith and culture belong naturally inside the story."
+          },
+          {
+            "h2": "Quality creates attention",
+            "p": "A meaningful subject does not automatically create an engaging book. Illustration, composition, typography and pacing all help invite a child to look closely, ask questions and return. That repeated attention is one of the ways a story becomes part of memory."
+          },
+          {
+            "h2": "Parents remain part of the experience",
+            "p": "The strongest children’s books do not replace family teaching. They create openings for it. A picture can invite a question; a scene can start a conversation; a familiar story can become part of bedtime, Ramadan or a quiet moment shared together."
+          }
+        ]
+      },
+      "fr": {
+        "title": "Pourquoi la narration visuelle compte pour les enfants musulmans",
+        "slug": "pourquoi-narration-visuelle-enfants-musulmans",
+        "excerpt": "Les enfants retiennent les images, les personnages et les moments chargés d’émotion. Une narration visuelle soignée peut aider la foi et l’héritage à entrer dans cette mémoire.",
+        "sections": [
+          {
+            "h2": "Les enfants vivent déjà dans un monde visuel",
+            "p": "De l’animation aux jeux, des albums aux médias numériques, les enfants apprennent chaque jour par le langage visuel. Les images les aident à comprendre personnages, lieux, émotions et relations avant même de pouvoir tout expliquer avec des mots."
+          },
+          {
+            "h2": "La représentation ne se limite pas à un visage familier",
+            "p": "Pour un enfant musulman, elle signifie aussi rencontrer des rythmes familiaux, des valeurs islamiques, des récits prophétiques et des références culturelles avec dignité. Il ne s’agit pas d’ajouter quelques symboles à une histoire générique, mais de laisser la foi et la culture habiter naturellement le récit."
+          },
+          {
+            "h2": "La qualité crée l’attention",
+            "p": "Un sujet important ne suffit pas à faire un livre captivant. L’illustration, la composition, la typographie et le rythme donnent envie à l’enfant d’observer, de questionner et de revenir. C’est souvent ainsi qu’une histoire entre dans la mémoire."
+          },
+          {
+            "h2": "Les parents restent au cœur de l’expérience",
+            "p": "Les meilleurs livres jeunesse ne remplacent pas la transmission familiale. Ils lui ouvrent des portes. Une image peut provoquer une question, une scène lancer une conversation et une histoire familière devenir un moment partagé au coucher ou pendant Ramadan."
+          }
+        ]
+      },
+      "es": {
+        "title": "Por qué la narración visual importa para los niños musulmanes",
+        "slug": "por-que-narracion-visual-ninos-musulmanes",
+        "excerpt": "Los niños recuerdan imágenes, personajes y momentos emocionales. Una buena narración visual puede ayudar a que la fe y la herencia formen parte de esa memoria.",
+        "sections": [
+          {
+            "h2": "Los niños ya viven en un mundo visual",
+            "p": "Desde la animación y los videojuegos hasta los álbumes y los medios digitales, los niños aprenden mediante lenguaje visual todos los días. Las imágenes les ayudan a comprender personajes, lugares, emociones y relaciones antes de poder explicarlo todo con palabras."
+          },
+          {
+            "h2": "Representación es más que ver un rostro familiar",
+            "p": "Para un niño musulmán también significa encontrar rutinas familiares, valores islámicos, historias proféticas y referencias culturales tratadas con dignidad. No se trata de decorar una historia genérica con símbolos musulmanes, sino de permitir que la fe y la cultura pertenezcan de forma natural al relato."
+          },
+          {
+            "h2": "La calidad crea atención",
+            "p": "Un tema con valor no convierte por sí solo un libro en atractivo. Ilustración, composición, tipografía y ritmo ayudan a que el niño observe, pregunte y quiera volver. Esa atención repetida es una de las formas en que una historia entra en la memoria."
+          },
+          {
+            "h2": "Los padres siguen formando parte de la experiencia",
+            "p": "Los mejores libros infantiles no sustituyen la enseñanza familiar. Crean oportunidades para ella. Una imagen puede provocar una pregunta, una escena iniciar una conversación y una historia conocida convertirse en parte de la hora de dormir o de Ramadán."
+          }
+        ]
+      },
+      "ar": {
+        "title": "لماذا يهم السرد البصري للأطفال المسلمين؟",
+        "slug": "لماذا-يهم-السرد-البصري-للأطفال-المسلمين",
+        "excerpt": "يتذكر الأطفال الصور والشخصيات واللحظات المؤثرة. ويمكن للسرد البصري الجيد أن يساعد الإيمان والتراث على أن يصبحا جزءاً من هذه الذاكرة.",
+        "sections": [
+          {
+            "h2": "الأطفال يعيشون أصلاً في عالم بصري",
+            "p": "من الرسوم المتحركة والألعاب إلى كتب الصور والوسائط الرقمية، يتعلم الأطفال كل يوم عبر اللغة البصرية. تساعدهم الصور على فهم الشخصيات والأماكن والمشاعر والعلاقات قبل أن يستطيعوا شرح كل ذلك بالكلمات."
+          },
+          {
+            "h2": "التمثيل أعمق من مجرد رؤية وجه مألوف",
+            "p": "بالنسبة للطفل المسلم، يعني التمثيل أيضاً أن يرى إيقاع الأسرة والقيم الإسلامية وقصص الأنبياء والمرجعيات الثقافية مقدمة بكرامة. الهدف ليس تزيين قصة عامة ببعض الرموز الإسلامية، بل أن يكون الإيمان والثقافة جزءاً طبيعياً من الحكاية."
+          },
+          {
+            "h2": "الجودة تصنع الانتباه",
+            "p": "لا يكفي أن يكون موضوع الكتاب مهماً حتى يصبح جذاباً. الرسم والتكوين والخط والإيقاع كلها تدعو الطفل إلى التوقف والملاحظة والسؤال والعودة. ومن خلال هذا التكرار تصبح القصة جزءاً من الذاكرة."
+          },
+          {
+            "h2": "الآباء جزء من التجربة",
+            "p": "الكتاب الجيد لا يحل محل دور الأسرة في التربية. بل يفتح له باباً. قد تصنع صورة سؤالاً، وقد تبدأ لقطة حواراً، وقد تصبح القصة جزءاً من وقت النوم أو رمضان أو لحظة هادئة يتشاركها الجميع."
+          }
+        ]
+      }
+    },
+    "choosing-books-by-age": {
+      "en": {
+        "title": "How to choose Islamic books for your child’s age",
+        "slug": "how-to-choose-islamic-books-by-age",
+        "excerpt": "Age ranges are useful, but the best choice also considers attention span, reading confidence, interests and how the family plans to use the book.",
+        "sections": [
+          {
+            "h2": "Use age as a guide, not a rule",
+            "p": "Two children of the same age may enjoy very different kinds of books. One may be ready for longer independent reading while another still loves a richly illustrated story read aloud with a parent."
+          },
+          {
+            "h2": "Think about how the book will be used",
+            "p": "A bedtime story, a Ramadan family book, a first book about a Prophet and an independent reader all ask for different pacing, language and visual density. Start with the moment you want the book to serve."
+          },
+          {
+            "h2": "Look for a bridge between familiarity and discovery",
+            "p": "Children often engage best when a book gives them something recognisable and something new. A familiar family value can open the door to a new Islamic concept; a known story can introduce richer vocabulary."
+          },
+          {
+            "h2": "Let interest lead",
+            "p": "If a child is fascinated by animals, journeys, family relationships, courage or celebration, use that curiosity. The right theme can make the educational value feel natural rather than imposed."
+          }
+        ]
+      },
+      "fr": {
+        "title": "Comment choisir un livre islamique adapté à l’âge de votre enfant",
+        "slug": "choisir-livre-islamique-age-enfant",
+        "excerpt": "Les tranches d’âge sont utiles, mais le bon choix dépend aussi de l’attention, de l’aisance en lecture, des intérêts de l’enfant et de la manière dont la famille utilisera le livre.",
+        "sections": [
+          {
+            "h2": "Utilisez l’âge comme un guide, pas comme une règle",
+            "p": "Deux enfants du même âge peuvent aimer des livres très différents. L’un sera prêt pour une lecture autonome plus longue, tandis que l’autre préférera encore une histoire richement illustrée lue avec un parent."
+          },
+          {
+            "h2": "Pensez au moment de lecture",
+            "p": "Une histoire du soir, un livre familial pour Ramadan, une première découverte d’un Prophète ou un livre de lecture autonome n’ont pas besoin du même rythme, du même vocabulaire ni de la même densité visuelle."
+          },
+          {
+            "h2": "Cherchez un pont entre le familier et la découverte",
+            "p": "Les enfants entrent souvent plus facilement dans un livre lorsqu’il leur offre à la fois quelque chose qu’ils connaissent et quelque chose de nouveau. Une valeur familiale connue peut ouvrir vers un nouveau concept islamique."
+          },
+          {
+            "h2": "Laissez l’intérêt guider le choix",
+            "p": "Si un enfant aime les animaux, les voyages, les relations familiales, le courage ou les fêtes, partez de cette curiosité. Le bon thème peut rendre la dimension éducative naturelle plutôt qu’imposée."
+          }
+        ]
+      },
+      "es": {
+        "title": "Cómo elegir libros islámicos según la edad de tu hijo",
+        "slug": "como-elegir-libros-islamicos-por-edad",
+        "excerpt": "Las edades recomendadas ayudan, pero la mejor elección también tiene en cuenta la atención, la confianza lectora, los intereses y cómo piensa usar el libro la familia.",
+        "sections": [
+          {
+            "h2": "Usa la edad como guía, no como regla",
+            "p": "Dos niños de la misma edad pueden disfrutar libros muy distintos. Uno puede estar preparado para una lectura independiente más larga mientras otro todavía disfruta más de una historia muy ilustrada leída con un adulto."
+          },
+          {
+            "h2": "Piensa en cómo se va a usar el libro",
+            "p": "Un cuento antes de dormir, un libro familiar para Ramadán, una primera historia sobre un Profeta y una lectura autónoma necesitan ritmos, lenguaje y densidad visual diferentes."
+          },
+          {
+            "h2": "Busca un puente entre lo familiar y lo nuevo",
+            "p": "Los niños suelen conectar mejor cuando un libro les ofrece algo reconocible y algo por descubrir. Un valor familiar conocido puede abrir la puerta a un concepto islámico nuevo."
+          },
+          {
+            "h2": "Deja que el interés guíe",
+            "p": "Si al niño le fascinan los animales, los viajes, la familia, el valor o las celebraciones, aprovecha esa curiosidad. El tema adecuado puede hacer que el valor educativo se sienta natural y no impuesto."
+          }
+        ]
+      },
+      "ar": {
+        "title": "كيف تختار كتاباً إسلامياً مناسباً لعمر طفلك؟",
+        "slug": "كيف-تختار-كتابا-إسلاميا-حسب-العمر",
+        "excerpt": "تفيد الفئات العمرية في التوجيه، لكن الاختيار الأفضل يراعي أيضاً مدة الانتباه والثقة في القراءة واهتمامات الطفل والطريقة التي ستستخدم بها الأسرة الكتاب.",
+        "sections": [
+          {
+            "h2": "استخدم العمر كدليل لا كقاعدة",
+            "p": "قد يستمتع طفلان في العمر نفسه بنوعين مختلفين تماماً من الكتب. قد يكون أحدهما مستعداً لقراءة أطول بمفرده، بينما ما زال الآخر يحب قصة مليئة بالصور يقرأها معه أحد الوالدين."
+          },
+          {
+            "h2": "فكر في طريقة استخدام الكتاب",
+            "p": "قصة قبل النوم وكتاب عائلي لرمضان وكتاب أول عن أحد الأنبياء وقراءة مستقلة كلها تحتاج إلى إيقاع ولغة وكثافة بصرية مختلفة. ابدأ من اللحظة التي تريد للكتاب أن يخدمها."
+          },
+          {
+            "h2": "ابحث عن جسر بين المألوف والجديد",
+            "p": "يتفاعل الطفل غالباً بشكل أفضل عندما يقدم له الكتاب شيئاً يعرفه وشيئاً جديداً يكتشفه. قيمة عائلية مألوفة قد تفتح الباب إلى مفهوم إسلامي أعمق."
+          },
+          {
+            "h2": "دع اهتمام الطفل يقود الاختيار",
+            "p": "إذا كان الطفل يحب الحيوانات أو الرحلات أو العلاقات العائلية أو الشجاعة أو الاحتفالات، فابدأ من هذا الفضول. الموضوع المناسب يجعل القيمة التعليمية تبدو طبيعية لا مفروضة."
+          }
+        ]
+      }
+    },
+    "ramadan-reading-tradition": {
+      "en": {
+        "title": "Creating a Ramadan reading tradition with children",
+        "slug": "ramadan-reading-tradition-children",
+        "excerpt": "A simple family reading routine can help Ramadan become more than a calendar event: it can become a season of stories, questions and shared memory.",
+        "sections": [
+          {
+            "h2": "Choose a rhythm your family can actually keep",
+            "p": "A short story after iftar, one picture book before bed or a weekly family reading session can be more meaningful than an ambitious plan that disappears after a few days."
+          },
+          {
+            "h2": "Let the book connect to what the child is already experiencing",
+            "p": "Moon sightings, fasting adults, special meals, prayer, charity and Eid preparations all give children concrete experiences. Stories can give language and meaning to those moments."
+          },
+          {
+            "h2": "Repeat favourite books",
+            "p": "Children often love repetition, and Ramadan traditions grow through repetition too. Returning to the same book each year can turn it into part of the season’s emotional memory."
+          },
+          {
+            "h2": "End with conversation, not a test",
+            "p": "Ask what the child noticed, liked or wondered about. A warm question often creates a deeper learning moment than checking whether every detail was remembered."
+          }
+        ]
+      },
+      "fr": {
+        "title": "Créer une tradition de lecture pendant Ramadan avec les enfants",
+        "slug": "tradition-lecture-ramadan-enfants",
+        "excerpt": "Une routine de lecture simple peut aider Ramadan à devenir plus qu’une date du calendrier : une saison d’histoires, de questions et de souvenirs partagés.",
+        "sections": [
+          {
+            "h2": "Choisissez un rythme que votre famille peut vraiment tenir",
+            "p": "Une courte histoire après l’iftar, un album avant de dormir ou un moment de lecture hebdomadaire peut avoir plus de sens qu’un programme ambitieux abandonné après quelques jours."
+          },
+          {
+            "h2": "Reliez le livre à ce que l’enfant vit déjà",
+            "p": "L’observation de la lune, les adultes qui jeûnent, les repas spéciaux, la prière, l’aumône et la préparation de l’Aïd sont des expériences concrètes. Les histoires peuvent leur donner des mots et du sens."
+          },
+          {
+            "h2": "Relisez les livres préférés",
+            "p": "Les enfants aiment souvent la répétition, et les traditions de Ramadan se construisent aussi ainsi. Relire le même livre chaque année peut l’inscrire dans la mémoire affective de la saison."
+          },
+          {
+            "h2": "Terminez par une conversation, pas par un test",
+            "p": "Demandez ce que l’enfant a remarqué, aimé ou voulu comprendre. Une question chaleureuse crée souvent un apprentissage plus profond qu’une vérification des détails."
+          }
+        ]
+      },
+      "es": {
+        "title": "Crear una tradición de lectura de Ramadán con los niños",
+        "slug": "tradicion-lectura-ramadan-ninos",
+        "excerpt": "Una rutina familiar sencilla puede hacer que Ramadán sea más que una fecha: puede convertirse en una temporada de historias, preguntas y recuerdos compartidos.",
+        "sections": [
+          {
+            "h2": "Elige un ritmo que vuestra familia pueda mantener",
+            "p": "Una historia corta después del iftar, un álbum antes de dormir o una sesión semanal en familia puede tener más sentido que un plan ambicioso que desaparece a los pocos días."
+          },
+          {
+            "h2": "Relaciona el libro con lo que el niño ya está viviendo",
+            "p": "La luna, los adultos que ayunan, las comidas especiales, la oración, la caridad y los preparativos de Eid son experiencias concretas. Las historias pueden dar palabras y significado a esos momentos."
+          },
+          {
+            "h2": "Repite los libros favoritos",
+            "p": "A los niños les gusta la repetición y las tradiciones de Ramadán también se construyen así. Volver al mismo libro cada año puede convertirlo en parte de la memoria emocional de la temporada."
+          },
+          {
+            "h2": "Termina con una conversación, no con un examen",
+            "p": "Pregunta qué ha notado, qué le ha gustado o qué le ha despertado curiosidad. Una pregunta cálida suele crear un aprendizaje más profundo que comprobar cada detalle."
+          }
+        ]
+      },
+      "ar": {
+        "title": "كيف تصنع تقليداً عائلياً للقراءة في رمضان؟",
+        "slug": "تقليد-القراءة-في-رمضان-للأطفال",
+        "excerpt": "يمكن لعادة قراءة بسيطة في الأسرة أن تجعل رمضان أكثر من مناسبة في التقويم، وأن تحوله إلى موسم للقصص والأسئلة والذكريات المشتركة.",
+        "sections": [
+          {
+            "h2": "اختر إيقاعاً تستطيع الأسرة الاستمرار عليه",
+            "p": "قصة قصيرة بعد الإفطار أو كتاب صور قبل النوم أو جلسة قراءة أسبوعية قد تكون أعمق أثراً من خطة كبيرة تختفي بعد أيام قليلة."
+          },
+          {
+            "h2": "اربط الكتاب بما يعيشه الطفل بالفعل",
+            "p": "رؤية الهلال وصيام الكبار والوجبات الخاصة والصلاة والصدقة والاستعداد للعيد كلها تجارب ملموسة. تستطيع القصص أن تمنح هذه اللحظات كلمات ومعنى."
+          },
+          {
+            "h2": "أعد قراءة الكتب المحبوبة",
+            "p": "يحب الأطفال التكرار، وتكبر تقاليد رمضان بالتكرار أيضاً. العودة إلى الكتاب نفسه كل سنة قد تجعله جزءاً من الذاكرة العاطفية للموسم."
+          },
+          {
+            "h2": "اختم بحوار لا باختبار",
+            "p": "اسأل الطفل ماذا لاحظ وماذا أحب وما الذي أثار فضوله. السؤال الدافئ يصنع أحياناً تعلماً أعمق من التأكد من حفظ كل التفاصيل."
+          }
+        ]
+      }
+    }
+  }
+}
