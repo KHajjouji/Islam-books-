@@ -246,13 +246,12 @@ function ip_core_content_pack_canvas_css( string $id ): string {
         . '</style>';
 }
 
-function ip_core_content_pack_render( string $key, string $lang ): string {
-    $spec = ip_core_content_pack_spec( $key, $lang );
+function ip_core_content_pack_render_spec( string $key, string $lang, array $spec ): string {
     if ( ! $spec ) {
         return '';
     }
     $languages = ip_core_content_pack_languages();
-    $dir = isset( $languages[ $lang ]['direction'] ) ? (string) $languages[ $lang ]['direction'] : 'ltr';
+    $dir = isset( $languages[ $lang ]['direction'] ) ? (string) $languages[ $lang ]['direction'] : ( function_exists( 'ip_core_language_dir' ) ? ip_core_language_dir( $lang ) : 'ltr' );
     $id = 'lmb-final-' . sanitize_html_class( $key ) . '-' . sanitize_html_class( $lang );
 
     $html = '<!-- ip-final-content-pack-v1 key="' . esc_attr( $key ) . '" lang="' . esc_attr( $lang ) . '" -->';
@@ -278,6 +277,10 @@ function ip_core_content_pack_render( string $key, string $lang ): string {
         }
     }
     return $html . '</div>';
+}
+
+function ip_core_content_pack_render( string $key, string $lang ): string {
+    return ip_core_content_pack_render_spec( $key, $lang, ip_core_content_pack_spec( $key, $lang ) );
 }
 
 function ip_core_shortcode_final_page( array $atts ): string {
