@@ -10,6 +10,9 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function ip_core_front_language(): string {
+    if ( function_exists( 'ip_core_internal_language' ) ) {
+        return ip_core_internal_language();
+    }
     if ( defined( 'ICL_LANGUAGE_CODE' ) && ICL_LANGUAGE_CODE ) {
         return sanitize_key( (string) ICL_LANGUAGE_CODE );
     }
