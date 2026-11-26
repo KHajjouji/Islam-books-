@@ -4,6 +4,7 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function ip_language_code(): string {
+    if ( function_exists( 'ip_core_internal_language' ) ) { return ip_core_internal_language(); }
     if ( defined( 'ICL_LANGUAGE_CODE' ) && ICL_LANGUAGE_CODE ) { return strtolower( (string) ICL_LANGUAGE_CODE ); }
     if ( function_exists( 'pll_current_language' ) ) {
         $polylang = pll_current_language( 'slug' );
@@ -40,16 +41,41 @@ function ip_text( string $key ): string {
 
 function ip_language_switcher(): void {
     $links = array();
-    if ( function_exists( 'icl_get_languages' ) ) {
+
+    if ( function_exists( 'ip_core_internal_language_links' ) ) {
+        $links = ip_core_internal_language_links();
+    } elseif ( function_exists( 'icl_get_languages' ) ) {
         $languages = icl_get_languages( 'skip_missing=0&orderby=code' );
-        foreach ( (array) $languages as $language ) { $links[] = array( 'code'=>strtoupper((string)$language['language_code']),'url'=>(string)$language['url'],'current'=>!empty($language['active']) ); }
+        foreach ( (array) $languages as $language ) {
+            $links[] = array(
+                'code'    => strtoupper( (string) $language['language_code'] ),
+                'url'     => (string) $language['url'],
+                'current' => ! empty( $language['active'] ),
+            );
+        }
     } elseif ( function_exists( 'pll_the_languages' ) ) {
-        $languages = pll_the_languages( array( 'raw'=>1, 'hide_if_empty'=>0 ) );
-        foreach ( (array) $languages as $language ) { $links[] = array( 'code'=>strtoupper((string)$language['slug']),'url'=>(string)$language['url'],'current'=>!empty($language['current_lang']) ); }
+        $languages = pll_the_languages( array( 'raw' => 1, 'hide_if_empty' => 0 ) );
+        foreach ( (array) $languages as $language ) {
+            $links[] = array(
+                'code'    => strtoupper( (string) $language['slug'] ),
+                'url'     => (string) $language['url'],
+                'current' => ! empty( $language['current_lang'] ),
+            );
+        }
     }
+
     if ( count( $links ) < 2 ) { return; }
+
     echo '<div class="language-switcher" data-language-switcher><button class="language-current" type="button" aria-expanded="false" aria-label="' . esc_attr__( 'Choose language', 'illuminated-path' ) . '">' . esc_html( strtoupper( ip_language_code() ) ) . '<span aria-hidden="true">⌄</span></button><div class="language-menu">';
-    foreach ( $links as $link ) { printf( '<a href="%1$s" lang="%2$s"%3$s>%4$s</a>', esc_url($link['url']), esc_attr(strtolower($link['code'])), $link['current'] ? ' aria-current="page"' : '', esc_html($link['code']) ); }
+    foreach ( $links as $link ) {
+        printf(
+            '<a href="%1$s" lang="%2$s"%3$s>%4$s</a>',
+            esc_url( $link['url'] ),
+            esc_attr( strtolower( (string) $link['code'] ) ),
+            ! empty( $link['current'] ) ? ' aria-current="page"' : '',
+            esc_html( (string) $link['code'] )
+        );
+    }
     echo '</div></div>';
 }
 
